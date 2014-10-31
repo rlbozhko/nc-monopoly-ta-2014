@@ -1,5 +1,6 @@
 package com.monopoly;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -9,8 +10,10 @@ public class Board {
     private List<Cell> cells;
     private List<Player> players;
     private Player currentPlayer;
-    public void addCell(Cell cell) {
 
+    public Board(){
+        cells = new ArrayList<>();
+        players = new ArrayList<>();
     }
 
     public List<Cell> getCells() {

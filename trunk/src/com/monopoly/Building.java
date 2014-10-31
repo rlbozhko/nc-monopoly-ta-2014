@@ -5,7 +5,6 @@ package com.monopoly;
  */
 public class Building {
     public void setLevel() {
-
     }
 
     public Effect getEffect() {

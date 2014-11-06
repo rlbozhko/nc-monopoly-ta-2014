@@ -5,27 +5,30 @@ import java.util.List;
 /**
  * Created by Roma on 31.10.2014.
  */
-public class Cell implements Property, Event {
-    public List<BuildingYard> yards;
+/**
+ * Ячейка
+ */
+public abstract class Cell {
+    private String name;
+    private String description;
+    private CellType cellType;
 
-
-    @Override
-    public boolean performEvent() {
-        return false;
+    public Cell (String name, String description, CellType cellType) {
+        this.name = name;
+        this.description = description;
+        this.cellType = cellType;
     }
 
-    @Override
-    public boolean setOwner(Player player) {
-        return false;
+    public String getName() {
+        return name;
     }
 
-    @Override
-    public Player getOwner() {
-        return null;
+    public String getDescription() {
+        return description;
     }
 
-    @Override
-    public List<BuildingYard> getBuildingYards() {
-        return yards;
+    public CellType getCellType() {
+        return cellType;
     }
 }
+

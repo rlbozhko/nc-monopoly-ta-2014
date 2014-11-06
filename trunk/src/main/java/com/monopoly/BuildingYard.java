@@ -3,6 +3,9 @@ package com.monopoly;
 /**
  * Created by Roma on 31.10.2014.
  */
+/**
+ * Стройплощадка
+ */
 public class BuildingYard {
     private Building building;
 

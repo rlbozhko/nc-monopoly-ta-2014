@@ -24,45 +24,45 @@ public class PropertyCell extends Cell implements Property {
         this.basePrice = basePrice;
         this.baseRent = baseRent;
         this.monopoly = monopoly;
+        monopoly.addProperty(this);
         buildingYards = new ArrayList<>(buildingYardsCount);
         for (int i = 0; i < buildingYardsCount; i++) {
             buildingYards.add(new BuildingYard());
         }
-
     }
 
     @Override
     public void setOwner(Player player) {
-
+        owner = player;
     }
 
     @Override
     public Player getOwner() {
-        return null;
+        return owner;
     }
 
     @Override
     public List<BuildingYard> getBuildingYards() {
-        return null;
+        return buildingYards;
     }
 
     @Override
     public int getPrice() {
-        return 0;
+        return basePrice;
     }
 
     @Override
     public int getRent() {
-        return 0;
+        return baseRent;
     }
 
     @Override
     public PropertyStatus getPropertyStatus() {
-        return null;
+        return status;
     }
 
     @Override
     public Monopoly getMonopoly() {
-        return null;
+        return monopoly;
     }
 }

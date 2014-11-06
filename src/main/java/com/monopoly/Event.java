@@ -3,6 +3,14 @@ package com.monopoly;
 /**
  * Created by Roma on 31.10.2014.
  */
+
+import java.util.List;
+
+/**
+ * Событие
+ */
 public interface Event {
-    public boolean performEvent();
+    public void performEvent(List<Player> players);
+    public String getEventDescription();
+    public String getEventName();
 }

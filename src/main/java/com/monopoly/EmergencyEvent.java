@@ -1,5 +1,6 @@
 package com.monopoly;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
@@ -26,16 +27,24 @@ public class EmergencyEvent implements Event {
     @Override
     public void performEvent(List<Player> players) {
         List<Cell> cells = board.getCells();
-        int randomIndex;
         for (int i = 0; i < cellCount; i++) {
-            randomIndex = random.nextInt(cells.size());
+            int randomIndex = random.nextInt(cells.size());
             Cell cell = board.getCells().get(randomIndex);
             if (cell.getCellType() == CellType.PropertyCell) {
                 Property property = (Property) cell;
                 List<BuildingYard> buildingYards = property.getBuildingYards();
-                randomIndex = random.nextInt(buildingYards.size());
-                BuildingOps b = (BuildingOps) buildingYards.get(randomIndex).getBuilding();
-                b.levelDown();
+                List<Building> buildings = new ArrayList<>();
+                for (BuildingYard by: buildingYards) {
+                    Building building = by.getBuilding();
+                    if (building != null) {
+                        buildings.add(building);
+                    }
+                }
+                if (!buildings.isEmpty()) {
+                    randomIndex = random.nextInt(buildings.size());
+                    BuildingOps b = (BuildingOps) buildingYards.get(randomIndex).getBuilding();
+                    b.levelDown();
+                }
             }
         }
     }

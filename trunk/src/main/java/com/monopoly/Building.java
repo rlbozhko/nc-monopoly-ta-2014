@@ -7,8 +7,5 @@ public class Building {
     public void setLevel() {
     }
 
-    public Effect getEffect() {
-        return null;
-    }
 
 }

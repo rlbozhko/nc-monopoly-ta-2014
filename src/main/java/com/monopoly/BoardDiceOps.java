@@ -9,5 +9,5 @@ import java.util.List;
  * ОперацииСКубиками
  */
 public interface BoardDiceOps {
-    public List<Dice> getDice();
+    public Dice getDice();
 }

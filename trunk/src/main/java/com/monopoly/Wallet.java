@@ -1,6 +1,6 @@
 package com.monopoly;
 
-public class Money {
+public class Wallet {
 	int money;
 
 	public int getMoney() {

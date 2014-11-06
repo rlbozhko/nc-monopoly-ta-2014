@@ -9,10 +9,10 @@ public class Player {
     private int position;
     private String name;
     private Status status;
-    private Money money;
+    private Wallet money;
     private List<Property> property;
 
-    public Player(String name, Money money) {
+    public Player(String name, Wallet money) {
         position = 0;
         this.name = name;
         this.money = money;
@@ -32,7 +32,7 @@ public class Player {
         return false;
     }
 
-    public Money getMoney() {
+    public Wallet getMoney() {
         return money;
     }
 

@@ -9,5 +9,7 @@ import java.util.List;
  * ОперацииСЯчейками
  */
 public interface BoardCellOperations {
-    public List<Cell> getCells();
+    List<Cell> getCells();
+    List<Cell> getPropertyCell();
+    List<Cell> getEventCell();
 }

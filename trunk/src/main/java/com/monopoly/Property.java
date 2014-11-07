@@ -11,9 +11,12 @@ import java.util.List;
 public interface Property {
     void setOwner(Player player);
     Player getOwner();
-    List<BuildingYard> getBuildingYards();
+    List<Building> getBuildings();
+    boolean buildBuilding(Building building, int listIndex);
+    boolean upgradeBuilding(Building building);
+    boolean sellBuilding(Building building);
     int getPrice();
     int getRent();
-    PropertyStatus getPropertyStatus();
     Monopoly getMonopoly();
+    boolean isPledged();
 }

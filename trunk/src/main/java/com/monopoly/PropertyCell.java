@@ -11,23 +11,23 @@ import java.util.List;
  */
 public class PropertyCell extends Cell implements Property {
     private Player owner = null;
-    private List<BuildingYard> buildingYards;
+    private List<Building> buildings;
     private int basePrice;
     private int baseRent;
     private Monopoly monopoly;
     private PropertyStatus status;
 
     public PropertyCell(String name, String description,
-                        Player owner, int buildingYardsCount, int basePrice, int baseRent, Monopoly monopoly) {
+                        Player owner, int buildingsCount, int basePrice, int baseRent, Monopoly monopoly) {
         super(name, description, CellType.PROPERTY_CELL);
         this.owner = owner;
         this.basePrice = basePrice;
         this.baseRent = baseRent;
         this.monopoly = monopoly;
         monopoly.addProperty(this);
-        buildingYards = new ArrayList<>(buildingYardsCount);
-        for (int i = 0; i < buildingYardsCount; i++) {
-            buildingYards.add(new BuildingYard());
+        buildings = new ArrayList<>(buildingsCount);
+        for (int i = 0; i < buildingsCount; i++) {
+            buildings.add(null);
         }
     }
 
@@ -42,8 +42,40 @@ public class PropertyCell extends Cell implements Property {
     }
 
     @Override
-    public List<BuildingYard> getBuildingYards() {
-        return buildingYards;
+    public List<Building> getBuildings() {
+        return buildings;
+    }
+
+    @Override
+    public boolean buildBuilding(Building building, int listIndex) {
+        if (buildings.get(listIndex) == null) {
+            buildings.set(listIndex, building);
+        }
+        return false;
+    }
+
+    @Override
+    public boolean upgradeBuilding(Building building) {
+        if (building != null && building.currentLevel() < building.getMaxLevel()) {
+            building.levelUp();
+            owner.getWallet().subtractMoney(building.currentPrice());
+            return true;
+        }
+        return false;
+    }
+
+    @Override
+    public boolean sellBuilding(Building building) {
+        if (building != null) {
+            if (building.currentLevel() > 1) {
+                building.levelDown();
+            } else {
+                building = null;
+            }
+            owner.getWallet().addMoney(building.currentPrice()/2);
+            return true;
+        }
+        return false;
     }
 
     @Override
@@ -57,12 +89,12 @@ public class PropertyCell extends Cell implements Property {
     }
 
     @Override
-    public PropertyStatus getPropertyStatus() {
-        return status;
+    public Monopoly getMonopoly() {
+        return monopoly;
     }
 
     @Override
-    public Monopoly getMonopoly() {
-        return monopoly;
+    public boolean isPledged() {
+        return false;
     }
 }

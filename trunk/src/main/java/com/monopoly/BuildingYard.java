@@ -9,8 +9,20 @@ package com.monopoly;
 public class BuildingYard {
     private Building building;
 
-    public void setBuilding(Building build) {
-        this.building = build;
+    public void buildBuilding(Building building) {
+        this.building = building;
+    }
+
+    public boolean sellBuilding() {
+        if (building != null) {
+            if (building.currentLevel() > 1) {
+                building.levelDown();
+            } else {
+                building = null;
+            }
+            return true;
+        }
+        return false;
     }
 
     public Building getBuilding() {

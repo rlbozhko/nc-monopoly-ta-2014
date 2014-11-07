@@ -3,14 +3,11 @@ package com.monopoly;
 import java.util.ArrayList;
 import java.util.List;
 
-/**
- * Created by misha on 06-Nov-14.
- */
 public class BeginEvent implements Event {
 
         private static final int START_CASH = 1500;
         private String eventName;
-        String description;
+        private String description;
 
         public BeginEvent(String eventName, String description){
             this.eventName = eventName;

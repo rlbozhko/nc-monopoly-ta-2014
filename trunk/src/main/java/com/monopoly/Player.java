@@ -2,10 +2,7 @@ package com.monopoly;
 
 import java.util.List;
 
-/**
- * Created by Roma on 31.10.2014.
- */
-public class Player {
+public class Player implements MoneyOperations, MoveOperations, TurnOperations {
     private int position;
     private String name;
     private Status status;
@@ -19,38 +16,53 @@ public class Player {
         status = Status.WAIT;
     }
 
+    @Override
     public void surrender() {
         finishTurn();
         status = Status.FINISH;
-    };
-
-    public boolean startTurn() {
-        return false;
     }
 
-    public boolean finishTurn() {
-        return false;
+    @Override
+    public void startTurn() {
+        //TODO
     }
 
-    public Wallet getMoney() {
+    @Override
+    public void finishTurn() {
+        //TODO
+    }
+
+    @Override
+    public int getPosition() {
+        return position;
+    }
+
+    @Override
+    public void goToPosition() {
+// ?
+    }
+
+    @Override
+    public Wallet getWallet() {
         return money;
     }
+
+
 
     public List<Property> getProperty() {
         return property;
     }
 
+
     public void move(int cellId) {
         position = cellId;
     }
 
-    public int getPosition() {
-        return position;
-    }
 
     public Status getStatus() {
         return status;
     }
+
 
     public void setStatus(Status status) {
         this.status = status;

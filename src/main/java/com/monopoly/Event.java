@@ -10,7 +10,7 @@ import java.util.List;
  * Событие
  */
 public interface Event {
-    public void performEvent(List<Player> players);
+    public void performEvent(Board board);
     public String getDescription();
     public String getName();
 }

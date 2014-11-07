@@ -12,13 +12,15 @@ public class Building implements BuildingOperations {
 	private String name;
 	private String description;
 	private int currentLevel;
+    private int maxLevel;
 	
-	public Building (Event event, int cost){
+	public Building (Event event, int cost, int maxLevel ){
 		this.event = event;
 		this.name = event.getName();
 		this.description = event.getDescription();
 		this.currentPrice = cost;
 		this.currentLevel = 1;
+        this.maxLevel = maxLevel;
 	}
 
 	public boolean levelUp (){
@@ -54,5 +56,10 @@ public class Building implements BuildingOperations {
 	public int currentLevel() {
 		return currentLevel;
 	}
-	    
+
+    @Override
+    public int getMaxLevel() {
+        return maxLevel;
+    }
+
 }

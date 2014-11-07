@@ -13,4 +13,5 @@ public interface BuildingOperations {
     boolean levelDown();
     Event getEvent();
     int currentLevel ();
+    int getMaxLevel();
 }

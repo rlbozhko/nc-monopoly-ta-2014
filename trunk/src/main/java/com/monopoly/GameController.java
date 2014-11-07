@@ -7,26 +7,21 @@ public class GameController implements Game {
 
 	public static void main(String[] args) {
 		List<Player> players = new ArrayList<>();
-		List<PropertyCell> propertyCells = new ArrayList<>();
-//		List<EventCell> eventCell = new ArrayList<>(); ???
+		List<Cell> cells = new ArrayList<>();
 		GameController gameController = new GameController();
-		gameController.newGame(players, propertyCells);
+		gameController.createGmae(players, cells);
+		
 	}
 
 	@Override
-	public void newGame(List<Player> players, List<PropertyCell> propertyCells) {
-//		Board newBoard = new Board(players, propertyCells);
-//		Thread gameThread = new Thread(newBoard);
-//		gameThread.start();
+	public void createGmae(List<Player> players, List<Cell> cells) {
+		Board board = new Board(players, cells);
+		Thread gameThread = new Thread(board);
+		gameThread.start();
 	}
 
 	@Override
 	public void stopGame() {
-		// TODO Auto-generated method stub
-	}
-
-	@Override
-	public void loadGame() {
 		// TODO Auto-generated method stub
 	}
 

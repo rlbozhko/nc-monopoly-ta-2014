@@ -7,8 +7,10 @@ package com.monopoly;
  * ОперацииЗдания
  */
 public interface BuildingOps {
-    public int getPrice();
-    public boolean levelUp();
-    public boolean levelDown();
+    
+	int currentPrice();
+    boolean levelUp();
+    boolean levelDown();
     Event getEvent();
+    int currentLevel ();
 }

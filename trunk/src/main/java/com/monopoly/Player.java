@@ -16,12 +16,12 @@ public class Player {
         position = 0;
         this.name = name;
         this.money = money;
-        status = Status.Wait;
+        status = Status.WAIT;
     }
 
     public void surrender() {
         finishTurn();
-        status = Status.Finish;
+        status = Status.FINISH;
     };
 
     public boolean startTurn() {

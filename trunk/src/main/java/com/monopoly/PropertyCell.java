@@ -17,9 +17,9 @@ public class PropertyCell extends Cell implements Property {
     private Monopoly monopoly;
     private PropertyStatus status;
 
-    public PropertyCell(String name, String description, CellType cellType,
+    public PropertyCell(String name, String description,
                         Player owner, int buildingYardsCount, int basePrice, int baseRent, Monopoly monopoly) {
-        super(name, description, cellType);
+        super(name, description, CellType.PROPERTY_CELL);
         this.owner = owner;
         this.basePrice = basePrice;
         this.baseRent = baseRent;

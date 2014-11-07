@@ -7,5 +7,5 @@ package com.monopoly;
  * СтатусСобственности
  */
 public enum PropertyStatus {
-    Pledged, Unpledged
+    PLEDGED, UNPLEDGED
 }

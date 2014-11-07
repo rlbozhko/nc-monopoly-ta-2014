@@ -7,5 +7,5 @@ package com.monopoly;
 * Статус
 */
 public enum Status {
-    Wait, Active, Finish, Jailed, Escape, Return, SkipTurn, OneMoreTurn
+    WAIT, ACTIVE, FINISH, JAILED, ESCAPE, RETURN, SKIP_TURN, ONE_MORE_TURN
 }

@@ -15,8 +15,8 @@ public class Building implements BuildingOps {
 	
 	public Building (Event event, int cost){
 		this.event = event;
-		this.name = event.getEventName();
-		this.description = event.getEventDescription();
+		this.name = event.getName();
+		this.description = event.getDescription();
 		this.currentPrice = cost;
 		this.currentLevel = 1;
 	}

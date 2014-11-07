@@ -6,7 +6,7 @@ package com.monopoly;
 /**
  * ОперацииЗдания
  */
-public interface BuildingOps {
+public interface BuildingOperations {
     
 	int currentPrice();
     boolean levelUp();

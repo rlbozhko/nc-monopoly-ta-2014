@@ -8,6 +8,6 @@ import java.util.List;
 /**
  * ОперацииСЯчейками
  */
-public interface BoardCellOps {
+public interface BoardCellOperations {
     public List<Cell> getCells();
 }

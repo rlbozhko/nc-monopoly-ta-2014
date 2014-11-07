@@ -3,7 +3,7 @@ package com.monopoly;
 /**
  * Created by Roma on 31.10.2014.
  */
-public class Building implements BuildingOps {
+public class Building implements BuildingOperations {
 	
 	public static final double PERCENTAGE_FOR_NEW_BUILD = 0.1;
 	

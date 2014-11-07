@@ -15,7 +15,8 @@ public class DiceGenerator implements Runnable {
 
 	@Override
 	public void run() {
-		while (true) {
+		Thread.currentThread();
+		while (!Thread.interrupted()) {
 			die1.setFace(xorShiftRandom.nextInt(MAX_VALUE_ON_FACE));
 			die2.setFace(xorShiftRandom.nextInt(MAX_VALUE_ON_FACE));
 		}

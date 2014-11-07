@@ -10,5 +10,5 @@ import java.util.List;
  */
 public interface MoveOperations {
     public int getPosition();
-    public void goToPosition();
+    public void goToPosition(int position);
 }

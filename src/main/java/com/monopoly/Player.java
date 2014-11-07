@@ -38,7 +38,7 @@ public class Player implements MoneyOperations, MoveOperations, TurnOperations {
     }
 
     @Override
-    public void goToPosition() {
+    public void goToPosition(int position) {
 // ?
     }
 

@@ -8,7 +8,7 @@ import java.util.List;
  */
 public class BeginEvent implements Event {
 
-    private static final int STARTCASH = 1500;
+    private static final int START_CASH = 1500;
     private String eventName;
     String description;
     private List<Wallet> money;
@@ -22,9 +22,9 @@ public class BeginEvent implements Event {
     public void performEvent(List<Player> players) {
         money = new ArrayList<Wallet>();
         for (int i = 0; i<players.size(); i++){
-            Wallet playerMoney = players.get(i).getMoney();
-            playerMoney.addMoney(STARTCASH);
-            money.set(i, playerMoney);
+            Wallet playerWallet = players.get(i).getMoney();
+            playerWallet.addMoney(START_CASH);
+            money.set(i, playerWallet);
         }
     }
 

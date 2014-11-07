@@ -42,7 +42,7 @@ public class EmergencyEvent implements Event {
                 }
                 if (!buildings.isEmpty()) {
                     randomIndex = random.nextInt(buildings.size());
-                    BuildingOps building = (BuildingOps) buildingYards.get(randomIndex).getBuilding();
+                    BuildingOperations building = (BuildingOperations) buildingYards.get(randomIndex).getBuilding();
                     building.levelDown();
                 }
             }

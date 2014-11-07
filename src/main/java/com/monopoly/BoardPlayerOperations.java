@@ -8,7 +8,7 @@ import java.util.List;
 /**
 * ОперацииСИгроками
 */
-public interface BoardPlayerOps {
+public interface BoardPlayerOperations {
     public List<Player> getPlayers();
     public Player nextPlayer();
     public Player currentPlayer();

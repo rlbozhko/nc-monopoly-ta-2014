@@ -7,5 +7,5 @@ package com.monopoly;
  * ТипЯчейки
  * */
 public enum CellType {
-    PropertyCell, EventCell
+    PROPERTY_CELL, EVENT_CELL
 }

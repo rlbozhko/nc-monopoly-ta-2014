@@ -11,11 +11,11 @@ import java.util.Random;
 * ЧПСобытие
 */
 public class EmergencyEvent implements Event {
-    private final String name;
-    private final String description;
-    private final int cellCount;
-    private final Board board;
-    Random random;
+    private String name;
+    private String description;
+    private int cellCount;
+    private Board board;
+    private Random random;
     public EmergencyEvent(String name, String description, int cellCount, Board board) {
         this.name = name;
         this.description = description;
@@ -30,32 +30,32 @@ public class EmergencyEvent implements Event {
         for (int i = 0; i < cellCount; i++) {
             int randomIndex = random.nextInt(cells.size());
             Cell cell = board.getCells().get(randomIndex);
-            if (cell.getCellType() == CellType.PropertyCell) {
+            if (cell.getCellType() == CellType.PROPERTY_CELL) {
                 Property property = (Property) cell;
                 List<BuildingYard> buildingYards = property.getBuildingYards();
                 List<Building> buildings = new ArrayList<>();
-                for (BuildingYard by: buildingYards) {
-                    Building building = by.getBuilding();
+                for (BuildingYard buildingYard: buildingYards) {
+                    Building building = buildingYard.getBuilding();
                     if (building != null) {
                         buildings.add(building);
                     }
                 }
                 if (!buildings.isEmpty()) {
                     randomIndex = random.nextInt(buildings.size());
-                    BuildingOps b = (BuildingOps) buildingYards.get(randomIndex).getBuilding();
-                    b.levelDown();
+                    BuildingOps building = (BuildingOps) buildingYards.get(randomIndex).getBuilding();
+                    building.levelDown();
                 }
             }
         }
     }
 
     @Override
-    public String getEventDescription() {
+    public String getDescription() {
         return description;
     }
 
     @Override
-    public String getEventName() {
+    public String getName() {
         return name;
     }
 }

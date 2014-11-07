@@ -11,6 +11,6 @@ import java.util.List;
  */
 public interface Event {
     public void performEvent(List<Player> players);
-    public String getEventDescription();
-    public String getEventName();
+    public String getDescription();
+    public String getName();
 }

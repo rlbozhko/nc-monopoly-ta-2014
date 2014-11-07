@@ -25,12 +25,12 @@ public class BeginEvent implements Event {
         }
 
     @Override
-    public String getEventDescription() {
+    public String getDescription() {
         return description;
     }
 
     @Override
-    public String getEventName() {
+    public String getName() {
         return eventName;
     }
 }

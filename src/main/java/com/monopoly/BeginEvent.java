@@ -8,25 +8,21 @@ import java.util.List;
  */
 public class BeginEvent implements Event {
 
-    private static final int START_CASH = 1500;
-    private String eventName;
-    String description;
-    private List<Wallet> money;
+        private static final int START_CASH = 1500;
+        private String eventName;
+        String description;
 
-    public BeginEvent(String eventName, String description){
-        this.eventName = eventName;
-        this.description = description;
-    }
-
-    @Override
-    public void performEvent(List<Player> players) {
-        money = new ArrayList<Wallet>();
-        for (int i = 0; i<players.size(); i++){
-            Wallet playerWallet = players.get(i).getMoney();
-            playerWallet.addMoney(START_CASH);
-            money.set(i, playerWallet);
+        public BeginEvent(String eventName, String description){
+            this.eventName = eventName;
+            this.description = description;
         }
-    }
+
+        @Override
+        public void performEvent(List<Player> players) {
+            for (Player player: players){
+                player.getMoney().addMoney(START_CASH);
+            }
+        }
 
     @Override
     public String getEventDescription() {

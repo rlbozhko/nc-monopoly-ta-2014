@@ -17,7 +17,7 @@ public class BeginEvent implements Event {
         @Override
         public void performEvent(List<Player> players) {
             for (Player player: players){
-                player.getMoney().addMoney(START_CASH);
+                player.getWallet().addMoney(START_CASH);
             }
         }
 

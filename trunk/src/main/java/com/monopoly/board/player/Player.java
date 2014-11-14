@@ -1,4 +1,4 @@
-package com.monopoly.board.players;
+package com.monopoly.board.player;
 
 import com.monopoly.board.cells.Property;
 

@@ -1,4 +1,4 @@
-package com.monopoly.board.buildings;
+package com.monopoly.board.building;
 
 /**
  * Created by Roma on 06.11.2014.

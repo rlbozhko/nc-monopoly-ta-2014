@@ -26,20 +26,22 @@ public class EmergencyEvent implements Event {
     public void performEvent(Board board) {
         List<Cell> cells = ((BoardCellOperations) board).getPropertyCell();
         for (int i = 0; i < cellCount; i++) {
-            int randomIndex = random.nextInt(cells.size());
-            Property property = (Property) cells.get(randomIndex);
-            List<Building> buildings = property.getBuildings();
+            randomBildingLevelDown(getRandomCellBildings(cells));
+        }
+    }
 
-            List<Building> nullList = new ArrayList<Building>();
-            nullList.add(null);
-            buildings.removeAll(nullList);
+    private List<Building> getRandomCellBildings(List<Cell> cells) {
+        int randomIndex = random.nextInt(cells.size());
+        List<Building> buildings = ((Property) cells.get(randomIndex)).getBuildings();
+        buildings.removeAll(Collections.singleton(null));
+        return buildings;
+    }
 
-            if (!buildings.isEmpty()) {
-                randomIndex = random.nextInt(buildings.size());
-                BuildingOperations building = buildings.get(randomIndex);
-                building.levelDown();
-            }
-
+    private void randomBildingLevelDown(List<Building> buildings) {
+        int randomIndex;
+        if (!buildings.isEmpty()) {
+            randomIndex = random.nextInt(buildings.size());
+            buildings.get(randomIndex).levelDown();
         }
     }
 

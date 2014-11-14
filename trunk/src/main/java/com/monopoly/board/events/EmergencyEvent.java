@@ -1,7 +1,7 @@
 package com.monopoly.board.events;
 
 import com.monopoly.board.*;
-import com.monopoly.board.bildings.Building;
+import com.monopoly.board.buildings.Building;
 import com.monopoly.board.cells.Cell;
 import com.monopoly.board.cells.Property;
 

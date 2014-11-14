@@ -1,4 +1,6 @@
-package com.monopoly;
+package com.monopoly.board.bildings;
+
+import com.monopoly.board.events.Event;
 
 /**
  * Created by Roma on 31.10.2014.

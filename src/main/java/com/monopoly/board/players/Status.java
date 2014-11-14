@@ -1,4 +1,4 @@
-package com.monopoly;
+package com.monopoly.board.players;
 
 /**
  * Created by Roma on 31.10.2014.

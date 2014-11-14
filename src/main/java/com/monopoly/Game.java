@@ -1,5 +1,8 @@
 package com.monopoly;
 
+import com.monopoly.board.cells.Cell;
+import com.monopoly.board.players.Player;
+
 import java.util.List;
 
 public interface Game {

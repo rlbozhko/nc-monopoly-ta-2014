@@ -1,6 +1,4 @@
-package com.monopoly;
-
-import java.util.List;
+package com.monopoly.board.players;
 
 /**
  * Created by mdolina on 07.11.2014.

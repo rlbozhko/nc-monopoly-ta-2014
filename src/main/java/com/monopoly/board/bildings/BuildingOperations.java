@@ -1,8 +1,11 @@
-package com.monopoly;
+package com.monopoly.board.bildings;
 
 /**
  * Created by Roma on 06.11.2014.
  */
+
+import com.monopoly.board.events.Event;
+
 /**
  * ОперацииЗдания
  */

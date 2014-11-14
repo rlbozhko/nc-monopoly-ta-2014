@@ -1,6 +1,4 @@
-package com.monopoly;
-
-import java.util.List;
+package com.monopoly.board.cells;
 
 /**
  * Created by Roma on 31.10.2014.

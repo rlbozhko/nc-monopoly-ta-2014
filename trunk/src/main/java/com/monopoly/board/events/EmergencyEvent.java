@@ -1,4 +1,9 @@
-package com.monopoly;
+package com.monopoly.board.events;
+
+import com.monopoly.board.*;
+import com.monopoly.board.bildings.Building;
+import com.monopoly.board.cells.Cell;
+import com.monopoly.board.cells.Property;
 
 import java.util.*;
 

@@ -1,6 +1,4 @@
-package com.monopoly;
-
-import java.util.List;
+package com.monopoly.board;
 
 /**
  * Created by Roma on 06.11.2014.

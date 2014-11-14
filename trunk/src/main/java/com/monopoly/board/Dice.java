@@ -1,4 +1,4 @@
-package com.monopoly;
+package com.monopoly.board;
 
 public class Dice  {
     private int face;

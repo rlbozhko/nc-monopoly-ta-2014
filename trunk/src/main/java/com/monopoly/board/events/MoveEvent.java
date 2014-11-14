@@ -1,7 +1,9 @@
-package com.monopoly;
+package com.monopoly.board.events;
 
 import java.util.Random;
 
+import com.monopoly.board.Board;
+import com.monopoly.board.players.Player;
 import com.monopoly.tools.XORShiftRandom;
 
 public class MoveEvent {

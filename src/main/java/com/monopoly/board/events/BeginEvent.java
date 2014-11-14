@@ -1,7 +1,7 @@
 package com.monopoly.board.events;
 
 import com.monopoly.board.Board;
-import com.monopoly.board.players.Player;
+import com.monopoly.board.player.Player;
 
 public class BeginEvent implements Event {
 

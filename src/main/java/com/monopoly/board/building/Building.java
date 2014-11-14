@@ -1,4 +1,4 @@
-package com.monopoly.board.buildings;
+package com.monopoly.board.building;
 
 import com.monopoly.board.events.Event;
 

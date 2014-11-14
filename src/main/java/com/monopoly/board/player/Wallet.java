@@ -1,4 +1,4 @@
-package com.monopoly.board.players;
+package com.monopoly.board.player;
 
 public class Wallet {
 	int money;

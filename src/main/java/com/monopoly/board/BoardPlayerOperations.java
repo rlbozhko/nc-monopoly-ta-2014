@@ -1,6 +1,6 @@
 package com.monopoly.board;
 
-import com.monopoly.board.players.Player;
+import com.monopoly.board.player.Player;
 
 import java.util.List;
 

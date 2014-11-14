@@ -1,4 +1,4 @@
-package com.monopoly.board;
+package com.monopoly.board.dice;
 
 import com.monopoly.tools.XORShiftRandom;
 

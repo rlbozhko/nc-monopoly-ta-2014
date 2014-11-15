@@ -13,12 +13,12 @@ public class GameController implements Game {
 		List<Player> players = new ArrayList<>();
 		List<Cell> cells = new ArrayList<>();
 		GameController gameController = new GameController();
-		gameController.createGmae(players, cells);
+		gameController.createGame(players, cells);
 		
 	}
 
 	@Override
-	public void createGmae(List<Player> players, List<Cell> cells) {
+	public void createGame(List<Player> players, List<Cell> cells) {
 		Board board = new Board(players, cells);
 		Thread gameThread = new Thread(board);
 		gameThread.start();

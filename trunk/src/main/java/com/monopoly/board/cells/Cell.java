@@ -10,8 +10,9 @@ public abstract class Cell {
     private String name;
     private String description;
     private CellType cellType;
+    private int position;
 
-    public Cell (String name, String description, CellType cellType) {
+    public Cell (String name, String description, CellType cellType, int position) {
         this.name = name;
         this.description = description;
         this.cellType = cellType;
@@ -28,5 +29,10 @@ public abstract class Cell {
     public CellType getCellType() {
         return cellType;
     }
+
+    public int getPosition() {
+        return position;
+    }
+
 }
 

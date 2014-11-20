@@ -20,18 +20,73 @@ public class PropertyCell extends Cell implements Property {
     private Monopoly monopoly;
     private PropertyStatus status;
 
-    public PropertyCell(String name, String description,
-                        Player owner, int buildingsCount, int basePrice, int baseRent, Monopoly monopoly) {
-        super(name, description, CellType.PROPERTY_CELL);
+    public static class PropertyBuilder {
+        private final static int DEFAULT_BASE_PRICE = 1000;
+        private final static int DEFAULT_BASE_RENT = 100;
+
+        private static String name;
+        private static String description;
+        private static int position;
+        private static Player owner = null;
+        private static List<Building> buildings;
+        private static int basePrice;
+        private static int baseRent;
+        private static Monopoly monopoly;
+        private static PropertyStatus status;
+
+
+        public PropertyBuilder(String name,  List<Building> buildings, int position) {
+            this.name = name;
+            this.description = name;
+            this.position = position;
+            this.buildings = buildings;
+            this.owner = null;
+            this.basePrice = DEFAULT_BASE_PRICE;
+            this.baseRent = DEFAULT_BASE_RENT;
+            this.monopoly = null;
+        }
+
+        public PropertyCell getPropertyCell() {
+            return new PropertyCell(name, description, position, owner, buildings, basePrice, baseRent, monopoly);
+        }
+
+        public PropertyBuilder setDescription(String description) {
+            this.owner = owner;
+            return this;
+        }
+
+        public PropertyBuilder setOwner(Player owner) {
+            this.owner = owner;
+            return this;
+        }
+
+        public PropertyBuilder setBasePrice(int basePrice) {
+            this.basePrice = basePrice;
+            return this;
+        }
+
+        public PropertyBuilder setBaseRent(int baseRent) {
+            this.baseRent = baseRent;
+            return this;
+        }
+
+        public PropertyBuilder setMonopoly(int monopoly1) {
+            this.monopoly = monopoly;
+            return this;
+        }
+
+
+    }
+
+    public PropertyCell(String name, String description, int position,
+                        Player owner, List<Building> buildings, int basePrice, int baseRent, Monopoly monopoly) {
+        super(name, description, CellType.PROPERTY_CELL, position);
         this.owner = owner;
         this.basePrice = basePrice;
         this.baseRent = baseRent;
         this.monopoly = monopoly;
         monopoly.addProperty(this);
-        buildings = new ArrayList<>(buildingsCount);
-        for (int i = 0; i < buildingsCount; i++) {
-            buildings.add(null);
-        }
+        this.buildings = buildings;
     }
 
     @Override

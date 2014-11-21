@@ -20,7 +20,7 @@ public class MoneyEvent {
 	XORShiftRandom xorShiftRandom = new XORShiftRandom();
 	
 	public void doAction(Board board) {
-		Player player = board.currentPlayer();
+		Player player = board.getCurrentPlayer();
 		boolean isAddMoney = random.nextBoolean();
 		if (isAddMoney) {
 			player.getWallet().addMoney(xorShiftRandom.nextInt(MAX_VALUE_MONEY_FOR_MONEYEVENT));

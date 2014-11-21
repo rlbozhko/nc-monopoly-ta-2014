@@ -21,6 +21,6 @@ public class EndTurnAction implements Action {
     @Override
     public void performAction(Player player) {
         player.setStatus(Status.WAIT);
-        board.nextPlayer().setStatus(Status.START_TURN);
+        board.getNextPlayer().setStatus(Status.START_TURN);
     }
 }

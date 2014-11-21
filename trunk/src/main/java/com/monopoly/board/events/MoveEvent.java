@@ -21,7 +21,7 @@ public class MoveEvent {
 
 	// TODO if (position + MAX_VALUE_MOVE_PLAYER) > board lenght
 	public void doAction(Board board) {
-		Player player = board.currentPlayer();
+		Player player = board.getCurrentPlayer();
 		boolean isAdvance = random.nextBoolean();
 		if (isAdvance) {
 			player.goToPosition(player.getPosition()

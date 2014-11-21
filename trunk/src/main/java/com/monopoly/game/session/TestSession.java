@@ -4,7 +4,9 @@ import com.monopoly.action.ActionController;
 import com.monopoly.action.PlayerActionController;
 import com.monopoly.board.Board;
 import com.monopoly.board.cells.*;
+import com.monopoly.board.dice.Dice;
 import com.monopoly.board.player.Player;
+import com.monopoly.board.player.Status;
 import com.monopoly.board.player.Wallet;
 import com.monopoly.io.ConsoleIO;
 import com.monopoly.io.DummyIO;
@@ -40,10 +42,18 @@ public class TestSession implements Session {
             cells.add(new TestCell("Property",null, CellType.EVENT_CELL, cells.size()));
         }
         List<Player> players = new ArrayList<>();
-        players.add(new Player("Player 1", new Wallet()));
-        players.add(new Player("Player 2", new Wallet()));
+        Player p1 = new Player("Player 1", new Wallet());
+        Player p2 = new Player("Player 2", new Wallet());
+        p1.setStatus(Status.START_TURN);
+        p2.setStatus(Status.WAIT);
+        players.add(p1);
+        players.add(p2);
 
-        board = new Board(players, cells);
+        List<Dice> dice = new ArrayList<>();
+        dice.add(new Dice());
+        dice.add(new Dice());
+
+        board = new Board(players, cells,null,null, dice);
 
         actionController = new PlayerActionController(this);
         ios = new ArrayList<>();

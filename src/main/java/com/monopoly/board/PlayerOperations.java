@@ -10,8 +10,9 @@ import java.util.List;
 /**
 * ОперацииСИгроками
 */
-public interface BoardPlayerOperations {
+public interface PlayerOperations {
     public List<Player> getPlayers();
-    public Player nextPlayer();
-    public Player currentPlayer();
+    public Player getNextPlayer();
+    public Player getCurrentPlayer();
+    public Player getPreviousPlayer();
 }

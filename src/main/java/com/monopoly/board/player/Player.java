@@ -1,10 +1,12 @@
 package com.monopoly.board.player;
 
+import com.monopoly.board.Board;
 import com.monopoly.board.cells.Property;
+import com.monopoly.board.cells.PropertyCell;
 
 import java.util.List;
 
-public class Player implements MoneyOperations, MoveOperations, TurnOperations {
+public class Player implements MoneyOperations, MoveOperations, TurnOperations, PropertyOperations {
     private int position;
     private String name;
     private Status status;
@@ -26,7 +28,10 @@ public class Player implements MoneyOperations, MoveOperations, TurnOperations {
 
     @Override
     public void startTurn() {
-        //TODO
+        status = Status.START_TURN;
+
+
+
     }
 
     @Override
@@ -41,7 +46,7 @@ public class Player implements MoneyOperations, MoveOperations, TurnOperations {
 
     @Override
     public void goToPosition(int position) {
-// ?
+        this.position = this.position + position;
     }
 
     @Override
@@ -49,24 +54,41 @@ public class Player implements MoneyOperations, MoveOperations, TurnOperations {
         return money;
     }
 
-
-
     public List<Property> getProperty() {
         return property;
     }
-
-
-    public void move(int cellId) {
-        position = cellId;
-    }
-
 
     public Status getStatus() {
         return status;
     }
 
-
     public void setStatus(Status status) {
         this.status = status;
+    }
+
+    @Override
+    public void buyProperty(PropertyCell propertyCell) {
+        if(propertyCell.getPrice() <= money.getMoney()) {
+            money.subtractMoney(propertyCell.getPrice());
+            property.add(propertyCell);
+//       что делать?     propertyCell.setOwner();
+        }
+    }
+
+    @Override
+    public void sellProperty(PropertyCell propertyCell) {
+        if(!propertyCell.isPledged()) {
+
+        }
+    }
+
+    @Override
+    public void putUpProperty(PropertyCell propertyCell) {
+
+    }
+
+    @Override
+    public void buyBackProperty(PropertyCell propertyCell) {
+
     }
 }

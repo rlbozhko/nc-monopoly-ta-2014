@@ -19,9 +19,9 @@ public class GameController implements Game {
 
 	@Override
 	public void createGame(List<Player> players, List<Cell> cells) {
-		Board board = new Board(players, cells);
-		Thread gameThread = new Thread(board);
-		gameThread.start();
+		//Board board = new Board(players, cells);
+		//Thread gameThread = new Thread(board);
+		//gameThread.start();
 	}
 
 	@Override

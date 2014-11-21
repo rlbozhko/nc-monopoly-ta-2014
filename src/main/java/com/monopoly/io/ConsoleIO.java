@@ -3,6 +3,7 @@ package com.monopoly.io;
 import com.monopoly.action.Action;
 import com.monopoly.action.ActionController;
 import com.monopoly.board.player.Player;
+import com.monopoly.board.player.Status;
 import com.monopoly.game.session.Session;
 
 import java.util.List;
@@ -64,6 +65,6 @@ public class ConsoleIO implements IO, Runnable {
                 performAction(actions.get(in.nextInt()));
             }
 
-        } while (true);
+        } while (!Status.FINISH.equals(player.getStatus()));
     }
 }

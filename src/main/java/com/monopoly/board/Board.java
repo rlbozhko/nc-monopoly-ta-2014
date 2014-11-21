@@ -12,17 +12,17 @@ import java.util.List;
  * Created by Roma on 31.10.2014.
  */
 public class Board implements DiceOperations, CellOperations, PlayerOperations, Runnable {
-    private LinkedList<Player> players;
+    private List<Player> players;
     private Player currentPlayer;
     private Player previousPlayer;
-    private LinkedList<Cell> cells;
+    private List<Cell> cells;
     private List<Cell> propertyCells;
     private List<Cell> eventCells;
-    private List <Dice> dices;
+    private List<Dice> dices;
 
     private Iterator<Player> playerIter;
 
-    public Board(LinkedList<Player> players, LinkedList<Cell> cells, List<Cell> propertyCells, List<Cell> eventCells, LinkedList<Dice> dices){
+    public Board(List<Player> players, List<Cell> cells, List<Cell> propertyCells, List<Cell> eventCells, List<Dice> dices){
         this.cells = cells;
         this.propertyCells = propertyCells;
         this.eventCells = eventCells;
@@ -31,7 +31,7 @@ public class Board implements DiceOperations, CellOperations, PlayerOperations, 
         this.playerIter = players.iterator();
     }
 
-    public LinkedList<Cell> getCells() {
+    public List<Cell> getCells() {
         return cells;
     }
 
@@ -46,7 +46,7 @@ public class Board implements DiceOperations, CellOperations, PlayerOperations, 
     }
 
     @Override
-    public LinkedList<Player> getPlayers() {
+    public List<Player> getPlayers() {
         return players;
     }
 

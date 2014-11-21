@@ -21,7 +21,7 @@ public class SurrenderAction implements Action {
     @Override
     public void performAction(Player player) {
         player.setStatus(Status.FINISH);
-        board.nextPlayer().setStatus(Status.START_TURN);
+        board.getNextPlayer().setStatus(Status.START_TURN);
     }
 
 

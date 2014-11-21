@@ -26,6 +26,12 @@ public class StartTurnAction implements Action {
     public void performAction(Player player) {
         List<Dice> dice = ((DiceOperations)board).getDice();
         Thread diceGenerator = new Thread(new DiceGenerator(dice.get(0), dice.get(1)));
+        diceGenerator.start();
+        try {
+            Thread.sleep(10);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
         player.goToPosition(player.getPosition() + dice.get(0).getFace() + dice.get(1).getFace());
         player.setStatus(Status.ACTIVE);
         diceGenerator.interrupt();

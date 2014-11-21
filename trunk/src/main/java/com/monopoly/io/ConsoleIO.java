@@ -50,8 +50,8 @@ public class ConsoleIO implements IO, Runnable {
     @Override
     public void performAction(Action action) {
         action.performAction(player);
-        outputBoardState();
-        outputAvailableActions(player);
+        //outputBoardState();
+        //outputAvailableActions(player);
     }
 
     @Override

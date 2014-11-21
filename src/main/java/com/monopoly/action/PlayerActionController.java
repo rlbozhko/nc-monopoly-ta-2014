@@ -24,6 +24,7 @@ public class PlayerActionController implements ActionController {
             return result;
         }
         result.add(new SurrenderAction(session));
+        result.add(new WaitAction(session));
         if (Status.WAIT.equals(player.getStatus())) {
             //
         } else if (Status.START_TURN.equals(player.getStatus())) {

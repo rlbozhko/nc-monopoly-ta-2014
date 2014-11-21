@@ -3,6 +3,7 @@ package com.monopoly.board;
 import com.monopoly.board.cells.Cell;
 import com.monopoly.board.dice.Dice;
 import com.monopoly.board.player.Player;
+import com.monopoly.board.player.Status;
 
 import java.util.Iterator;
 import java.util.LinkedList;
@@ -29,6 +30,7 @@ public class Board implements DiceOperations, CellOperations, PlayerOperations, 
         this.players = players;
         this.dices = dices;
         this.playerIter = players.iterator();
+        currentPlayer = players.get(0);
     }
 
     public List<Cell> getCells() {
@@ -57,11 +59,17 @@ public class Board implements DiceOperations, CellOperations, PlayerOperations, 
 
     @Override
     public Player getNextPlayer() {
-        if(playerIter.hasNext()) {
+        int index = players.indexOf(currentPlayer);
+        if (index == players.size() - 1) {
+            return players.get(0);
+        }
+        return players.get(index + 1);
+
+        /*if(playerIter.hasNext()) {
             previousPlayer = currentPlayer;
             currentPlayer = playerIter.next();
         }
-        return currentPlayer;
+        return currentPlayer;*/
     }
 
     @Override

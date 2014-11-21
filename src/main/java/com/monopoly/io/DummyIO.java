@@ -58,15 +58,11 @@ public class DummyIO implements IO, Runnable {
                 e.printStackTrace();
             }
             int choice;
-
+            outputAvailableActions(player);
             for (int i = 0; i < actions.size(); i++) {
                 Action action = actions.get(i);
-                if (action instanceof StartTurnAction) {
+                if (action instanceof StartTurnAction || action instanceof EndTurnAction) {
                     performAction(action);
-                    return;
-                } else if (action instanceof EndTurnAction) {
-                    performAction(action);
-                    return;
                 }
             }
 

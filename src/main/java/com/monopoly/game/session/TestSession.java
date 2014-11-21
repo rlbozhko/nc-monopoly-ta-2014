@@ -26,12 +26,12 @@ public class TestSession implements Session {
     public static void main(String[] args) {
         Session test = new TestSession();
         ConsoleIO consoleIO = (ConsoleIO) test.getIO().get(0);
-        DummyIO dummyIO = (DummyIO) test.getIO().get(1);
+        //DummyIO dummyIO = (DummyIO) test.getIO().get(1);
         Thread player = new Thread(consoleIO);
-        Thread dummy = new Thread(dummyIO);
+        //Thread dummy = new Thread(dummyIO);
 
         player.start();
-        dummy.start();
+        //dummy.start();
 
     }
 
@@ -47,7 +47,7 @@ public class TestSession implements Session {
         p1.setStatus(Status.START_TURN);
         p2.setStatus(Status.WAIT);
         players.add(p1);
-        players.add(p2);
+        //players.add(p2);
 
         List<Dice> dice = new ArrayList<>();
         dice.add(new Dice());
@@ -58,8 +58,8 @@ public class TestSession implements Session {
         actionController = new PlayerActionController(this);
         ios = new ArrayList<>();
 
-        ios.add(new ConsoleIO(this, players.get(0)));
-        ios.add(new DummyIO(this, players.get(1)));
+        ios.add(new ConsoleIO(this, p1));
+        //ios.add(new DummyIO(this, p2));
 
     }
 

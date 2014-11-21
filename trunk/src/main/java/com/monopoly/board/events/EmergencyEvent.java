@@ -29,7 +29,7 @@ public class EmergencyEvent implements Event {
 
     @Override
     public void performEvent(Board board) {
-        List<Cell> cells = ((BoardCellOperations) board).getPropertyCell();
+        List<Cell> cells = ((CellOperations) board).getPropertyCell();
         for (int i = 0; i < cellCount; i++) {
             randomBildingLevelDown(getRandomCellBildings(cells));
         }

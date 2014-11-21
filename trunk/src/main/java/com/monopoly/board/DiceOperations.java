@@ -8,6 +8,6 @@ import java.util.List; /**
 /**
  * ОперацииСКубиками
  */
-public interface BoardDiceOperations {
+public interface DiceOperations {
     public List<Dice> getDice();
 }

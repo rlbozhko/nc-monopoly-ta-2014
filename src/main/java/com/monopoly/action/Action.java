@@ -7,4 +7,5 @@ import com.monopoly.board.player.Player;
  */
 public interface Action {
     void performAction(Player player);
+    String getName();
 }

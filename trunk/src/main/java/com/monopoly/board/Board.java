@@ -60,10 +60,14 @@ public class Board implements DiceOperations, CellOperations, PlayerOperations, 
     @Override
     public Player getNextPlayer() {
         int index = players.indexOf(currentPlayer);
+        Player next;
         if (index == players.size() - 1) {
-            return players.get(0);
+            next = players.get(0);
+        } else {
+            next = players.get(index + 1);
         }
-        return players.get(index + 1);
+        currentPlayer = next;
+        return next;
 
         /*if(playerIter.hasNext()) {
             previousPlayer = currentPlayer;

@@ -26,13 +26,15 @@ public class TestSession implements Session {
     public static void main(String[] args) {
         Session test = new TestSession();
         ConsoleIO consoleIO = (ConsoleIO) test.getIO().get(0);
-        //DummyIO dummyIO = (DummyIO) test.getIO().get(1);
+        DummyIO dummyIO1 = (DummyIO) test.getIO().get(1);
+        DummyIO dummyIO2 = (DummyIO) test.getIO().get(2);
         Thread player = new Thread(consoleIO);
-        //Thread dummy = new Thread(dummyIO);
+        Thread dummy1 = new Thread(dummyIO1);
+        Thread dummy2 = new Thread(dummyIO2);
 
         player.start();
-        //dummy.start();
-
+        dummy1.start();
+        dummy2.start();
     }
 
     public TestSession() {
@@ -41,13 +43,16 @@ public class TestSession implements Session {
             //cells.add(new PropertyCell.PropertyBuilder("Property",null,cells.size()).getPropertyCell());
             cells.add(new TestCell("Property",null, CellType.EVENT_CELL, cells.size()));
         }
+
         List<Player> players = new ArrayList<>();
         Player p1 = new Player("Player 1", new Wallet());
         Player p2 = new Player("Player 2", new Wallet());
+        Player p3 = new Player("Player 3", new Wallet());
         p1.setStatus(Status.START_TURN);
         p2.setStatus(Status.WAIT);
         players.add(p1);
-        //players.add(p2);
+        players.add(p2);
+        players.add(p3);
 
         List<Dice> dice = new ArrayList<>();
         dice.add(new Dice());
@@ -59,7 +64,8 @@ public class TestSession implements Session {
         ios = new ArrayList<>();
 
         ios.add(new ConsoleIO(this, p1));
-        //ios.add(new DummyIO(this, p2));
+        ios.add(new DummyIO(this, p2));
+        ios.add(new DummyIO(this, p3));
 
     }
 

@@ -57,7 +57,6 @@ public class DummyIO implements IO, Runnable {
             } catch (InterruptedException e) {
                 e.printStackTrace();
             }
-            int choice;
             outputAvailableActions(player);
             for (int i = 0; i < actions.size(); i++) {
                 Action action = actions.get(i);

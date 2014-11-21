@@ -5,6 +5,7 @@ import com.monopoly.action.ActionController;
 import com.monopoly.board.player.Player;
 import com.monopoly.board.player.Status;
 import com.monopoly.game.session.Session;
+import com.monopoly.game.session.TestSession;
 
 import java.util.List;
 import java.util.Scanner;
@@ -13,19 +14,20 @@ import java.util.Scanner;
  * Created by Roma on 20.11.2014.
  */
 public class ConsoleIO implements IO, Runnable {
-    Session session;
+    //Session session;
     Player player;
-    ActionController actionController;
+    //ActionController actionController;
     List<Action> actions;
 
-    public ConsoleIO(Session session, Player player) {
-        this.session = session;
+    public ConsoleIO(Player player) {
+        //this.session = TestSession.getInstance();
         this.player = player;
-        this.actionController = session.getActionController();
+        //this.actionController = session.getActionController();
     }
 
     @Override
     public void outputBoardState() {
+        Session session = TestSession.getInstance();
         System.out.println("Информация об игре");
         List<Player> players = session.getBoard().getPlayers();
         System.out.println("Вы на позиции: " + player.getPosition());
@@ -40,10 +42,11 @@ public class ConsoleIO implements IO, Runnable {
 
     @Override
     public void outputAvailableActions(Player player) {
+        ActionController actionController = TestSession.getInstance().getActionController();
         actions = actionController.getAvailableActions(player);
         System.out.println("Доступные действия:");
         for (int i = 0; i < actions.size(); i++) {
-            System.out.println(i + " " + actions.get(i));
+            System.out.println(i + " " + actions.get(i).getName());
         }
     }
 

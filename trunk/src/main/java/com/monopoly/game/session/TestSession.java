@@ -19,12 +19,45 @@ import java.util.List;
  * Created by Roma on 20.11.2014.
  */
 public class TestSession implements Session {
-    Board board;
-    ActionController actionController;
-    List<IO> ios;
+    private static volatile Session session;
+    //private static volatile TestSessionBuilder testSessionBuilder = new TestSessionBuilder();
+
+    private Board board;
+    private ActionController actionController;
+    private List<IO> ios;
 
     public static void main(String[] args) {
-        Session test = new TestSession();
+        List<Cell> cells = new ArrayList<>();
+        for (int i = 0; i < 20 ; i++) {
+            cells.add(new TestCell("Property",null, CellType.EVENT_CELL, cells.size()));
+        }
+
+        List<Player> players = new ArrayList<>();
+        Player p1 = new Player("Player 1", new Wallet());
+        Player p2 = new Player("Player 2", new Wallet());
+        Player p3 = new Player("Player 3", new Wallet());
+        p1.setStatus(Status.START_TURN);
+        p2.setStatus(Status.WAIT);
+        players.add(p1);
+        players.add(p2);
+        players.add(p3);
+
+        List<Dice> dice = new ArrayList<>();
+        dice.add(new Dice());
+        dice.add(new Dice());
+
+        List<IO> ios = new ArrayList<>();
+        ios.add(new ConsoleIO(p1));
+        ios.add(new DummyIO(p2));
+        ios.add(new DummyIO(p3));
+
+        TestSessionBuilder.setBoard(new Board(players, cells,null,null, dice));
+        TestSessionBuilder.setActionController(new PlayerActionController());
+        TestSessionBuilder.setIOs(ios);
+
+
+        Session test = TestSession.getInstance();
+
         ConsoleIO consoleIO = (ConsoleIO) test.getIO().get(0);
         DummyIO dummyIO1 = (DummyIO) test.getIO().get(1);
         DummyIO dummyIO2 = (DummyIO) test.getIO().get(2);
@@ -37,10 +70,24 @@ public class TestSession implements Session {
         dummy2.start();
     }
 
-    public TestSession() {
+
+    public static Session getInstance() {
+        Session localInstance = session;
+        if (localInstance == null) {
+            synchronized (TestSession.class) {
+                localInstance = session;
+                if (localInstance == null) {
+                    session = localInstance =  new TestSession(TestSessionBuilder.getBoard(),
+                            TestSessionBuilder.getActionController(),TestSessionBuilder.getIos());
+                }
+            }
+        }
+        return localInstance;
+    }
+/*
+    private TestSession() {
         List<Cell> cells = new ArrayList<>();
         for (int i = 0; i < 20 ; i++) {
-            //cells.add(new PropertyCell.PropertyBuilder("Property",null,cells.size()).getPropertyCell());
             cells.add(new TestCell("Property",null, CellType.EVENT_CELL, cells.size()));
         }
 
@@ -66,8 +113,47 @@ public class TestSession implements Session {
         ios.add(new ConsoleIO(this, p1));
         ios.add(new DummyIO(this, p2));
         ios.add(new DummyIO(this, p3));
-
     }
+*/
+    private TestSession(Board board, ActionController actionController, List<IO> ios) {
+        this.board = board;
+        this.actionController = actionController;
+        this.ios = ios;
+    }
+
+    public static class TestSessionBuilder {
+        private static Board board;
+        private static ActionController actionController;
+        private static List<IO> ios;
+
+        private TestSessionBuilder() {
+        }
+
+        public static void setBoard(Board board) {
+            TestSessionBuilder.board = board;
+        }
+
+        public static void setActionController(ActionController actionController) {
+            TestSessionBuilder.actionController = actionController;
+        }
+
+        public static void setIOs(List<IO> ios) {
+            TestSessionBuilder.ios = ios;
+        }
+
+        public static ActionController getActionController() {
+            return actionController;
+        }
+
+        public static Board getBoard() {
+            return board;
+        }
+
+        public static List<IO> getIos() {
+            return ios;
+        }
+    }
+
 
     @Override
     public Board getBoard() {

@@ -4,6 +4,7 @@ import com.monopoly.board.Board;
 import com.monopoly.board.player.Player;
 import com.monopoly.board.player.Status;
 import com.monopoly.game.session.Session;
+import com.monopoly.game.session.TestSession;
 
 /**
  * Created by Roma on 20.11.2014.
@@ -13,8 +14,8 @@ public class SurrenderAction implements Action {
     Session session;
     Board board;
 
-    public SurrenderAction(Session session) {
-        this.session = session;
+    public SurrenderAction() {
+        this.session = TestSession.getInstance();
         this.board = session.getBoard();
     }
 
@@ -27,6 +28,11 @@ public class SurrenderAction implements Action {
                 nextPlayer.setStatus(Status.START_TURN);
             }
         }
+    }
+
+    @Override
+    public String getName() {
+        return "Surrender";
     }
 
 

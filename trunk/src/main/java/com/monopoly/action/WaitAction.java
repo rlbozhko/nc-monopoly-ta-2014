@@ -19,15 +19,16 @@ import com.monopoly.board.Board;
  */
 public class WaitAction implements Action {
 
-    Session session;
-    Board board;
 
-    public WaitAction(Session session) {
-        this.session = session;
-        this.board = session.getBoard();
+    public WaitAction() {
     }
 
     @Override
     public void performAction(Player player) {
+    }
+
+    @Override
+    public String getName() {
+        return "Wait";
     }
 }

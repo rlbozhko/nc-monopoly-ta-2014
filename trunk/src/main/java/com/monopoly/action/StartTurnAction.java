@@ -7,6 +7,7 @@ import com.monopoly.board.dice.DiceGenerator;
 import com.monopoly.board.player.Player;
 import com.monopoly.board.player.Status;
 import com.monopoly.game.session.Session;
+import com.monopoly.game.session.TestSession;
 
 import java.util.List;
 
@@ -17,8 +18,8 @@ public class StartTurnAction implements Action {
     Session session;
     Board board;
 
-    public StartTurnAction(Session session) {
-        this.session = session;
+    public StartTurnAction() {
+        this.session = TestSession.getInstance();
         this.board = session.getBoard();
     }
 
@@ -35,5 +36,10 @@ public class StartTurnAction implements Action {
         player.goToPosition(player.getPosition() + dice.get(0).getFace() + dice.get(1).getFace());
         player.setStatus(Status.ACTIVE);
         diceGenerator.interrupt();
+    }
+
+    @Override
+    public String getName() {
+        return "Start Turn";
     }
 }

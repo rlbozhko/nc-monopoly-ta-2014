@@ -74,8 +74,6 @@ public class PropertyCell extends Cell implements Property {
             this.monopoly = monopoly;
             return this;
         }
-
-
     }
 
     public PropertyCell(String name, String description, int position,

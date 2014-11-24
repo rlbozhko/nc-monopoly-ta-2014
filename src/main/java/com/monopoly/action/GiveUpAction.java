@@ -9,12 +9,12 @@ import com.monopoly.game.session.TestSession;
 /**
  * Created by Roma on 20.11.2014.
  */
-public class SurrenderAction implements Action {
+public class GiveUpAction implements Action {
 
     Session session;
     Board board;
 
-    public SurrenderAction() {
+    public GiveUpAction() {
         this.session = TestSession.getInstance();
         this.board = session.getBoard();
     }

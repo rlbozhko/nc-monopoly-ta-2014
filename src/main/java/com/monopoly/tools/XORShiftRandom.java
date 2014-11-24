@@ -1,22 +1,22 @@
 package com.monopoly.tools;
 
 public class XORShiftRandom {
-	private final int MAGIC_NUMBER1 = 21;
-	private final int MAGIC_NUMBER2 = 35;
-	private final int MAGIC_NUMBER3 = 4;
-	
-	private long last;
+    private final int MAGIC_NUMBER1 = 21;
+    private final int MAGIC_NUMBER2 = 35;
+    private final int MAGIC_NUMBER3 = 4;
 
-	public XORShiftRandom() {
-	    this.last =System.nanoTime();
-	}
+    private long last;
 
-	public int nextInt(int max) {
-	    last ^= (last << MAGIC_NUMBER1);
-	    last ^= (last >>> MAGIC_NUMBER2);
-	    last ^= (last << MAGIC_NUMBER3);
-	    int value = (int) last % max;     
-	    return (value < 0) ? -value + 1 : value + 1;
-	}
+    public XORShiftRandom() {
+        this.last = System.nanoTime();
+    }
+
+    public int nextInt(int max) {
+        last ^= (last << MAGIC_NUMBER1);
+        last ^= (last >>> MAGIC_NUMBER2);
+        last ^= (last << MAGIC_NUMBER3);
+        int value = (int) last % max;
+        return (value < 0) ? -value + 1 : value + 1;
+    }
 
 }

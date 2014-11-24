@@ -6,7 +6,9 @@ import com.monopoly.board.player.Player;
 import java.util.List;
 
 public interface Game {
-	public void createGame(List<Player> players, List<Cell> cells);
-	public void stopGame();
-	public void saveGame();
+    public void createGame(List<Player> players, List<Cell> cells);
+
+    public void stopGame();
+
+    public void saveGame();
 }

@@ -11,6 +11,8 @@ import com.monopoly.board.Board;
  */
 public interface Event {
     public void performEvent(Board board);
+
     public String getDescription();
+
     public String getName();
 }

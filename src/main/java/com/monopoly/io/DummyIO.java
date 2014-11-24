@@ -8,7 +8,6 @@ import com.monopoly.game.session.Session;
 import com.monopoly.game.session.TestSession;
 
 import java.util.List;
-import java.util.Scanner;
 
 /**
  * Created by Roma on 20.11.2014.
@@ -23,6 +22,25 @@ public class DummyIO implements IO, Runnable {
         //this.session = TestSession.getInstance();
         this.player = player;
         //this.actionController = session.getActionController();
+    }
+
+    @Override
+    public void run() {
+        do {
+            try {
+                Thread.sleep(1000);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+            outputAvailableActions(player);
+            for (int i = 0; i < actions.size(); i++) {
+                Action action = actions.get(i);
+                if (action instanceof StartTurnAction || action instanceof EndTurnAction) {
+                    performAction(action);
+                    break;
+                }
+            }
+        } while (true);
     }
 
     @Override
@@ -78,25 +96,11 @@ public class DummyIO implements IO, Runnable {
 
     @Override
     public boolean yesNoDialog(String message) {
-        return false;
+        return true;
     }
 
     @Override
-    public void run() {
-        do {
-            try {
-                Thread.sleep(1000);
-            } catch (InterruptedException e) {
-                e.printStackTrace();
-            }
-            outputAvailableActions(player);
-            for (int i = 0; i < actions.size(); i++) {
-                Action action = actions.get(i);
-                if (action instanceof StartTurnAction || action instanceof EndTurnAction) {
-                    performAction(action);
-                    break;
-                }
-            }
-        } while (true);
+    public void showMessage(String message) {
+        System.out.println(player.getName() + ": " + message);
     }
 }

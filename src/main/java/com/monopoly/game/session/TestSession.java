@@ -3,7 +3,9 @@ package com.monopoly.game.session;
 import com.monopoly.action.ActionController;
 import com.monopoly.action.PlayerActionController;
 import com.monopoly.board.Board;
-import com.monopoly.board.cells.*;
+import com.monopoly.board.cells.Cell;
+import com.monopoly.board.cells.CellType;
+import com.monopoly.board.cells.TestCell;
 import com.monopoly.board.dice.Dice;
 import com.monopoly.board.player.Player;
 import com.monopoly.board.player.Status;
@@ -27,8 +29,8 @@ public class TestSession implements Session {
 
     public static void main(String[] args) {
         List<Cell> cells = new ArrayList<>();
-        for (int i = 0; i < 20 ; i++) {
-            cells.add(new TestCell("Property",null, CellType.EVENT_CELL, cells.size()));
+        for (int i = 0; i < 20; i++) {
+            cells.add(new TestCell("Property", null, CellType.EVENT_CELL, cells.size()));
         }
 
         List<Player> players = new ArrayList<>();
@@ -50,7 +52,7 @@ public class TestSession implements Session {
         ios.add(new DummyIO(p2));
         ios.add(new DummyIO(p3));
 
-        TestSessionBuilder.setBoard(new Board(players, cells,null,null, dice));
+        TestSessionBuilder.setBoard(new Board(players, cells, null, null, dice));
         TestSessionBuilder.setActionController(new PlayerActionController());
         TestSessionBuilder.setIOs(ios);
 
@@ -76,44 +78,45 @@ public class TestSession implements Session {
             synchronized (TestSession.class) {
                 localInstance = session;
                 if (localInstance == null) {
-                    session = localInstance =  new TestSession(TestSessionBuilder.getBoard(),
-                            TestSessionBuilder.getActionController(),TestSessionBuilder.getIos());
+                    session = localInstance = new TestSession(TestSessionBuilder.getBoard(),
+                            TestSessionBuilder.getActionController(), TestSessionBuilder.getIos());
                 }
             }
         }
         return localInstance;
     }
-/*
-    private TestSession() {
-        List<Cell> cells = new ArrayList<>();
-        for (int i = 0; i < 20 ; i++) {
-            cells.add(new TestCell("Property",null, CellType.EVENT_CELL, cells.size()));
+
+    /*
+        private TestSession() {
+            List<Cell> cells = new ArrayList<>();
+            for (int i = 0; i < 20 ; i++) {
+                cells.add(new TestCell("Property",null, CellType.EVENT_CELL, cells.size()));
+            }
+
+            List<Player> players = new ArrayList<>();
+            Player p1 = new Player("Player 1", new Wallet());
+            Player p2 = new Player("Player 2", new Wallet());
+            Player p3 = new Player("Player 3", new Wallet());
+            p1.setStatus(Status.START_TURN);
+            p2.setStatus(Status.WAIT);
+            players.add(p1);
+            players.add(p2);
+            players.add(p3);
+
+            List<Dice> dice = new ArrayList<>();
+            dice.add(new Dice());
+            dice.add(new Dice());
+
+            board = new Board(players, cells,null,null, dice);
+
+            actionController = new PlayerActionController(this);
+            ios = new ArrayList<>();
+
+            ios.add(new ConsoleIO(this, p1));
+            ios.add(new DummyIO(this, p2));
+            ios.add(new DummyIO(this, p3));
         }
-
-        List<Player> players = new ArrayList<>();
-        Player p1 = new Player("Player 1", new Wallet());
-        Player p2 = new Player("Player 2", new Wallet());
-        Player p3 = new Player("Player 3", new Wallet());
-        p1.setStatus(Status.START_TURN);
-        p2.setStatus(Status.WAIT);
-        players.add(p1);
-        players.add(p2);
-        players.add(p3);
-
-        List<Dice> dice = new ArrayList<>();
-        dice.add(new Dice());
-        dice.add(new Dice());
-
-        board = new Board(players, cells,null,null, dice);
-
-        actionController = new PlayerActionController(this);
-        ios = new ArrayList<>();
-
-        ios.add(new ConsoleIO(this, p1));
-        ios.add(new DummyIO(this, p2));
-        ios.add(new DummyIO(this, p3));
-    }
-*/
+    */
     private TestSession(Board board, ActionController actionController, List<IO> ios) {
         this.board = board;
         this.actionController = actionController;

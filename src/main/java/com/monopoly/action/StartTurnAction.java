@@ -25,7 +25,7 @@ public class StartTurnAction implements Action {
 
     @Override
     public void performAction(Player player) {
-        List<Dice> dice = ((DiceOperations)board).getDice();
+        List<Dice> dice = ((DiceOperations) board).getDice();
         Thread diceGenerator = new Thread(new DiceGenerator(dice.get(0), dice.get(1)));
         diceGenerator.start();
         try {

@@ -3,10 +3,8 @@ package com.monopoly.board;
 import com.monopoly.board.cells.Cell;
 import com.monopoly.board.dice.Dice;
 import com.monopoly.board.player.Player;
-import com.monopoly.board.player.Status;
 
 import java.util.Iterator;
-import java.util.LinkedList;
 import java.util.List;
 
 /**
@@ -23,7 +21,7 @@ public class Board implements DiceOperations, CellOperations, PlayerOperations, 
 
     private Iterator<Player> playerIter;
 
-    public Board(List<Player> players, List<Cell> cells, List<Cell> propertyCells, List<Cell> eventCells, List<Dice> dices){
+    public Board(List<Player> players, List<Cell> cells, List<Cell> propertyCells, List<Cell> eventCells, List<Dice> dices) {
         this.cells = cells;
         this.propertyCells = propertyCells;
         this.eventCells = eventCells;
@@ -86,9 +84,9 @@ public class Board implements DiceOperations, CellOperations, PlayerOperations, 
         return dices;
     }
 
-	@Override
-	public void run() {
-		// TODO Auto-generated method stub
+    @Override
+    public void run() {
+        // TODO Auto-generated method stub
 
-	}
+    }
 }

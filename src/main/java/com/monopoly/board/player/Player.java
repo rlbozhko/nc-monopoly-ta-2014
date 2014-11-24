@@ -1,6 +1,5 @@
 package com.monopoly.board.player;
 
-import com.monopoly.board.Board;
 import com.monopoly.board.cells.Property;
 import com.monopoly.board.cells.PropertyCell;
 
@@ -19,22 +18,23 @@ public class Player implements MoneyOperations, MoveOperations, PropertyOperatio
         this.money = money;
         status = Status.WAIT;
     }
-/*
-    @Override
-    public void surrender() {
-        finishTurn();
-        status = Status.FINISH;
-    }
 
-    @Override
-    public void startTurn() {
-        status = Status.START_TURN;
-    }
+    /*
+        @Override
+        public void surrender() {
+            finishTurn();
+            status = Status.FINISH;
+        }
 
-    @Override
-    public void finishTurn() {
-    }
-*/
+        @Override
+        public void startTurn() {
+            status = Status.START_TURN;
+        }
+
+        @Override
+        public void finishTurn() {
+        }
+    */
     @Override
     public int getPosition() {
         return position;
@@ -68,7 +68,7 @@ public class Player implements MoneyOperations, MoveOperations, PropertyOperatio
 
     @Override
     public void buyProperty(PropertyCell propertyCell) {
-        if(propertyCell.getPrice() <= money.getMoney()) {
+        if (propertyCell.getPrice() <= money.getMoney()) {
             money.subtractMoney(propertyCell.getPrice());
             property.add(propertyCell);
 //       что делать?     propertyCell.setOwner();
@@ -77,7 +77,7 @@ public class Player implements MoneyOperations, MoveOperations, PropertyOperatio
 
     @Override
     public void sellProperty(PropertyCell propertyCell) {
-        if(!propertyCell.isPledged()) {
+        if (!propertyCell.isPledged()) {
 
         }
     }

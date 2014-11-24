@@ -10,11 +10,16 @@ import com.monopoly.board.events.Event;
  * ОперацииЗдания
  */
 public interface BuildingOperations {
-    
-	int currentPrice();
+
+    int currentPrice();
+
     boolean levelUp();
+
     boolean levelDown();
+
     Event getEvent();
-    int currentLevel ();
+
+    int currentLevel();
+
     int getMaxLevel();
 }

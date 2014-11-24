@@ -15,9 +15,9 @@ public class BeginEvent implements Event {
     }
 
     @Override
-    public void performEvent(Board board) {
-        for (Player player : board.getPlayers())
-            player.getWallet().addMoney(START_CASH);
+    public void performEvent() {
+        /*for (Player player : board.getPlayers())
+            player.getWallet().addMoney(START_CASH);*/
     }
 
     @Override

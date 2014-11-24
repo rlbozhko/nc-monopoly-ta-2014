@@ -1,8 +1,8 @@
 package com.monopoly.board.dice;
 
-public class Dice  {
+public class Dice {
     private int face;
-    
+
     public Dice() {
         this.face = 0;
     }
@@ -14,6 +14,6 @@ public class Dice  {
     public synchronized void setFace(int face) {
         this.face = face;
     }
-    
-    
+
+
 }

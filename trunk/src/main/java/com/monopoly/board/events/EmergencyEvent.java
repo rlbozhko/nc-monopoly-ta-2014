@@ -1,11 +1,14 @@
 package com.monopoly.board.events;
 
-import com.monopoly.board.*;
+import com.monopoly.board.Board;
+import com.monopoly.board.CellOperations;
 import com.monopoly.board.building.Building;
 import com.monopoly.board.cells.Cell;
 import com.monopoly.board.cells.Property;
 
-import java.util.*;
+import java.util.Collections;
+import java.util.List;
+import java.util.Random;
 
 /**
  * Created by Roma on 06.11.2014.

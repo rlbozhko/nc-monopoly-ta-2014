@@ -11,6 +11,8 @@ import java.util.List;
  */
 public interface Session {
     Board getBoard();
+
     ActionController getActionController();
+
     List<IO> getIO();
 }

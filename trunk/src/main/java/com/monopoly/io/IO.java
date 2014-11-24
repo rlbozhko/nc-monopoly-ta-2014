@@ -11,12 +11,22 @@ import com.monopoly.board.player.Player;
  */
 public interface IO {
     void outputBoardState();
+
     void outputAvailableActions(Player player);
+
     void performAction(Action action);
+
     Player getUser();
+
     Player selectPlayer();
+
     Property selectProperty(Player player);
+
     Building selectBuilding(Property property);
+
     Deal dealDialog(Player otherPlayer);
+
     boolean yesNoDialog(String message);
+
+    void showMessage(String message);
 }

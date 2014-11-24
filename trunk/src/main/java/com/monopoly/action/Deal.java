@@ -3,14 +3,16 @@ package com.monopoly.action;
 import com.monopoly.board.cells.Property;
 import com.monopoly.board.player.Player;
 
+import java.util.List;
+
 /**
  * Created by Roma on 24.11.2014.
  */
 public class Deal {
     private int askMoney;
     private int giveMoney;
-    private Property askProperty;
-    private Property giveProperty;
+    private List<Property> askProperties;
+    private List<Property> giveProperties;
     private Player source;
 
     public Deal(Player source) {
@@ -37,30 +39,30 @@ public class Deal {
         this.giveMoney = giveMoney;
     }
 
-    public Property getAskProperty() {
-        return askProperty;
+    public List<Property> getAskProperties() {
+        return askProperties;
     }
 
-    public void setAskProperty(Property askProperty) {
-        this.askProperty = askProperty;
+    public void addAskProperty(Property askProperty) {
+        this.askProperties.add(askProperty);
     }
 
-    public Property getGiveProperty() {
-        return giveProperty;
+    public List<Property> getGiveProperties() {
+        return giveProperties;
     }
 
-    public void setGiveProperty(Property giveProperty) {
-        this.giveProperty = giveProperty;
+    public void addGiveProperty(Property giveProperty) {
+        this.giveProperties.add(giveProperty);
     }
 
     public String message() {
         StringBuilder message = new StringBuilder();
         message.append(source.getName()).append(" ").append("Предлагает\n")
                 .append("Денег: ").append(getGiveMoney()).append("\n")
-                .append("Собственность: ").append(getGiveProperty()).append("\n")
+                .append("Собственность: ").append(getGiveProperties()).append("\n")
                 .append("Просит\n")
                 .append("Денег: ").append(getAskMoney()).append("\n")
-                .append("Собственность: ").append(getAskProperty()).append("\n");
+                .append("Собственность: ").append(getAskProperties()).append("\n");
         return message.toString();
     }
 

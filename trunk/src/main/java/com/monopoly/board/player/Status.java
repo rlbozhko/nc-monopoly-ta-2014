@@ -3,9 +3,10 @@ package com.monopoly.board.player;
 /**
  * Created by Roma on 31.10.2014.
  */
+
 /**
-* Статус
-*/
+ * Статус
+ */
 public enum Status {
     START_TURN, WAIT, ACTIVE, FINISH, JAILED, ESCAPE, RETURN, SKIP_TURN, ONE_MORE_TURN
 }

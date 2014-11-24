@@ -8,7 +8,10 @@ import com.monopoly.board.cells.PropertyCell;
 public interface PropertyOperations {
 
     public void buyProperty(PropertyCell propertyCell);
+
     public void sellProperty(PropertyCell propertyCell);
+
     public void putUpProperty(PropertyCell propertyCell);
+
     public void buyBackProperty(PropertyCell propertyCell);
 }

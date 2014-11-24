@@ -13,6 +13,7 @@ import java.util.List;
  */
 public class PlayerActionController implements ActionController {
     Session session;
+
     public PlayerActionController() {
 
     }
@@ -25,7 +26,8 @@ public class PlayerActionController implements ActionController {
             //result.clear();
             return result;
         }
-        result.add(new SurrenderAction());
+        result.add(new DealAction());
+        result.add(new GiveUpAction());
         result.add(new WaitAction());
         if (Status.WAIT.equals(player.getStatus())) {
             //

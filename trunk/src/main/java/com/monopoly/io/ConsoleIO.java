@@ -139,29 +139,38 @@ public class ConsoleIO implements IO, Runnable {
         System.out.println("Установите условия сделки");
         boolean continueSelect = true;
         while (continueSelect) {
-        System.out.println(
-                "1 Отдать денег " + deal.getGiveMoney() + "\n" +
-                "2 Требовать денег " + deal.getAskMoney() + "\n" +
-                "3 Отдать собственность " + deal.getGiveProperty() + "\n" +
-                "4 Требовать собственность " + deal.getAskProperty() + "\n" +
-                "7 Отправить сделку\n" +
-                "0 Отменить сделку\n");
+            System.out.println(
+                    "1 Отдать денег " + deal.getGiveMoney() + "\n" +
+                            "2 Требовать денег " + deal.getAskMoney() + "\n" +
+                            "3 Отдать собственность " + deal.getGiveProperties() + "\n" +
+                            "4 Требовать собственность " + deal.getAskProperties() + "\n" +
+                            "7 Отправить предложение\n" +
+                            "0 Отменить сделку\n");
             int choice = positiveIntInput();
             int input;
             switch (choice) {
                 case 1:
+                    System.out.println("Введите количество денег:");
                     input = positiveIntInput();
-                    deal.setGiveMoney( input < 0 ? input : 0);
+                    if (input >= 0 && input <= player.getWallet().getMoney()) {
+                        deal.setGiveMoney(input < 0 ? input : 0);
+                    } else {
+                        System.out.println("Число должно быть в диапозоне от 0 до " + player.getWallet().getMoney());
+                    }
                     break;
                 case 2:
+                    System.out.println("Введите количество денег:");
                     input = positiveIntInput();
                     deal.setAskMoney(input < 0 ? input : 0);
+                    if (input < 0) {
+                        System.out.println("Введите положительное число");
+                    }
                     break;
                 case 3:
-                    deal.setGiveProperty(selectProperty(player));
+                    deal.addGiveProperty(selectProperty(player));
                     break;
                 case 4:
-                    deal.setAskProperty(selectProperty(otherPlayer));
+                    deal.addAskProperty(selectProperty(otherPlayer));
                     break;
                 case 7:
                     continueSelect = false;
@@ -169,6 +178,7 @@ public class ConsoleIO implements IO, Runnable {
                 default:
                     deal = null;
                     continueSelect = false;
+                    showMessage("Сделка отменена");
                     break;
             }
         }
@@ -186,6 +196,11 @@ public class ConsoleIO implements IO, Runnable {
             return true;
         }
         return false;
+    }
+
+    @Override
+    public void showMessage(String message) {
+        System.out.println(message);
     }
 
     private int positiveIntInput() {

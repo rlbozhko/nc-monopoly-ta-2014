@@ -31,12 +31,10 @@ public class TestSession implements Session {
     private List<IO> ios;
 
     public static void main(String[] args) {
-        List<Cell> cells = new ArrayList<>();
-        cells.add(new EventCell("Start", "Start cell", 0,
-                new MoneyEvent("Begin Event", "Вы прошли полный круг!!! Получите $200", 200)));
-        /*for (int i = 0; i < 20; i++) {
-            cells.add(new TestCell("Property", null, CellType.EVENT_CELL, cells.size()));
-        }*/
+        List<Dice> dice = new ArrayList<>();
+        dice.add(new Dice());
+        dice.add(new Dice());
+        
         Monopoly monopoly1 = new Monopoly("Monopoly1");
         Monopoly monopoly2 = new Monopoly("Monopoly2");
         Monopoly monopoly3 = new Monopoly("Monopoly3");
@@ -47,23 +45,88 @@ public class TestSession implements Session {
         Monopoly monopoly8 = new Monopoly("Monopoly8");
         Monopoly monopoly9 = new Monopoly("Monopoly9");
 
-        cells.add(new PropertyCell("c1m1", "c1m1 desc", cells.size(), null,
-                new ArrayList<Building>(), 1000, 200, monopoly1));
-
         List<Event> chanceEvents = new ArrayList<Event>();
         chanceEvents.add(new EmergencyEvent("Emergency Event", "Случился пожар. Ваше здание Сгорело", 1));
         chanceEvents.add(new MoneyEvent("Получите деньги", "Получите $200", 200));
         chanceEvents.add(new MoneyEvent("Заплатите", "У Вас дополнителные расходы. Заплатите $200", -200));
+        chanceEvents.add(new RandomMoneyEvent("Казино", "Может выиграете, а может и проиграете"));
+
+        List<Cell> cells = new ArrayList<>();
+        cells.add(new EventCell("Start", "Start cell", 0,
+                new MoneyEvent("Begin Event", "Вы прошли полный круг!!! Получите $200", 200)));
+        cells.add(new PropertyCell("c1m1", "c1m1 desc", cells.size(), null,
+                new ArrayList<Building>(), 1000, 200, monopoly1));
         cells.add(new ChanceCell("Шанс", "Случайное событие", cells.size(), chanceEvents));
         cells.add(new PropertyCell("c2m1", "c2m1 desc", cells.size(), null,
                 new ArrayList<Building>(), 1000, 200, monopoly1));
         cells.add(new PropertyCell("c3m1", "c3m1 desc", cells.size(), null,
                 new ArrayList<Building>(), 1000, 200, monopoly1));
-        cells.add(new EventCell("Получите деньги", "Счастье привалило", cells.size(),
-                new RandomMoneyEvent("Получите деньги", "Счастье привалило")));
-
-
-
+        cells.add(new PropertyCell("c1m9", "c1m9 desc", cells.size(), null,
+                new ArrayList<Building>(), 2000, 250, monopoly9));
+        cells.add(new PropertyCell("c1m2", "c1m2 desc", cells.size(), null,
+                new ArrayList<Building>(), 1500, 300, monopoly2));
+        cells.add(new PropertyCell("c2m2", "c2m2 desc", cells.size(), null,
+                new ArrayList<Building>(), 1500, 300, monopoly2));
+        cells.add(new EventCell("Уплатите налог", "Подоходный налог", cells.size(),
+                new MoneyEvent("Уплатите налог", "Подоходный налог", -200)));
+        cells.add(new PropertyCell("c3m2", "c3m2 desc", cells.size(), null,
+                new ArrayList<Building>(), 1500, 300, monopoly2));
+        cells.add(new EventCell("Тюрьма", "Вы можете кого то посетить", cells.size(),
+                new MoneyEvent("Тюрьма", "Вы можете кого то посетить", 0)));
+        cells.add(new PropertyCell("c1m3", "c1m3 desc", cells.size(), null,
+                new ArrayList<Building>(), 3000, 300, monopoly3));
+        cells.add(new PropertyCell("c2m3", "c2m3 desc", cells.size(), null,
+                new ArrayList<Building>(), 3000, 300, monopoly3));
+        cells.add(new ChanceCell("Шанс", "Случайное событие", cells.size(), chanceEvents));        
+        cells.add(new PropertyCell("c3m3", "c3m3 desc", cells.size(), null,
+                new ArrayList<Building>(), 3000, 300, monopoly3));
+        cells.add(new PropertyCell("c2m9", "c2m9 desc", cells.size(), null,
+                new ArrayList<Building>(), 2000, 250, monopoly9));
+        cells.add(new ChanceCell("Шанс", "Случайное событие", cells.size(), chanceEvents));        
+        cells.add(new PropertyCell("c1m4", "c1m4 desc", cells.size(), null,
+                new ArrayList<Building>(), 3300, 330, monopoly4));
+        cells.add(new EventCell("Уплатите налог", "Налог на роскошь", cells.size(),
+                new MoneyEvent("Уплатите налог", "Налог на роскошь", -100)));    
+        cells.add(new PropertyCell("c2m4", "c2m4 desc", cells.size(), null,
+                new ArrayList<Building>(), 3300, 330, monopoly4));
+        cells.add(new EventCell("Бесплатная стоянка", "Можете передохнуть", cells.size(),
+                new MoneyEvent("Бесплатная стоянка", "Можете передохнуть", 0)));
+        cells.add(new PropertyCell("c1m5", "c1m5 desc", cells.size(), null,
+                new ArrayList<Building>(), 3500, 350, monopoly5));
+        cells.add(new PropertyCell("c3m9", "c3m9 desc", cells.size(), null,
+                new ArrayList<Building>(), 2000, 250, monopoly9));
+        cells.add(new PropertyCell("c2m5", "c2m5 desc", cells.size(), null,
+                new ArrayList<Building>(), 3500, 350, monopoly5));
+        cells.add(new EventCell("Казино", "Может выиграете, а может и проиграете", cells.size(),
+                new RandomMoneyEvent("Казино", "Может выиграете, а может и проиграете")));
+        cells.add(new EventCell("Событие Хода", "Место для событие хода", cells.size(),
+                new MoneyEvent("Событие Хода", "Место для событие хода", 0)));
+        cells.add(new PropertyCell("c1m6", "c1m6 desc", cells.size(), null,
+                new ArrayList<Building>(), 4000, 400, monopoly6));
+        cells.add(new ChanceCell("Шанс", "Случайное событие", cells.size(), chanceEvents));                
+        cells.add(new PropertyCell("c2m6", "c2m6 desc", cells.size(), null,
+                new ArrayList<Building>(), 4000, 400, monopoly6));
+        cells.add(new PropertyCell("c3m6", "c3m6 desc", cells.size(), null,
+                new ArrayList<Building>(), 4000, 400, monopoly6));
+        cells.add(new EventCell("Событие в Тюрьму", "Место для события В тюроьму", cells.size(),
+                new MoneyEvent("Событие в Тюрьму", "Место для события В тюроьму", 0)));
+        cells.add(new PropertyCell("c1m7", "c1m7 desc", cells.size(), null,
+                new ArrayList<Building>(), 4200, 420, monopoly7));
+        cells.add(new EventCell("Уплатите налог", "Налог на роскошь", cells.size(),
+                new MoneyEvent("Уплатите налог", "Налог на роскошь", -100)));
+        cells.add(new PropertyCell("c2m7", "c2m7 desc", cells.size(), null,
+                new ArrayList<Building>(), 4200, 420, monopoly7));
+        cells.add(new PropertyCell("c3m7", "c3m7 desc", cells.size(), null,
+                new ArrayList<Building>(), 4200, 420, monopoly7));
+        cells.add(new PropertyCell("c1m8", "c1m8 desc", cells.size(), null,
+                new ArrayList<Building>(), 4500, 450, monopoly8));
+        cells.add(new PropertyCell("c3m9", "c3m9 desc", cells.size(), null,
+                new ArrayList<Building>(), 2000, 250, monopoly9));
+        cells.add(new PropertyCell("c2m8", "c2m8 desc", cells.size(), null,
+                new ArrayList<Building>(), 4500, 450, monopoly8));
+        cells.add(new PropertyCell("c3m8", "c3m8 desc", cells.size(), null,
+                new ArrayList<Building>(), 4500, 450, monopoly8));
+        
         List<Player> players = new ArrayList<>();
         Player p1 = new Player("Player 1", new Wallet());
         Player p2 = new Player("Player 2", new Wallet());
@@ -72,11 +135,7 @@ public class TestSession implements Session {
         p2.setStatus(Status.WAIT);
         players.add(p1);
         players.add(p2);
-        players.add(p3);
-
-        List<Dice> dice = new ArrayList<>();
-        dice.add(new Dice());
-        dice.add(new Dice());
+        players.add(p3);        
 
         List<IO> ios = new ArrayList<>();
         ios.add(new ConsoleIO(p1));

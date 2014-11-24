@@ -86,7 +86,7 @@ public class ConsoleIO implements IO, Runnable {
         System.out.println("Выберите игрока:");
         for (int i = 0; i < players.size(); i++) {
             Player player = players.get(i);
-            if (!Status.FINISH.equals(player.getStatus())) {
+            if (!Status.FINISH.equals(player.getStatus()) && !this.player.equals(player)) {
                 System.out.println(i + " " + player.getName());
             }
         }

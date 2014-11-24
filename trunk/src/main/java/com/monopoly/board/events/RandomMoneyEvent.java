@@ -12,11 +12,11 @@ import com.monopoly.tools.XORShiftRandom;
 public class RandomMoneyEvent implements Event {
 	private final int MAX_VALUE_MONEY_FOR_MONEYEVENT = 200;
 	private String name;
-	private String descrition;
+	private String description;
 
-	public RandomMoneyEvent(String eventName, String descrition) {
+	public RandomMoneyEvent(String eventName, String description) {
 		this.name = eventName;
-		this.descrition = descrition;
+		this.description = description;
 	}
 
 	Random random = new Random();
@@ -44,7 +44,7 @@ public class RandomMoneyEvent implements Event {
 
 	@Override
 	public String getDescription() {
-		return descrition;
+		return description;
 	}
 
 	@Override

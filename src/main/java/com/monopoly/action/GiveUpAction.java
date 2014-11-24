@@ -32,7 +32,7 @@ public class GiveUpAction implements Action {
 
     @Override
     public String getName() {
-        return "Surrender";
+        return "Give up";
     }
 
 

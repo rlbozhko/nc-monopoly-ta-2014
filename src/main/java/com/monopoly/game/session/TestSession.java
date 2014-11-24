@@ -3,10 +3,13 @@ package com.monopoly.game.session;
 import com.monopoly.action.ActionController;
 import com.monopoly.action.PlayerActionController;
 import com.monopoly.board.Board;
-import com.monopoly.board.cells.Cell;
-import com.monopoly.board.cells.CellType;
-import com.monopoly.board.cells.TestCell;
+import com.monopoly.board.building.Building;
+import com.monopoly.board.cells.*;
 import com.monopoly.board.dice.Dice;
+import com.monopoly.board.events.MoneyEvent;
+import com.monopoly.board.events.EmergencyEvent;
+import com.monopoly.board.events.Event;
+import com.monopoly.board.events.RandomMoneyEvent;
 import com.monopoly.board.player.Player;
 import com.monopoly.board.player.Status;
 import com.monopoly.board.player.Wallet;
@@ -29,9 +32,37 @@ public class TestSession implements Session {
 
     public static void main(String[] args) {
         List<Cell> cells = new ArrayList<>();
-        for (int i = 0; i < 20; i++) {
+        cells.add(new EventCell("Start", "Start cell", 0,
+                new MoneyEvent("Begin Event", "Вы прошли полный круг!!! Получите $200", 200)));
+        /*for (int i = 0; i < 20; i++) {
             cells.add(new TestCell("Property", null, CellType.EVENT_CELL, cells.size()));
-        }
+        }*/
+        Monopoly monopoly1 = new Monopoly("Monopoly1");
+        Monopoly monopoly2 = new Monopoly("Monopoly2");
+        Monopoly monopoly3 = new Monopoly("Monopoly3");
+        Monopoly monopoly4 = new Monopoly("Monopoly4");
+        Monopoly monopoly5 = new Monopoly("Monopoly5");
+        Monopoly monopoly6 = new Monopoly("Monopoly6");
+        Monopoly monopoly7 = new Monopoly("Monopoly7");
+        Monopoly monopoly8 = new Monopoly("Monopoly8");
+        Monopoly monopoly9 = new Monopoly("Monopoly9");
+
+        cells.add(new PropertyCell("c1m1", "c1m1 desc", cells.size(), null,
+                new ArrayList<Building>(), 1000, 200, monopoly1));
+
+        List<Event> chanceEvents = new ArrayList<Event>();
+        chanceEvents.add(new EmergencyEvent("Emergency Event", "Случился пожар. Ваше здание Сгорело", 1));
+        chanceEvents.add(new MoneyEvent("Получите деньги", "Получите $200", 200));
+        chanceEvents.add(new MoneyEvent("Заплатите", "У Вас дополнителные расходы. Заплатите $200", -200));
+        cells.add(new ChanceCell("Шанс", "Случайное событие", cells.size(), chanceEvents));
+        cells.add(new PropertyCell("c2m1", "c2m1 desc", cells.size(), null,
+                new ArrayList<Building>(), 1000, 200, monopoly1));
+        cells.add(new PropertyCell("c3m1", "c3m1 desc", cells.size(), null,
+                new ArrayList<Building>(), 1000, 200, monopoly1));
+        cells.add(new EventCell("Получите деньги", "Счастье привалило", cells.size(),
+                new RandomMoneyEvent("Получите деньги", "Счастье привалило")));
+
+
 
         List<Player> players = new ArrayList<>();
         Player p1 = new Player("Player 1", new Wallet());

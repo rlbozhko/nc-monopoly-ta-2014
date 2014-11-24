@@ -1,9 +1,8 @@
 package com.monopoly.io;
 
-import com.monopoly.action.Action;
-import com.monopoly.action.ActionController;
-import com.monopoly.action.EndTurnAction;
-import com.monopoly.action.StartTurnAction;
+import com.monopoly.action.*;
+import com.monopoly.board.building.Building;
+import com.monopoly.board.cells.Property;
 import com.monopoly.board.player.Player;
 import com.monopoly.game.session.Session;
 import com.monopoly.game.session.TestSession;
@@ -53,6 +52,36 @@ public class DummyIO implements IO, Runnable {
     }
 
     @Override
+    public Player getUser() {
+        return player;
+    }
+
+    @Override
+    public Player selectPlayer() {
+        return null;
+    }
+
+    @Override
+    public Property selectProperty(Player player) {
+        return null;
+    }
+
+    @Override
+    public Building selectBuilding(Property property) {
+        return null;
+    }
+
+    @Override
+    public Deal dealDialog(Player otherPlayer) {
+        return null;
+    }
+
+    @Override
+    public boolean yesNoDialog(String message) {
+        return false;
+    }
+
+    @Override
     public void run() {
         do {
             try {
@@ -65,6 +94,7 @@ public class DummyIO implements IO, Runnable {
                 Action action = actions.get(i);
                 if (action instanceof StartTurnAction || action instanceof EndTurnAction) {
                     performAction(action);
+                    break;
                 }
             }
         } while (true);

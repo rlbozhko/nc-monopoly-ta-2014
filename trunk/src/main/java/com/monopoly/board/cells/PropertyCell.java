@@ -3,12 +3,12 @@ package com.monopoly.board.cells;
 import com.monopoly.board.building.Building;
 import com.monopoly.board.player.Player;
 
-import java.util.ArrayList;
 import java.util.List;
 
 /**
  * Created by Roma on 06.11.2014.
  */
+
 /**
  * ЯчейкаСобственности
  */
@@ -35,7 +35,7 @@ public class PropertyCell extends Cell implements Property {
         private static PropertyStatus status;
 
 
-        public PropertyBuilder(String name,  List<Building> buildings, int position) {
+        public PropertyBuilder(String name, List<Building> buildings, int position) {
             this.name = name;
             this.description = name;
             this.position = position;
@@ -128,7 +128,7 @@ public class PropertyCell extends Cell implements Property {
             } else {
                 building = null;
             }
-            owner.getWallet().addMoney(building.currentPrice()/2);
+            owner.getWallet().addMoney(building.currentPrice() / 2);
             return true;
         }
         return false;

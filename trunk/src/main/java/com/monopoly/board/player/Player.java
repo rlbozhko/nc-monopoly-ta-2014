@@ -6,7 +6,7 @@ import com.monopoly.board.cells.PropertyCell;
 
 import java.util.List;
 
-public class Player implements MoneyOperations, MoveOperations, TurnOperations, PropertyOperations {
+public class Player implements MoneyOperations, MoveOperations, PropertyOperations {
     private int position;
     private String name;
     private Status status;
@@ -19,7 +19,7 @@ public class Player implements MoneyOperations, MoveOperations, TurnOperations, 
         this.money = money;
         status = Status.WAIT;
     }
-
+/*
     @Override
     public void surrender() {
         finishTurn();
@@ -29,16 +29,12 @@ public class Player implements MoneyOperations, MoveOperations, TurnOperations, 
     @Override
     public void startTurn() {
         status = Status.START_TURN;
-
-
-
     }
 
     @Override
     public void finishTurn() {
-        //TODO
     }
-
+*/
     @Override
     public int getPosition() {
         return position;
@@ -56,6 +52,10 @@ public class Player implements MoneyOperations, MoveOperations, TurnOperations, 
 
     public List<Property> getProperty() {
         return property;
+    }
+
+    public String getName() {
+        return name;
     }
 
     public Status getStatus() {

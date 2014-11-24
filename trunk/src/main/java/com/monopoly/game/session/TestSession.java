@@ -20,7 +20,6 @@ import java.util.List;
  */
 public class TestSession implements Session {
     private static volatile Session session;
-    //private static volatile TestSessionBuilder testSessionBuilder = new TestSessionBuilder();
 
     private Board board;
     private ActionController actionController;

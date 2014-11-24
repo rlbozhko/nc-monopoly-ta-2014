@@ -8,7 +8,9 @@ import org.junit.Test;
 
 import com.monopoly.board.dice.Dice;
 import com.monopoly.board.dice.DiceGenerator;
-
+/**
+ * Create By Kulikovsky Anton
+ * */
 public class DiceGeneratorTest {
 	private DiceGenerator diceGenerator;
 	private Dice die1;

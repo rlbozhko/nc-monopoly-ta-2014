@@ -1,5 +1,7 @@
 package com.monopoly.tools;
-
+/**
+ * Create By Kulikovsky Anton
+ * */
 public class XORShiftRandom {
     private final int MAGIC_NUMBER1 = 21;
     private final int MAGIC_NUMBER2 = 35;

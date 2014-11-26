@@ -32,4 +32,6 @@ public interface Property {
     Monopoly getMonopoly();
 
     boolean isPledged();
+
+    int getMaxLevel();
 }

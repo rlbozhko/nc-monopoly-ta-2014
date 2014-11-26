@@ -98,8 +98,8 @@ public class TestSession implements Session {
                 new ArrayList<Building>(), 2000, 250, monopoly9));
         cells.add(new PropertyCell("c2m5", "c2m5 desc", cells.size(), null,
                 new ArrayList<Building>(), 3500, 350, monopoly5));
-        cells.add(new EventCell("Казино", "Может выиграете, а может и проиграете", cells.size(),
-                new RandomMoneyEvent("Казино", "Может выиграете, а может и проиграете")));
+        cells.add(new EventCell("Казино", "Может выиграешь, а может и проиграешь", cells.size(),
+                new RandomMoneyEvent("Казино", "Может выиграешь, а может и проиграешь")));
         cells.add(new EventCell("Событие Хода", "Место для событие хода", cells.size(),
                 new MoneyEvent("Событие Хода", "Место для событие хода", 0)));
         cells.add(new PropertyCell("c1m6", "c1m6 desc", cells.size(), null,
@@ -109,8 +109,8 @@ public class TestSession implements Session {
                 new ArrayList<Building>(), 4000, 400, monopoly6));
         cells.add(new PropertyCell("c3m6", "c3m6 desc", cells.size(), null,
                 new ArrayList<Building>(), 4000, 400, monopoly6));
-        cells.add(new EventCell("Событие в Тюрьму", "Место для события В тюроьму", cells.size(),
-                new MoneyEvent("Событие в Тюрьму", "Место для события В тюроьму", 0)));
+        cells.add(new EventCell("Событие в Тюрьму", "Место для события В тюрьму", cells.size(),
+                new MoneyEvent("Событие в Тюрьму", "Место для события В тюрьму", 0)));
         cells.add(new PropertyCell("c1m7", "c1m7 desc", cells.size(), null,
                 new ArrayList<Building>(), 4200, 420, monopoly7));
         cells.add(new EventCell("Уплатите налог", "Налог на роскошь", cells.size(),
@@ -158,6 +158,15 @@ public class TestSession implements Session {
         Thread player = new Thread(consoleIO);
         Thread dummy1 = new Thread(dummyIO1);
         Thread dummy2 = new Thread(dummyIO2);
+
+        //
+        Property testProperty = (Property) cells.get(1);
+        p1.getProperty().add(testProperty);
+        testProperty.setOwner(p1);
+        //
+        p1.getWallet().addMoney(5000);
+        p2.getWallet().addMoney(5000);
+        p3.getWallet().addMoney(5000);
 
         player.start();
         dummy1.start();

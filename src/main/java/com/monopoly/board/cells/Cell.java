@@ -35,5 +35,9 @@ public abstract class Cell {
         return position;
     }
 
+    @Override
+    public String toString() {
+        return name;
+    }
 }
 

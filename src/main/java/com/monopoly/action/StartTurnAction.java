@@ -2,6 +2,9 @@ package com.monopoly.action;
 
 import com.monopoly.board.Board;
 import com.monopoly.board.DiceOperations;
+import com.monopoly.board.cells.Cell;
+import com.monopoly.board.cells.CellType;
+import com.monopoly.board.cells.EventCell;
 import com.monopoly.board.dice.Dice;
 import com.monopoly.board.dice.DiceGenerator;
 import com.monopoly.board.player.Player;
@@ -37,7 +40,12 @@ public class StartTurnAction implements Action {
         */
         player.goToPosition(player.getPosition() + dice.get(0).getFace() + dice.get(1).getFace());
         player.setStatus(Status.ACTIVE);
-        //diceGenerator.interrupt();
+
+        Cell currentCell = board.getCells().get(player.getPosition());
+        if (CellType.EVENT_CELL.equals(currentCell.getCellType())) {
+            ((EventCell) currentCell).getEvent().performEvent();
+        }
+
     }
 
     @Override

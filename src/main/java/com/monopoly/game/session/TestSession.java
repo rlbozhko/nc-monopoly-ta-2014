@@ -6,6 +6,7 @@ import com.monopoly.board.Board;
 import com.monopoly.board.building.Building;
 import com.monopoly.board.cells.*;
 import com.monopoly.board.dice.Dice;
+import com.monopoly.board.dice.DiceGenerator;
 import com.monopoly.board.events.MoneyEvent;
 import com.monopoly.board.events.EmergencyEvent;
 import com.monopoly.board.events.Event;
@@ -146,8 +147,10 @@ public class TestSession implements Session {
         TestSessionBuilder.setActionController(new PlayerActionController());
         TestSessionBuilder.setIOs(ios);
 
-
         Session test = TestSession.getInstance();
+
+        Thread diceGenerator = new Thread(new DiceGenerator(dice.get(0), dice.get(1)));
+        diceGenerator.start();
 
         ConsoleIO consoleIO = (ConsoleIO) test.getIO().get(0);
         DummyIO dummyIO1 = (DummyIO) test.getIO().get(1);

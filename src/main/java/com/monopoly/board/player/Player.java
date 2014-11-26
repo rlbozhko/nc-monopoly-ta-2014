@@ -2,6 +2,7 @@ package com.monopoly.board.player;
 
 import com.monopoly.board.cells.Property;
 import com.monopoly.board.cells.PropertyCell;
+import com.monopoly.game.session.TestSession;
 
 import java.util.List;
 
@@ -42,7 +43,8 @@ public class Player implements MoneyOperations, MoveOperations, PropertyOperatio
 
     @Override
     public void goToPosition(int position) {
-        this.position = this.position + position;
+        int boardSize = TestSession.getInstance().getBoard().getCells().size();
+        this.position = position % boardSize;
     }
 
     @Override
@@ -71,7 +73,7 @@ public class Player implements MoneyOperations, MoveOperations, PropertyOperatio
         if (propertyCell.getPrice() <= money.getMoney()) {
             money.subtractMoney(propertyCell.getPrice());
             property.add(propertyCell);
-//       что делать?     propertyCell.setOwner();
+            propertyCell.setOwner(this);
         }
     }
 

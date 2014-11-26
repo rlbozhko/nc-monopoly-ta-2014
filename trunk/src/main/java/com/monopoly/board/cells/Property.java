@@ -34,4 +34,6 @@ public interface Property {
     boolean isPledged();
 
     int getMaxLevel();
+
+    int getMaxBuildings();
 }

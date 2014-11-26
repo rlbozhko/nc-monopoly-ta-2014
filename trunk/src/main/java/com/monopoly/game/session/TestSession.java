@@ -30,6 +30,7 @@ public class TestSession implements Session {
     private Board board;
     private ActionController actionController;
     private List<IO> ios;
+    private ValueGeneratorForDice valueGeneratorForDice;
 
     public static void main(String[] args) {
         List<Dice> dice = new ArrayList<>();
@@ -53,7 +54,7 @@ public class TestSession implements Session {
         chanceEvents.add(new RandomMoneyEvent("Казино", "Может выиграете, а может и проиграете"));
 
         List<Cell> cells = new ArrayList<>();
-        cells.add(new SingleEventCell("Start", "Start cell", 0,
+        cells.add(new SingleEventCell("Начало", "Начало", 0,
                 new MoneyEvent("Begin Event", "Вы прошли полный круг!!! Получите $200", 200)));
         cells.add(new PropertyCell("c1m1", "c1m1 desc", cells.size(), null,
                 new ArrayList<Building>(), 1000, 200, monopoly1));
@@ -69,7 +70,7 @@ public class TestSession implements Session {
         cells.add(new PropertyCell("c2m2", "c2m2 desc", cells.size(), null,
                 new ArrayList<Building>(), 1500, 300, monopoly2));
         cells.add(new SingleEventCell("Уплатите налог", "Подоходный налог", cells.size(),
-                new MoneyEvent("Уплатите налог", "Подоходный налог", -200)));
+                new MoneyEvent("Уплатите налог", "Подоходный налог -$200", -200)));
         cells.add(new PropertyCell("c3m2", "c3m2 desc", cells.size(), null,
                 new ArrayList<Building>(), 1500, 300, monopoly2));
         cells.add(new SingleEventCell("Тюрьма", "Вы можете кого то посетить", cells.size(),
@@ -87,7 +88,7 @@ public class TestSession implements Session {
         cells.add(new PropertyCell("c1m4", "c1m4 desc", cells.size(), null,
                 new ArrayList<Building>(), 3300, 330, monopoly4));
         cells.add(new SingleEventCell("Уплатите налог", "Налог на роскошь", cells.size(),
-                new MoneyEvent("Уплатите налог", "Налог на роскошь", -100)));    
+                new MoneyEvent("Уплатите налог", "Налог на роскошь -$100", -100)));
         cells.add(new PropertyCell("c2m4", "c2m4 desc", cells.size(), null,
                 new ArrayList<Building>(), 3300, 330, monopoly4));
         cells.add(new SingleEventCell("Бесплатная стоянка", "Можете передохнуть", cells.size(),
@@ -100,8 +101,8 @@ public class TestSession implements Session {
                 new ArrayList<Building>(), 3500, 350, monopoly5));
         cells.add(new SingleEventCell("Казино", "Может выиграешь, а может и проиграешь", cells.size(),
                 new RandomMoneyEvent("Казино", "Может выиграешь, а может и проиграешь")));
-        cells.add(new SingleEventCell("Событие Хода", "Место для событие хода", cells.size(),
-                new MoneyEvent("Событие Хода", "Место для событие хода", 0)));
+        cells.add(new SingleEventCell("Событие Хода", "Место для События хода", cells.size(),
+                new MoneyEvent("Событие Хода", "Место для События хода", 0)));
         cells.add(new PropertyCell("c1m6", "c1m6 desc", cells.size(), null,
                 new ArrayList<Building>(), 4000, 400, monopoly6));
         cells.add(new RandomEventCell("Шанс", "Случайное событие", cells.size(), chanceEvents));
@@ -109,8 +110,8 @@ public class TestSession implements Session {
                 new ArrayList<Building>(), 4000, 400, monopoly6));
         cells.add(new PropertyCell("c3m6", "c3m6 desc", cells.size(), null,
                 new ArrayList<Building>(), 4000, 400, monopoly6));
-        cells.add(new SingleEventCell("Событие в Тюрьму", "Место для события В тюрьму", cells.size(),
-                new MoneyEvent("Событие в Тюрьму", "Место для события В тюрьму", 0)));
+        cells.add(new SingleEventCell("Событие в Тюрьму", "Место для События В тюрьму", cells.size(),
+                new MoneyEvent("Событие в Тюрьму", "Место для События В тюрьму", 0)));
         cells.add(new PropertyCell("c1m7", "c1m7 desc", cells.size(), null,
                 new ArrayList<Building>(), 4200, 420, monopoly7));
         cells.add(new SingleEventCell("Уплатите налог", "Налог на роскошь", cells.size(),
@@ -143,13 +144,16 @@ public class TestSession implements Session {
         ios.add(new DummyIO(p2));
         ios.add(new DummyIO(p3));
 
+        ValueGeneratorForDice valueGeneratorForDice = new ValueGeneratorForDice();
+
         TestSessionBuilder.setBoard(new Board(players, cells, dice));
         TestSessionBuilder.setActionController(new PlayerActionController());
         TestSessionBuilder.setIOs(ios);
+        TestSessionBuilder.setValueGeneratorForDice(valueGeneratorForDice);
 
         Session test = TestSession.getInstance();
 
-        Thread diceGenerator = new Thread(new ValueGeneratorForDice(dice.get(0), dice.get(1)));
+        Thread diceGenerator = new Thread(valueGeneratorForDice);
         diceGenerator.start();
 
         ConsoleIO consoleIO = (ConsoleIO) test.getIO().get(0);
@@ -181,7 +185,8 @@ public class TestSession implements Session {
                 localInstance = session;
                 if (localInstance == null) {
                     session = localInstance = new TestSession(TestSessionBuilder.getBoard(),
-                            TestSessionBuilder.getActionController(), TestSessionBuilder.getIos());
+                            TestSessionBuilder.getActionController(), TestSessionBuilder.getIos(),
+                            TestSessionBuilder.getValueGeneratorForDice());
                 }
             }
         }
@@ -219,18 +224,28 @@ public class TestSession implements Session {
             ios.add(new DummyIO(this, p3));
         }
     */
-    private TestSession(Board board, ActionController actionController, List<IO> ios) {
+    private TestSession(Board board, ActionController actionController, List<IO> ios, ValueGeneratorForDice valueGeneratorForDice) {
         this.board = board;
         this.actionController = actionController;
         this.ios = ios;
+        this.valueGeneratorForDice = valueGeneratorForDice;
     }
 
     public static class TestSessionBuilder {
         private static Board board;
         private static ActionController actionController;
         private static List<IO> ios;
+        private static ValueGeneratorForDice valueGeneratorForDice;
 
         private TestSessionBuilder() {
+        }
+
+        public static void setValueGeneratorForDice(ValueGeneratorForDice valueGeneratorForDice) {
+            TestSessionBuilder.valueGeneratorForDice = valueGeneratorForDice;
+        }
+
+        public static ValueGeneratorForDice getValueGeneratorForDice() {
+            return valueGeneratorForDice;
         }
 
         public static void setBoard(Board board) {
@@ -272,5 +287,10 @@ public class TestSession implements Session {
     @Override
     public List<IO> getIO() {
         return ios;
+    }
+
+    @Override
+    public ValueGeneratorForDice getValueGeneratorForDice() {
+        return valueGeneratorForDice;
     }
 }

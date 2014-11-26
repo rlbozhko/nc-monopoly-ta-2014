@@ -20,6 +20,7 @@ public class PropertyCell extends Cell implements Property {
     private Monopoly monopoly;
     private PropertyStatus status;
     private int maxLevel = 5;//временно
+    private int maxBuildings = 1;//временно
 
     public static class PropertyBuilder {
         private final static int DEFAULT_BASE_PRICE = 1000;
@@ -34,6 +35,8 @@ public class PropertyCell extends Cell implements Property {
         private static int baseRent;
         private static Monopoly monopoly;
         private static PropertyStatus status;
+        private static int maxLevel;
+        private static int maxBuildings;
 
 
         public PropertyBuilder(String name, List<Building> buildings, int position) {
@@ -45,10 +48,32 @@ public class PropertyCell extends Cell implements Property {
             this.basePrice = DEFAULT_BASE_PRICE;
             this.baseRent = DEFAULT_BASE_RENT;
             this.monopoly = null;
+            this.maxLevel = 5;
+            this.maxBuildings = 1;
         }
 
         public PropertyCell getPropertyCell() {
-            return new PropertyCell(name, description, position, owner, buildings, basePrice, baseRent, monopoly);
+            PropertyCell propertyCell = new PropertyCell(name, description, position,
+                    owner, buildings, basePrice, baseRent, monopoly);
+            propertyCell.maxLevel = getMaxLevel();
+            propertyCell.maxBuildings = getMaxBuildings();
+            return propertyCell;
+        }
+
+        public static void setMaxLevel(int maxLevel) {
+            PropertyBuilder.maxLevel = maxLevel;
+        }
+
+        public static int getMaxLevel() {
+            return maxLevel;
+        }
+
+        public static void setMaxBuildings(int maxBuildings) {
+            PropertyBuilder.maxBuildings = maxBuildings;
+        }
+
+        public static int getMaxBuildings() {
+            return maxBuildings;
         }
 
         public PropertyBuilder setDescription(String description) {
@@ -159,5 +184,10 @@ public class PropertyCell extends Cell implements Property {
     @Override
     public int getMaxLevel() {
         return maxLevel;
+    }
+
+    @Override
+    public int getMaxBuildings() {
+        return maxBuildings;
     }
 }

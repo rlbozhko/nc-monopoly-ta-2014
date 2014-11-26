@@ -33,12 +33,12 @@ public class RandomMoneyEvent implements Event {
 
 		if (isAddMoney) {
 			player.getWallet().addMoney(amountMoney);
-			playerIO.showMessage("Поздравляем! Вы выйграли " + amountMoney
-					+ "$.");
+			playerIO.showMessage("Поздравляем! Вы выйграли $" + amountMoney
+					+ ".");
 		} else {
 			player.getWallet().subtractMoney(amountMoney);
-			playerIO.showMessage("Сеголня был не Ваш день! Вы проиграли "
-					+ amountMoney + "$.");
+			playerIO.showMessage("Сеголня был не Ваш день! Вы проиграли $"
+					+ amountMoney + ".");
 		}
 	}
 

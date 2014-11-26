@@ -2,18 +2,13 @@ package com.monopoly.board.dice;
 
 import com.monopoly.tools.XORShiftRandom;
 
-public class DiceGenerator implements Runnable {
+public class ValueGeneratorForDice implements Runnable {
 	private final int MAX_VALUE_ON_FACE = 6;
-	private Dice die1;
-	private Dice die2;
+	private int value1;
+	private int value2;
 	private boolean flag;
 	private XORShiftRandom xorShiftRandom = new XORShiftRandom();
 
-	public DiceGenerator(Dice die1, Dice die2) {
-		this.die1 = die1;
-		this.die2 = die2;
-	}
-	
 	public synchronized boolean finish(){
 		this.flag = true;
 		return flag;
@@ -22,8 +17,8 @@ public class DiceGenerator implements Runnable {
 	@Override
 	public void run() {
 		while (!flag) {
-			die1.setFace(xorShiftRandom.nextInt(MAX_VALUE_ON_FACE));
-			die2.setFace(xorShiftRandom.nextInt(MAX_VALUE_ON_FACE));
+			value1 = xorShiftRandom.nextInt(MAX_VALUE_ON_FACE);
+			value2 = xorShiftRandom.nextInt(MAX_VALUE_ON_FACE);
 			try {
 				Thread.sleep(2000);
 			} catch (InterruptedException e) {
@@ -31,4 +26,13 @@ public class DiceGenerator implements Runnable {
 			}
 		}
 	}
+
+	public int getValue1() {
+		return value1;
+	}
+
+	public int getValue2() {
+		return value2;
+	}
+
 }

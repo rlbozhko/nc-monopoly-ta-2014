@@ -7,7 +7,7 @@ import com.monopoly.board.cells.PropertyCell;
  */
 public interface PropertyOperations {
 
-    public void buyProperty(PropertyCell propertyCell);
+    public boolean buyProperty(PropertyCell propertyCell);
 
     public void sellProperty(PropertyCell propertyCell);
 

@@ -4,19 +4,21 @@ import com.monopoly.board.cells.Property;
 import com.monopoly.board.cells.PropertyCell;
 import com.monopoly.game.session.TestSession;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class Player implements MoneyOperations, MoveOperations, PropertyOperations {
     private int position;
     private String name;
     private Status status;
-    private Wallet money;
+    private Wallet wallet;
     private List<Property> property;
 
     public Player(String name, Wallet money) {
         position = 0;
         this.name = name;
-        this.money = money;
+        this.wallet = money;
+        this.property = new ArrayList<>();
         status = Status.WAIT;
     }
 
@@ -49,7 +51,7 @@ public class Player implements MoneyOperations, MoveOperations, PropertyOperatio
 
     @Override
     public Wallet getWallet() {
-        return money;
+        return wallet;
     }
 
     public List<Property> getProperty() {
@@ -69,12 +71,14 @@ public class Player implements MoneyOperations, MoveOperations, PropertyOperatio
     }
 
     @Override
-    public void buyProperty(PropertyCell propertyCell) {
-        if (propertyCell.getPrice() <= money.getMoney()) {
-            money.subtractMoney(propertyCell.getPrice());
+    public boolean buyProperty(PropertyCell propertyCell) {
+        if (propertyCell.getPrice() <= wallet.getMoney()) {
+            wallet.subtractMoney(propertyCell.getPrice());
             property.add(propertyCell);
             propertyCell.setOwner(this);
+            return true;
         }
+        return false;
     }
 
     @Override

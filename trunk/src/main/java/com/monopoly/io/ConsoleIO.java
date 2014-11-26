@@ -105,10 +105,11 @@ public class ConsoleIO implements IO, Runnable {
         List<Property> properties = player.getProperty();
         for (int i = 0; i < properties.size(); i++) {
             Property property = properties.get(i);
-            System.out.println(i + " " + ((Cell) property).getName());
+            System.out.println((i + 1) + " " + ((Cell) property).getName());
         }
 
-        int input = positiveIntInput();
+        System.out.println("0 - Для отмены");
+        int input = positiveIntInput() - 1;
         if (input < properties.size() && input >= 0) {
             return properties.get(input);
         } else {

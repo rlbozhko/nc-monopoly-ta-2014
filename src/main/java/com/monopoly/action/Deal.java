@@ -3,6 +3,7 @@ package com.monopoly.action;
 import com.monopoly.board.cells.Property;
 import com.monopoly.board.player.Player;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -16,6 +17,8 @@ public class Deal {
     private Player source;
 
     public Deal(Player source) {
+        askProperties = new ArrayList<>();
+        giveProperties = new ArrayList<>();
         this.source = source;
     }
 
@@ -44,7 +47,9 @@ public class Deal {
     }
 
     public void addAskProperty(Property askProperty) {
-        this.askProperties.add(askProperty);
+        if (askProperty != null) {
+            this.askProperties.add(askProperty);
+        }
     }
 
     public List<Property> getGiveProperties() {
@@ -52,7 +57,9 @@ public class Deal {
     }
 
     public void addGiveProperty(Property giveProperty) {
-        this.giveProperties.add(giveProperty);
+        if (giveProperty != null) {
+            this.giveProperties.add(giveProperty);
+        }
     }
 
     public String message() {

@@ -1,9 +1,11 @@
 package com.monopoly.board;
 
 import com.monopoly.board.cells.Cell;
+import com.monopoly.board.cells.CellType;
 import com.monopoly.board.dice.Dice;
 import com.monopoly.board.player.Player;
 
+import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
@@ -15,20 +17,29 @@ public class Board implements DiceOperations, CellOperations, PlayerOperations, 
     private Player currentPlayer;
     private Player previousPlayer;
     private List<Cell> cells;
-    private List<Cell> propertyCells;
-    private List<Cell> eventCells;
+    private List<Cell> propertyCells = new ArrayList<>();
+    private List<Cell> eventCells = new ArrayList<>();
     private List<Dice> dices;
 
     private Iterator<Player> playerIter;
 
-    public Board(List<Player> players, List<Cell> cells, List<Cell> propertyCells, List<Cell> eventCells, List<Dice> dices) {
+    public Board(List<Player> players, List<Cell> cells, List<Dice> dices) {
         this.cells = cells;
-        this.propertyCells = propertyCells;
-        this.eventCells = eventCells;
+        updatePropertyEventCells();
         this.players = players;
         this.dices = dices;
         this.playerIter = players.iterator();
         currentPlayer = players.get(0);
+    }
+
+    private void updatePropertyEventCells() {
+        for (Cell cell : cells) {
+            if (CellType.PROPERTY_CELL.equals(cell.getCellType())) {
+                propertyCells.add(cell);
+            } else {
+                eventCells.add(cell);
+            }
+        }
     }
 
     public List<Cell> getCells() {

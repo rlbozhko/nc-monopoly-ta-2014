@@ -143,7 +143,7 @@ public class TestSession implements Session {
         ios.add(new DummyIO(p2));
         ios.add(new DummyIO(p3));
 
-        TestSessionBuilder.setBoard(new Board(players, cells, null, null, dice));
+        TestSessionBuilder.setBoard(new Board(players, cells, dice));
         TestSessionBuilder.setActionController(new PlayerActionController());
         TestSessionBuilder.setIOs(ios);
 

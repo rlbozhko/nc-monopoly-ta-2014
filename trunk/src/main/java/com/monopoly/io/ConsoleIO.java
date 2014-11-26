@@ -55,7 +55,9 @@ public class ConsoleIO implements IO, Runnable {
         Session session = TestSession.getInstance();
         System.out.println("Информация об игре");
         List<Player> players = session.getBoard().getPlayers();
-        System.out.println("Вы на позиции: " + player.getPosition());
+        int position = player.getPosition();
+        System.out.println("Вы на позиции: " + position + " " + session.getBoard().getCells().get(position).getName());
+        System.out.println("У Вас на счету $" + player.getWallet().getMoney() + ". У Вас в собственности: " + player.getProperty());
         int i = 0;
         for (Player other : players) {
             if (!player.equals(other)) {
@@ -162,7 +164,7 @@ public class ConsoleIO implements IO, Runnable {
                 case 2:
                     System.out.println("Введите количество денег:");
                     input = positiveIntInput();
-                    deal.setAskMoney(input < 0 ? input : 0);
+                    deal.setAskMoney(input > 0 ? input : 0);
                     if (input < 0) {
                         System.out.println("Введите положительное число");
                     }

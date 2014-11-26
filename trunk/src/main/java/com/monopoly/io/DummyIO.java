@@ -101,6 +101,6 @@ public class DummyIO implements IO, Runnable {
 
     @Override
     public void showMessage(String message) {
-        System.out.println(player.getName() + ": " + message);
+        //System.out.println(player.getName() + ": " + message);
     }
 }

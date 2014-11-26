@@ -1,5 +1,6 @@
 package com.monopoly.action;
 
+import com.monopoly.board.cells.Property;
 import com.monopoly.board.player.Player;
 import com.monopoly.io.IO;
 
@@ -27,6 +28,14 @@ public class DealAction implements Action {
 
                 otherPlayer.getProperty().removeAll(deal.getAskProperties());
                 player.getProperty().addAll(deal.getAskProperties());
+
+                for (Property property: deal.getGiveProperties()) {
+                    property.setOwner(otherPlayer);
+                }
+
+                for (Property property: deal.getAskProperties()) {
+                    property.setOwner(player);
+                }
 
                 playerIO.showMessage("Сделка состоялась");
                 otherIO.showMessage("Сделка состоялась");

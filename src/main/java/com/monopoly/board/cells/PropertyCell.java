@@ -19,6 +19,7 @@ public class PropertyCell extends Cell implements Property {
     private int baseRent;
     private Monopoly monopoly;
     private PropertyStatus status;
+    private int maxLevel = 5;//временно
 
     public static class PropertyBuilder {
         private final static int DEFAULT_BASE_PRICE = 1000;
@@ -97,6 +98,7 @@ public class PropertyCell extends Cell implements Property {
         return owner;
     }
 
+
     @Override
     public List<Building> getBuildings() {
         return buildings;
@@ -152,5 +154,10 @@ public class PropertyCell extends Cell implements Property {
     @Override
     public boolean isPledged() {
         return false;
+    }
+
+    @Override
+    public int getMaxLevel() {
+        return maxLevel;
     }
 }

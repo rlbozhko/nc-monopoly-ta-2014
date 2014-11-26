@@ -18,15 +18,11 @@ import java.util.Scanner;
  * Created by Roma on 20.11.2014.
  */
 public class ConsoleIO implements IO, Runnable {
-    //Session session;
     Player player;
-    //ActionController actionController;
     List<Action> actions;
 
     public ConsoleIO(Player player) {
-        //this.session = TestSession.getInstance();
         this.player = player;
-        //this.actionController = session.getActionController();
     }
 
     @Override

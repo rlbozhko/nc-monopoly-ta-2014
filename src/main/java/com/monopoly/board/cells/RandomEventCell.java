@@ -5,12 +5,12 @@ import com.monopoly.tools.XORShiftRandom;
 
 import java.util.List;
 
-public class ChanceCell extends Cell {
+public class RandomEventCell extends Cell implements EventCell {
 
     private List<Event> events;
     private XORShiftRandom random;
 
-    public ChanceCell(String name, String description, int position, List<Event> events) {
+    public RandomEventCell(String name, String description, int position, List<Event> events) {
         super(name, description, CellType.EVENT_CELL, position);
         this.events = events;
         random = new XORShiftRandom();

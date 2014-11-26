@@ -16,6 +16,11 @@ public class DealAction implements Action {
         if (deal != null) {
             IO otherIO = ActionUtils.getPlayerIO(otherPlayer);
             boolean answer = otherIO.yesNoDialog(deal.message());
+
+            if (otherPlayer.getWallet().getMoney() < deal.getAskMoney()) {
+                otherIO.showMessage("У Вас не достаточно денег");
+                answer = false;
+            }
             if (answer) {
                 player.getWallet().subtractMoney(deal.getGiveMoney());
                 otherPlayer.getWallet().addMoney(deal.getGiveMoney());
@@ -29,11 +34,11 @@ public class DealAction implements Action {
                 otherPlayer.getProperty().removeAll(deal.getAskProperties());
                 player.getProperty().addAll(deal.getAskProperties());
 
-                for (Property property: deal.getGiveProperties()) {
+                for (Property property : deal.getGiveProperties()) {
                     property.setOwner(otherPlayer);
                 }
 
-                for (Property property: deal.getAskProperties()) {
+                for (Property property : deal.getAskProperties()) {
                     property.setOwner(player);
                 }
 

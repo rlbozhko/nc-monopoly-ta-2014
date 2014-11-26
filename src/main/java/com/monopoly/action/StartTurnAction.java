@@ -6,7 +6,7 @@ import com.monopoly.board.cells.Cell;
 import com.monopoly.board.cells.CellType;
 import com.monopoly.board.cells.EventCell;
 import com.monopoly.board.dice.Dice;
-import com.monopoly.board.dice.DiceGenerator;
+import com.monopoly.board.dice.ValueGeneratorForDice;
 import com.monopoly.board.player.Player;
 import com.monopoly.board.player.Status;
 import com.monopoly.game.session.Session;

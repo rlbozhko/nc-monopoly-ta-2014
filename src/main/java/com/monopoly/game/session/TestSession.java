@@ -6,7 +6,7 @@ import com.monopoly.board.Board;
 import com.monopoly.board.building.Building;
 import com.monopoly.board.cells.*;
 import com.monopoly.board.dice.Dice;
-import com.monopoly.board.dice.DiceGenerator;
+import com.monopoly.board.dice.ValueGeneratorForDice;
 import com.monopoly.board.events.MoneyEvent;
 import com.monopoly.board.events.EmergencyEvent;
 import com.monopoly.board.events.Event;
@@ -149,7 +149,7 @@ public class TestSession implements Session {
 
         Session test = TestSession.getInstance();
 
-        Thread diceGenerator = new Thread(new DiceGenerator(dice.get(0), dice.get(1)));
+        Thread diceGenerator = new Thread(new ValueGeneratorForDice(dice.get(0), dice.get(1)));
         diceGenerator.start();
 
         ConsoleIO consoleIO = (ConsoleIO) test.getIO().get(0);

@@ -29,15 +29,11 @@ public class StartTurnAction implements Action {
     @Override
     public void performAction(Player player) {
         List<Dice> dice = ((DiceOperations) board).getDice();
-        //Thread diceGenerator = new Thread(new DiceGenerator(dice.get(0), dice.get(1)));
-        //diceGenerator.start();
-        /*
-        try {
-            Thread.sleep(10);
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
-        */
+        ValueGeneratorForDice valueGeneratorForDice = TestSession.getInstance().getValueGeneratorForDice();
+        dice.get(0).setFace(valueGeneratorForDice.getValue1());
+        dice.get(1).setFace(valueGeneratorForDice.getValue2());
+        System.out.println(dice.get(0).getFace());
+        System.out.println(dice.get(1).getFace());
         player.goToPosition(player.getPosition() + dice.get(0).getFace() + dice.get(1).getFace());
         player.setStatus(Status.ACTIVE);
 

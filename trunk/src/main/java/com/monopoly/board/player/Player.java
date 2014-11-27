@@ -13,6 +13,7 @@ public class Player implements MoneyOperations, MoveOperations, PropertyOperatio
     private Status status;
     private Wallet wallet;
     private List<Property> property;
+    private boolean mustPayRent;
 
     public Player(String name, Wallet money) {
         position = 0;
@@ -20,24 +21,9 @@ public class Player implements MoneyOperations, MoveOperations, PropertyOperatio
         this.wallet = money;
         this.property = new ArrayList<>();
         status = Status.WAIT;
+        mustPayRent = false;
     }
 
-    /*
-        @Override
-        public void surrender() {
-            finishTurn();
-            status = Status.FINISH;
-        }
-
-        @Override
-        public void startTurn() {
-            status = Status.START_TURN;
-        }
-
-        @Override
-        public void finishTurn() {
-        }
-    */
     @Override
     public int getPosition() {
         return position;
@@ -96,5 +82,15 @@ public class Player implements MoneyOperations, MoveOperations, PropertyOperatio
     @Override
     public void buyBackProperty(PropertyCell propertyCell) {
 
+    }
+
+    @Override
+    public boolean mustPayRent() {
+        return mustPayRent;
+    }
+
+    @Override
+    public void setMustPayRent(boolean mustPayRent) {
+        this.mustPayRent = mustPayRent;
     }
 }

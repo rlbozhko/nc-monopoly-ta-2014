@@ -1,5 +1,9 @@
 package com.monopoly.action;
 
+import com.monopoly.board.cells.Cell;
+import com.monopoly.board.cells.CellType;
+import com.monopoly.board.cells.Property;
+import com.monopoly.board.cells.PropertyCell;
 import com.monopoly.board.player.Player;
 import com.monopoly.board.player.Status;
 import com.monopoly.game.session.Session;
@@ -23,8 +27,10 @@ public class PlayerActionController implements ActionController {
         session = TestSession.getInstance();
         List<Action> result = new ArrayList<>();
         if (Status.FINISH.equals(player.getStatus())) {
-            //result.clear();
             return result;
+        }
+        if (player.mustPayRent()) {
+            result.add(new PayRentAction());
         }
         result.add(new DealAction());
         result.add(new GiveUpAction());

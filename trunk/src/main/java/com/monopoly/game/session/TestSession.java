@@ -163,13 +163,18 @@ public class TestSession implements Session {
         Thread dummy1 = new Thread(dummyIO1);
         Thread dummy2 = new Thread(dummyIO2);
 
-        //
+        //Для тестирования Действий с собственностью
+        for (Cell property : test.getBoard().getPropertyCell()) {
+            ((Property) property).setOwner(p1);
+        }
+
         Property testProperty = (Property) cells.get(1);
         p1.getProperty().add(testProperty);
         testProperty.setOwner(p1);
         //
+
         p1.getWallet().addMoney(5000);
-        p2.getWallet().addMoney(5000);
+        //p2.getWallet().addMoney(5000);
         p3.getWallet().addMoney(5000);
 
         player.start();

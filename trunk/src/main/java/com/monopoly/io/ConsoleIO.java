@@ -57,7 +57,7 @@ public class ConsoleIO implements IO, Runnable {
         int i = 0;
         for (Player other : players) {
             if (!player.equals(other)) {
-                System.out.println("Другой игрок " + i + " -- на позиции: " + other.getPosition());
+                System.out.println(other.getName() + " -- на позиции: " + other.getPosition());
             }
             i++;
         }
@@ -139,9 +139,9 @@ public class ConsoleIO implements IO, Runnable {
         boolean continueSelect = true;
         while (continueSelect) {
             System.out.println(
-                    "1 Отдать денег " + deal.getGiveMoney() + "\n" +
+                    "1 Предложить денег " + deal.getGiveMoney() + "\n" +
                             "2 Требовать денег " + deal.getAskMoney() + "\n" +
-                            "3 Отдать собственность " + deal.getGiveProperties() + "\n" +
+                            "3 Предложить собственность " + deal.getGiveProperties() + "\n" +
                             "4 Требовать собственность " + deal.getAskProperties() + "\n" +
                             "7 Отправить предложение\n" +
                             "0 Отменить сделку\n");

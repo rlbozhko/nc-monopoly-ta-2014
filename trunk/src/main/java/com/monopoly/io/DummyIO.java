@@ -4,6 +4,7 @@ import com.monopoly.action.*;
 import com.monopoly.board.building.Building;
 import com.monopoly.board.cells.Property;
 import com.monopoly.board.player.Player;
+import com.monopoly.board.player.Status;
 import com.monopoly.game.session.Session;
 import com.monopoly.game.session.TestSession;
 
@@ -35,12 +36,24 @@ public class DummyIO implements IO, Runnable {
             outputAvailableActions(player);
             for (int i = 0; i < actions.size(); i++) {
                 Action action = actions.get(i);
-                if (action instanceof StartTurnAction || action instanceof EndTurnAction) {
+                if (action instanceof PayRentAction) {
+                    performPayRent(action);
+                    break;
+                } else if (action instanceof StartTurnAction || action instanceof EndTurnAction) {
                     performAction(action);
                     break;
                 }
             }
-        } while (true);
+        } while (!Status.FINISH.equals(player.getStatus()));
+    }
+
+    private void performPayRent(Action action) {
+        Property property = (Property) TestSession.getInstance().getBoard().getCells().get(player.getPosition());
+        if (player.getWallet().getMoney() >= property.getRent()) {
+            performAction(action);
+        } else {
+            performAction(new GiveUpAction());
+        }
     }
 
     @Override

@@ -4,6 +4,7 @@ import com.monopoly.board.cells.Cell;
 import com.monopoly.board.cells.CellType;
 import com.monopoly.board.dice.Dice;
 import com.monopoly.board.player.Player;
+import com.monopoly.board.player.Status;
 
 import java.util.ArrayList;
 import java.util.Iterator;
@@ -12,7 +13,7 @@ import java.util.List;
 /**
  * Created by Roma on 31.10.2014.
  */
-public class Board implements DiceOperations, CellOperations, PlayerOperations, Runnable {
+public class Board implements DiceOperations, CellOperations, PlayerOperations {
     private List<Player> players;
     private Player currentPlayer;
     private Player previousPlayer;
@@ -76,13 +77,10 @@ public class Board implements DiceOperations, CellOperations, PlayerOperations, 
             next = players.get(index + 1);
         }
         currentPlayer = next;
-        return next;
-
-        /*if(playerIter.hasNext()) {
-            previousPlayer = currentPlayer;
-            currentPlayer = playerIter.next();
+        if (Status.FINISH.equals(next.getStatus())) {
+            next = getNextPlayer();
         }
-        return currentPlayer;*/
+        return next;
     }
 
     @Override
@@ -93,11 +91,5 @@ public class Board implements DiceOperations, CellOperations, PlayerOperations, 
     @Override
     public List<Dice> getDice() {
         return dices;
-    }
-
-    @Override
-    public void run() {
-        // TODO Auto-generated method stub
-
     }
 }

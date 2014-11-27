@@ -67,6 +67,8 @@ public class TestSession implements Session {
         Thread dummy1 = new Thread(dummyIO1);
         Thread dummy2 = new Thread(dummyIO2);
 
+        //consoleIO.printBoardToFile();
+
         //Для тестирования Действий с собственностью
         for (Cell property : test.getBoard().getPropertyCell()) {
             ((Property) property).setOwner(p1);
@@ -186,7 +188,7 @@ public class TestSession implements Session {
                 new ArrayList<Building>(), 1500, 300, monopoly2));
         cells.add(new PropertyCell("c2m2", "c2m2 desc", cells.size(), null,
                 new ArrayList<Building>(), 1500, 300, monopoly2));
-        cells.add(new SingleEventCell("Уплатите налог", "Подоходный налог", cells.size(),
+        cells.add(new SingleEventCell("Уплатите налог", "Подоходный налог -$200", cells.size(),
                 new MoneyEvent("Уплатите налог", "Подоходный налог -$200", -200)));
         cells.add(new PropertyCell("c3m2", "c3m2 desc", cells.size(), null,
                 new ArrayList<Building>(), 1500, 300, monopoly2));
@@ -204,7 +206,7 @@ public class TestSession implements Session {
         cells.add(new RandomEventCell("Шанс", "Случайное событие", cells.size(), chanceEvents));
         cells.add(new PropertyCell("c1m4", "c1m4 desc", cells.size(), null,
                 new ArrayList<Building>(), 3300, 330, monopoly4));
-        cells.add(new SingleEventCell("Уплатите налог", "Налог на роскошь", cells.size(),
+        cells.add(new SingleEventCell("Уплатите налог", "Налог на роскошь -$100", cells.size(),
                 new MoneyEvent("Уплатите налог", "Налог на роскошь -$100", -100)));
         cells.add(new PropertyCell("c2m4", "c2m4 desc", cells.size(), null,
                 new ArrayList<Building>(), 3300, 330, monopoly4));
@@ -212,14 +214,13 @@ public class TestSession implements Session {
                 new MoneyEvent("Бесплатная стоянка", "Можете передохнуть", 0)));
         cells.add(new PropertyCell("c1m5", "c1m5 desc", cells.size(), null,
                 new ArrayList<Building>(), 3500, 350, monopoly5));
-        cells.add(new PropertyCell("c3m9", "c3m9 desc", cells.size(), null,
-                new ArrayList<Building>(), 2000, 250, monopoly9));
+        cells.add(new RandomEventCell("Шанс", "Случайное событие", cells.size(), chanceEvents));
         cells.add(new PropertyCell("c2m5", "c2m5 desc", cells.size(), null,
                 new ArrayList<Building>(), 3500, 350, monopoly5));
-        cells.add(new SingleEventCell("Казино", "Может выиграешь, а может и проиграешь", cells.size(),
-                new RandomMoneyEvent("Казино", "Может выиграешь, а может и проиграешь")));
         cells.add(new SingleEventCell("Событие Хода", "Место для События хода", cells.size(),
                 new MoneyEvent("Событие Хода", "Место для События хода", 0)));
+        cells.add(new PropertyCell("c3m9", "c3m9 desc", cells.size(), null,
+                new ArrayList<Building>(), 2000, 250, monopoly9));
         cells.add(new PropertyCell("c1m6", "c1m6 desc", cells.size(), null,
                 new ArrayList<Building>(), 4000, 400, monopoly6));
         cells.add(new RandomEventCell("Шанс", "Случайное событие", cells.size(), chanceEvents));
@@ -237,10 +238,11 @@ public class TestSession implements Session {
                 new ArrayList<Building>(), 4200, 420, monopoly7));
         cells.add(new PropertyCell("c3m7", "c3m7 desc", cells.size(), null,
                 new ArrayList<Building>(), 4200, 420, monopoly7));
+        cells.add(new PropertyCell("c4m9", "c4m9 desc", cells.size(), null,
+                new ArrayList<Building>(), 2000, 250, monopoly9));
         cells.add(new PropertyCell("c1m8", "c1m8 desc", cells.size(), null,
                 new ArrayList<Building>(), 4500, 450, monopoly8));
-        cells.add(new PropertyCell("c3m9", "c3m9 desc", cells.size(), null,
-                new ArrayList<Building>(), 2000, 250, monopoly9));
+        cells.add(new RandomEventCell("Шанс", "Случайное событие", cells.size(), chanceEvents));
         cells.add(new PropertyCell("c2m8", "c2m8 desc", cells.size(), null,
                 new ArrayList<Building>(), 4500, 450, monopoly8));
         cells.add(new PropertyCell("c3m8", "c3m8 desc", cells.size(), null,

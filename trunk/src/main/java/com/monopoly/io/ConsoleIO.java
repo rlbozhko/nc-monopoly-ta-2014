@@ -3,14 +3,19 @@ package com.monopoly.io;
 import com.monopoly.action.Action;
 import com.monopoly.action.ActionController;
 import com.monopoly.action.Deal;
+import com.monopoly.board.Board;
 import com.monopoly.board.building.Building;
 import com.monopoly.board.cells.Cell;
+import com.monopoly.board.cells.CellType;
 import com.monopoly.board.cells.Property;
 import com.monopoly.board.player.Player;
 import com.monopoly.board.player.Status;
 import com.monopoly.game.session.Session;
 import com.monopoly.game.session.TestSession;
 
+import java.io.BufferedWriter;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.util.List;
 import java.util.Scanner;
 
@@ -27,6 +32,7 @@ public class ConsoleIO implements IO, Runnable {
 
     @Override
     public void run() {
+        printBoardToFile();
         do {
             outputBoardState();
             outputAvailableActions(player);
@@ -209,5 +215,25 @@ public class ConsoleIO implements IO, Runnable {
             input = in.nextInt();
         }
         return input;
+    }
+
+    private void printBoardToFile() {
+        Board board = TestSession.getInstance().getBoard();
+        try (BufferedWriter fileWriter = new BufferedWriter(new FileWriter("board.txt"))) {
+            for (Cell cell : board.getCells()) {
+                StringBuilder cellLine = new StringBuilder();
+                cellLine.append(cell.getPosition()).append(". ").append(cell.getName()).append(". Описание: ").append(cell.getDescription());
+                if (CellType.PROPERTY_CELL.equals(cell.getCellType())) {
+                    Property property = (Property) cell;
+                    cellLine.append(". Монополия: ").append(property.getMonopoly().getMonopolyType())
+                            .append(". Максимальное количество зданий ").append(property.getMaxBuildings())
+                            .append(". Максимальный уровень зданий ").append(property.getMaxLevel());
+                }
+                cellLine.append("\n");
+                fileWriter.write(cellLine.toString());
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 }

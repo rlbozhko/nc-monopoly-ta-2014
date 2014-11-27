@@ -26,4 +26,8 @@ public class Monopoly {
     public boolean addProperty(Property property) {
         return monopolyProperty.add(property);
     }
+
+    public String getMonopolyType() {
+        return monopolyType;
+    }
 }

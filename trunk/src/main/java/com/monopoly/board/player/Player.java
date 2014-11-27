@@ -60,7 +60,7 @@ public class Player implements MoneyOperations, MoveOperations, PropertyOperatio
     public boolean buyProperty(PropertyCell propertyCell) {
         if (propertyCell.getPrice() <= wallet.getMoney()) {
             wallet.subtractMoney(propertyCell.getPrice());
-            property.add(propertyCell);
+            //property.add(propertyCell);
             propertyCell.setOwner(this);
             return true;
         }

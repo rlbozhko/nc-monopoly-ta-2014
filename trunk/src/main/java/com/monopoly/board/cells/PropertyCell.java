@@ -115,7 +115,13 @@ public class PropertyCell extends Cell implements Property {
 
     @Override
     public void setOwner(Player player) {
+        if (owner != null) {
+            owner.getProperty().remove(this);
+        }
         owner = player;
+        if (player != null) {
+            player.getProperty().add(this);
+        }
     }
 
     @Override

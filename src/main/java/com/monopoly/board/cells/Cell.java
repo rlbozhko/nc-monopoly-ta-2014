@@ -17,6 +17,7 @@ public abstract class Cell {
         this.name = name;
         this.description = description;
         this.cellType = cellType;
+        this.position = position;
     }
 
     public String getName() {

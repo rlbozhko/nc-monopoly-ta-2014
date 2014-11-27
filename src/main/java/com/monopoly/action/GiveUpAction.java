@@ -5,6 +5,7 @@ import com.monopoly.board.player.Player;
 import com.monopoly.board.player.Status;
 import com.monopoly.game.session.Session;
 import com.monopoly.game.session.TestSession;
+import com.monopoly.io.IO;
 
 /**
  * Created by Roma on 20.11.2014.
@@ -21,12 +22,15 @@ public class GiveUpAction implements Action {
 
     @Override
     public void performAction(Player player) {
-        player.setStatus(Status.FINISH);
         Player nextPlayer = board.getNextPlayer();
         if (Status.ACTIVE.equals(player.getStatus()) || Status.START_TURN.equals(player.getStatus())) {
             if (!player.equals(nextPlayer)) {
                 nextPlayer.setStatus(Status.START_TURN);
             }
+        }
+        player.setStatus(Status.FINISH);
+        for (IO io : session.getIO()) {
+            io.showMessage(player.getName() + " сдался");
         }
     }
 

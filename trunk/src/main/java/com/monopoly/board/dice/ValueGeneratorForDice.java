@@ -23,7 +23,7 @@ public class ValueGeneratorForDice implements Runnable {
 			value1 = xorShiftRandom.nextInt(MAX_VALUE_ON_FACE);
 			value2 = xorShiftRandom.nextInt(MAX_VALUE_ON_FACE);
 			try {
-				Thread.sleep(2000);
+				Thread.sleep(100);
 			} catch (InterruptedException e) {
 				e.printStackTrace();
 			}

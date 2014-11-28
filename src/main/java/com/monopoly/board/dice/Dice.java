@@ -1,4 +1,7 @@
 package com.monopoly.board.dice;
+/**
+ * Create By Kulikovsky Anton
+ * */
 
 public class Dice {
     private int faceDie1;
@@ -9,7 +12,11 @@ public class Dice {
        this.valueGeneratorForDice = valueGeneratorForDice;
     }
 
-	public synchronized int getNewFaceDie1() {
+    public synchronized boolean isSame() {
+    	return faceDie1 == faceDie2;
+    }
+    
+    public synchronized int getNewFaceDie1() {
 		this.faceDie1 = valueGeneratorForDice.getValue1();
 		return this.faceDie1;
 	}

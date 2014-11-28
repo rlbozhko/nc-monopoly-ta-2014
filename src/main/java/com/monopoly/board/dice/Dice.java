@@ -19,8 +19,11 @@ public class Dice {
 		return this.faceDie2;
 	}
 
-    
+	public synchronized int getFaceDie1() {
+		return faceDie1;
+	}
 
-   
-
+	public synchronized int getFaceDie2() {
+		return faceDie2;
+	}
 }

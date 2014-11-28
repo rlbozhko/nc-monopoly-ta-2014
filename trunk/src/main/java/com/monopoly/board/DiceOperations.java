@@ -10,5 +10,5 @@ import java.util.List; /**
  * ОперацииСКубиками
  */
 public interface DiceOperations {
-    public List<Dice> getDice();
+    public Dice getDice();
 }

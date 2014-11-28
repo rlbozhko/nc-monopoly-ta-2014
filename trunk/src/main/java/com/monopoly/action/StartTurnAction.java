@@ -21,6 +21,7 @@ import java.util.List;
 public class StartTurnAction implements Action {
     Session session;
     Board board;
+    private final int MAX_MOVE = 12;
 
     public StartTurnAction() {
         this.session = TestSession.getInstance();
@@ -29,14 +30,16 @@ public class StartTurnAction implements Action {
 
     @Override
     public void performAction(Player player) {
-        List<Dice> dice = ((DiceOperations) board).getDice();
-        ValueGeneratorForDice valueGeneratorForDice = TestSession.getInstance().getValueGeneratorForDice();
-        dice.get(0).setFace(valueGeneratorForDice.getValue1());
-        dice.get(1).setFace(valueGeneratorForDice.getValue2());
-        player.goToPosition(player.getPosition() + dice.get(0).getFace() + dice.get(1).getFace());
+        Dice dice = ((DiceOperations) board).getDice();
+        player.goToPosition(player.getPosition() + dice.getNewFaceDie1() + dice.getNewFaceDie2());
         player.setStatus(Status.ACTIVE);
+        List<Cell> cells = board.getCells();
 
-        Cell currentCell = board.getCells().get(player.getPosition());
+        if (hasPassCircle(player)) {
+            ((EventCell) cells.get(0)).getEvent().performEvent();
+        }
+
+        Cell currentCell = cells.get(player.getPosition());
         if (CellType.EVENT_CELL.equals(currentCell.getCellType())) {
             ((EventCell) currentCell).getEvent().performEvent();
         } else if (CellType.PROPERTY_CELL.equals(currentCell.getCellType())) {
@@ -45,8 +48,12 @@ public class StartTurnAction implements Action {
                 player.setMustPayRent(true);
             }
         }
+    }
 
-
+    private boolean hasPassCircle(Player player) {
+        return (player.getLastPosition() > (board.getCells().size() - MAX_MOVE))
+            && (player.getPosition() < MAX_MOVE)
+                && (player.getPosition() != 0);
     }
 
     @Override

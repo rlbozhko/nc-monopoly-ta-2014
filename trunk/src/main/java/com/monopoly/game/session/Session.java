@@ -16,6 +16,4 @@ public interface Session {
     ActionController getActionController();
 
     List<IO> getIO();
-
-    ValueGeneratorForDice getValueGeneratorForDice();
 }

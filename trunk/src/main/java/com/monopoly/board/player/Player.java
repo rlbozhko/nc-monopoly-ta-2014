@@ -9,6 +9,7 @@ import java.util.List;
 
 public class Player implements MoneyOperations, MoveOperations, PropertyOperations {
     private int position;
+    private int lastPosition;
     private String name;
     private Status status;
     private Wallet wallet;
@@ -17,6 +18,7 @@ public class Player implements MoneyOperations, MoveOperations, PropertyOperatio
 
     public Player(String name, Wallet money) {
         position = 0;
+        lastPosition = 0;
         this.name = name;
         this.wallet = money;
         this.property = new ArrayList<>();
@@ -30,8 +32,14 @@ public class Player implements MoneyOperations, MoveOperations, PropertyOperatio
     }
 
     @Override
+    public int getLastPosition() {
+        return lastPosition;
+    }
+
+    @Override
     public void goToPosition(int position) {
         int boardSize = TestSession.getInstance().getBoard().getCells().size();
+        this.lastPosition = position;
         this.position = position % boardSize;
     }
 

@@ -1,4 +1,7 @@
 package com.monopoly.board.events;
+/**
+ * Create By Kulikovsky Anton
+ * */
 
 import com.monopoly.action.ActionUtils;
 import com.monopoly.board.Board;

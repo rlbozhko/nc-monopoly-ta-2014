@@ -1,5 +1,8 @@
 package com.monopoly.board.dice;
 
+/**
+ * Create By Kulikovsky Anton
+ * */
 import com.monopoly.tools.XORShiftRandom;
 
 public class ValueGeneratorForDice implements Runnable {

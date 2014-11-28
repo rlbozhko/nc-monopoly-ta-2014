@@ -219,18 +219,20 @@ public class ConsoleIO implements IO, Runnable {
 
     private void printBoardToFile() {
         Board board = TestSession.getInstance().getBoard();
-        try (BufferedWriter fileWriter = new BufferedWriter(new FileWriter("board.txt"))) {
+        try (BufferedWriter writer = new BufferedWriter(new FileWriter("board.txt"))) {
             for (Cell cell : board.getCells()) {
                 StringBuilder cellLine = new StringBuilder();
                 cellLine.append(cell.getPosition()).append(". ").append(cell.getName()).append(". Описание: ").append(cell.getDescription());
                 if (CellType.PROPERTY_CELL.equals(cell.getCellType())) {
                     Property property = (Property) cell;
                     cellLine.append(". Монополия: ").append(property.getMonopoly().getMonopolyType())
+                            .append(". Базовая стоимость ").append(property.getPrice())
+                            .append(". Базовая аренда ").append(property.getRent())
                             .append(". Максимальное количество зданий ").append(property.getMaxBuildings())
                             .append(". Максимальный уровень зданий ").append(property.getMaxLevel());
                 }
                 cellLine.append("\n");
-                fileWriter.write(cellLine.toString());
+                writer.write(cellLine.toString());
             }
         } catch (IOException e) {
             e.printStackTrace();

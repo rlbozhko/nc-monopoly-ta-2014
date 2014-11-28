@@ -63,10 +63,10 @@ public class TestSession implements Session {
 
         //Для тестирования Действий с собственностью
 /*      for (Cell property : test.getBoard().getPropertyCell()) {
-            ((Property) property).setOwner(p1);
+            ((Property) property).setAndAddToOwner(p1);
         }
         Property testProperty = (Property) test.getBoard().getCells().get(1);
-        testProperty.setOwner(p1);
+        testProperty.setAndAddToOwner(p1);
         //p1.getWallet().addMoney(5000);
         p2.getWallet().subtractMoney(START_MONEY);
         //p3.getWallet().addMoney(5000);

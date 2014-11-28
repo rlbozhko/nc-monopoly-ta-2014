@@ -81,7 +81,7 @@ public class Player implements MoneyOperations, MoveOperations, PropertyOperatio
         if (propertyCell.getPrice() <= wallet.getMoney()) {
             wallet.subtractMoney(propertyCell.getPrice());
             //property.add(propertyCell);
-            propertyCell.setOwner(this);
+            propertyCell.setAndAddToOwner(this);
             return true;
         }
         return false;

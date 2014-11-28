@@ -13,7 +13,7 @@ import java.util.List;
  * Собственность
  */
 public interface Property {
-    void setOwner(Player player);
+    void setAndAddToOwner(Player player);
 
     Player getOwner();
 

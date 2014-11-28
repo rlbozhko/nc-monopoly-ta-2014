@@ -55,6 +55,7 @@ public class ConsoleIO implements IO, Runnable {
     @Override
     public void outputBoardState() {
         Session session = TestSession.getInstance();
+        System.out.println();
         System.out.println("Информация об игре");
         List<Player> players = session.getBoard().getPlayers();
         int position = player.getPosition();
@@ -77,6 +78,7 @@ public class ConsoleIO implements IO, Runnable {
         for (int i = 0; i < actions.size(); i++) {
             System.out.println(i + " " + actions.get(i).getName());
         }
+        System.out.println();
     }
 
     @Override
@@ -192,6 +194,7 @@ public class ConsoleIO implements IO, Runnable {
 
     @Override
     public boolean yesNoDialog(String message) {
+        System.out.println();
         System.out.println(message);
         System.out.println("Выберите ответ\n" +
                 "1 - Да\n" +
@@ -205,6 +208,7 @@ public class ConsoleIO implements IO, Runnable {
 
     @Override
     public void showMessage(String message) {
+        System.out.println();
         System.out.println(message);
     }
 

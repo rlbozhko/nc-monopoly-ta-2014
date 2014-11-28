@@ -35,6 +35,15 @@ public class PlayerActionController implements ActionController {
         result.add(new DealAction());
         result.add(new GiveUpAction());
         result.add(new WaitAction());
+
+        Cell cell = session.getBoard().getCells().get(player.getPosition());
+        if (CellType.PROPERTY_CELL.equals(cell.getCellType())) {
+            PropertyCell propertyCell = (PropertyCell) cell;
+            if (propertyCell.getOwner() == null) {
+                result.add(new BuyPropertyAction());
+            }
+        }
+
         if (Status.WAIT.equals(player.getStatus())) {
             //
         } else if (Status.START_TURN.equals(player.getStatus())) {

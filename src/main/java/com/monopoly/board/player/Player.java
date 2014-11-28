@@ -15,6 +15,8 @@ public class Player implements MoneyOperations, MoveOperations, PropertyOperatio
     private Wallet wallet;
     private List<Property> property;
     private boolean mustPayRent;
+    private boolean nextCircle;
+    private final int MAX_MOVE = 12;
 
     public Player(String name, Wallet money) {
         position = 0;
@@ -41,6 +43,13 @@ public class Player implements MoneyOperations, MoveOperations, PropertyOperatio
         int boardSize = TestSession.getInstance().getBoard().getCells().size();
         this.lastPosition = position;
         this.position = position % boardSize;
+    }
+
+    @Override
+    public boolean isNextCircle() {
+        return (this.getLastPosition() > (TestSession.getInstance().getBoard().getCells().size() - MAX_MOVE))
+                && (this.getPosition() < MAX_MOVE)
+                && (this.getPosition() != 0);
     }
 
     @Override

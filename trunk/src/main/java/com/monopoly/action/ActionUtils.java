@@ -11,7 +11,6 @@ import java.util.List;
  */
 public class ActionUtils {
     public static IO getPlayerIO(Player player) {
-        int index = -1;
         List<IO> ioList = TestSession.getInstance().getIO();
         for (int i = 0; i < ioList.size(); i++) {
             Player user = ioList.get(i).getUser();

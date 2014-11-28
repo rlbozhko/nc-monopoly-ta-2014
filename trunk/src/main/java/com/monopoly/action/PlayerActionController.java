@@ -2,7 +2,6 @@ package com.monopoly.action;
 
 import com.monopoly.board.cells.Cell;
 import com.monopoly.board.cells.CellType;
-import com.monopoly.board.cells.Property;
 import com.monopoly.board.cells.PropertyCell;
 import com.monopoly.board.player.Player;
 import com.monopoly.board.player.Status;

@@ -102,20 +102,10 @@ public class TestSession implements Session {
         private static Board board;
         private static ActionController actionController;
         private static List<IO> ios;
-        private static ValueGeneratorForDice valueGeneratorForDice;
 
         private TestSessionBuilder() {
         }
 
-        /*
-                public static void setValueGeneratorForDice(ValueGeneratorForDice valueGeneratorForDice) {
-                    TestSessionBuilder.valueGeneratorForDice = valueGeneratorForDice;
-                }
-
-                public static ValueGeneratorForDice getValueGeneratorForDice() {
-                    return valueGeneratorForDice;
-                }
-        */
         public static void setBoard(Board board) {
             TestSessionBuilder.board = board;
         }
@@ -159,7 +149,7 @@ public class TestSession implements Session {
         Monopoly monopoly8 = new Monopoly("Monopoly8");
         Monopoly monopoly9 = new Monopoly("Monopoly9");
 
-        List<Event> chanceEvents = new ArrayList<Event>();
+        List<Event> chanceEvents = new ArrayList<>();
         chanceEvents.add(new EmergencyEvent("Emergency Event", "Случился пожар. Ваше здание Сгорело", 1));
         chanceEvents.add(new MoneyEvent("Получите деньги", "Получите $200", 200));
         chanceEvents.add(new MoneyEvent("Заплатите", "У Вас дополнителные расходы. Заплатите $200", -200));

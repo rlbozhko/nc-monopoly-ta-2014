@@ -61,12 +61,10 @@ public class ConsoleIO implements IO, Runnable {
         int position = player.getPosition();
         System.out.println("Вы на позиции: " + position + " " + session.getBoard().getCells().get(position).getName());
         System.out.println("У Вас на счету $" + player.getWallet().getMoney() + ". У Вас в собственности: " + player.getProperty());
-        int i = 0;
         for (Player other : players) {
             if (!player.equals(other)) {
                 System.out.println(other.getName() + " -- на позиции: " + other.getPosition());
             }
-            i++;
         }
     }
 
@@ -200,10 +198,7 @@ public class ConsoleIO implements IO, Runnable {
                 "1 - Да\n" +
                 "0 - Нет");
         int choice = positiveIntInput();
-        if (choice == 1) {
-            return true;
-        }
-        return false;
+        return choice == 1;
     }
 
     @Override

@@ -1,5 +1,6 @@
 package com.monopoly.board.player;
 
+import com.monopoly.board.cells.EventCell;
 import com.monopoly.board.cells.Property;
 import com.monopoly.board.cells.PropertyCell;
 import com.monopoly.game.session.TestSession;
@@ -15,7 +16,6 @@ public class Player implements MoneyOperations, MoveOperations, PropertyOperatio
     private Wallet wallet;
     private List<Property> property;
     private boolean mustPayRent;
-    private boolean nextCircle;
     private final int MAX_MOVE = 12;
 
     public Player(String name, Wallet money) {
@@ -43,6 +43,9 @@ public class Player implements MoneyOperations, MoveOperations, PropertyOperatio
         int boardSize = TestSession.getInstance().getBoard().getCells().size();
         this.lastPosition = position;
         this.position = position % boardSize;
+        if (this.isNextCircle()) {
+            ((EventCell) TestSession.getInstance().getBoard().getCells().get(0)).getEvent().performEvent();
+        }
     }
 
     @Override

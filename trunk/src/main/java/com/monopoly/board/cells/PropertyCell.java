@@ -96,7 +96,7 @@ public class PropertyCell extends Cell implements Property {
             return this;
         }
 
-        public PropertyBuilder setMonopoly(int monopoly1) {
+        public PropertyBuilder setMonopoly(Monopoly monopoly) {
             this.monopoly = monopoly;
             return this;
         }
@@ -184,7 +184,15 @@ public class PropertyCell extends Cell implements Property {
 
     @Override
     public boolean isPledged() {
+        if (PropertyStatus.PLEDGED.equals(status)) {
+            return true;
+        }
         return false;
+    }
+
+    @Override
+    public void setStatus(PropertyStatus propertyStatus) {
+        this.status = propertyStatus;
     }
 
     @Override

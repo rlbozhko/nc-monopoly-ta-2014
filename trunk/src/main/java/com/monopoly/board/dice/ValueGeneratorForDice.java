@@ -27,11 +27,11 @@ public class ValueGeneratorForDice implements Runnable {
 		}
 	}
 
-	public int getValue1() {
+	public synchronized int getValue1() {
 		return value1;
 	}
 
-	public int getValue2() {
+	public synchronized int getValue2() {
 		return value2;
 	}
 

@@ -7,7 +7,10 @@ import com.monopoly.board.building.Building;
 import com.monopoly.board.cells.*;
 import com.monopoly.board.dice.Dice;
 import com.monopoly.board.dice.ValueGeneratorForDice;
-import com.monopoly.board.events.*;
+import com.monopoly.board.events.EmergencyEvent;
+import com.monopoly.board.events.Event;
+import com.monopoly.board.events.MoneyEvent;
+import com.monopoly.board.events.RandomMoneyEvent;
 import com.monopoly.board.player.Player;
 import com.monopoly.board.player.Status;
 import com.monopoly.board.player.Wallet;
@@ -27,7 +30,6 @@ public class TestSession implements Session {
     private Board board;
     private ActionController actionController;
     private List<IO> ios;
-    //private ValueGeneratorForDice valueGeneratorForDice;
     private static final int START_MONEY = 5000;
 
     public static void main(String[] args) {
@@ -38,7 +40,7 @@ public class TestSession implements Session {
         p1.setStatus(Status.START_TURN);
         players.add(p1);
         players.add(p2);
-        players.add(p3);        
+        players.add(p3);
 
         List<IO> ios = new ArrayList<>();
         ios.add(new ConsoleIO(p1));
@@ -49,7 +51,6 @@ public class TestSession implements Session {
         TestSessionBuilder.setBoard(newBoard(players, START_MONEY));
         TestSessionBuilder.setActionController(new PlayerActionController());
         TestSessionBuilder.setIOs(ios);
-        //TestSessionBuilder.setValueGeneratorForDice(valueGeneratorForDice);
 
         Session test = TestSession.getInstance();
 
@@ -60,10 +61,8 @@ public class TestSession implements Session {
         Thread dummy1 = new Thread(dummyIO1);
         Thread dummy2 = new Thread(dummyIO2);
 
-        //consoleIO.printBoardToFile();
-
         //Для тестирования Действий с собственностью
-        for (Cell property : test.getBoard().getPropertyCell()) {
+/*      for (Cell property : test.getBoard().getPropertyCell()) {
             ((Property) property).setOwner(p1);
         }
         Property testProperty = (Property) test.getBoard().getCells().get(1);
@@ -72,7 +71,7 @@ public class TestSession implements Session {
         p2.getWallet().subtractMoney(START_MONEY);
         //p3.getWallet().addMoney(5000);
         //
-
+*/
         player.start();
         dummy1.start();
         dummy2.start();
@@ -107,15 +106,16 @@ public class TestSession implements Session {
 
         private TestSessionBuilder() {
         }
-/*
-        public static void setValueGeneratorForDice(ValueGeneratorForDice valueGeneratorForDice) {
-            TestSessionBuilder.valueGeneratorForDice = valueGeneratorForDice;
-        }
 
-        public static ValueGeneratorForDice getValueGeneratorForDice() {
-            return valueGeneratorForDice;
-        }
-*/
+        /*
+                public static void setValueGeneratorForDice(ValueGeneratorForDice valueGeneratorForDice) {
+                    TestSessionBuilder.valueGeneratorForDice = valueGeneratorForDice;
+                }
+
+                public static ValueGeneratorForDice getValueGeneratorForDice() {
+                    return valueGeneratorForDice;
+                }
+        */
         public static void setBoard(Board board) {
             TestSessionBuilder.board = board;
         }

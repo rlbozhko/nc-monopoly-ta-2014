@@ -21,7 +21,6 @@ import java.util.List;
 public class StartTurnAction implements Action {
     Session session;
     Board board;
-    private final int MAX_MOVE = 12;
 
     public StartTurnAction() {
         this.session = TestSession.getInstance();
@@ -32,10 +31,11 @@ public class StartTurnAction implements Action {
     public void performAction(Player player) {
         Dice dice = ((DiceOperations) board).getDice();
         player.goToPosition(player.getPosition() + dice.getNewFaceDie1() + dice.getNewFaceDie2());
+        //System.out.println(dice.getFaceDie1() + " " + dice.getFaceDie2());
         player.setStatus(Status.ACTIVE);
         List<Cell> cells = board.getCells();
 
-        if (hasPassCircle(player)) {
+        if (player.isNextCircle()) {
             ((EventCell) cells.get(0)).getEvent().performEvent();
         }
 
@@ -48,12 +48,6 @@ public class StartTurnAction implements Action {
                 player.setMustPayRent(true);
             }
         }
-    }
-
-    private boolean hasPassCircle(Player player) {
-        return (player.getLastPosition() > (board.getCells().size() - MAX_MOVE))
-            && (player.getPosition() < MAX_MOVE)
-                && (player.getPosition() != 0);
     }
 
     @Override

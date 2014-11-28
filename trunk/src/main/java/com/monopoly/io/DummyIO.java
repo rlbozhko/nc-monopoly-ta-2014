@@ -29,7 +29,7 @@ public class DummyIO implements IO, Runnable {
     public void run() {
         do {
             try {
-                Thread.sleep(1000);
+                Thread.sleep(110);
             } catch (InterruptedException e) {
                 e.printStackTrace();
             }

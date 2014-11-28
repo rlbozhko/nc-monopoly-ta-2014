@@ -1,7 +1,6 @@
 package com.monopoly.board.events;
 
 import com.monopoly.board.Board;
-import com.monopoly.board.CellOperations;
 import com.monopoly.board.building.Building;
 import com.monopoly.board.cells.Cell;
 import com.monopoly.board.cells.Property;
@@ -34,7 +33,7 @@ public class EmergencyEvent implements Event {
     @Override
     public void performEvent() {
         Board board = TestSession.getInstance().getBoard();
-        List<Cell> cells = ((CellOperations) board).getPropertyCell();
+        List<Cell> cells = board.getPropertyCell();
         for (int i = 0; i < cellCount; i++) {
             randomBuildingLevelDown(getRandomCellBuildings(cells));
         }

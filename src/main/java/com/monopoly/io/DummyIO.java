@@ -14,22 +14,19 @@ import java.util.List;
  * Created by Roma on 20.11.2014.
  */
 public class DummyIO implements IO, Runnable {
-    //Session session;
+
     Player player;
-    //ActionController actionController;
     List<Action> actions;
 
     public DummyIO(Player player) {
-        //this.session = TestSession.getInstance();
         this.player = player;
-        //this.actionController = session.getActionController();
     }
 
     @Override
     public void run() {
         do {
             try {
-                Thread.sleep(110);
+                Thread.sleep(500);
             } catch (InterruptedException e) {
                 e.printStackTrace();
             }

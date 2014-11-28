@@ -1,13 +1,11 @@
 package com.monopoly.action;
 
 import com.monopoly.board.Board;
-import com.monopoly.board.DiceOperations;
 import com.monopoly.board.cells.Cell;
 import com.monopoly.board.cells.CellType;
 import com.monopoly.board.cells.EventCell;
 import com.monopoly.board.cells.Property;
 import com.monopoly.board.dice.Dice;
-import com.monopoly.board.dice.ValueGeneratorForDice;
 import com.monopoly.board.player.Player;
 import com.monopoly.board.player.Status;
 import com.monopoly.game.session.Session;
@@ -29,15 +27,11 @@ public class StartTurnAction implements Action {
 
     @Override
     public void performAction(Player player) {
-        Dice dice = ((DiceOperations) board).getDice();
+        Dice dice = board.getDice();
         player.goToPosition(player.getPosition() + dice.getNewFaceDie1() + dice.getNewFaceDie2());
         //System.out.println(dice.getFaceDie1() + " " + dice.getFaceDie2());
         player.setStatus(Status.ACTIVE);
         List<Cell> cells = board.getCells();
-
-        if (player.isNextCircle()) {
-            ((EventCell) cells.get(0)).getEvent().performEvent();
-        }
 
         Cell currentCell = cells.get(player.getPosition());
         if (CellType.EVENT_CELL.equals(currentCell.getCellType())) {

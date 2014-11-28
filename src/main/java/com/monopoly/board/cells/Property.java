@@ -33,6 +33,8 @@ public interface Property {
 
     boolean isPledged();
 
+    void setStatus(PropertyStatus propertyStatus);
+
     int getMaxLevel();
 
     int getMaxBuildings();

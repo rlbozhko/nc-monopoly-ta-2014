@@ -10,5 +10,7 @@ package com.monopoly.board.player;
 public interface MoveOperations {
     public int getPosition();
 
+    public int getLastPosition();
+
     public void goToPosition(int position);
 }

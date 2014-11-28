@@ -7,10 +7,7 @@ import com.monopoly.board.building.Building;
 import com.monopoly.board.cells.*;
 import com.monopoly.board.dice.Dice;
 import com.monopoly.board.dice.ValueGeneratorForDice;
-import com.monopoly.board.events.MoneyEvent;
-import com.monopoly.board.events.EmergencyEvent;
-import com.monopoly.board.events.Event;
-import com.monopoly.board.events.RandomMoneyEvent;
+import com.monopoly.board.events.*;
 import com.monopoly.board.player.Player;
 import com.monopoly.board.player.Status;
 import com.monopoly.board.player.Wallet;
@@ -30,7 +27,7 @@ public class TestSession implements Session {
     private Board board;
     private ActionController actionController;
     private List<IO> ios;
-    private ValueGeneratorForDice valueGeneratorForDice;
+    //private ValueGeneratorForDice valueGeneratorForDice;
     private static final int START_MONEY = 5000;
 
     public static void main(String[] args) {
@@ -48,17 +45,13 @@ public class TestSession implements Session {
         ios.add(new DummyIO(p2));
         ios.add(new DummyIO(p3));
 
-        ValueGeneratorForDice valueGeneratorForDice = new ValueGeneratorForDice();
 
         TestSessionBuilder.setBoard(newBoard(players, START_MONEY));
         TestSessionBuilder.setActionController(new PlayerActionController());
         TestSessionBuilder.setIOs(ios);
-        TestSessionBuilder.setValueGeneratorForDice(valueGeneratorForDice);
+        //TestSessionBuilder.setValueGeneratorForDice(valueGeneratorForDice);
 
         Session test = TestSession.getInstance();
-
-        Thread diceGenerator = new Thread(valueGeneratorForDice);
-        diceGenerator.start();
 
         ConsoleIO consoleIO = (ConsoleIO) test.getIO().get(0);
         DummyIO dummyIO1 = (DummyIO) test.getIO().get(1);
@@ -93,19 +86,17 @@ public class TestSession implements Session {
                 localInstance = session;
                 if (localInstance == null) {
                     session = localInstance = new TestSession(TestSessionBuilder.getBoard(),
-                            TestSessionBuilder.getActionController(), TestSessionBuilder.getIos(),
-                            TestSessionBuilder.getValueGeneratorForDice());
+                            TestSessionBuilder.getActionController(), TestSessionBuilder.getIos());
                 }
             }
         }
         return localInstance;
     }
 
-    private TestSession(Board board, ActionController actionController, List<IO> ios, ValueGeneratorForDice valueGeneratorForDice) {
+    private TestSession(Board board, ActionController actionController, List<IO> ios) {
         this.board = board;
         this.actionController = actionController;
         this.ios = ios;
-        this.valueGeneratorForDice = valueGeneratorForDice;
     }
 
     public static class TestSessionBuilder {
@@ -116,7 +107,7 @@ public class TestSession implements Session {
 
         private TestSessionBuilder() {
         }
-
+/*
         public static void setValueGeneratorForDice(ValueGeneratorForDice valueGeneratorForDice) {
             TestSessionBuilder.valueGeneratorForDice = valueGeneratorForDice;
         }
@@ -124,7 +115,7 @@ public class TestSession implements Session {
         public static ValueGeneratorForDice getValueGeneratorForDice() {
             return valueGeneratorForDice;
         }
-
+*/
         public static void setBoard(Board board) {
             TestSessionBuilder.board = board;
         }
@@ -152,9 +143,11 @@ public class TestSession implements Session {
 
 
     private static Board newBoard(List<Player> players, int startMoney) {
-        List<Dice> dice = new ArrayList<>();
-        dice.add(new Dice());
-        dice.add(new Dice());
+        ValueGeneratorForDice valueGeneratorForDice = new ValueGeneratorForDice();
+        Thread diceGenerator = new Thread(valueGeneratorForDice);
+        diceGenerator.start();
+
+        Dice dice = new Dice(valueGeneratorForDice);
 
         Monopoly monopoly1 = new Monopoly("Monopoly1");
         Monopoly monopoly2 = new Monopoly("Monopoly2");
@@ -171,6 +164,7 @@ public class TestSession implements Session {
         chanceEvents.add(new MoneyEvent("Получите деньги", "Получите $200", 200));
         chanceEvents.add(new MoneyEvent("Заплатите", "У Вас дополнителные расходы. Заплатите $200", -200));
         chanceEvents.add(new RandomMoneyEvent("Казино", "Может выиграете, а может и проиграете"));
+        //chanceEvents.add(new ExtraTurnEvent("Дополнителный ход", "Получите дополнительный ход"));
 
         List<Cell> cells = new ArrayList<>();
         cells.add(new SingleEventCell("Начало", "Начало", 0,
@@ -269,9 +263,10 @@ public class TestSession implements Session {
     public List<IO> getIO() {
         return ios;
     }
-
+/*
     @Override
     public ValueGeneratorForDice getValueGeneratorForDice() {
         return valueGeneratorForDice;
     }
+    */
 }

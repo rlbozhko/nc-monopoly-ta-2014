@@ -20,15 +20,15 @@ public class Board implements DiceOperations, CellOperations, PlayerOperations {
     private List<Cell> cells;
     private List<Cell> propertyCells = new ArrayList<>();
     private List<Cell> eventCells = new ArrayList<>();
-    private List<Dice> dices;
+    private Dice dice;
 
     private Iterator<Player> playerIter;
 
-    public Board(List<Player> players, List<Cell> cells, List<Dice> dices) {
+    public Board(List<Player> players, List<Cell> cells, Dice dice) {
         this.cells = cells;
         updatePropertyEventCells();
         this.players = players;
-        this.dices = dices;
+        this.dice = dice;
         this.playerIter = players.iterator();
         currentPlayer = players.get(0);
     }
@@ -89,7 +89,7 @@ public class Board implements DiceOperations, CellOperations, PlayerOperations {
     }
 
     @Override
-    public List<Dice> getDice() {
-        return dices;
+    public Dice getDice() {
+        return dice;
     }
 }

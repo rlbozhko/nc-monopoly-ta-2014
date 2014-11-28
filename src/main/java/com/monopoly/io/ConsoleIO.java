@@ -66,6 +66,7 @@ public class ConsoleIO implements IO, Runnable {
                 System.out.println(other.getName() + " -- на позиции: " + other.getPosition());
             }
         }
+        System.out.println();
     }
 
     @Override

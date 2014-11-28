@@ -26,17 +26,17 @@ public class PropertyCell extends Cell implements Property {
         private final static int DEFAULT_BASE_PRICE = 1000;
         private final static int DEFAULT_BASE_RENT = 100;
 
-        private static String name;
-        private static String description;
-        private static int position;
-        private static Player owner = null;
-        private static List<Building> buildings;
-        private static int basePrice;
-        private static int baseRent;
-        private static Monopoly monopoly;
-        private static PropertyStatus status;
-        private static int maxLevel;
-        private static int maxBuildings;
+        private String name;
+        private String description;
+        private int position;
+        private Player owner = null;
+        private List<Building> buildings;
+        private int basePrice;
+        private int baseRent;
+        private Monopoly monopoly;
+        private PropertyStatus status;
+        private int maxLevel;
+        private int maxBuildings;
 
 
         public PropertyBuilder(String name, List<Building> buildings, int position) {
@@ -50,34 +50,28 @@ public class PropertyCell extends Cell implements Property {
             this.monopoly = null;
             this.maxLevel = 5;
             this.maxBuildings = 1;
+            this.status = PropertyStatus.PLEDGED;
         }
 
         public PropertyCell getPropertyCell() {
             PropertyCell propertyCell = new PropertyCell(name, description, position,
                     owner, buildings, basePrice, baseRent, monopoly);
-            propertyCell.maxLevel = getMaxLevel();
-            propertyCell.maxBuildings = getMaxBuildings();
+            propertyCell.maxLevel = maxLevel;
+            propertyCell.maxBuildings = maxBuildings;
+            propertyCell.setStatus(status);
             return propertyCell;
         }
 
-        public static void setMaxLevel(int maxLevel) {
-            PropertyBuilder.maxLevel = maxLevel;
+        public void setMaxLevel(int maxLevel) {
+            this.maxLevel = maxLevel;
         }
 
-        public static int getMaxLevel() {
-            return maxLevel;
-        }
-
-        public static void setMaxBuildings(int maxBuildings) {
-            PropertyBuilder.maxBuildings = maxBuildings;
-        }
-
-        public static int getMaxBuildings() {
-            return maxBuildings;
+        public void setMaxBuildings(int maxBuildings) {
+            this.maxBuildings = maxBuildings;
         }
 
         public PropertyBuilder setDescription(String description) {
-            this.owner = owner;
+            this.description = description;
             return this;
         }
 
@@ -114,7 +108,7 @@ public class PropertyCell extends Cell implements Property {
     }
 
     @Override
-    public void setOwner(Player player) {
+    public void setAndAddToOwner(Player player) {
         if (owner != null) {
             owner.getProperty().remove(this);
         }

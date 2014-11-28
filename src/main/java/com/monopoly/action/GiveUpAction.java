@@ -37,7 +37,7 @@ public class GiveUpAction implements Action {
         //Место для аукциона
         List<Property> property = player.getProperty();
         while (property.size() != 0) {
-            property.get(0).setOwner(null);
+            property.get(0).setAndAddToOwner(null);
         }
         //
         player.setStatus(Status.FINISH);

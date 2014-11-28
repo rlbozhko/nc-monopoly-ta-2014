@@ -35,11 +35,11 @@ public class DealAction implements Action {
                 player.getProperty().addAll(deal.getAskProperties());
 
                 for (Property property : deal.getGiveProperties()) {
-                    property.setOwner(otherPlayer);
+                    property.setAndAddToOwner(otherPlayer);
                 }
 
                 for (Property property : deal.getAskProperties()) {
-                    property.setOwner(player);
+                    property.setAndAddToOwner(player);
                 }
 
                 playerIO.showMessage("Сделка состоялась");

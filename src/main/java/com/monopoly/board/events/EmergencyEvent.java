@@ -5,6 +5,7 @@ import com.monopoly.board.building.Building;
 import com.monopoly.board.cells.Cell;
 import com.monopoly.board.cells.Property;
 import com.monopoly.game.session.TestSession;
+import static org.apache.commons.collections4.CollectionUtils.isEmpty;
 
 import java.util.Collections;
 import java.util.List;
@@ -48,7 +49,7 @@ public class EmergencyEvent implements Event {
 
     private void randomBuildingLevelDown(List<Building> buildings) {
         int randomIndex;
-        if (!buildings.isEmpty()) {
+        if (!isEmpty(buildings)) {
             randomIndex = random.nextInt(buildings.size());
             buildings.get(randomIndex).levelDown();
         }

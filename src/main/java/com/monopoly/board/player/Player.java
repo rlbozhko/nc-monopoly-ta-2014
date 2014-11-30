@@ -1,8 +1,6 @@
 package com.monopoly.board.player;
 
-import com.monopoly.board.cells.EventCell;
-import com.monopoly.board.cells.Property;
-import com.monopoly.board.cells.PropertyCell;
+import com.monopoly.board.cells.*;
 import com.monopoly.game.session.TestSession;
 
 import java.util.ArrayList;
@@ -46,10 +44,19 @@ public class Player implements MoneyOperations, MoveOperations, PropertyOperatio
         if (this.isNextCircle()) {
             ((EventCell) TestSession.getInstance().getBoard().getCells().get(0)).getEvent().performEvent();
         }
+
+        Cell currentCell = TestSession.getInstance().getBoard().getCells().get(this.getPosition());
+        if (CellType.EVENT_CELL.equals(currentCell.getCellType())) {
+            ((EventCell) currentCell).getEvent().performEvent();
+        } else if (CellType.PROPERTY_CELL.equals(currentCell.getCellType())) {
+            Property property = (Property) currentCell;
+            if (null != property.getOwner() && !this.equals(property.getOwner())) {
+                this.setMustPayRent(true);
+            }
+        }
     }
 
-    @Override
-    public boolean isNextCircle() {
+    private boolean isNextCircle() {
         return (this.getLastPosition() > (TestSession.getInstance().getBoard().getCells().size() - MAX_MOVE))
                 && (this.getPosition() < MAX_MOVE)
                 && (this.getPosition() != 0);
@@ -80,7 +87,6 @@ public class Player implements MoneyOperations, MoveOperations, PropertyOperatio
     public boolean buyProperty(PropertyCell propertyCell) {
         if (propertyCell.getPrice() <= wallet.getMoney()) {
             wallet.subtractMoney(propertyCell.getPrice());
-            //property.add(propertyCell);
             propertyCell.setAndAddToOwner(this);
             return true;
         }

@@ -18,18 +18,16 @@ public class Building implements BuildingOperations {
     private int maxLevel;
     
     public Building(BuildingType type, int cost, int maxLevel) {
-    	//TODO для того чтобы забирать деньги у игрока или отдавать ему
-    	// в конструктор надо еще передавать номер ячейки тогда через 
-    	//доску я могу заполучить игрока и его кошелек
     	if (maxLevel < 0){
     		throw new RuntimeException("MaxLevel can't be < 0");
     	}
     	if (cost < 0){
     		throw new RuntimeException("You should pay money!");
     	}
-        BuildingStore building = new BuildingStore(type);
-        this.name = building.getName();
-        this.description = building.getDescription();
+        //BuildingFactory building = new BuildingFactory(type);
+        this.name = BuildingFactory.getCurrentBuilding(type).getName();
+        this.description = BuildingFactory.getCurrentBuilding(type)
+        									.getDescription();
         this.primaryCost = cost;
         this.currentPrice = cost;
         this.currentLevel = 1;
@@ -38,8 +36,6 @@ public class Building implements BuildingOperations {
     
 	public boolean levelUp() {
 		if (this.currentLevel <= this.maxLevel && this.currentLevel > 0) {
-			//TODO проверить позволяют ли деньги у игрока это сделать!
-			//TODO реализовать отнимание денег у игрока?
 			this.currentLevel++;
 			this.currentPrice = (int) (this.currentPrice + this.currentPrice
 					* PERCENTAGE_FOR_NEW_BUILD);

@@ -1,4 +1,4 @@
-package com.monopoly;
+package com.monopoly.board.building;
 
 import static org.junit.Assert.*;
 
@@ -13,7 +13,7 @@ public class BuildingTest {
 	private Building building;
 	private int primaryCost = 1000;
 	private int maxLevel = 5;
-	private int lowLevel = 1;
+	//private int lowLevel = 1;
 	
 	@Before
 	public void prepareForTest (){

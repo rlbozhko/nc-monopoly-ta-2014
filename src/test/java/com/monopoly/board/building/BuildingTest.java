@@ -12,13 +12,12 @@ public class BuildingTest {
 	
 	private Building building;
 	private int primaryCost = 1000;
-	private int maxLevel = 5;
+	//private int maxLevel = 5;
 	//private int lowLevel = 1;
 	
 	@Before
 	public void prepareForTest (){
-		this.building = new Building(BuildingType.CLUB, this.primaryCost
-									, this.maxLevel);
+		this.building = new Building(BuildingType.CLUB, this.primaryCost);
 	}
 	
 	@Test

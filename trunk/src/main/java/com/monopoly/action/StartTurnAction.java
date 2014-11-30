@@ -28,20 +28,11 @@ public class StartTurnAction implements Action {
     @Override
     public void performAction(Player player) {
         Dice dice = board.getDice();
-        player.goToPosition(player.getPosition() + dice.getNewFaceDie1() + dice.getNewFaceDie2());
+        dice.generateNewDiceValue();
+        player.goToPosition(player.getPosition() + dice.getFaceDie1() + dice.getFaceDie2());
         //System.out.println(dice.getFaceDie1() + " " + dice.getFaceDie2());
         player.setStatus(Status.ACTIVE);
         List<Cell> cells = board.getCells();
-
-        Cell currentCell = cells.get(player.getPosition());
-        if (CellType.EVENT_CELL.equals(currentCell.getCellType())) {
-            ((EventCell) currentCell).getEvent().performEvent();
-        } else if (CellType.PROPERTY_CELL.equals(currentCell.getCellType())) {
-            Property property = (Property) currentCell;
-            if (null != property.getOwner() && !player.equals(property.getOwner())) {
-                player.setMustPayRent(true);
-            }
-        }
     }
 
     @Override

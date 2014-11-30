@@ -13,6 +13,4 @@ public interface MoveOperations {
     public int getLastPosition();
 
     public void goToPosition(int position);
-
-    boolean isNextCircle();
 }

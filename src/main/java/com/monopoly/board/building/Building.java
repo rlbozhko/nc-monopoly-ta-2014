@@ -17,7 +17,7 @@ public class Building implements BuildingOperations {
     private int currentLevel;
     private int maxLevel;
     
-    public Building(BuildingType type, int cost, int maxLevel) {
+    public Building(BuildingType type, int cost) {
     	if (maxLevel < 0){
     		throw new RuntimeException("MaxLevel can't be < 0");
     	}
@@ -31,7 +31,7 @@ public class Building implements BuildingOperations {
         this.primaryCost = cost;
         this.currentPrice = cost;
         this.currentLevel = 1;
-        this.maxLevel = maxLevel;
+        this.maxLevel = BuildingFactory.getCurrentBuilding(type).getMaxLevel();
     }
     
 	public boolean levelUp() {

@@ -4,5 +4,6 @@ public interface AvailableBuilding {
 
 	String getName();
 	String getDescription();
+	int getMaxLevel();
 	
 }

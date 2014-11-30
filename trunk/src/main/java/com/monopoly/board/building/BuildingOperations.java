@@ -9,10 +9,15 @@ package com.monopoly.board.building;
  */
 public interface BuildingOperations {
 
-    int currentPrice();
     boolean levelUp();
     boolean levelDown();
+    
+    int currentPrice();
     int currentLevel();
     int getMaxLevel();
+    int getPrimaryCost();
+    
+    String getName();
+    String getDescription();
     
 }

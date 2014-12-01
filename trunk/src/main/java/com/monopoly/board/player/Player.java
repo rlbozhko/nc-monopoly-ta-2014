@@ -14,7 +14,7 @@ public class Player implements MoneyOperations, MoveOperations, PropertyOperatio
     private Wallet wallet;
     private List<Property> property;
     private boolean mustPayRent;
-    private final int MAX_MOVE = 12;
+    //private final int MAX_MOVE = 12;
 
     public Player(String name, Wallet money) {
         position = 0;
@@ -39,9 +39,10 @@ public class Player implements MoneyOperations, MoveOperations, PropertyOperatio
     @Override
     public void goToPosition(int position) {
         int boardSize = TestSession.getInstance().getBoard().getCells().size();
-        this.lastPosition = position;
+        this.lastPosition = this.position;
+        boolean nextCircle = isNextCircle(position);
         this.position = position % boardSize;
-        if (this.isNextCircle()) {
+        if (nextCircle) {
             ((EventCell) TestSession.getInstance().getBoard().getCells().get(0)).getEvent().performEvent();
         }
 
@@ -56,10 +57,11 @@ public class Player implements MoneyOperations, MoveOperations, PropertyOperatio
         }
     }
 
-    private boolean isNextCircle() {
-        return (this.getLastPosition() > (TestSession.getInstance().getBoard().getCells().size() - MAX_MOVE))
+    private boolean isNextCircle(int position) {
+        return (position > TestSession.getInstance().getBoard().getCells().size());
+        /*return (this.getLastPosition() > (TestSession.getInstance().getBoard().getCells().size() - MAX_MOVE))
                 && (this.getPosition() < MAX_MOVE)
-                && (this.getPosition() != 0);
+                && (this.getPosition() != 0);*/
     }
 
     @Override

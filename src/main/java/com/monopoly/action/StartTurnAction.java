@@ -32,7 +32,6 @@ public class StartTurnAction implements Action {
         player.goToPosition(player.getPosition() + dice.getFaceDie1() + dice.getFaceDie2());
         //System.out.println(dice.getFaceDie1() + " " + dice.getFaceDie2());
         player.setStatus(Status.ACTIVE);
-        List<Cell> cells = board.getCells();
     }
 
     @Override

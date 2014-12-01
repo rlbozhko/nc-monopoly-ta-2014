@@ -1,37 +1,28 @@
 package com.monopoly.board.building;
 
 public class BuildingFactory {
-
-	private static AvailableBuilding building;
 	
 	public static AvailableBuilding getCurrentBuilding (BuildingType type){
 		switch (type) {
 		
 		case CLUB:
-			building = new Club();
-			break;
+			return new Club();
 
 		case PARK:
-			building = new Park();
-			break;
+			return new Park();
 
 		case MARKET:
-			building = new Market();
-			break;
+			return new Market();
 
 		case LAW_DEPARTMENT:
-			building = new LawDepartment();
-			break;
+			return new LawDepartment();
 
 		case CASTLE:
-			building = new Castle();
-			break;
+			return new Castle();
 		
 		default:
-			building = null;
-			break;
+			return null;
 		}
-		return building;
 	}
 	/*
 	public BuildingFactory(BuildingType type) {

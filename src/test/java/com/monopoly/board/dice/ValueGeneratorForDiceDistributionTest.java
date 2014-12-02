@@ -8,9 +8,7 @@ import java.util.List;
  */
 public class ValueGeneratorForDiceDistributionTest {
     public static void main(String[] args) {
-        ValueGeneratorForDice generator = new ValueGeneratorForDice();
-        Thread genThread = new Thread(generator);
-        genThread.start();
+        Dice generator = Dice.getInstance();
         int number_of_repeat = 100;
         int[] sumOfValues1 = new int[6];
         int[] sumOfValues2 = new int[6];
@@ -22,8 +20,9 @@ public class ValueGeneratorForDiceDistributionTest {
             } catch (InterruptedException e) {
                 e.printStackTrace();
             }
-            int val1 = generator.getValue1();
-            int val2 = generator.getValue2();
+            generator.generateNewDiceValue();
+            int val1 = generator.getFaceDie1();
+            int val2 = generator.getFaceDie2();
             sumOfValues1[val1 - 1]++;
             sumOfValues2[val2 - 1]++;
             sumOfValues.add(val1 + val2);
@@ -69,3 +68,25 @@ public class ValueGeneratorForDiceDistributionTest {
     }
 
 }
+/*
+* Распеределение чисел 1 и 2 значений 1000 бросков
+  1   2   3   4   5   6
+160 169 193 148 160 170
+186 171 141 163 165 174
+Количество дублей 157
+
+Распределение сумм
+  1   2   3   4   5   6   7   8   9  10  11  12
+  0  31  56  85 111 131 171 150 102  84  53  26
+* */
+/*
+* Распеределение чисел 1 и 2 значений 1000 бросков
+  1   2   3   4   5   6
+167 168 159 161 180 165
+166 186 145 134 183 186
+Количество дублей 189
+
+Распределение сумм
+  1   2   3   4   5   6   7   8   9  10  11  12
+  0  32  59  91 103 118 171 127 116  83  61  39
+* */

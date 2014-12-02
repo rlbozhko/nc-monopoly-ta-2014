@@ -13,22 +13,20 @@ import java.util.List;
 /**
  * Created by Roma on 31.10.2014.
  */
-public class Board implements DiceOperations, CellOperations, PlayerOperations {
+public class Board implements CellOperations, PlayerOperations {
     private List<Player> players;
     private Player currentPlayer;
     private Player previousPlayer;
     private List<Cell> cells;
     private List<Cell> propertyCells = new ArrayList<>();
     private List<Cell> eventCells = new ArrayList<>();
-    private Dice dice;
 
     private Iterator<Player> playerIter;
 
-    public Board(List<Player> players, List<Cell> cells, Dice dice) {
+    public Board(List<Player> players, List<Cell> cells) {
         this.cells = cells;
         updatePropertyEventCells();
         this.players = players;
-        this.dice = dice;
         this.playerIter = players.iterator();
         currentPlayer = players.get(0);
     }
@@ -86,10 +84,5 @@ public class Board implements DiceOperations, CellOperations, PlayerOperations {
     @Override
     public Player getPreviousPlayer() {
         return previousPlayer;
-    }
-
-    @Override
-    public Dice getDice() {
-        return dice;
     }
 }

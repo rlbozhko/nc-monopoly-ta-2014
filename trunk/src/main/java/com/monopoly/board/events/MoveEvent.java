@@ -8,7 +8,7 @@ import com.monopoly.board.Board;
 import com.monopoly.board.player.Player;
 import com.monopoly.game.session.TestSession;
 import com.monopoly.io.IO;
-import com.monopoly.tools.XORShiftRandom;
+import com.monopoly.tools.XORShiftStrategy;
 
 import java.util.Random;
 
@@ -23,7 +23,7 @@ public class MoveEvent implements Event {
 	}
 
 	Random random = new Random();
-	XORShiftRandom xorShiftRandom = new XORShiftRandom();
+	XORShiftStrategy xorShiftRandom = new XORShiftStrategy();
 
 	@Override
 	public void performEvent() {

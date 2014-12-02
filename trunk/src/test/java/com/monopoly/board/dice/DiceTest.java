@@ -3,56 +3,44 @@ package com.monopoly.board.dice;
 /**
  * Create By Kulikovsky Anton
  * */
-import java.util.concurrent.TimeUnit;
-
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 
-import com.monopoly.board.dice.Dice;
-import com.monopoly.board.dice.ValueGeneratorForDice;
-
 public class DiceTest {
 	private Dice dice;
-	private ValueGeneratorForDice valueGeneratorForDice;
-	private Thread diceThread;
 
 	@Before
 	public void before() {
-		valueGeneratorForDice = new ValueGeneratorForDice();
-		dice = new Dice(valueGeneratorForDice);
-		diceThread = new Thread(valueGeneratorForDice);
+		dice = Dice.getInstance();
 	}
 
+	@Test()
+	public void singeltone() {
+		Dice dice2 = Dice.getInstance();
+		Assert.assertTrue(dice2 == dice);
+	}
+	
 	@Test(timeout = 1000)
 	public void initializationDie() {
 		Assert.assertTrue(dice.getFaceDie1() == 0 && dice.getFaceDie2() == 0);
 	}
 
 	@Test(timeout = 10000)
-	public void generateDice() throws InterruptedException {
-		diceThread.start();
-		TimeUnit.MILLISECONDS.sleep(200);
-		valueGeneratorForDice.finish();
-		TimeUnit.MILLISECONDS.sleep(200);
+	public void generateDiceValue() throws InterruptedException {
 		dice.generateNewDiceValue();
 		Assert.assertTrue(dice.getFaceDie1() > 0 && dice.getFaceDie2() > 0);
 	}
 
-	@Test()
+	@Test(timeout = 10000)
 	public void same() throws InterruptedException {
-		boolean flag = false;
-		diceThread.start();
-		while (!flag) {
-			TimeUnit.SECONDS.sleep(1);
+		boolean isSame = false;
+		while (!isSame) {
 			dice.generateNewDiceValue();
-			System.out.println(dice.getFaceDie1() + " " + dice.getFaceDie2());
-			if (dice.isSame()) {
-				valueGeneratorForDice.finish();
-				flag = true;
+			if (dice.getFaceDie1() == dice.getFaceDie2()) {
+				isSame = true;
 			}
-
 		}
-
+		Assert.assertTrue(isSame);
 	}
 }

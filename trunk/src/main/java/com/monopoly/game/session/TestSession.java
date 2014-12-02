@@ -133,12 +133,6 @@ public class TestSession implements Session {
 
 
     private static Board newBoard(List<Player> players, int startMoney) {
-        ValueGeneratorForDice valueGeneratorForDice = new ValueGeneratorForDice();
-        Thread diceGenerator = new Thread(valueGeneratorForDice);
-        diceGenerator.start();
-
-        Dice dice = new Dice(valueGeneratorForDice);
-
         Monopoly monopoly1 = new Monopoly("Monopoly1");
         Monopoly monopoly2 = new Monopoly("Monopoly2");
         Monopoly monopoly3 = new Monopoly("Monopoly3");
@@ -236,7 +230,7 @@ public class TestSession implements Session {
             player.getWallet().addMoney(startMoney);
         }
 
-        return new Board(players, cells, dice);
+        return new Board(players, cells);
     }
 
     @Override
@@ -253,10 +247,4 @@ public class TestSession implements Session {
     public List<IO> getIO() {
         return ios;
     }
-/*
-    @Override
-    public ValueGeneratorForDice getValueGeneratorForDice() {
-        return valueGeneratorForDice;
-    }
-    */
 }

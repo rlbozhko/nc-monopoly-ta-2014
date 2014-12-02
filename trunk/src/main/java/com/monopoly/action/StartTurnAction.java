@@ -1,10 +1,5 @@
 package com.monopoly.action;
 
-import com.monopoly.board.Board;
-import com.monopoly.board.cells.Cell;
-import com.monopoly.board.cells.CellType;
-import com.monopoly.board.cells.EventCell;
-import com.monopoly.board.cells.Property;
 import com.monopoly.board.dice.Dice;
 import com.monopoly.board.player.Player;
 import com.monopoly.board.player.Status;
@@ -18,16 +13,14 @@ import java.util.List;
  */
 public class StartTurnAction implements Action {
     Session session;
-    Board board;
 
     public StartTurnAction() {
         this.session = TestSession.getInstance();
-        this.board = session.getBoard();
     }
 
     @Override
     public void performAction(Player player) {
-        Dice dice = board.getDice();
+        Dice dice = Dice.getInstance();
         dice.generateNewDiceValue();
         player.goToPosition(player.getPosition() + dice.getFaceDie1() + dice.getFaceDie2());
         //System.out.println(dice.getFaceDie1() + " " + dice.getFaceDie2());

@@ -1,33 +1,46 @@
 package com.monopoly.board.dice;
 
+import java.util.concurrent.TimeUnit;
+
 /**
  * Create By Kulikovsky Anton
  * */
-import com.monopoly.tools.XORShiftRandom;
+import com.monopoly.tools.RandomStrategy;
 
 public class ValueGeneratorForDice implements Runnable {
-	private final int MAX_VALUE_ON_FACE = 6;
+	private static final int MAX_VALUE_ON_FACE = 6;
+	private static final int GENERATE_SLEEP_TIME = 100;
 	private int value1;
 	private int value2;
-	private boolean flag;
-	private XORShiftRandom xorShiftRandom = new XORShiftRandom();
+	private boolean isGeneratorEnabled;
+	private RandomStrategy xorShiftRandomStrategy;
+	
+	public ValueGeneratorForDice (RandomStrategy xorShiftRandomStrategy) {
+		this.xorShiftRandomStrategy = xorShiftRandomStrategy;
+		this.value1 = 1;
+		this.value2 = 1;
+	}
 
 	public synchronized boolean finish(){
-		this.flag = true;
-		return flag;
+		this.isGeneratorEnabled = true;
+		return isGeneratorEnabled;
 	}
 
 	@Override
 	public void run() {
-		while (!flag) {
-			value1 = xorShiftRandom.nextInt(MAX_VALUE_ON_FACE);
-			value2 = xorShiftRandom.nextInt(MAX_VALUE_ON_FACE);
-			try {
-				Thread.sleep(100);
-			} catch (InterruptedException e) {
-				e.printStackTrace();
-			}
+		while (!isGeneratorEnabled) {
+			value1 = xorShiftRandomStrategy.nextInt(MAX_VALUE_ON_FACE);
+				try {
+					TimeUnit.MILLISECONDS.sleep(GENERATE_SLEEP_TIME);
+				} catch (InterruptedException e) {
+					e.printStackTrace();
+				}
+			value2 = xorShiftRandomStrategy.nextInt(MAX_VALUE_ON_FACE);
 		}
+	}
+	
+	public void changeRandomStrategy(RandomStrategy xorShiftRandomStrategy) {
+		this.xorShiftRandomStrategy = xorShiftRandomStrategy;
 	}
 
 	public synchronized int getValue1() {

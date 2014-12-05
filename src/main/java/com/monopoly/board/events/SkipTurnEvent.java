@@ -8,9 +8,7 @@ import com.monopoly.board.player.Status;
 import com.monopoly.game.session.TestSession;
 import com.monopoly.io.IO;
 
-public class SkipTurnEvent implements Event{
-	private String name;
-	private String description;
+public class SkipTurnEvent extends BaseEvent{
 	
 	public SkipTurnEvent(String eventName, String description) {
 		this.name = eventName;
@@ -25,15 +23,4 @@ public class SkipTurnEvent implements Event{
         player.setStatus(Status.SKIP_TURN);
         playerIO.showMessage("Жизнь хорошо, когда ешь не спеша. Вы пропускаете 1 ход");
 	}
-
-	@Override
-	public String getDescription() {
-		return description;
-	}
-
-	@Override
-	public String getName() {
-		return name;
-	}
-
 }

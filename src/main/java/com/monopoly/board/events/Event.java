@@ -10,8 +10,6 @@ package com.monopoly.board.events;
  */
 public interface Event {
     public void performEvent();
-
-    public String getDescription();
-
     public String getName();
+    public String getDescription();
 }

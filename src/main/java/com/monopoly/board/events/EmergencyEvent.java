@@ -18,9 +18,7 @@ import java.util.Random;
 /**
  * ЧПСобытие
  */
-public class EmergencyEvent implements Event {
-    private String name;
-    private String description;
+public class EmergencyEvent extends BaseEvent {
     private int cellCount;
     private Random random;
 
@@ -53,15 +51,5 @@ public class EmergencyEvent implements Event {
             randomIndex = random.nextInt(buildings.size());
             buildings.get(randomIndex).levelDown();
         }
-    }
-
-    @Override
-    public String getDescription() {
-        return description;
-    }
-
-    @Override
-    public String getName() {
-        return name;
     }
 }

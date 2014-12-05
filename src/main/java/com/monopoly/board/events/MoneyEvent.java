@@ -4,14 +4,12 @@ import com.monopoly.action.ActionUtils;
 import com.monopoly.board.player.Player;
 import com.monopoly.game.session.TestSession;
 
-public class MoneyEvent implements Event {
+public class MoneyEvent extends BaseEvent {
 
     private int startCash;
-    private String eventName;
-    private String description;
 
-    public MoneyEvent(String eventName, String description, int startCash) {
-        this.eventName = eventName;
+    public MoneyEvent(String name, String description, int startCash) {
+        this.name = name;
         this.description = description;
         this.startCash = startCash;
     }
@@ -21,15 +19,5 @@ public class MoneyEvent implements Event {
         Player player = TestSession.getInstance().getBoard().getCurrentPlayer();
         player.getWallet().addMoney(startCash);
         ActionUtils.getPlayerIO(player).showMessage(description);
-    }
-
-    @Override
-    public String getDescription() {
-        return description;
-    }
-
-    @Override
-    public String getName() {
-        return eventName;
     }
 }

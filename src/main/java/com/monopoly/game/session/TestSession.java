@@ -1,6 +1,7 @@
 package com.monopoly.game.session;
 
 import com.monopoly.action.ActionController;
+import com.monopoly.action.GiveUpAction;
 import com.monopoly.action.PlayerActionController;
 import com.monopoly.board.Board;
 import com.monopoly.board.building.Building;
@@ -62,16 +63,18 @@ public class TestSession implements Session {
         Thread dummy2 = new Thread(dummyIO2);
 
         //Для тестирования Действий с собственностью
-/*      for (Cell property : test.getBoard().getPropertyCell()) {
+        /*for (Cell property : test.getBoard().getPropertyCell()) {
             ((Property) property).setAndAddToOwner(p1);
-        }
-        Property testProperty = (Property) test.getBoard().getCells().get(1);
-        testProperty.setAndAddToOwner(p1);
+        }*/
+        /*Property testProperty1 = (Property) test.getBoard().getCells().get(1);
+        Property testProperty2 = (Property) test.getBoard().getCells().get(3);
+        testProperty1.setAndAddToOwner(p2);
+        testProperty2.setAndAddToOwner(p2);
         //p1.getWallet().addMoney(5000);
         p2.getWallet().subtractMoney(START_MONEY);
-        //p3.getWallet().addMoney(5000);
+        //p3.getWallet().addMoney(5000);*/
         //
-*/
+
         player.start();
         dummy1.start();
         dummy2.start();

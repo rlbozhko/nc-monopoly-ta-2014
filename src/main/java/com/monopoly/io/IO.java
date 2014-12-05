@@ -12,7 +12,7 @@ import com.monopoly.board.player.Player;
 public interface IO {
     void outputBoardState();
 
-    void outputAvailableActions(Player player);
+    void outputAvailableActions();
 
     void performAction(Action action);
 

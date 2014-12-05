@@ -15,8 +15,9 @@ import java.util.List;
  */
 public class DummyIO implements IO, Runnable {
 
-    Player player;
-    List<Action> actions;
+    private Player player;
+    private List<Action> actions;
+    private boolean answer = true;
 
     public DummyIO(Player player) {
         this.player = player;
@@ -30,9 +31,13 @@ public class DummyIO implements IO, Runnable {
             } catch (InterruptedException e) {
                 e.printStackTrace();
             }
-            outputAvailableActions(player);
+            outputAvailableActions();
             for (int i = 0; i < actions.size(); i++) {
                 Action action = actions.get(i);
+                if (player.getWallet().getMoney() == 0) {
+                    performAction(new GiveUpAction());
+                    break;
+                }
                 if (action instanceof PayRentAction) {
                     performPayRent(action);
                     break;
@@ -69,7 +74,7 @@ public class DummyIO implements IO, Runnable {
     }
 
     @Override
-    public void outputAvailableActions(Player player) {
+    public void outputAvailableActions() {
         ActionController actionController = TestSession.getInstance().getActionController();
         actions = actionController.getAvailableActions(player);
     }
@@ -106,7 +111,13 @@ public class DummyIO implements IO, Runnable {
 
     @Override
     public boolean yesNoDialog(String message) {
-        return true;
+        if (answer) {
+            answer = false;
+            return true;
+        } else {
+            answer = true;
+            return false;
+        }
     }
 
     @Override

@@ -10,6 +10,8 @@ import com.monopoly.io.IO;
 
 import java.util.List;
 
+import static org.apache.commons.collections4.CollectionUtils.isEmpty;
+
 /**
  * Created by Roma on 20.11.2014.
  */
@@ -31,16 +33,19 @@ public class GiveUpAction implements Action {
                 nextPlayer.setStatus(Status.START_TURN);
             }
         }
+        player.setStatus(Status.FINISH);
+
         for (IO io : session.getIO()) {
             io.showMessage(player.getName() + " сдался");
         }
         //Место для аукциона
         List<Property> property = player.getProperty();
-        while (property.size() != 0) {
+        while (!isEmpty(property)) {
             property.get(0).setAndAddToOwner(null);
         }
+        //new AuctionAction().performAction(player);
         //
-        player.setStatus(Status.FINISH);
+
     }
 
     @Override

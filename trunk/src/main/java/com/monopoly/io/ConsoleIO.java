@@ -23,8 +23,8 @@ import java.util.Scanner;
  * Created by Roma on 20.11.2014.
  */
 public class ConsoleIO implements IO, Runnable {
-    Player player;
-    List<Action> actions;
+    private Player player;
+    private List<Action> actions;
 
     public ConsoleIO(Player player) {
         this.player = player;
@@ -35,7 +35,7 @@ public class ConsoleIO implements IO, Runnable {
         printBoardToFile();
         do {
             outputBoardState();
-            outputAvailableActions(player);
+            outputAvailableActions();
             System.out.print("Выберите действие: ");
             int input = positiveIntInput();
             if (input < actions.size() && input >= 0) {
@@ -43,7 +43,6 @@ public class ConsoleIO implements IO, Runnable {
             } else {
                 System.out.println("Неверный Ввод!!!");
             }
-
         } while (!Status.FINISH.equals(player.getStatus()));
     }
 
@@ -70,7 +69,7 @@ public class ConsoleIO implements IO, Runnable {
     }
 
     @Override
-    public void outputAvailableActions(Player player) {
+    public void outputAvailableActions() {
         ActionController actionController = TestSession.getInstance().getActionController();
         actions = actionController.getAvailableActions(player);
         System.out.println("Доступные действия:");

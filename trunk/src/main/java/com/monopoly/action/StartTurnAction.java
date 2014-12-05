@@ -5,6 +5,7 @@ import com.monopoly.board.player.Player;
 import com.monopoly.board.player.Status;
 import com.monopoly.game.session.Session;
 import com.monopoly.game.session.TestSession;
+import com.monopoly.io.IO;
 
 import java.util.List;
 
@@ -23,7 +24,10 @@ public class StartTurnAction implements Action {
         Dice dice = Dice.getInstance();
         dice.generateNewDiceValue();
         player.goToPosition(player.getPosition() + dice.getFaceDie1() + dice.getFaceDie2());
-        //System.out.println(dice.getFaceDie1() + " " + dice.getFaceDie2());
+        //System.out.println(player.getName() + " бросил кости: " + dice.getFaceDie1() + " " + dice.getFaceDie2());
+        for (IO io : TestSession.getInstance().getIO()) {
+            io.showMessage(player.getName() + " бросил кости: " + dice.getFaceDie1() + " " + dice.getFaceDie2());
+        }
         player.setStatus(Status.ACTIVE);
     }
 

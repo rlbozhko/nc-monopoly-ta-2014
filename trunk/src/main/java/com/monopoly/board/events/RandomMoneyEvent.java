@@ -9,13 +9,11 @@ import com.monopoly.game.session.TestSession;
 import com.monopoly.io.IO;
 import com.monopoly.tools.XORShiftStrategy;
 
-public class RandomMoneyEvent implements Event {
-	private final int MAX_VALUE_MONEY_FOR_MONEYEVENT = 200;
-	private String name;
-	private String description;
+public class RandomMoneyEvent extends BaseEvent {
+	private static final int MAX_VALUE_MONEY_FOR_MONEYEVENT = 200;
 
-	public RandomMoneyEvent(String eventName, String description) {
-		this.name = eventName;
+	public RandomMoneyEvent(String name, String description) {
+		this.name = name;
 		this.description = description;
 	}
 
@@ -40,16 +38,6 @@ public class RandomMoneyEvent implements Event {
 			playerIO.showMessage("Сеголня был не Ваш день! Вы проиграли $"
 					+ amountMoney + ".");
 		}
-	}
-
-	@Override
-	public String getDescription() {
-		return description;
-	}
-
-	@Override
-	public String getName() {
-		return name;
 	}
 
 }

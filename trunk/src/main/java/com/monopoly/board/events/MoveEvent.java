@@ -1,4 +1,5 @@
 package com.monopoly.board.events;
+
 /**
  * Create By Kulikovsky Anton
  * */
@@ -12,13 +13,11 @@ import com.monopoly.tools.XORShiftStrategy;
 
 import java.util.Random;
 
-public class MoveEvent implements Event {
-	private final int MAX_VALUE_MOVE_PLAYER = 7;
-	private String name;
-	private String description;
+public class MoveEvent extends BaseEvent {
+	private static final int MAX_VALUE_MOVE_PLAYER = 7;
 
-	public MoveEvent(String eventName, String description) {
-		this.name = eventName;
+	public MoveEvent(String name, String description) {
+		this.name = name;
 		this.description = description;
 	}
 
@@ -35,21 +34,12 @@ public class MoveEvent implements Event {
 		int valueMove = xorShiftRandom.nextInt(MAX_VALUE_MOVE_PLAYER);
 		if (isAdvance) {
 			player.goToPosition(valueMove);
-			playerIO.showMessage("Отправляйтесь на " + valueMove + " клеток вперед.");
+			playerIO.showMessage("Отправляйтесь на " + valueMove
+					+ " клеток вперед.");
 		} else {
 			player.goToPosition(-valueMove);
-			playerIO.showMessage("Отправляйтесь на " + valueMove + " клеток назад.");
+			playerIO.showMessage("Отправляйтесь на " + valueMove
+					+ " клеток назад.");
 		}
 	}
-
-	@Override
-	public String getDescription() {
-		return description;
-	}
-
-	@Override
-	public String getName() {
-		return name;
-	}
-
 }

@@ -31,6 +31,10 @@ public class Player implements MoneyOperations, MoveOperations, PropertyOperatio
         return position;
     }
 
+    public void setPosition(int position) {
+        this.position = position;
+    }
+
     @Override
     public int getLastPosition() {
         return lastPosition;

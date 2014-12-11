@@ -17,10 +17,6 @@ import java.util.List;
 public class PlayerActionController implements ActionController {
     Session session;
 
-    public PlayerActionController() {
-
-    }
-
     @Override
     public List<Action> getAvailableActions(Player player) {
         session = TestSession.getInstance();
@@ -28,10 +24,11 @@ public class PlayerActionController implements ActionController {
         if (Status.FINISH.equals(player.getStatus())) {
             return result;
         }
-        if (player.mustPayRent()) {
+        if (player.isPayRent()) {
             result.add(new PayRentAction());
         }
         result.add(new DealAction());
+        result.add(new PledgePropertyAction());
         result.add(new GiveUpAction());
         result.add(new WaitAction());
 
@@ -43,9 +40,7 @@ public class PlayerActionController implements ActionController {
             }
         }
 
-        if (Status.WAIT.equals(player.getStatus())) {
-            //
-        } else if (Status.START_TURN.equals(player.getStatus())) {
+        if (Status.START_TURN.equals(player.getStatus())) {
             result.add(new StartTurnAction());
         } else if (Status.ACTIVE.equals(player.getStatus())) {
             result.add(new EndTurnAction());

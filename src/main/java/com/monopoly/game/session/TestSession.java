@@ -35,9 +35,10 @@ public class TestSession implements Session {
 
     public static void main(String[] args) {
         List<Player> players = new ArrayList<>();
-        Player p1 = new Player("Player 1", new Wallet());
-        Player p2 = new Player("Player 2", new Wallet());
-        Player p3 = new Player("Player 3", new Wallet());
+        Player p1 = new Player("Player 1");
+        Player p2 = new Player("Player 2");
+        Player p3 = new Player("Player 3");
+
         p1.setStatus(Status.START_TURN);
         players.add(p1);
         players.add(p2);
@@ -66,13 +67,12 @@ public class TestSession implements Session {
         /*for (Cell property : test.getBoard().getPropertyCell()) {
             ((Property) property).setAndAddToOwner(p1);
         }*/
-        /*Property testProperty1 = (Property) test.getBoard().getCells().get(1);
+        Property testProperty1 = (Property) test.getBoard().getCells().get(1);
         Property testProperty2 = (Property) test.getBoard().getCells().get(3);
-        testProperty1.setAndAddToOwner(p2);
-        testProperty2.setAndAddToOwner(p2);
-        //p1.getWallet().addMoney(5000);
-        p2.getWallet().subtractMoney(START_MONEY);
-        //p3.getWallet().addMoney(5000);*/
+        testProperty1.setAndAddToOwner(p1);
+        testProperty2.setAndAddToOwner(p1);
+        //p2.subtractMoney(START_MONEY);
+        //p3.addMoney(5000);*/
         //
 
         player.start();
@@ -230,7 +230,7 @@ public class TestSession implements Session {
                 new ArrayList<Building>(), 4500, 450, monopoly8));
 
         for (Player player : players) {
-            player.getWallet().addMoney(startMoney);
+            player.addMoney(startMoney);
         }
 
         return new Board(players, cells);

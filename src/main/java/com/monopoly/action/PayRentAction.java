@@ -21,7 +21,7 @@ public class PayRentAction implements Action {
         if (player.getWallet().getMoney() >= rent) {
             player.getWallet().subtractMoney(rent);
             owner.getWallet().addMoney(rent);
-            player.setMustPayRent(false);
+            player.setPayRent(false);
             playerIO.showMessage("Вы уплатили аренду в размере $" + rent);
             ownerIO.showMessage(player.getName() + " уплатил аренду в размере $" + rent);
         } else {

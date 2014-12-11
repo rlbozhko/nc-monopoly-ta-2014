@@ -21,10 +21,13 @@ public class PropertyCell extends Cell implements Property {
     private PropertyStatus status;
     private int maxLevel = 5;//временно
     private int maxBuildings = 1;//временно
+    private int turnsToPayBack;
 
     public static class PropertyBuilder {
         private final static int DEFAULT_BASE_PRICE = 1000;
         private final static int DEFAULT_BASE_RENT = 100;
+        public static final int DEFAULT_MAX_LEVEL = 5;
+        public static final int DEFAULT_MAX_BUILDINGS = 1;
 
         private String name;
         private String description;
@@ -37,6 +40,7 @@ public class PropertyCell extends Cell implements Property {
         private PropertyStatus status;
         private int maxLevel;
         private int maxBuildings;
+        private int turnsToPayBack;
 
 
         public PropertyBuilder(String name, List<Building> buildings, int position) {
@@ -48,9 +52,10 @@ public class PropertyCell extends Cell implements Property {
             this.basePrice = DEFAULT_BASE_PRICE;
             this.baseRent = DEFAULT_BASE_RENT;
             this.monopoly = null;
-            this.maxLevel = 5;
-            this.maxBuildings = 1;
+            this.maxLevel = DEFAULT_MAX_LEVEL;
+            this.maxBuildings = DEFAULT_MAX_BUILDINGS;
             this.status = PropertyStatus.PLEDGED;
+            this.turnsToPayBack = 0;
         }
 
         public PropertyCell getPropertyCell() {
@@ -58,7 +63,8 @@ public class PropertyCell extends Cell implements Property {
                     owner, buildings, basePrice, baseRent, monopoly);
             propertyCell.maxLevel = maxLevel;
             propertyCell.maxBuildings = maxBuildings;
-            propertyCell.setStatus(status);
+            propertyCell.status = status;
+            propertyCell.turnsToPayBack = turnsToPayBack;
             return propertyCell;
         }
 
@@ -94,6 +100,11 @@ public class PropertyCell extends Cell implements Property {
             this.monopoly = monopoly;
             return this;
         }
+
+        public PropertyBuilder setTurnsToPayBack(int turnsToPayBack) {
+            this.turnsToPayBack = turnsToPayBack;
+            return this;
+        }
     }
 
     public PropertyCell(String name, String description, int position,
@@ -110,11 +121,11 @@ public class PropertyCell extends Cell implements Property {
     @Override
     public void setAndAddToOwner(Player player) {
         if (owner != null) {
-            owner.getProperty().remove(this);
+            owner.getPropertyList().remove(this);
         }
         owner = player;
         if (player != null) {
-            player.getProperty().add(this);
+            player.getPropertyList().add(this);
         }
     }
 
@@ -141,7 +152,7 @@ public class PropertyCell extends Cell implements Property {
     public boolean upgradeBuilding(Building building) {
         if (building != null && building.currentLevel() < building.getMaxLevel()) {
             building.levelUp();
-            owner.getWallet().subtractMoney(building.currentPrice());
+            owner.subtractMoney(building.currentPrice());
             return true;
         }
         return false;
@@ -155,7 +166,7 @@ public class PropertyCell extends Cell implements Property {
             } else {
                 building = null;
             }
-            owner.getWallet().addMoney(building.currentPrice() / 2);
+            owner.addMoney(building.currentPrice() / 2);
             return true;
         }
         return false;
@@ -178,7 +189,7 @@ public class PropertyCell extends Cell implements Property {
 
     @Override
     public boolean isPledged() {
-        if (PropertyStatus.PLEDGED.equals(status)) {
+        if (PropertyStatus.PLEDGED == status) {
             return true;
         }
         return false;
@@ -190,6 +201,16 @@ public class PropertyCell extends Cell implements Property {
     }
 
     @Override
+    public boolean hasBuildings() {
+        for (Building building : buildings) {
+            if (building != null) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    @Override
     public int getMaxLevel() {
         return maxLevel;
     }
@@ -197,5 +218,15 @@ public class PropertyCell extends Cell implements Property {
     @Override
     public int getMaxBuildings() {
         return maxBuildings;
+    }
+
+    @Override
+    public void setTurnsToPayBack(int turnsToPayBack) {
+        this.turnsToPayBack = turnsToPayBack;
+    }
+
+    @Override
+    public int getTurnsToPayBack() {
+        return turnsToPayBack;
     }
 }

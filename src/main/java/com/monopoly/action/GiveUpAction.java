@@ -39,7 +39,7 @@ public class GiveUpAction implements Action {
             io.showMessage(player.getName() + " сдался");
         }
         //Место для аукциона
-        List<Property> property = player.getProperty();
+        List<Property> property = player.getPropertyList();
         while (!isEmpty(property)) {
             property.get(0).setAndAddToOwner(null);
         }

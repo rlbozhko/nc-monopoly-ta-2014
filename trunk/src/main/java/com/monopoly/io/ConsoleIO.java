@@ -59,7 +59,7 @@ public class ConsoleIO implements IO, Runnable {
         List<Player> players = session.getBoard().getPlayers();
         int position = player.getPosition();
         System.out.println("Вы на позиции: " + position + " " + session.getBoard().getCells().get(position).getName());
-        System.out.println("У Вас на счету $" + player.getWallet().getMoney() + ". У Вас в собственности: " + player.getProperty());
+        System.out.println("У Вас на счету $" + player.getWallet().getMoney() + ". У Вас в собственности: " + player.getPropertyList());
         for (Player other : players) {
             if (!player.equals(other)) {
                 System.out.println(other.getName() + " -- на позиции: " + other.getPosition());
@@ -106,7 +106,7 @@ public class ConsoleIO implements IO, Runnable {
     @Override
     public Property selectProperty(Player player) {
         System.out.println("Выберите Собственность игрока " + player.getName());
-        List<Property> properties = player.getProperty();
+        List<Property> properties = player.getPropertyList();
         for (int i = 0; i < properties.size(); i++) {
             Property property = properties.get(i);
             System.out.println((i + 1) + " " + ((Cell) property).getName());
@@ -157,10 +157,10 @@ public class ConsoleIO implements IO, Runnable {
                 case 1:
                     System.out.println("Введите количество денег:");
                     input = positiveIntInput();
-                    if (input >= 0 && input <= player.getWallet().getMoney()) {
-                        deal.setGiveMoney(input < 0 ? input : 0);
+                    if (input >= 0 && input <= player.getMoney()) {
+                        deal.setGiveMoney(input > 0 ? input : 0);
                     } else {
-                        System.out.println("Число должно быть в диапозоне от 0 до " + player.getWallet().getMoney());
+                        System.out.println("Число должно быть в диапозоне от 0 до " + player.getMoney());
                     }
                     break;
                 case 2:

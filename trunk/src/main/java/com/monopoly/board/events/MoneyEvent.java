@@ -17,7 +17,7 @@ public class MoneyEvent extends BaseEvent {
     @Override
     public void performEvent() {
         Player player = TestSession.getInstance().getBoard().getCurrentPlayer();
-        player.getWallet().addMoney(startCash);
+        player.addMoney(startCash);
         ActionUtils.getPlayerIO(player).showMessage(description);
     }
 }

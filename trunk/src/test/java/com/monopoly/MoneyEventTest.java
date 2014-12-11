@@ -12,12 +12,12 @@ import com.monopoly.board.player.Wallet;
 
 public class MoneyEventTest {
 	private Wallet wallet = new Wallet();
-	private Player player = new Player("Karabas", wallet);
+	private Player player = new Player("Karabas");
 	
 	
 	@Before
 	public void before() {
-		player.getWallet().addMoney(500);
+		player.addMoney(500);
 	}
 	
 	@Test

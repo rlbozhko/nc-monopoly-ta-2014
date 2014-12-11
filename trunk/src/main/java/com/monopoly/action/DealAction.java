@@ -17,22 +17,16 @@ public class DealAction implements Action {
             IO otherIO = ActionUtils.getPlayerIO(otherPlayer);
             boolean answer = otherIO.yesNoDialog(deal.message());
 
-            if (otherPlayer.getWallet().getMoney() < deal.getAskMoney()) {
+            if (otherPlayer.getMoney() < deal.getAskMoney()) {
                 otherIO.showMessage("У Вас не достаточно денег");
                 answer = false;
             }
             if (answer) {
-                player.getWallet().subtractMoney(deal.getGiveMoney());
-                otherPlayer.getWallet().addMoney(deal.getGiveMoney());
+                player.subtractMoney(deal.getGiveMoney());
+                otherPlayer.addMoney(deal.getGiveMoney());
 
-                player.getWallet().addMoney(deal.getAskMoney());
-                otherPlayer.getWallet().subtractMoney(deal.getAskMoney());
-
-                player.getProperty().removeAll(deal.getGiveProperties());
-                otherPlayer.getProperty().addAll(deal.getGiveProperties());
-
-                otherPlayer.getProperty().removeAll(deal.getAskProperties());
-                player.getProperty().addAll(deal.getAskProperties());
+                player.addMoney(deal.getAskMoney());
+                otherPlayer.subtractMoney(deal.getAskMoney());
 
                 for (Property property : deal.getGiveProperties()) {
                     property.setAndAddToOwner(otherPlayer);

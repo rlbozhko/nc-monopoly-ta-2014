@@ -30,7 +30,7 @@ public class RandomMoneyEvent extends BaseEvent {
 				.nextInt(MAX_VALUE_MONEY_FOR_MONEYEVENT);
 
 		if (isAddMoney) {
-			player.getWallet().addMoney(amountMoney);
+			player.addMoney(amountMoney);
 			playerIO.showMessage("Поздравляем! Вы выйграли $" + amountMoney
 					+ ".");
 		} else {

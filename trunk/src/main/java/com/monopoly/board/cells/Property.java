@@ -35,6 +35,8 @@ public interface Property {
 
     void setStatus(PropertyStatus propertyStatus);
 
+    PropertyStatus getStatus();
+
     boolean hasBuildings();
 
     int getMaxLevel();
@@ -42,5 +44,14 @@ public interface Property {
     int getMaxBuildings();
 
     void setTurnsToPayBack(int turnsToPayBack);
+
     int getTurnsToPayBack();
+
+    int getPayBackMoney();
+
+    void setPayBackMoney(int payBackMoney);
+
+    double getPledgePercent();
+
+    void setPledgePercent(double pledgePercent);
 }

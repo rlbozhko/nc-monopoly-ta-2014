@@ -109,7 +109,7 @@ public class ConsoleIO implements IO, Runnable {
         List<Property> properties = player.getPropertyList();
         for (int i = 0; i < properties.size(); i++) {
             Property property = properties.get(i);
-            System.out.println((i + 1) + " " + ((Cell) property).getName());
+            System.out.println((i + 1) + " " + ((Cell) property).getName() + (property.isPledged() ? " Заложена" : ""));
         }
 
         System.out.println("0 - Для отмены");

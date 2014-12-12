@@ -65,6 +65,7 @@ public class Player implements MoneyOperations, MoveOperations, PropertyOperatio
             for (Property property : propertyList) {
                 if (property.isPledged()) {
                     property.setTurnsToPayBack(property.getTurnsToPayBack() - 1);
+                    property.setPayBackMoney((int)(property.getPayBackMoney() * (1 + property.getPledgePercent())));
                     if (property.getTurnsToPayBack() == 0) {
                         ActionUtils.getPlayerIO(this).showMessage("ВНИМАНИЕ!!!\n" +
                                 "Срок погашения заема истек для " + ((Cell)property).getName() + ".\n" +

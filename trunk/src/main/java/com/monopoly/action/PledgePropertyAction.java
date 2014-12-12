@@ -22,8 +22,9 @@ import com.monopoly.io.IO;
     */
 
 public class PledgePropertyAction implements Action {
-    public static final double MAX_PERCENT = 0.7;
+    public static final double MAX_PERCENT_FROM_PROPERTY = 0.7;
     public static final int MAX_TURNS_TO_PAY_BACK = 1;
+    public static final double MAX_PLEDGE_PERCENT_PER_TURN = 0.1;
 
     @Override
     public void performAction(Player player) {
@@ -31,14 +32,20 @@ public class PledgePropertyAction implements Action {
 
         PropertyCell property = (PropertyCell) selectPropertyToPledge(player, playerIO);
         if (property != null) {
-            property.setStatus(PropertyStatus.PLEDGED);
-            int turnsToPayBack = MAX_TURNS_TO_PAY_BACK;
-            property.setTurnsToPayBack(turnsToPayBack);
 
-            int payment = (int) (property.getPrice() * MAX_PERCENT);
+            //выбирается игроком
+            int turnsToPayBack = MAX_TURNS_TO_PAY_BACK;
+            int payment = (int) (property.getPrice() * MAX_PERCENT_FROM_PROPERTY);
+            double pledgePercent = MAX_PLEDGE_PERCENT_PER_TURN;
+            //
+
             if (playerIO.yesNoDialog("Хотите заложить " + property.getName() + " за $" + payment + ".\n" +
                     " На " + turnsToPayBack + " ходов")) {
                 player.addMoney(payment);
+                property.setStatus(PropertyStatus.PLEDGED);
+                property.setTurnsToPayBack(turnsToPayBack);
+                property.setPledgePercent(pledgePercent);
+                property.setPayBackMoney(payment);
                 playerIO.showMessage("Вы заложили " + property.getName() + " за $" + payment + ".\n" +
                         " На " + turnsToPayBack + " ходов");
             }
@@ -47,12 +54,14 @@ public class PledgePropertyAction implements Action {
 
     private Property selectPropertyToPledge(Player player, IO playerIO) {
         Property property = playerIO.selectProperty(player);
-        if (property.isPledged()) {
-            playerIO.showMessage("Нельзя заложить уже заложеную собственность!!!");
-        } else if (property.hasBuildings()) {
-            playerIO.showMessage("Нельзя заложить собственность с постройками!!!");
-        } else {
-            return property;
+        if (property != null) {
+            if (property.isPledged()) {
+                playerIO.showMessage("Нельзя заложить уже заложеную собственность!!!");
+            } else if (property.hasBuildings()) {
+                playerIO.showMessage("Нельзя заложить собственность с постройками!!!");
+            } else {
+                return property;
+            }
         }
         return null;
     }

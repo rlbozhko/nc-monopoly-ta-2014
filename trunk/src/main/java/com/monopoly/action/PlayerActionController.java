@@ -28,9 +28,12 @@ public class PlayerActionController implements ActionController {
             result.add(new PayRentAction());
         }
         result.add(new DealAction());
-        result.add(new PledgePropertyAction());
         result.add(new GiveUpAction());
         result.add(new WaitAction());
+        result.add(new PledgePropertyAction());
+        if (player.hasPledgedProperty()) {
+            result.add(new PayBackAction());
+        }
 
         Cell cell = session.getBoard().getCells().get(player.getPosition());
         if (CellType.PROPERTY_CELL.equals(cell.getCellType())) {

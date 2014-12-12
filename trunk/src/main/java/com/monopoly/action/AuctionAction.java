@@ -29,11 +29,11 @@ public class AuctionAction implements Action {
     public void performAction(Player player) {
 
         List<Player> participants = new ArrayList<>(TestSession.getInstance().getBoard().getPlayers());
-        ActionUtils.sendToAll("Открыт аукцион на " + property.getName());
+        ActionUtils.sendMessageToAll("Открыт аукцион на " + property.getName());
 
         Player winner = null;
         int lastRate = 0;
-        int currentRate = property.getPrice() / 2;
+        int currentRate = property.getPayBackMoney();
         while (participants.size() > 1) {
             Iterator<Player> participantsIterator = participants.iterator();
             while (participantsIterator.hasNext()) {
@@ -45,7 +45,7 @@ public class AuctionAction implements Action {
                         winner = participant;
                         lastRate = currentRate;
                         currentRate *= NEXT_RATE_COEFFICIENT;
-                        ActionUtils.sendToAll(winner.getName() + " принял ставку $" + lastRate);
+                        ActionUtils.sendMessageToAll(winner.getName() + " принял ставку $" + lastRate);
                     } else {
                         participantsIterator.remove();
                     }
@@ -58,7 +58,7 @@ public class AuctionAction implements Action {
             winner.subtractMoney(lastRate);
             property.setAndAddToOwner(winner);
             property.setStatus(PropertyStatus.UNPLEDGED);
-            ActionUtils.sendToAll(winner.getName() + " победил в аукционе за " + ((PropertyCell) property).getName());
+            ActionUtils.sendMessageToAll(winner.getName() + " победил в аукционе за " + ((PropertyCell) property).getName());
         } else {
             //назначить Штраф или в Тюрьму
             property.setAndAddToOwner(null);

@@ -5,6 +5,8 @@ import com.monopoly.board.player.Player;
 
 import java.util.List;
 
+import static org.apache.commons.collections4.CollectionUtils.isEmpty;
+
 /**
  * Created by Roma on 06.11.2014.
  */
@@ -22,6 +24,8 @@ public class PropertyCell extends Cell implements Property {
     private int maxLevel = 5;//временно
     private int maxBuildings = 1;//временно
     private int turnsToPayBack;
+    private int payBackMoney;
+    private double pledgePercent;
 
     public static class PropertyBuilder {
         private final static int DEFAULT_BASE_PRICE = 1000;
@@ -116,6 +120,7 @@ public class PropertyCell extends Cell implements Property {
         this.monopoly = monopoly;
         monopoly.addProperty(this);
         this.buildings = buildings;
+        this.status = PropertyStatus.UNPLEDGED;
     }
 
     @Override
@@ -201,10 +206,17 @@ public class PropertyCell extends Cell implements Property {
     }
 
     @Override
+    public PropertyStatus getStatus() {
+        return status;
+    }
+
+    @Override
     public boolean hasBuildings() {
-        for (Building building : buildings) {
-            if (building != null) {
-                return true;
+        if (!isEmpty(buildings)) {
+            for (Building building : buildings) {
+                if (building != null) {
+                    return true;
+                }
             }
         }
         return false;
@@ -228,5 +240,25 @@ public class PropertyCell extends Cell implements Property {
     @Override
     public int getTurnsToPayBack() {
         return turnsToPayBack;
+    }
+
+    @Override
+    public int getPayBackMoney() {
+        return payBackMoney;
+    }
+
+    @Override
+    public void setPayBackMoney(int payBackMoney) {
+        this.payBackMoney = payBackMoney;
+    }
+
+    @Override
+    public double getPledgePercent() {
+        return pledgePercent;
+    }
+
+    @Override
+    public void setPledgePercent(double pledgePercent) {
+        this.pledgePercent = pledgePercent;
     }
 }

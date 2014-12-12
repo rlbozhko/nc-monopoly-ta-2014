@@ -13,4 +13,8 @@ public interface MoveOperations {
     public int getLastPosition();
 
     public void goToPosition(int position);
+
+    boolean isPayRent();
+
+    void setPayRent(boolean payRent);
 }

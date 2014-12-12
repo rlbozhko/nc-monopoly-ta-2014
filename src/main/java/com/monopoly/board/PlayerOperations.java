@@ -17,6 +17,4 @@ public interface PlayerOperations {
     public Player getNextPlayer();
 
     public Player getCurrentPlayer();
-
-    public Player getPreviousPlayer();
 }

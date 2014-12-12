@@ -15,9 +15,5 @@ public interface PropertyOperations {
 
     public void buyBackProperty(PropertyCell propertyCell);
 
-    boolean isPayRent();
-
-    void setPayRent(boolean payRent);
-
     boolean hasPledgedProperty();
 }

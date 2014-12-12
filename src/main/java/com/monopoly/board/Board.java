@@ -2,12 +2,10 @@ package com.monopoly.board;
 
 import com.monopoly.board.cells.Cell;
 import com.monopoly.board.cells.CellType;
-import com.monopoly.board.dice.Dice;
 import com.monopoly.board.player.Player;
 import com.monopoly.board.player.Status;
 
 import java.util.ArrayList;
-import java.util.Iterator;
 import java.util.List;
 
 /**
@@ -16,19 +14,22 @@ import java.util.List;
 public class Board implements CellOperations, PlayerOperations {
     private List<Player> players;
     private Player currentPlayer;
-    private Player previousPlayer;
     private List<Cell> cells;
     private List<Cell> propertyCells = new ArrayList<>();
     private List<Cell> eventCells = new ArrayList<>();
-
-    private Iterator<Player> playerIter;
 
     public Board(List<Player> players, List<Cell> cells) {
         this.cells = cells;
         updatePropertyEventCells();
         this.players = players;
-        this.playerIter = players.iterator();
         currentPlayer = players.get(0);
+    }
+
+    public Board(List<Player> players, Player currentPlayer, List<Cell> cells) {
+        this.players = players;
+        this.currentPlayer = currentPlayer;
+        this.cells = cells;
+        updatePropertyEventCells();
     }
 
     private void updatePropertyEventCells() {
@@ -79,10 +80,5 @@ public class Board implements CellOperations, PlayerOperations {
             next = getNextPlayer();
         }
         return next;
-    }
-
-    @Override
-    public Player getPreviousPlayer() {
-        return previousPlayer;
     }
 }

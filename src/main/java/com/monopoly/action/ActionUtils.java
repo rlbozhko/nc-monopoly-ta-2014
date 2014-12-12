@@ -21,7 +21,7 @@ public class ActionUtils {
         return null;
     }
 
-    public static void sendToAll(String message) {
+    public static void sendMessageToAll(String message) {
         for (IO io : TestSession.getInstance().getIO()) {
             io.showMessage(message);
         }

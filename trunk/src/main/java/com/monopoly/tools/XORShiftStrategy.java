@@ -21,7 +21,4 @@ public class XORShiftStrategy implements RandomStrategy {
         int value = (int) last % max;
         return (value < 0) ? -value + 1 : value + 1;
 	}
-   
-   
-
 }

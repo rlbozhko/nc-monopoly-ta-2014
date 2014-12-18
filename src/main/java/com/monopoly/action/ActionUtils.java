@@ -1,7 +1,7 @@
 package com.monopoly.action;
 
 import com.monopoly.board.player.Player;
-import com.monopoly.game.session.TestSession;
+import com.monopoly.game.session.GameSession;
 import com.monopoly.io.IO;
 
 import java.util.List;
@@ -11,7 +11,7 @@ import java.util.List;
  */
 public class ActionUtils {
     public static IO getPlayerIO(Player player) {
-        List<IO> ioList = TestSession.getInstance().getIO();
+        List<IO> ioList = GameSession.getInstance().getIO();
         for (int i = 0; i < ioList.size(); i++) {
             Player user = ioList.get(i).getUser();
             if (player.equals(user)) {
@@ -22,7 +22,7 @@ public class ActionUtils {
     }
 
     public static void sendMessageToAll(String message) {
-        for (IO io : TestSession.getInstance().getIO()) {
+        for (IO io : GameSession.getInstance().getIO()) {
             io.showMessage(message);
         }
     }

@@ -2,7 +2,7 @@ package com.monopoly.board.player;
 
 import com.monopoly.action.ActionUtils;
 import com.monopoly.board.cells.*;
-import com.monopoly.game.session.TestSession;
+import com.monopoly.game.session.GameSession;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -53,12 +53,12 @@ public class Player implements MoneyOperations, MoveOperations, PropertyOperatio
 
     @Override
     public void goToPosition(int position) {
-        int boardSize = TestSession.getInstance().getBoard().getCells().size();
+        int boardSize = GameSession.getInstance().getBoard().getCells().size();
         this.lastPosition = this.position;
         boolean nextCircle = isNextCircle(position);
         this.position = position % boardSize;
         if (nextCircle) {
-            ((EventCell) TestSession.getInstance().getBoard().getCells().get(0)).getEvent().performEvent();
+            ((EventCell) GameSession.getInstance().getBoard().getCells().get(0)).getEvent().performEvent();
         }
 
         if (hasPledgedProperty()) {
@@ -75,7 +75,7 @@ public class Player implements MoneyOperations, MoveOperations, PropertyOperatio
             }
         }
 
-        Cell currentCell = TestSession.getInstance().getBoard().getCells().get(this.getPosition());
+        Cell currentCell = GameSession.getInstance().getBoard().getCells().get(this.getPosition());
         if (CellType.EVENT_CELL.equals(currentCell.getCellType())) {
             ((EventCell) currentCell).getEvent().performEvent();
         } else if (CellType.PROPERTY_CELL.equals(currentCell.getCellType())) {
@@ -87,7 +87,7 @@ public class Player implements MoneyOperations, MoveOperations, PropertyOperatio
     }
 
     private boolean isNextCircle(int position) {
-        return (position > TestSession.getInstance().getBoard().getCells().size());
+        return (position > GameSession.getInstance().getBoard().getCells().size());
     }
 
     @Override
@@ -178,19 +178,26 @@ public class Player implements MoneyOperations, MoveOperations, PropertyOperatio
         private int lastPosition;
         private String name;
         private Status status;
-        private Wallet wallet;
+        private int money;
         private List<Property> propertyList;
         private boolean payRent;
 
         public PlayerBuilder(String name) {
             this.name = name;
             status = Status.WAIT;
-            wallet = new Wallet();
             propertyList = new ArrayList<>();
         }
 
         public Player getPlayer() {
-            return new Player(name, position, lastPosition, status, wallet, propertyList, payRent);
+            Player player =  new Player(name);
+            player.position = position;
+            player.lastPosition = lastPosition;
+            player.status = status;
+            player.addMoney(money);
+            player.propertyList = propertyList;
+            player.payRent = payRent;
+
+            return player;
         }
 
         public PlayerBuilder lastPosition(int lastPosition) {
@@ -223,8 +230,8 @@ public class Player implements MoneyOperations, MoveOperations, PropertyOperatio
             return this;
         }
 
-        public PlayerBuilder wallet(Wallet wallet) {
-            this.wallet = wallet;
+        public PlayerBuilder money(int money) {
+            this.money = money;
             return this;
         }
     }

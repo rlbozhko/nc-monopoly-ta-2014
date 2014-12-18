@@ -3,8 +3,8 @@ package com.monopoly.action;
 import com.monopoly.board.dice.Dice;
 import com.monopoly.board.player.Player;
 import com.monopoly.board.player.Status;
+import com.monopoly.game.session.GameSession;
 import com.monopoly.game.session.Session;
-import com.monopoly.game.session.TestSession;
 
 /**
  * Created by Roma on 19.11.2014.
@@ -13,7 +13,7 @@ public class StartTurnAction implements Action {
     Session session;
 
     public StartTurnAction() {
-        this.session = TestSession.getInstance();
+        this.session = GameSession.getInstance();
     }
 
     @Override

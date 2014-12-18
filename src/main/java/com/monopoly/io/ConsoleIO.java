@@ -10,8 +10,8 @@ import com.monopoly.board.cells.CellType;
 import com.monopoly.board.cells.Property;
 import com.monopoly.board.player.Player;
 import com.monopoly.board.player.Status;
+import com.monopoly.game.session.GameSession;
 import com.monopoly.game.session.Session;
-import com.monopoly.game.session.TestSession;
 
 import java.io.BufferedWriter;
 import java.io.FileWriter;
@@ -53,7 +53,7 @@ public class ConsoleIO implements IO, Runnable {
 
     @Override
     public void outputBoardState() {
-        Session session = TestSession.getInstance();
+        Session session = GameSession.getInstance();
         System.out.println();
         System.out.println("Информация об игре");
         List<Player> players = session.getBoard().getPlayers();
@@ -70,7 +70,7 @@ public class ConsoleIO implements IO, Runnable {
 
     @Override
     public void outputAvailableActions() {
-        ActionController actionController = TestSession.getInstance().getActionController();
+        ActionController actionController = GameSession.getInstance().getActionController();
         actions = actionController.getAvailableActions(player);
         System.out.println("Доступные действия:");
         for (int i = 0; i < actions.size(); i++) {
@@ -86,7 +86,7 @@ public class ConsoleIO implements IO, Runnable {
 
     @Override
     public Player selectPlayer() {
-        List<Player> players = TestSession.getInstance().getBoard().getPlayers();
+        List<Player> players = GameSession.getInstance().getBoard().getPlayers();
         System.out.println("Выберите игрока:");
         for (int i = 0; i < players.size(); i++) {
             Player player = players.get(i);
@@ -217,7 +217,7 @@ public class ConsoleIO implements IO, Runnable {
     }
 
     private void printBoardToFile() {
-        Board board = TestSession.getInstance().getBoard();
+        Board board = GameSession.getInstance().getBoard();
         try (BufferedWriter writer = new BufferedWriter(new FileWriter("board.txt"))) {
             for (Cell cell : board.getCells()) {
                 StringBuilder cellLine = new StringBuilder();

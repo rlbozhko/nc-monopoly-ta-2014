@@ -24,7 +24,6 @@ public class PayBackAction implements Action {
                     playerIO.showMessage(((Cell) property).getName() + " выкуплено за " + property.getPayBackMoney());
                     property.setPledgePercent(0);
                     property.setTurnsToPayBack(0);
-                    property.setPledgePercent(0);
                 } else {
                     playerIO.showMessage("У Вас не достаточно средств!");
                 }

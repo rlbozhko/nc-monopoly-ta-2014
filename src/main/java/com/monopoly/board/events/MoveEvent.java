@@ -7,7 +7,7 @@ package com.monopoly.board.events;
 import com.monopoly.action.ActionUtils;
 import com.monopoly.board.Board;
 import com.monopoly.board.player.Player;
-import com.monopoly.game.session.TestSession;
+import com.monopoly.game.session.GameSession;
 import com.monopoly.io.IO;
 import com.monopoly.tools.XORShiftStrategy;
 
@@ -26,7 +26,7 @@ public class MoveEvent extends BaseEvent {
 
 	@Override
 	public void performEvent() {
-		Board board = TestSession.getInstance().getBoard();
+		Board board = GameSession.getInstance().getBoard();
 		Player player = board.getCurrentPlayer();
 		IO playerIO = ActionUtils.getPlayerIO(player);
 		boolean isAdvance = random.nextBoolean();

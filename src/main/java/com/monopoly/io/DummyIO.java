@@ -5,8 +5,8 @@ import com.monopoly.board.building.Building;
 import com.monopoly.board.cells.Property;
 import com.monopoly.board.player.Player;
 import com.monopoly.board.player.Status;
+import com.monopoly.game.session.GameSession;
 import com.monopoly.game.session.Session;
-import com.monopoly.game.session.TestSession;
 
 import java.util.List;
 
@@ -50,7 +50,7 @@ public class DummyIO implements IO, Runnable {
     }
 
     private void performPayRent(Action action) {
-        Property property = (Property) TestSession.getInstance().getBoard().getCells().get(player.getPosition());
+        Property property = (Property) GameSession.getInstance().getBoard().getCells().get(player.getPosition());
         if (player.getWallet().getMoney() >= property.getRent()) {
             performAction(action);
         } else {
@@ -60,7 +60,7 @@ public class DummyIO implements IO, Runnable {
 
     @Override
     public void outputBoardState() {
-        Session session = TestSession.getInstance();
+        Session session = GameSession.getInstance();
         System.out.println("Информация об игре");
         List<Player> players = session.getBoard().getPlayers();
         System.out.println("Вы на позиции: " + player.getPosition());
@@ -75,7 +75,7 @@ public class DummyIO implements IO, Runnable {
 
     @Override
     public void outputAvailableActions() {
-        ActionController actionController = TestSession.getInstance().getActionController();
+        ActionController actionController = GameSession.getInstance().getActionController();
         actions = actionController.getAvailableActions(player);
     }
 

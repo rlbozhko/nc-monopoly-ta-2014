@@ -8,10 +8,10 @@ public class MoneyEvent extends BaseEvent {
 
     private int startCash;
 
-    public MoneyEvent(String name, String description, int startCash) {
+    public MoneyEvent(String name, String description) {
         this.name = name;
         this.description = description;
-        this.startCash = startCash;
+        this.startCash = 200;
     }
 
     @Override
@@ -20,4 +20,12 @@ public class MoneyEvent extends BaseEvent {
         player.addMoney(startCash);
         ActionUtils.getPlayerIO(player).showMessage(description);
     }
+
+	public synchronized int getStartCash() {
+		return startCash;
+	}
+
+	public synchronized void setStartCash(int startCash) {
+		this.startCash = startCash;
+	}
 }

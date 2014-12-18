@@ -22,10 +22,10 @@ public class EmergencyEvent extends BaseEvent {
     private int cellCount;
     private Random random;
 
-    public EmergencyEvent(String name, String description, int cellCount) {
+    public EmergencyEvent(String name, String description) {
         this.name = name;
         this.description = description;
-        this.cellCount = cellCount;
+        this.cellCount = TestSession.getInstance().getBoard().getPropertyCell().size();
         random = new Random(cellCount);
     }
 
@@ -52,4 +52,12 @@ public class EmergencyEvent extends BaseEvent {
             buildings.get(randomIndex).levelDown();
         }
     }
+
+	public synchronized int getCellCount() {
+		return cellCount;
+	}
+
+	public synchronized void setCellCount(int cellCount) {
+		this.cellCount = cellCount;
+	}
 }

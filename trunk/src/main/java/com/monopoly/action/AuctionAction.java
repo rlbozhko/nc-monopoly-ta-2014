@@ -5,7 +5,7 @@ import com.monopoly.board.cells.PropertyCell;
 import com.monopoly.board.cells.PropertyStatus;
 import com.monopoly.board.player.Player;
 import com.monopoly.board.player.Status;
-import com.monopoly.game.session.TestSession;
+import com.monopoly.game.session.GameSession;
 import com.monopoly.io.IO;
 
 import java.util.ArrayList;
@@ -27,8 +27,7 @@ public class AuctionAction implements Action {
 
     @Override
     public void performAction(Player player) {
-
-        List<Player> participants = new ArrayList<>(TestSession.getInstance().getBoard().getPlayers());
+        List<Player> participants = new ArrayList<>(GameSession.getInstance().getBoard().getPlayers());
         ActionUtils.sendMessageToAll("Открыт аукцион на " + property.getName());
 
         Player winner = null;

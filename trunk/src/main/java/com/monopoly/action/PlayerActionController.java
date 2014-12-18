@@ -5,8 +5,8 @@ import com.monopoly.board.cells.CellType;
 import com.monopoly.board.cells.PropertyCell;
 import com.monopoly.board.player.Player;
 import com.monopoly.board.player.Status;
+import com.monopoly.game.session.GameSession;
 import com.monopoly.game.session.Session;
-import com.monopoly.game.session.TestSession;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -19,7 +19,7 @@ public class PlayerActionController implements ActionController {
 
     @Override
     public List<Action> getAvailableActions(Player player) {
-        session = TestSession.getInstance();
+        session = GameSession.getInstance();
         List<Action> result = new ArrayList<>();
         if (Status.FINISH.equals(player.getStatus())) {
             return result;

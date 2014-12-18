@@ -4,7 +4,8 @@ import com.monopoly.board.Board;
 import com.monopoly.board.building.Building;
 import com.monopoly.board.cells.Cell;
 import com.monopoly.board.cells.Property;
-import com.monopoly.game.session.TestSession;
+import com.monopoly.game.session.GameSession;
+
 import static org.apache.commons.collections4.CollectionUtils.isEmpty;
 
 import java.util.Collections;
@@ -25,13 +26,13 @@ public class EmergencyEvent extends BaseEvent {
     public EmergencyEvent(String name, String description) {
         this.name = name;
         this.description = description;
-        this.cellCount = TestSession.getInstance().getBoard().getPropertyCell().size();
+        this.cellCount = 1;
         random = new Random(cellCount);
     }
 
     @Override
     public void performEvent() {
-        Board board = TestSession.getInstance().getBoard();
+        Board board = GameSession.getInstance().getBoard();
         List<Cell> cells = board.getPropertyCell();
         for (int i = 0; i < cellCount; i++) {
             randomBuildingLevelDown(getRandomCellBuildings(cells));

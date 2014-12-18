@@ -3,6 +3,7 @@ package com.monopoly.board.cells;
 import com.monopoly.board.building.Building;
 import com.monopoly.board.player.Player;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import static org.apache.commons.collections4.CollectionUtils.isEmpty;
@@ -47,15 +48,15 @@ public class PropertyCell extends Cell implements Property {
         private int turnsToPayBack;
 
 
-        public PropertyBuilder(String name, List<Building> buildings, int position) {
+        public PropertyBuilder(String name, Monopoly monopoly, int position) {
             this.name = name;
             this.description = name;
             this.position = position;
-            this.buildings = buildings;
+            this.buildings = new ArrayList<>();
             this.owner = null;
             this.basePrice = DEFAULT_BASE_PRICE;
             this.baseRent = DEFAULT_BASE_RENT;
-            this.monopoly = null;
+            this.monopoly = monopoly;
             this.maxLevel = DEFAULT_MAX_LEVEL;
             this.maxBuildings = DEFAULT_MAX_BUILDINGS;
             this.status = PropertyStatus.PLEDGED;
@@ -72,12 +73,14 @@ public class PropertyCell extends Cell implements Property {
             return propertyCell;
         }
 
-        public void setMaxLevel(int maxLevel) {
+        public PropertyBuilder setMaxLevel(int maxLevel) {
             this.maxLevel = maxLevel;
+            return this;
         }
 
-        public void setMaxBuildings(int maxBuildings) {
+        public PropertyBuilder setMaxBuildings(int maxBuildings) {
             this.maxBuildings = maxBuildings;
+            return this;
         }
 
         public PropertyBuilder setDescription(String description) {
@@ -100,8 +103,8 @@ public class PropertyCell extends Cell implements Property {
             return this;
         }
 
-        public PropertyBuilder setMonopoly(Monopoly monopoly) {
-            this.monopoly = monopoly;
+        public PropertyBuilder setBuildings(List<Building> buildings) {
+            this.buildings = buildings;
             return this;
         }
 

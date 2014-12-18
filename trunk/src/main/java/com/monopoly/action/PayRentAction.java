@@ -2,7 +2,7 @@ package com.monopoly.action;
 
 import com.monopoly.board.cells.Property;
 import com.monopoly.board.player.Player;
-import com.monopoly.game.session.TestSession;
+import com.monopoly.game.session.GameSession;
 import com.monopoly.io.IO;
 
 /**
@@ -12,7 +12,7 @@ public class PayRentAction implements Action {
 
     @Override
     public void performAction(Player player) {
-        Property property = (Property) TestSession.getInstance().getBoard().getCells().get(player.getPosition());
+        Property property = (Property) GameSession.getInstance().getBoard().getCells().get(player.getPosition());
         Player owner = property.getOwner();
         IO playerIO = ActionUtils.getPlayerIO(player);
         IO ownerIO = ActionUtils.getPlayerIO(owner);

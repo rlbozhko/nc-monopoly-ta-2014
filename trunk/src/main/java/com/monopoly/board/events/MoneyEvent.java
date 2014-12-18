@@ -2,7 +2,7 @@ package com.monopoly.board.events;
 
 import com.monopoly.action.ActionUtils;
 import com.monopoly.board.player.Player;
-import com.monopoly.game.session.TestSession;
+import com.monopoly.game.session.GameSession;
 
 public class MoneyEvent extends BaseEvent {
 
@@ -16,7 +16,7 @@ public class MoneyEvent extends BaseEvent {
 
     @Override
     public void performEvent() {
-        Player player = TestSession.getInstance().getBoard().getCurrentPlayer();
+        Player player = GameSession.getInstance().getBoard().getCurrentPlayer();
         player.addMoney(startCash);
         ActionUtils.getPlayerIO(player).showMessage(description);
     }

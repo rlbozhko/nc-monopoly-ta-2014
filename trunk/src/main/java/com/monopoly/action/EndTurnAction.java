@@ -4,7 +4,7 @@ import com.monopoly.board.Board;
 import com.monopoly.board.cells.Property;
 import com.monopoly.board.player.Player;
 import com.monopoly.board.player.Status;
-import com.monopoly.game.session.TestSession;
+import com.monopoly.game.session.GameSession;
 import com.monopoly.io.IO;
 
 import java.util.ArrayList;
@@ -17,7 +17,7 @@ public class EndTurnAction implements Action {
     Board board;
 
     public EndTurnAction() {
-        this.board = TestSession.getInstance().getBoard();
+        this.board = GameSession.getInstance().getBoard();
     }
 
     @Override

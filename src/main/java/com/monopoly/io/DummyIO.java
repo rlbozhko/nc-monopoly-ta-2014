@@ -105,7 +105,7 @@ public class DummyIO implements IO, Runnable {
     }
 
     @Override
-    public Deal dealDialog(Player otherPlayer) {
+    public com.monopoly.action.deal.Deal dealDialog(Player otherPlayer) {
         return null;
     }
 

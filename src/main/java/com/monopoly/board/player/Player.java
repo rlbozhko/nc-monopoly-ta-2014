@@ -26,17 +26,6 @@ public class Player implements MoneyOperations, MoveOperations, PropertyOperatio
         payRent = false;
     }
 
-    private Player(String name, int position, int lastPosition, Status status, Wallet wallet, List<Property> property,
-                   boolean payRent) {
-        this.name = name;
-        this.position = position;
-        this.lastPosition = lastPosition;
-        this.status = status;
-        this.wallet = wallet;
-        this.propertyList = property;
-        this.payRent = payRent;
-    }
-
     @Override
     public int getPosition() {
         return position;
@@ -62,17 +51,7 @@ public class Player implements MoneyOperations, MoveOperations, PropertyOperatio
         }
 
         if (hasPledgedProperty()) {
-            for (Property property : propertyList) {
-                if (property.isPledged()) {
-                    property.setTurnsToPayBack(property.getTurnsToPayBack() - 1);
-                    property.setPayBackMoney((int)(property.getPayBackMoney() * (1 + property.getPledgePercent())));
-                    if (property.getTurnsToPayBack() == 0) {
-                        ActionUtils.getPlayerIO(this).showMessage("ВНИМАНИЕ!!!\n" +
-                                "Срок погашения заема истек для " + ((Cell)property).getName() + ".\n" +
-                                "Если вы не погасите задолженность, то по окончанию хода начнется аукцион");
-                    }
-                }
-            }
+            pledgedPropertyCheck();
         }
 
         Cell currentCell = GameSession.getInstance().getBoard().getCells().get(this.getPosition());
@@ -83,6 +62,24 @@ public class Player implements MoneyOperations, MoveOperations, PropertyOperatio
             if (null != property.getOwner() && !this.equals(property.getOwner())) {
                 this.setPayRent(true);
             }
+        }
+    }
+
+    private void pledgedPropertyCheck() {
+        for (Property property : propertyList) {
+            if (property.isPledged()) {
+                property.decrementTurnsToPayBack();
+                property.risePayBackMoney();
+                propertyWarning(property);
+            }
+        }
+    }
+
+    private void propertyWarning(Property property) {
+        if (property.getTurnsToPayBack() == 0) {
+            ActionUtils.getPlayerIO(this).showMessage("ВНИМАНИЕ!!!\n" +
+                    "Срок погашения заема истек для " + ((Cell) property).getName() + ".\n" +
+                    "Если вы не погасите задолженность, то по окончанию хода начнется аукцион");
         }
     }
 
@@ -189,7 +186,7 @@ public class Player implements MoneyOperations, MoveOperations, PropertyOperatio
         }
 
         public Player getPlayer() {
-            Player player =  new Player(name);
+            Player player = new Player(name);
             player.position = position;
             player.lastPosition = lastPosition;
             player.status = status;

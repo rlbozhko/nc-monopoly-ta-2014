@@ -2,6 +2,7 @@ package com.monopoly.board;
 
 import com.monopoly.board.cells.Cell;
 import com.monopoly.board.cells.CellType;
+import com.monopoly.board.cells.EventCell;
 import com.monopoly.board.player.Player;
 import com.monopoly.board.player.Status;
 
@@ -54,6 +55,11 @@ public class Board implements CellOperations, PlayerOperations {
     @Override
     public List<Cell> getEventCell() {
         return eventCells;
+    }
+
+    @Override
+    public void performStartEvent() {
+        ((EventCell) cells.get(0)).getEvent().performEvent();
     }
 
     @Override

@@ -128,7 +128,7 @@ public class GameSession implements Session {
     }
 
 
-    private static Board newBoard(List<Player> players, int startMoney) {
+    public static Board newBoard(List<Player> players, int startMoney) {
         Monopoly monopoly1 = new Monopoly("Monopoly1");
         Monopoly monopoly2 = new Monopoly("Monopoly2");
         Monopoly monopoly3 = new Monopoly("Monopoly3");

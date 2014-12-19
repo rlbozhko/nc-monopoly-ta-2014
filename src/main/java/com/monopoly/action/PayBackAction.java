@@ -10,26 +10,35 @@ import com.monopoly.io.IO;
  * Created by Roma on 12.12.2014.
  */
 public class PayBackAction implements Action {
+    private Player player;
+    private IO playerIO;
+    private Property property;
 
     @Override
-    public void performAction(Player player) {
-        IO playerIO = ActionUtils.getPlayerIO(player);
-        Property property = playerIO.selectProperty(player);
+    public void performAction(Player aPlayer) {
+        this.player = aPlayer;
+        playerIO = ActionUtils.getPlayerIO(player);
+        property = playerIO.selectProperty(player);
+
         if (property != null && property.isPledged()) {
             int payBackMoney = property.getPayBackMoney();
             if (playerIO.yesNoDialog("Выкупить " + ((Cell) property).getName() + " за $" + payBackMoney + "?")) {
-                if (payBackMoney <= player.getMoney()) {
-                    player.subtractMoney(payBackMoney);
-                    property.setStatus(PropertyStatus.UNPLEDGED);
-                    playerIO.showMessage(((Cell) property).getName() + " выкуплено за " + property.getPayBackMoney());
-                    property.setPledgePercent(0);
-                    property.setTurnsToPayBack(0);
-                } else {
-                    playerIO.showMessage("У Вас не достаточно средств!");
-                }
+                tryPayBack(payBackMoney);
             }
         } else {
-            playerIO.showMessage("Собственность должна быть заложена");
+            playerIO.showMessage("Эта собственность не заложена!");
+        }
+    }
+
+    private void tryPayBack(int payBackMoney) {
+        if (payBackMoney <= player.getMoney()) {
+            player.subtractMoney(payBackMoney);
+            property.setStatus(PropertyStatus.UNPLEDGED);
+            playerIO.showMessage(((Cell) property).getName() + " выкуплено за " + property.getPayBackMoney());
+            property.setPledgePercent(0);
+            property.setTurnsToPayBack(0);
+        } else {
+            playerIO.showMessage("У Вас не достаточно средств!");
         }
     }
 

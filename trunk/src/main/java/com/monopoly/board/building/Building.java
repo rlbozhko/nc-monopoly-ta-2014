@@ -18,20 +18,25 @@ public class Building implements BuildingOperations {
     private int maxLevel;
     
     public Building(BuildingType type, int cost) {
-    	if (maxLevel < 0){
-    		throw new RuntimeException("MaxLevel can't be < 0");
-    	}
     	if (cost < 0){
     		throw new RuntimeException("You should pay money!");
     	}
+    	AvailableBuilding buildings = BuildingSettings.getInstance()
+    										.getSettingsByType(type);
+    	
+    	this.name = buildings.getName();
+    	this.description = buildings.getDescription();
+    	this.maxLevel = buildings.getMaxLevel();
+    	
         //BuildingFactory building = new BuildingFactory(type);
-        this.name = BuildingFactory.getCurrentBuilding(type).getName();
-        this.description = BuildingFactory.getCurrentBuilding(type)
-        									.getDescription();
-        this.primaryCost = cost;
+        //this.name = BuildingFactory.getCurrentBuilding(type).getName();
+        //this.description = BuildingFactory.getCurrentBuilding(type)
+        //									.getDescription();
+        
+    	this.primaryCost = cost;
         this.currentPrice = cost;
         this.currentLevel = 1;
-        this.maxLevel = BuildingFactory.getCurrentBuilding(type).getMaxLevel();
+        //this.maxLevel = BuildingFactory.getCurrentBuilding(type).getMaxLevel();
     }
     
 	public boolean levelUp() {

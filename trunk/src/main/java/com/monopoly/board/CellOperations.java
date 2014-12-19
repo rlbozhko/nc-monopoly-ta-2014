@@ -17,4 +17,6 @@ public interface CellOperations {
     List<Cell> getPropertyCell();
 
     List<Cell> getEventCell();
+
+    void performStartEvent();
 }

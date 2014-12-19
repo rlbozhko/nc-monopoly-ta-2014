@@ -138,6 +138,14 @@ public class PropertyCell extends Cell implements Property {
     }
 
     @Override
+    public void resetOwner() {
+        if (owner != null) {
+            owner.getPropertyList().remove(this);
+            owner = null;
+        }
+    }
+
+    @Override
     public Player getOwner() {
         return owner;
     }
@@ -241,6 +249,11 @@ public class PropertyCell extends Cell implements Property {
     }
 
     @Override
+    public void decrementTurnsToPayBack() {
+        turnsToPayBack--;
+    }
+
+    @Override
     public int getTurnsToPayBack() {
         return turnsToPayBack;
     }
@@ -253,6 +266,11 @@ public class PropertyCell extends Cell implements Property {
     @Override
     public void setPayBackMoney(int payBackMoney) {
         this.payBackMoney = payBackMoney;
+    }
+
+    @Override
+    public void risePayBackMoney() {
+        payBackMoney = (int)(payBackMoney * (1 + payBackMoney));
     }
 
     @Override

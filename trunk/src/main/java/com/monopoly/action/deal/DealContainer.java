@@ -1,24 +1,23 @@
-package com.monopoly.action;
+package com.monopoly.action.deal;
 
 import com.monopoly.board.cells.Property;
 import com.monopoly.board.player.Player;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.*;
 
 /**
  * Created by Roma on 24.11.2014.
  */
-public class Deal {
+public class DealContainer {
     private int askMoney;
     private int giveMoney;
-    private List<Property> askProperties;
-    private List<Property> giveProperties;
+    private Set<Property> askProperties;
+    private Set<Property> giveProperties;
     private Player source;
 
-    public Deal(Player source) {
-        askProperties = new ArrayList<>();
-        giveProperties = new ArrayList<>();
+    public DealContainer(Player source) {
+        askProperties = new LinkedHashSet<>();
+        giveProperties = new LinkedHashSet<>();
         this.source = source;
     }
 
@@ -43,7 +42,7 @@ public class Deal {
     }
 
     public List<Property> getAskProperties() {
-        return askProperties;
+        return new LinkedList<>(askProperties);
     }
 
     public void addAskProperty(Property askProperty) {
@@ -53,7 +52,7 @@ public class Deal {
     }
 
     public List<Property> getGiveProperties() {
-        return giveProperties;
+        return new LinkedList<>(giveProperties);
     }
 
     public void addGiveProperty(Property giveProperty) {

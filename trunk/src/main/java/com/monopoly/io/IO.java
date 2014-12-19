@@ -1,7 +1,7 @@
 package com.monopoly.io;
 
 import com.monopoly.action.Action;
-import com.monopoly.action.Deal;
+import com.monopoly.action.deal.DealContainer;
 import com.monopoly.board.building.Building;
 import com.monopoly.board.cells.Property;
 import com.monopoly.board.player.Player;
@@ -24,7 +24,7 @@ public interface IO {
 
     Building selectBuilding(Property property);
 
-    Deal dealDialog(Player otherPlayer);
+    com.monopoly.action.deal.Deal dealDialog(Player otherPlayer);
 
     boolean yesNoDialog(String message);
 

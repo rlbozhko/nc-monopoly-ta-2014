@@ -8,6 +8,7 @@ import com.monopoly.game.session.GameSession;
 import com.monopoly.game.session.Session;
 import com.monopoly.io.IO;
 
+import java.util.LinkedList;
 import java.util.List;
 
 import static org.apache.commons.collections4.CollectionUtils.isEmpty;
@@ -38,14 +39,10 @@ public class GiveUpAction implements Action {
         for (IO io : session.getIO()) {
             io.showMessage(player.getName() + " сдался");
         }
-        //Место для аукциона
-        List<Property> property = player.getPropertyList();
-        while (!isEmpty(property)) {
-            property.get(0).setAndAddToOwner(null);
+        List<Property> properties = new LinkedList<>(player.getPropertyList());
+        for (Property property : properties) {
+            property.resetOwner();
         }
-        //new AuctionAction().performAction(player);
-        //
-
     }
 
     @Override

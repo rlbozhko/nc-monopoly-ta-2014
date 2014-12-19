@@ -15,6 +15,8 @@ import java.util.List;
 public interface Property {
     void setAndAddToOwner(Player player);
 
+    void resetOwner();
+
     Player getOwner();
 
     List<Building> getBuildings();
@@ -45,11 +47,15 @@ public interface Property {
 
     void setTurnsToPayBack(int turnsToPayBack);
 
+    void decrementTurnsToPayBack();
+
     int getTurnsToPayBack();
 
     int getPayBackMoney();
 
     void setPayBackMoney(int payBackMoney);
+
+    void risePayBackMoney();
 
     double getPledgePercent();
 

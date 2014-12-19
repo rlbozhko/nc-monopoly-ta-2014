@@ -2,7 +2,7 @@ package com.monopoly.io;
 
 import com.monopoly.action.Action;
 import com.monopoly.action.ActionController;
-import com.monopoly.action.Deal;
+import com.monopoly.action.deal.*;
 import com.monopoly.board.Board;
 import com.monopoly.board.building.Building;
 import com.monopoly.board.cells.Cell;
@@ -18,6 +18,8 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.util.List;
 import java.util.Scanner;
+
+import static org.apache.commons.collections4.CollectionUtils.isEmpty;
 
 /**
  * Created by Roma on 20.11.2014.
@@ -140,15 +142,16 @@ public class ConsoleIO implements IO, Runnable {
 
     @Override
     public Deal dealDialog(Player otherPlayer) {
-        Deal deal = new Deal(player);
+        Deal deal = new EmptyDeal(player, otherPlayer);;
+        DealContainer dealContainer = new DealContainer(player);
         System.out.println("Установите условия сделки");
         boolean continueSelect = true;
         while (continueSelect) {
             System.out.println(
-                    "1 Предложить денег " + deal.getGiveMoney() + "\n" +
-                            "2 Требовать денег " + deal.getAskMoney() + "\n" +
-                            "3 Предложить собственность " + deal.getGiveProperties() + "\n" +
-                            "4 Требовать собственность " + deal.getAskProperties() + "\n" +
+                    "1 Предложить денег " + dealContainer.getGiveMoney() + "\n" +
+                            "2 Требовать денег " + dealContainer.getAskMoney() + "\n" +
+                            "3 Предложить собственность " + dealContainer.getGiveProperties() + "\n" +
+                            "4 Требовать собственность " + dealContainer.getAskProperties() + "\n" +
                             "7 Отправить предложение\n" +
                             "0 Отменить сделку\n");
             int choice = positiveIntInput();
@@ -158,7 +161,7 @@ public class ConsoleIO implements IO, Runnable {
                     System.out.println("Введите количество денег:");
                     input = positiveIntInput();
                     if (input >= 0 && input <= player.getMoney()) {
-                        deal.setGiveMoney(input > 0 ? input : 0);
+                        dealContainer.setGiveMoney(input > 0 ? input : 0);
                     } else {
                         System.out.println("Число должно быть в диапозоне от 0 до " + player.getMoney());
                     }
@@ -166,19 +169,31 @@ public class ConsoleIO implements IO, Runnable {
                 case 2:
                     System.out.println("Введите количество денег:");
                     input = positiveIntInput();
-                    deal.setAskMoney(input > 0 ? input : 0);
+                    dealContainer.setAskMoney(input > 0 ? input : 0);
                     if (input < 0) {
                         System.out.println("Введите положительное число");
                     }
                     break;
                 case 3:
-                    deal.addGiveProperty(selectProperty(player));
+                    dealContainer.addGiveProperty(selectProperty(player));
                     break;
                 case 4:
-                    deal.addAskProperty(selectProperty(otherPlayer));
+                    dealContainer.addAskProperty(selectProperty(otherPlayer));
                     break;
                 case 7:
                     continueSelect = false;
+                    if (dealContainer.getAskMoney() != 0) {
+                        deal = new AskMoneyDeal(deal, dealContainer.getAskMoney());
+                    }
+                    if (dealContainer.getGiveMoney() != 0) {
+                        deal = new GiveMoneyDeal(deal, dealContainer.getGiveMoney());
+                    }
+                    if (!isEmpty(dealContainer.getAskProperties())) {
+                        deal = new AskPropertyDeal(deal, dealContainer.getAskProperties());
+                    }
+                    if (!isEmpty(dealContainer.getGiveProperties())) {
+                        deal = new GivePropertyDeal(deal, dealContainer.getGiveProperties());
+                    }
                     break;
                 default:
                     deal = null;

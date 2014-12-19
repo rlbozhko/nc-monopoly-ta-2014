@@ -19,6 +19,7 @@ public class ValueGeneratorForDice implements Runnable {
 		this.randomStrategy = randomStrategy;
 		this.value1 = 1;
 		this.value2 = 1;
+		this.isGeneratorEnabled = true;
 	}
 
 	public synchronized void finish(){

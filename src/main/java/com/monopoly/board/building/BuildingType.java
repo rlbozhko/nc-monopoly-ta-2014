@@ -6,6 +6,14 @@ public enum BuildingType {
 	PARK,
 	LAW_DEPARTMENT,
 	CASTLE,
-	MARKET
+	MARKET;
 	
+	public static BuildingType getTypeByText(String text) {
+		for (BuildingType type : BuildingType.values()) {
+			if (type.name().toLowerCase().equals(text.toLowerCase())) {
+				return type;
+			}
+		}
+		throw new RuntimeException("Not supported building type " + text);
+	}
 }

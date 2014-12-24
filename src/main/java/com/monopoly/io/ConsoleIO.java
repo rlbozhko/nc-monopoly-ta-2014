@@ -146,8 +146,8 @@ public class ConsoleIO implements IO, Runnable {
 
     @Override
     public Deal dealDialog(Player otherPlayer) {
-        Deal deal = new EmptyDeal(player, otherPlayer);
-        DealContainer dealContainer = new DealContainer(player);
+        Deal deal = null;
+        DealContainer dealContainer = new DealContainer(player, otherPlayer);
         System.out.println("Установите условия сделки");
         boolean continueSelect = true;
         while (continueSelect) {
@@ -186,21 +186,9 @@ public class ConsoleIO implements IO, Runnable {
                     break;
                 case 7:
                     continueSelect = false;
-                    if (dealContainer.getAskMoney() != 0) {
-                        deal = new AskMoneyDeal(deal, dealContainer.getAskMoney());
-                    }
-                    if (dealContainer.getGiveMoney() != 0) {
-                        deal = new GiveMoneyDeal(deal, dealContainer.getGiveMoney());
-                    }
-                    if (!isEmpty(dealContainer.getAskProperties())) {
-                        deal = new AskPropertyDeal(deal, dealContainer.getAskProperties());
-                    }
-                    if (!isEmpty(dealContainer.getGiveProperties())) {
-                        deal = new GivePropertyDeal(deal, dealContainer.getGiveProperties());
-                    }
+                    deal = dealContainer.createDeal();
                     break;
                 default:
-                    deal = null;
                     continueSelect = false;
                     showMessage("Сделка отменена");
                     break;

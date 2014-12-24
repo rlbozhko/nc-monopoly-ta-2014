@@ -24,7 +24,7 @@ public class AskPropertyDeal extends WrapperDeal {
     @Override
     public String message() {
         StringBuilder message = new StringBuilder();
-        message.append("Требует\n")
+        message.append("Требует ")
                 .append("Собственность: ").append(properties).append("\n");
         return super.message() + message.toString();
     }

@@ -256,4 +256,12 @@ public class PropertyCell extends Cell implements Property {
     public void setPledgePercent(double pledgePercent) {
         this.pledgePercent = pledgePercent;
     }
+
+    @Override
+    public void resetPledge() {
+        setStatus(PropertyStatus.UNPLEDGED);
+        setTurnsToPayBack(0);
+        setPledgePercent(0);
+        setPayBackMoney(0);
+    }
 }

@@ -35,8 +35,10 @@ public class DealTest {
 
         List<Property> askProperties = new ArrayList<>();
         askProperties.add(property1);
+        askProperties.add(property2);
         List<Property> giveProperties = new ArrayList<>();
         giveProperties.add(property2);
+        giveProperties.add(property1);
 
         Deal deal = new DealMock(source, target);
         deal = new AskMoneyDeal(deal, 100);

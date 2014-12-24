@@ -55,4 +55,6 @@ public interface Property {
     double getPledgePercent();
 
     void setPledgePercent(double pledgePercent);
+
+    void resetPledge();
 }

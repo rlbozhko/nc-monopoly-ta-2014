@@ -5,6 +5,8 @@ import com.monopoly.board.player.Player;
 
 import java.util.*;
 
+import static org.apache.commons.collections4.CollectionUtils.isEmpty;
+
 /**
  * Created by Roma on 24.11.2014.
  */
@@ -14,15 +16,34 @@ public class DealContainer {
     private Set<Property> askProperties;
     private Set<Property> giveProperties;
     private Player source;
+    private Player target;
 
-    public DealContainer(Player source) {
+    public DealContainer(Player source, Player target) {
         askProperties = new LinkedHashSet<>();
         giveProperties = new LinkedHashSet<>();
         this.source = source;
+        this.target = target;
     }
 
     public Player getSource() {
         return source;
+    }
+
+    public Deal createDeal() {
+        Deal deal = new EmptyDeal(source, target);
+        if (getAskMoney() != 0) {
+            deal = new AskMoneyDeal(deal, getAskMoney());
+        }
+        if (getGiveMoney() != 0) {
+            deal = new GiveMoneyDeal(deal, getGiveMoney());
+        }
+        if (!isEmpty(getAskProperties())) {
+            deal = new AskPropertyDeal(deal, getAskProperties());
+        }
+        if (!isEmpty(getGiveProperties())) {
+            deal = new GivePropertyDeal(deal, getGiveProperties());
+        }
+        return deal;
     }
 
     public int getAskMoney() {

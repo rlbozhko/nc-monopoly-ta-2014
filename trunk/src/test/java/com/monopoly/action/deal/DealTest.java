@@ -1,14 +1,14 @@
 package com.monopoly.action.deal;
 
-import com.monopoly.board.Board;
 import com.monopoly.board.building.Building;
 import com.monopoly.board.cells.Monopoly;
 import com.monopoly.board.cells.Property;
 import com.monopoly.board.cells.PropertyCell;
 import com.monopoly.board.player.Player;
-import com.monopoly.game.session.GameSession;
+import com.monopoly.board.player.PropertyManager;
 
 import java.util.ArrayList;
+import java.util.LinkedList;
 import java.util.List;
 
 /**
@@ -18,15 +18,20 @@ public class DealTest {
     public static void main(String[] args) {
         Player source = new Player("SourcePlayer");
         Player target = new Player("TargetPlayer");
+        List<Player> players = new LinkedList<>();
+        players.add(source);
+        players.add(target);
 
         Monopoly monopoly1 = new Monopoly("Monopoly1");
-        Property property1 = new PropertyCell("c2m1", "c2m1 desc", 1, null,
+        Property property1 = new PropertyCell("c2m1", "c2m1 desc", 1,
                 new ArrayList<Building>(), 1000, 200, monopoly1);
-        Property property2 = new PropertyCell("c3m1", "c3m1 desc", 2, null,
+        Property property2 = new PropertyCell("c3m1", "c3m1 desc", 2,
                 new ArrayList<Building>(), 1000, 200, monopoly1);
 
-        property1.setAndAddToOwner(target);
-        property2.setAndAddToOwner(source);
+        PropertyManager propertyManager = new PropertyManager(players);
+
+        propertyManager.setPropertyOwner(target, property1);
+        propertyManager.setPropertyOwner(source,property2);
 
         List<Property> askProperties = new ArrayList<>();
         askProperties.add(property1);
@@ -40,6 +45,5 @@ public class DealTest {
         deal = new GivePropertyDeal(deal, giveProperties);
 
         System.out.println(deal.message());
-
     }
 }

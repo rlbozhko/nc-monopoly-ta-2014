@@ -2,6 +2,8 @@ package com.monopoly.board.cells;
 
 import com.monopoly.board.building.Building;
 import com.monopoly.board.player.Player;
+import com.monopoly.board.player.PropertyManager;
+import com.monopoly.game.session.GameSession;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -16,7 +18,6 @@ import static org.apache.commons.collections4.CollectionUtils.isEmpty;
  * ЯчейкаСобственности
  */
 public class PropertyCell extends Cell implements Property {
-    private Player owner = null;
     private List<Building> buildings;
     private int basePrice;
     private int baseRent;
@@ -65,7 +66,7 @@ public class PropertyCell extends Cell implements Property {
 
         public PropertyCell getPropertyCell() {
             PropertyCell propertyCell = new PropertyCell(name, description, position,
-                    owner, buildings, basePrice, baseRent, monopoly);
+                    buildings, basePrice, baseRent, monopoly);
             propertyCell.maxLevel = maxLevel;
             propertyCell.maxBuildings = maxBuildings;
             propertyCell.status = status;
@@ -115,9 +116,8 @@ public class PropertyCell extends Cell implements Property {
     }
 
     public PropertyCell(String name, String description, int position,
-                        Player owner, List<Building> buildings, int basePrice, int baseRent, Monopoly monopoly) {
+                        List<Building> buildings, int basePrice, int baseRent, Monopoly monopoly) {
         super(name, description, CellType.PROPERTY_CELL, position);
-        this.owner = owner;
         this.basePrice = basePrice;
         this.baseRent = baseRent;
         this.monopoly = monopoly;
@@ -125,31 +125,6 @@ public class PropertyCell extends Cell implements Property {
         this.buildings = buildings;
         this.status = PropertyStatus.UNPLEDGED;
     }
-
-    @Override
-    public void setAndAddToOwner(Player player) {
-        if (owner != null) {
-            owner.getPropertyList().remove(this);
-        }
-        owner = player;
-        if (player != null) {
-            player.getPropertyList().add(this);
-        }
-    }
-
-    @Override
-    public void resetOwner() {
-        if (owner != null) {
-            owner.getPropertyList().remove(this);
-            owner = null;
-        }
-    }
-
-    @Override
-    public Player getOwner() {
-        return owner;
-    }
-
 
     @Override
     public List<Building> getBuildings() {
@@ -166,9 +141,10 @@ public class PropertyCell extends Cell implements Property {
 
     @Override
     public boolean upgradeBuilding(Building building) {
+        PropertyManager propertyManager = GameSession.getInstance().getPropertyManager();
         if (building != null && building.currentLevel() < building.getMaxLevel()) {
             building.levelUp();
-            owner.subtractMoney(building.currentPrice());
+            propertyManager.getPropertyOwner(this).subtractMoney(building.currentPrice());
             return true;
         }
         return false;
@@ -176,13 +152,14 @@ public class PropertyCell extends Cell implements Property {
 
     @Override
     public boolean sellBuilding(Building building) {
+        PropertyManager propertyManager = GameSession.getInstance().getPropertyManager();
         if (building != null) {
             if (building.currentLevel() > 1) {
                 building.levelDown();
             } else {
                 building = null;
             }
-            owner.addMoney(building.currentPrice() / 2);
+            propertyManager.getPropertyOwner(this).addMoney(building.currentPrice() / 2);
             return true;
         }
         return false;
@@ -205,10 +182,7 @@ public class PropertyCell extends Cell implements Property {
 
     @Override
     public boolean isPledged() {
-        if (PropertyStatus.PLEDGED == status) {
-            return true;
-        }
-        return false;
+        return PropertyStatus.PLEDGED == status;
     }
 
     @Override
@@ -270,7 +244,7 @@ public class PropertyCell extends Cell implements Property {
 
     @Override
     public void risePayBackMoney() {
-        payBackMoney = (int)(payBackMoney * (1 + payBackMoney));
+        payBackMoney = payBackMoney * (1 + payBackMoney);
     }
 
     @Override

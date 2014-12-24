@@ -4,6 +4,7 @@ import com.monopoly.board.cells.Property;
 import com.monopoly.board.cells.PropertyCell;
 import com.monopoly.board.cells.PropertyStatus;
 import com.monopoly.board.player.Player;
+import com.monopoly.board.player.PropertyManager;
 import com.monopoly.board.player.Status;
 import com.monopoly.game.session.GameSession;
 import com.monopoly.io.IO;
@@ -23,6 +24,7 @@ public class AuctionAction implements Action {
     private Player winner = null;
     private List<Player> participants;
     private PropertyCell property;
+    private PropertyManager propertyManager;
 
     public AuctionAction(Property property) {
         this.property = (PropertyCell) property;
@@ -30,6 +32,8 @@ public class AuctionAction implements Action {
 
     @Override
     public void performAction(Player player) {
+        propertyManager = GameSession.getInstance().getPropertyManager();
+
         participants = new ArrayList<>(GameSession.getInstance().getBoard().getPlayers());
         ActionUtils.sendMessageToAll("Открыт аукцион на " + property.getName());
 
@@ -42,12 +46,12 @@ public class AuctionAction implements Action {
     private void manageProperty() {
         if (winner != null && lastRate <= winner.getMoney()) {
             winner.subtractMoney(lastRate);
-            property.setAndAddToOwner(winner);
+            propertyManager.setPropertyOwner(winner, property);
             property.setStatus(PropertyStatus.UNPLEDGED);
-            ActionUtils.sendMessageToAll(winner.getName() + " победил в аукционе за " + ((PropertyCell) property).getName());
+            ActionUtils.sendMessageToAll(winner.getName() + " победил в аукционе за " + property.getName());
         } else {
             //назначить Штраф или в Тюрьму
-            property.resetOwner();
+            propertyManager.resetPropertyOwner(property);
         }
     }
 

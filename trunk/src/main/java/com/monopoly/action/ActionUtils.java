@@ -12,10 +12,10 @@ import java.util.List;
 public class ActionUtils {
     public static IO getPlayerIO(Player player) {
         List<IO> ioList = GameSession.getInstance().getIO();
-        for (int i = 0; i < ioList.size(); i++) {
-            Player user = ioList.get(i).getUser();
+        for (IO io : ioList) {
+            Player user = io.getUser();
             if (player.equals(user)) {
-                return ioList.get(i);
+                return io;
             }
         }
         return null;

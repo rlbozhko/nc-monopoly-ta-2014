@@ -21,7 +21,7 @@ public class PlayerDaoImplTest extends TestCase {
 
         for (Player player: players){
             assertNotNull("Player is not null",player.getName());
-            assertNotNull("Wallent is not null",player.getWallet().getMoney());
+            assertNotNull("Wallent is not null",player.getMoney());
 //            System.out.println(player.getName()+ " " + player.getWallet().getMoney()+" "+ player.getPosition());
         }
     }

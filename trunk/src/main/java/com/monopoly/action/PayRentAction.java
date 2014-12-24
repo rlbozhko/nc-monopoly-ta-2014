@@ -2,6 +2,7 @@ package com.monopoly.action;
 
 import com.monopoly.board.cells.Property;
 import com.monopoly.board.player.Player;
+import com.monopoly.board.player.PropertyManager;
 import com.monopoly.game.session.GameSession;
 import com.monopoly.io.IO;
 
@@ -12,15 +13,16 @@ public class PayRentAction implements Action {
 
     @Override
     public void performAction(Player player) {
-        Property property = (Property) GameSession.getInstance().getBoard().getCells().get(player.getPosition());
-        Player owner = property.getOwner();
+        PropertyManager propertyManager = GameSession.getInstance().getPropertyManager();
+        Property property = (Property) player.getCurrentCell();
+        Player owner = propertyManager.getPropertyOwner(property);
         IO playerIO = ActionUtils.getPlayerIO(player);
         IO ownerIO = ActionUtils.getPlayerIO(owner);
 
         int rent = property.getRent();
-        if (player.getWallet().getMoney() >= rent) {
-            player.getWallet().subtractMoney(rent);
-            owner.getWallet().addMoney(rent);
+        if (player.getMoney() >= rent) {
+            player.subtractMoney(rent);
+            owner.addMoney(rent);
             player.setPayRent(false);
             playerIO.showMessage("Вы уплатили аренду в размере $" + rent);
             ownerIO.showMessage(player.getName() + " уплатил аренду в размере $" + rent);

@@ -8,7 +8,6 @@ package com.monopoly.board.player;
  * Деньги
  */
 public interface MoneyOperations {
-    Wallet getWallet();
     void addMoney(int money);
     void subtractMoney(int money);
     int getMoney();

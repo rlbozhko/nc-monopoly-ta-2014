@@ -54,7 +54,7 @@ public class PlayerDaoImpl implements GenericDao<Player> {
             list = new ArrayList<Player>();
             while (rs.next()) {
                 Player player = new Player(rs.getString("name"));
-                player.getWallet().addMoney(rs.getInt("money"));
+                player.addMoney(rs.getInt("money"));
                 //player.setStatus(Status.valueOf(rs.getString("")));//статус
                 player.setPosition(rs.getInt("position"));
                 list.add(player);

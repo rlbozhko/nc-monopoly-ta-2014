@@ -9,11 +9,5 @@ public interface PropertyOperations {
 
     public boolean buyProperty(PropertyCell propertyCell);
 
-    public void sellProperty(PropertyCell propertyCell);
-
-    public void putUpProperty(PropertyCell propertyCell);
-
-    public void buyBackProperty(PropertyCell propertyCell);
-
     boolean hasPledgedProperty();
 }

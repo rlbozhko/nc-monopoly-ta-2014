@@ -3,8 +3,6 @@ package com.monopoly.board.player;
 import com.monopoly.action.ActionUtils;
 import com.monopoly.board.cells.*;
 import com.monopoly.game.session.GameSession;
-
-import java.util.ArrayList;
 import java.util.List;
 
 public class Player implements MoneyOperations, MoveOperations, PropertyOperations {
@@ -13,7 +11,6 @@ public class Player implements MoneyOperations, MoveOperations, PropertyOperatio
     private String name;
     private Status status;
     private Wallet wallet;
-    private List<Property> propertyList;
     private boolean payRent;
 
     public Player(String name) {
@@ -21,7 +18,6 @@ public class Player implements MoneyOperations, MoveOperations, PropertyOperatio
         lastPosition = 0;
         this.name = name;
         this.wallet = new Wallet();
-        this.propertyList = new ArrayList<>();
         status = Status.WAIT;
         payRent = false;
     }
@@ -43,6 +39,7 @@ public class Player implements MoneyOperations, MoveOperations, PropertyOperatio
     @Override
     public void goToPosition(int position) {
         int boardSize = GameSession.getInstance().getBoard().getCells().size();
+        PropertyManager propertyManager = GameSession.getInstance().getPropertyManager();
         this.lastPosition = this.position;
         boolean nextCircle = isNextCircle(position);
         this.position = position % boardSize;
@@ -59,20 +56,30 @@ public class Player implements MoneyOperations, MoveOperations, PropertyOperatio
             ((EventCell) currentCell).getEvent().performEvent();
         } else if (CellType.PROPERTY_CELL.equals(currentCell.getCellType())) {
             Property property = (Property) currentCell;
-            if (null != property.getOwner() && !this.equals(property.getOwner())) {
+            Player owner = propertyManager.getPropertyOwner(property);
+            if (null != owner && !this.equals(owner)) {
                 this.setPayRent(true);
             }
         }
     }
 
+    @Override
+    public Cell getCurrentCell() {
+        return GameSession.getInstance().getBoard().getCells().get(getPosition());
+    }
+
     private void pledgedPropertyCheck() {
-        for (Property property : propertyList) {
+        for (Property property : getProperties()) {
             if (property.isPledged()) {
                 property.decrementTurnsToPayBack();
                 property.risePayBackMoney();
                 propertyWarning(property);
             }
         }
+    }
+
+    private List<Property> getProperties() {
+        return GameSession.getInstance().getPropertyManager().getPlayerProperties(this);
     }
 
     private void propertyWarning(Property property) {
@@ -85,11 +92,6 @@ public class Player implements MoneyOperations, MoveOperations, PropertyOperatio
 
     private boolean isNextCircle(int position) {
         return (position > GameSession.getInstance().getBoard().getCells().size());
-    }
-
-    @Override
-    public Wallet getWallet() {
-        return wallet;
     }
 
     @Override
@@ -107,10 +109,6 @@ public class Player implements MoneyOperations, MoveOperations, PropertyOperatio
         return wallet.getMoney();
     }
 
-    public List<Property> getPropertyList() {
-        return propertyList;
-    }
-
     public String getName() {
         return name;
     }
@@ -125,29 +123,23 @@ public class Player implements MoneyOperations, MoveOperations, PropertyOperatio
 
     @Override
     public boolean buyProperty(PropertyCell propertyCell) {
-        if (propertyCell.getPrice() <= wallet.getMoney()) {
-            wallet.subtractMoney(propertyCell.getPrice());
-            propertyCell.setAndAddToOwner(this);
+        PropertyManager propertyManager = GameSession.getInstance().getPropertyManager();
+        if (propertyCell.getPrice() <= getMoney()) {
+            subtractMoney(propertyCell.getPrice());
+            propertyManager.setPropertyOwner(this, propertyCell);
             return true;
         }
         return false;
     }
 
     @Override
-    public void sellProperty(PropertyCell propertyCell) {
-        if (!propertyCell.isPledged()) {
-
+    public boolean hasPledgedProperty() {
+        for (Property property : getProperties()) {
+            if (property.isPledged()) {
+                return true;
+            }
         }
-    }
-
-    @Override
-    public void putUpProperty(PropertyCell propertyCell) {
-
-    }
-
-    @Override
-    public void buyBackProperty(PropertyCell propertyCell) {
-
+        return false;
     }
 
     @Override
@@ -160,29 +152,17 @@ public class Player implements MoneyOperations, MoveOperations, PropertyOperatio
         this.payRent = payRent;
     }
 
-    @Override
-    public boolean hasPledgedProperty() {
-        for (Property property : propertyList) {
-            if (property.isPledged()) {
-                return true;
-            }
-        }
-        return false;
-    }
-
     public static class PlayerBuilder {
         private int position;
         private int lastPosition;
         private String name;
         private Status status;
         private int money;
-        private List<Property> propertyList;
         private boolean payRent;
 
         public PlayerBuilder(String name) {
             this.name = name;
             status = Status.WAIT;
-            propertyList = new ArrayList<>();
         }
 
         public Player getPlayer() {
@@ -191,7 +171,6 @@ public class Player implements MoneyOperations, MoveOperations, PropertyOperatio
             player.lastPosition = lastPosition;
             player.status = status;
             player.addMoney(money);
-            player.propertyList = propertyList;
             player.payRent = payRent;
 
             return player;
@@ -214,11 +193,6 @@ public class Player implements MoneyOperations, MoveOperations, PropertyOperatio
 
         public PlayerBuilder payRent(boolean payRent) {
             this.payRent = payRent;
-            return this;
-        }
-
-        public PlayerBuilder propertyList(List<Property> property) {
-            this.propertyList = property;
             return this;
         }
 

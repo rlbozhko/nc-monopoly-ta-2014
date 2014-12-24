@@ -32,9 +32,8 @@ public class DummyIO implements IO, Runnable {
                 e.printStackTrace();
             }
             outputAvailableActions();
-            for (int i = 0; i < actions.size(); i++) {
-                Action action = actions.get(i);
-                if (player.getWallet().getMoney() == 0) {
+            for (Action action : actions) {
+                if (player.getMoney() == 0) {
                     performAction(new GiveUpAction());
                     break;
                 }
@@ -51,7 +50,7 @@ public class DummyIO implements IO, Runnable {
 
     private void performPayRent(Action action) {
         Property property = (Property) GameSession.getInstance().getBoard().getCells().get(player.getPosition());
-        if (player.getWallet().getMoney() >= property.getRent()) {
+        if (player.getMoney() >= property.getRent()) {
             performAction(action);
         } else {
             performAction(new GiveUpAction());

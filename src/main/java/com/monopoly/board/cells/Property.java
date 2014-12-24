@@ -13,11 +13,6 @@ import java.util.List;
  * Собственность
  */
 public interface Property {
-    void setAndAddToOwner(Player player);
-
-    void resetOwner();
-
-    Player getOwner();
 
     List<Building> getBuildings();
 

@@ -3,6 +3,7 @@ package com.monopoly.action;
 import com.monopoly.board.Board;
 import com.monopoly.board.cells.Property;
 import com.monopoly.board.player.Player;
+import com.monopoly.board.player.PropertyManager;
 import com.monopoly.board.player.Status;
 import com.monopoly.game.session.GameSession;
 import com.monopoly.io.IO;
@@ -14,7 +15,7 @@ import java.util.ArrayList;
  */
 public class EndTurnAction implements Action {
 
-    Board board;
+    private Board board;
 
     public EndTurnAction() {
         this.board = GameSession.getInstance().getBoard();
@@ -35,7 +36,8 @@ public class EndTurnAction implements Action {
 
     private void checkAndStartAuction(Player player) {
         if (player.hasPledgedProperty()) {
-            for (Property property : new ArrayList<>(player.getPropertyList())) {
+            for (Property property : new ArrayList<>(GameSession.getInstance().getPropertyManager()
+                    .getPlayerProperties(player))) {
                 if(property.isPledged() && 0 == property.getTurnsToPayBack()) {
                     new AuctionAction(property).performAction(player);
                 }

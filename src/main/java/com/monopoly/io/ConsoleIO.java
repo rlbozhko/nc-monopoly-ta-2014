@@ -9,6 +9,7 @@ import com.monopoly.board.cells.Cell;
 import com.monopoly.board.cells.CellType;
 import com.monopoly.board.cells.Property;
 import com.monopoly.board.player.Player;
+import com.monopoly.board.player.PropertyManager;
 import com.monopoly.board.player.Status;
 import com.monopoly.game.session.GameSession;
 import com.monopoly.game.session.Session;
@@ -27,6 +28,7 @@ import static org.apache.commons.collections4.CollectionUtils.isEmpty;
 public class ConsoleIO implements IO, Runnable {
     private Player player;
     private List<Action> actions;
+    PropertyManager propertyManager;
 
     public ConsoleIO(Player player) {
         this.player = player;
@@ -34,6 +36,7 @@ public class ConsoleIO implements IO, Runnable {
 
     @Override
     public void run() {
+        propertyManager = GameSession.getInstance().getPropertyManager();
         printBoardToFile();
         do {
             outputBoardState();
@@ -61,7 +64,8 @@ public class ConsoleIO implements IO, Runnable {
         List<Player> players = session.getBoard().getPlayers();
         int position = player.getPosition();
         System.out.println("Вы на позиции: " + position + " " + session.getBoard().getCells().get(position).getName());
-        System.out.println("У Вас на счету $" + player.getWallet().getMoney() + ". У Вас в собственности: " + player.getPropertyList());
+        System.out.println("У Вас на счету $" + player.getMoney() + ". У Вас в собственности: "
+                + propertyManager.getPlayerProperties(player));
         for (Player other : players) {
             if (!player.equals(other)) {
                 System.out.println(other.getName() + " -- на позиции: " + other.getPosition());
@@ -108,7 +112,7 @@ public class ConsoleIO implements IO, Runnable {
     @Override
     public Property selectProperty(Player player) {
         System.out.println("Выберите Собственность игрока " + player.getName());
-        List<Property> properties = player.getPropertyList();
+        List<Property> properties = propertyManager.getPlayerProperties(player);
         for (int i = 0; i < properties.size(); i++) {
             Property property = properties.get(i);
             System.out.println((i + 1) + " " + ((Cell) property).getName() + (property.isPledged() ? " Заложена" : ""));
@@ -142,7 +146,7 @@ public class ConsoleIO implements IO, Runnable {
 
     @Override
     public Deal dealDialog(Player otherPlayer) {
-        Deal deal = new EmptyDeal(player, otherPlayer);;
+        Deal deal = new EmptyDeal(player, otherPlayer);
         DealContainer dealContainer = new DealContainer(player);
         System.out.println("Установите условия сделки");
         boolean continueSelect = true;

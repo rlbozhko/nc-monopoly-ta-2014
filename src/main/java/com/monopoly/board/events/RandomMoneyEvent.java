@@ -34,7 +34,7 @@ public class RandomMoneyEvent extends BaseEvent {
 			playerIO.showMessage("Поздравляем! Вы выйграли $" + amountMoney
 					+ ".");
 		} else {
-			player.getWallet().subtractMoney(amountMoney);
+			player.subtractMoney(amountMoney);
 			playerIO.showMessage("Сеголня был не Ваш день! Вы проиграли $"
 					+ amountMoney + ".");
 		}

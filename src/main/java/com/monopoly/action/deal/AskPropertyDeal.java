@@ -2,6 +2,9 @@ package com.monopoly.action.deal;
 
 import com.monopoly.board.cells.Cell;
 import com.monopoly.board.cells.Property;
+import com.monopoly.board.player.PropertyManager;
+import com.monopoly.game.Game;
+import com.monopoly.game.session.GameSession;
 
 import java.util.List;
 
@@ -29,8 +32,10 @@ public class AskPropertyDeal extends WrapperDeal {
     @Override
     public void performDeal() {
         super.performDeal();
+        PropertyManager propertyManager = GameSession.getInstance().getPropertyManager();
+
         for (Property property : properties) {
-            property.setAndAddToOwner(getSource());
+            propertyManager.setPropertyOwner(getSource(),property);
         }
     }
 

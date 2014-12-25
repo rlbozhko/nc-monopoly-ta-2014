@@ -5,7 +5,7 @@ package com.monopoly.board.building;
  */
 public class Building implements BuildingOperations {
 	
-    public static final double PERCENTAGE_FOR_NEW_BUILD = 0.1;
+    public static final float PERCENTAGE_FOR_NEW_BUILD = 0.1F;
 
     //TODO еобходимо еще реализовать поле по которому возможно узнавать и
     //использовать бонусы от постройки
@@ -21,12 +21,12 @@ public class Building implements BuildingOperations {
     	if (cost < 0){
     		throw new RuntimeException("You should pay money!");
     	}
-    	AvailableBuilding buildings = BuildingSettings.getInstance()
+    	Settings settings = BuildingSettings.getInstance()
     										.getSettingsByType(type);
     	
-    	this.name = buildings.getName();
-    	this.description = buildings.getDescription();
-    	this.maxLevel = buildings.getMaxLevel();
+    	this.name = settings.getName();
+    	this.description = settings.getDescription();
+    	this.maxLevel = settings.getMaxLevel();
     	
         //BuildingFactory building = new BuildingFactory(type);
         //this.name = BuildingFactory.getCurrentBuilding(type).getName();
@@ -42,7 +42,7 @@ public class Building implements BuildingOperations {
 	public boolean levelUp() {
 		if (this.currentLevel <= this.maxLevel && this.currentLevel > 0) {
 			this.currentLevel++;
-			this.currentPrice = (int) (this.currentPrice + this.currentPrice
+			this.currentPrice = Math.round(this.currentPrice + this.currentPrice
 					* PERCENTAGE_FOR_NEW_BUILD);
 			return true;
 		}
@@ -50,13 +50,12 @@ public class Building implements BuildingOperations {
 	}
 
 	public boolean levelDown() {
-		if (this.currentLevel <= this.maxLevel && this.currentLevel > 0) {
+		if (this.currentLevel > 0) {
 			//TODO подумать над тем когда будет продаваться последнее здание
 			//и ячейка должна будет быть пустой значит ее надо делать null
 			//и удалять из коллекции
 			this.currentLevel--;
-			this.currentPrice = (int) (this.currentPrice - this.currentPrice
-					* PERCENTAGE_FOR_NEW_BUILD);
+			this.currentPrice = Math.round(this.currentPrice - PERCENTAGE_FOR_NEW_BUILD * this.currentPrice);
 			return true;
 		}
 		return false;

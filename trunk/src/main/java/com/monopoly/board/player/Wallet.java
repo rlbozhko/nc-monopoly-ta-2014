@@ -8,10 +8,10 @@ public class Wallet {
     }
 
     public void addMoney(int amount) {
-        money = money + amount;
+        money +=amount;
     }
 
     public void subtractMoney(int amount) {
-        money = money - amount;
+        money -=amount;
     }
 }

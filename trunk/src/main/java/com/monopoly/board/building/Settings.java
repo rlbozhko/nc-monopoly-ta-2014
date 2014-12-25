@@ -1,11 +1,20 @@
 package com.monopoly.board.building;
 
-public class Settings implements AvailableBuilding {
+public class Settings {
 
 	private String name;
 	private String description;
 	private int maxLevel;
 	
+	
+	
+	public Settings(String name, String description, int maxLevel) {
+		super();
+		this.name = name;
+		this.description = description;
+		this.maxLevel = maxLevel;
+	}
+
 	public Settings (BuildingType type){
 				
 		switch (type) {

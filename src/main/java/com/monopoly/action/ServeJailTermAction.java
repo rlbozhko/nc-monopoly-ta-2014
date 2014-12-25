@@ -10,7 +10,7 @@ public class ServeJailTermAction implements Action {
     @Override
     public void performAction(Player player) {
         IO playerIO = ActionUtils.getPlayerIO(player);
-        player.substructJailTerm();
+        player.subtractJailTerm();
         //добавить склонение слова ход
         playerIO.showMessage("Вам еще сидеть " + player.getJailTerm() + " ходов");
         new EndTurnAction().performAction(player);

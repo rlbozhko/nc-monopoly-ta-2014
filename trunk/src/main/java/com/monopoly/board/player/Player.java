@@ -12,6 +12,7 @@ public class Player implements MoneyOperations, MoveOperations, PropertyOperatio
     private Status status;
     private Wallet wallet;
     private boolean payRent;
+    private int jailTerm = 0;
 
     public Player(String name) {
         position = 0;
@@ -22,6 +23,18 @@ public class Player implements MoneyOperations, MoveOperations, PropertyOperatio
         payRent = false;
     }
 
+    public int getJailTerm() {
+        return jailTerm;
+    }
+
+    public void substructJailTerm(){
+        this.jailTerm -=1;
+    }
+
+    public void setJailTerm(int jailTerm) {
+        this.jailTerm = jailTerm;
+    }
+
     @Override
     public int getPosition() {
         return position;
@@ -29,6 +42,14 @@ public class Player implements MoneyOperations, MoveOperations, PropertyOperatio
 
     public void setPosition(int position) {
         this.position = position;
+    }
+
+    public boolean isJailed(){
+        boolean a = false;
+        if (jailTerm > 0){  //(getStatus().equals(Status.JAILED))
+            return !a;
+        } else
+            return a;
     }
 
     @Override

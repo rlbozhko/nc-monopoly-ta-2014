@@ -16,6 +16,7 @@ public class PayBailAction implements Action {
             playerIO.showMessage("Вы заплатили залог в размере " + BAIL + "$.\n " +
                     "Впредь будьте более удачливы. Можете быть свободны.");
             player.setJailTerm(RESET_JAIL_TERM);
+
         } else {
             playerIO.showMessage("Недостаточно денег для выплаты залога.");
         }

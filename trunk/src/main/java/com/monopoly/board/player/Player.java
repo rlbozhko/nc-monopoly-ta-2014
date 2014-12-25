@@ -3,6 +3,7 @@ package com.monopoly.board.player;
 import com.monopoly.action.ActionUtils;
 import com.monopoly.board.cells.*;
 import com.monopoly.game.session.GameSession;
+
 import java.util.List;
 
 public class Player implements MoneyOperations, MoveOperations, PropertyOperations {
@@ -13,6 +14,7 @@ public class Player implements MoneyOperations, MoveOperations, PropertyOperatio
     private Wallet wallet;
     private boolean payRent;
     private int jailTerm = 0;
+    private Status jailStatus;
 
     public Player(String name) {
         position = 0;
@@ -23,12 +25,20 @@ public class Player implements MoneyOperations, MoveOperations, PropertyOperatio
         payRent = false;
     }
 
+    public Status getJailStatus() {
+        return jailStatus;
+    }
+
+    public void setJailStatus(Status jailStatus) {
+        this.jailStatus = jailStatus;
+    }
+
     public int getJailTerm() {
         return jailTerm;
     }
 
-    public void substructJailTerm(){
-        this.jailTerm -=1;
+    public void subtractJailTerm() {
+        this.jailTerm -= 1;
     }
 
     public void setJailTerm(int jailTerm) {
@@ -44,12 +54,8 @@ public class Player implements MoneyOperations, MoveOperations, PropertyOperatio
         this.position = position;
     }
 
-    public boolean isJailed(){
-        boolean a = false;
-        if (jailTerm > 0){  //(getStatus().equals(Status.JAILED))
-            return !a;
-        } else
-            return a;
+    public boolean isJailed() {
+        return getJailStatus() == Status.JAILED;
     }
 
     @Override

@@ -21,22 +21,16 @@ public class Building implements BuildingOperations {
     	if (cost < 0){
     		throw new RuntimeException("You should pay money!");
     	}
+    	
     	Settings settings = BuildingSettings.getInstance()
     										.getSettingsByType(type);
     	
     	this.name = settings.getName();
     	this.description = settings.getDescription();
     	this.maxLevel = settings.getMaxLevel();
-    	
-        //BuildingFactory building = new BuildingFactory(type);
-        //this.name = BuildingFactory.getCurrentBuilding(type).getName();
-        //this.description = BuildingFactory.getCurrentBuilding(type)
-        //									.getDescription();
-        
     	this.primaryCost = cost;
         this.currentPrice = cost;
         this.currentLevel = 1;
-        //this.maxLevel = BuildingFactory.getCurrentBuilding(type).getMaxLevel();
     }
     
 	public boolean levelUp() {
@@ -65,11 +59,11 @@ public class Building implements BuildingOperations {
         return currentPrice;
     }
 
-    public String getName() {
+    public String getBuildingName() {
         return name;
     }
 
-    public String getDescription() {
+    public String getBuildingDescription() {
         return description;
     }
 

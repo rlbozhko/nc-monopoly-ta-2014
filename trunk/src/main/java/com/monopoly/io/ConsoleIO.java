@@ -133,7 +133,7 @@ public class ConsoleIO implements IO, Runnable {
         List<Building> buildings = property.getBuildings();
         for (int i = 0; i < buildings.size(); i++) {
             Building building = buildings.get(i);
-            System.out.println(i + " " + (building.getName()));
+            System.out.println(i + " " + (building.getBuildingName()));
         }
 
         int input = positiveIntInput();

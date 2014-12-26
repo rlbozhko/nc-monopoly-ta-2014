@@ -17,7 +17,7 @@ public interface BuildingOperations {
     int getMaxLevel();
     int getPrimaryCost();
     
-    String getName();
-    String getDescription();
+    String getBuildingName();
+    String getBuildingDescription();
     
 }

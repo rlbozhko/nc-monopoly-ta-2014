@@ -5,10 +5,8 @@ package com.monopoly.action.deal;
  */
 public class GiveMoneyDeal extends WrapperDeal {
     private int money;
-    private Deal deal;
 
     public GiveMoneyDeal(Deal deal, int money) {
-        super(deal);
         this.money = money;
         this.deal = deal;
     }

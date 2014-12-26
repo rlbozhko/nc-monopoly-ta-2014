@@ -1,5 +1,6 @@
-package com.monopoly.action;
+package com.monopoly.action.controller;
 
+import com.monopoly.action.*;
 import com.monopoly.board.cells.Cell;
 import com.monopoly.board.cells.CellType;
 import com.monopoly.board.cells.PropertyCell;
@@ -25,18 +26,25 @@ public class PlayerActionController implements ActionController {
         propertyManager = session.getPropertyManager();
 
         List<Action> result = new ArrayList<>();
-        if (Status.FINISH.equals(player.getStatus())) {
+        if (Status.FINISH == player.getStatus()) {
             return result;
         }
-        if (player.isPayRent()) {
-            result.add(new PayRentAction());
-        }
+
         result.add(new DealAction());
         result.add(new GiveUpAction());
         result.add(new WaitAction());
         result.add(new PledgePropertyAction());
         if (player.hasPledgedProperty()) {
             result.add(new PayBackAction());
+        }
+
+        if (player.isJailed()) {
+            result.addAll(getJailActions(player));
+            return result;
+        }
+
+        if (player.isPayRent()) {
+            result.add(new PayRentAction());
         }
 
         Cell cell = session.getBoard().getCells().get(player.getPosition());
@@ -54,5 +62,9 @@ public class PlayerActionController implements ActionController {
         }
 
         return result;
+    }
+
+    List<Action> getJailActions(Player player) {
+        return new JailActionController().getAvailableActions(player);
     }
 }

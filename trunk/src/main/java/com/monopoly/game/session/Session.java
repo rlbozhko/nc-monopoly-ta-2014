@@ -1,6 +1,6 @@
 package com.monopoly.game.session;
 
-import com.monopoly.action.ActionController;
+import com.monopoly.action.controller.ActionController;
 import com.monopoly.board.Board;
 import com.monopoly.board.player.PropertyManager;
 import com.monopoly.io.IO;

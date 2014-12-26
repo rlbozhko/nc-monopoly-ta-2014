@@ -3,16 +3,19 @@ package com.monopoly.database;
 import com.monopoly.board.player.Player;
 import com.monopoly.database.dao.DaoConnect;
 import com.monopoly.database.dao.GenericDao;
+
 import junit.framework.TestCase;
 
 import java.sql.Connection;
 import java.sql.SQLException;
 import java.util.List;
+import java.util.Locale;
 
 public class PlayerDaoImplTest extends TestCase {
 
     public void testGetAll() throws SQLException, PersistException {
-        DaoConnect factory = new DbConnection();
+    	Locale.setDefault(Locale.ENGLISH);    	
+    	DaoConnect factory = new DbConnection();
         Connection connection = (Connection) factory.getConnection();
         List<Player> players = null;
         GenericDao playerDao =  factory.getDao(connection, Player.class);

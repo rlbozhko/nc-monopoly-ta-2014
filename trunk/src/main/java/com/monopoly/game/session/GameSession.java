@@ -1,7 +1,7 @@
 package com.monopoly.game.session;
 
-import com.monopoly.action.ActionController;
-import com.monopoly.action.PlayerActionController;
+import com.monopoly.action.controller.ActionController;
+import com.monopoly.action.controller.PlayerActionController;
 import com.monopoly.board.Board;
 import com.monopoly.board.building.Building;
 import com.monopoly.board.cells.*;
@@ -72,11 +72,12 @@ public class GameSession implements Session {
         testPropertyManager.setPropertyOwner(p1, testProperty2);
         //p2.subtractMoney(START_MONEY);
         //p3.addMoney(5000);*/
-        //
+        //       
 
         player.start();
         dummy1.start();
         dummy2.start();
+        new JailEvent().performEvent();
     }
 
 
@@ -226,12 +227,10 @@ public class GameSession implements Session {
                 new ArrayList<Building>(), 4000, 400, monopoly6));
         cells.add(new PropertyCell("c3m6", "c3m6 desc", cells.size(),
                 new ArrayList<Building>(), 4000, 400, monopoly6));
-        MoneyEvent goToJail = new MoneyEvent("Событие в Тюрьму", "Место для События В тюрьму");
-        goToJail.setStartCash(0);
+        JailEvent goToJail = new JailEvent();
         cells.add(new SingleEventCell("Событие в Тюрьму", "Место для События В тюрьму", cells.size(), goToJail));
         cells.add(new PropertyCell("c1m7", "c1m7 desc", cells.size(),
                 new ArrayList<Building>(), 4200, 420, monopoly7));
-
         cells.add(new SingleEventCell("Уплатите налог", "Налог на роскошь", cells.size(), luxTax));
         cells.add(new PropertyCell("c2m7", "c2m7 desc", cells.size(),
                 new ArrayList<Building>(), 4200, 420, monopoly7));

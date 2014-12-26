@@ -8,5 +8,5 @@ package com.monopoly.board.player;
  * Статус
  */
 public enum Status {
-    START_TURN, WAIT, ACTIVE, FINISH, JAILED, ESCAPE, RETURN, SKIP_TURN, ONE_MORE_TURN
+    START_TURN, WAIT, ACTIVE, FINISH, CLEAN, JAILED, ESCAPE, RETURN, SKIP_TURN, ONE_MORE_TURN
 }

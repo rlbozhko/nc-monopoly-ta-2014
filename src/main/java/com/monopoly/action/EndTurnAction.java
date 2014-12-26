@@ -3,7 +3,6 @@ package com.monopoly.action;
 import com.monopoly.board.Board;
 import com.monopoly.board.cells.Property;
 import com.monopoly.board.player.Player;
-import com.monopoly.board.player.PropertyManager;
 import com.monopoly.board.player.Status;
 import com.monopoly.game.session.GameSession;
 import com.monopoly.io.IO;

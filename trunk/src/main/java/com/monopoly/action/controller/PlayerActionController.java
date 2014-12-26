@@ -48,7 +48,7 @@ public class PlayerActionController implements ActionController {
         }
 
         Cell cell = session.getBoard().getCells().get(player.getPosition());
-        if (CellType.PROPERTY_CELL.equals(cell.getCellType())) {
+        if (CellType.PROPERTY_CELL == cell.getCellType()) {
             PropertyCell propertyCell = (PropertyCell) cell;
             if (propertyManager.getPropertyOwner(propertyCell) == null) {
                 result.add(new BuyPropertyAction());

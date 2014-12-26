@@ -1,9 +1,9 @@
 package com.monopoly.action.controller;
 
 import com.monopoly.action.Action;
-import com.monopoly.action.EscapeAction;
-import com.monopoly.action.PayBailAction;
-import com.monopoly.action.ServeJailTermAction;
+import com.monopoly.action.jail.EscapeAction;
+import com.monopoly.action.jail.PayBailAction;
+import com.monopoly.action.jail.ServeJailTermAction;
 import com.monopoly.action.controller.ActionController;
 import com.monopoly.board.player.Player;
 

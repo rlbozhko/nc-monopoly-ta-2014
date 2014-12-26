@@ -1,7 +1,7 @@
 package com.monopoly.io;
 
 import com.monopoly.action.Action;
-import com.monopoly.action.ActionController;
+import com.monopoly.action.controller.ActionController;
 import com.monopoly.action.deal.*;
 import com.monopoly.board.Board;
 import com.monopoly.board.building.Building;

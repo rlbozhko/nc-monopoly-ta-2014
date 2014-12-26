@@ -63,6 +63,11 @@ public class Board implements CellOperations, PlayerOperations {
     }
 
     @Override
+    public Cell getJailCell() {
+        return cells.get(10);
+    }
+
+    @Override
     public List<Player> getPlayers() {
         return players;
     }

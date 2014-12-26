@@ -12,10 +12,8 @@ import java.util.List;
  */
 public class GivePropertyDeal extends WrapperDeal {
     private List<Property> properties;
-    private Deal deal;
 
     public GivePropertyDeal(Deal deal, List<Property> properties) {
-        super(deal);
         this.properties = properties;
         this.deal = deal;
     }

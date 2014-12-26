@@ -10,7 +10,6 @@ public class GoToJail {
 
     public void performEvent(Player player) {
         player.setPayRent(false);
-        player.setStatus(Status.JAILED);
         player.setJailStatus(Status.JAILED);
         player.setJailTerm(JAIL_TERM);
         if (player.getPosition() != jailPosition) {

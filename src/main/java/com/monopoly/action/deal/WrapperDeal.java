@@ -7,11 +7,8 @@ import com.monopoly.io.IO;
  * Created by Roma on 18.12.2014.
  */
 public abstract class WrapperDeal implements Deal {
-    private Deal deal;
+    protected Deal deal;
 
-    protected WrapperDeal(Deal deal) {
-        this.deal = deal;
-    }
     @Override
     public Player getSource() {
         return deal.getSource();

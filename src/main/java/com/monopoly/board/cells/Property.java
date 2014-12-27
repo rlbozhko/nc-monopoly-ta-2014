@@ -1,7 +1,6 @@
 package com.monopoly.board.cells;
 
 import com.monopoly.board.building.Building;
-import com.monopoly.board.player.Player;
 
 import java.util.List;
 

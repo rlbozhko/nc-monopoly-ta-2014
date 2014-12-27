@@ -20,8 +20,7 @@ public class PayRentAction implements Action {
         IO ownerIO = ActionUtils.getPlayerIO(owner);
 
         int rent = property.getRent();
-        if (player.getMoney() >= rent) {
-            player.subtractMoney(rent);
+        if (player.subtractMoney(rent)) {            
             owner.addMoney(rent);
             player.setPayRent(false);
             playerIO.showMessage("Вы уплатили аренду в размере $" + rent);

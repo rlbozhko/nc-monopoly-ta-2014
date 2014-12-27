@@ -48,7 +48,7 @@ public class ConsoleIO implements IO, Runnable {
             } else {
                 System.out.println("Неверный Ввод!!!");
             }
-        } while (!Status.FINISH.equals(player.getStatus()));
+        } while (Status.FINISH != player.getStatus());
     }
 
     @Override
@@ -96,7 +96,7 @@ public class ConsoleIO implements IO, Runnable {
         System.out.println("Выберите игрока:");
         for (int i = 0; i < players.size(); i++) {
             Player player = players.get(i);
-            if (!Status.FINISH.equals(player.getStatus()) && !this.player.equals(player)) {
+            if (Status.FINISH != player.getStatus() && !this.player.equals(player)) {
                 System.out.println(i + " " + player.getName());
             }
         }
@@ -229,7 +229,7 @@ public class ConsoleIO implements IO, Runnable {
             for (Cell cell : board.getCells()) {
                 StringBuilder cellLine = new StringBuilder();
                 cellLine.append(cell.getPosition()).append(". ").append(cell.getName()).append(". Описание: ").append(cell.getDescription());
-                if (CellType.PROPERTY_CELL.equals(cell.getCellType())) {
+                if (CellType.PROPERTY_CELL == cell.getCellType()) {
                     Property property = (Property) cell;
                     cellLine.append(". Монополия: ").append(property.getMonopoly().getMonopolyType())
                             .append(". Базовая стоимость ").append(property.getPrice())

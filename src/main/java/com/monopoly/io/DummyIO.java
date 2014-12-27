@@ -46,7 +46,7 @@ public class DummyIO implements IO, Runnable {
                     break;
                 }
             }
-        } while (!Status.FINISH.equals(player.getStatus()));
+        } while (Status.FINISH != player.getStatus());
     }
 
     private void performPayRent(Action action) {

@@ -1,7 +1,6 @@
 package com.monopoly.board;
 
 import com.monopoly.board.cells.Cell;
-import com.monopoly.board.cells.EventCell;
 
 import java.util.List;
 

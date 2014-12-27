@@ -22,8 +22,8 @@ public class AskMoneyDeal extends WrapperDeal {
     @Override
     public void performDeal() {
         super.performDeal();
-        getSource().addMoney(money);
         getTarget().subtractMoney(money);
+        getSource().addMoney(money);        
     }
 
     @Override

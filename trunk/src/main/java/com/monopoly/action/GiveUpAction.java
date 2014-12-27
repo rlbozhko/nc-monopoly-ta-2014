@@ -9,7 +9,7 @@ import com.monopoly.game.session.GameSession;
 import com.monopoly.game.session.Session;
 import com.monopoly.io.IO;
 
-import java.util.LinkedList;
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -29,7 +29,7 @@ public class GiveUpAction implements Action {
     public void performAction(Player player) {
         PropertyManager propertyManager = GameSession.getInstance().getPropertyManager();
         Player nextPlayer = board.getNextPlayer();
-        if (Status.ACTIVE.equals(player.getStatus()) || Status.START_TURN.equals(player.getStatus())) {
+        if (Status.ACTIVE == player.getStatus() || Status.START_TURN == player.getStatus()) {
             if (!player.equals(nextPlayer)) {
                 nextPlayer.setStatus(Status.START_TURN);
             }
@@ -39,14 +39,14 @@ public class GiveUpAction implements Action {
         for (IO io : session.getIO()) {
             io.showMessage(player.getName() + " сдался");
         }
-        List<Property> properties = new LinkedList<>(propertyManager.getPlayerProperties(player));
+        List<Property> properties = new ArrayList<>(propertyManager.getPlayerProperties(player));
         for (Property property : properties) {
             propertyManager.resetPropertyOwner(property);
         }
     }
 
     @Override
-    public String getName() {
+    public String getName() {    	
         return "Give up";
     }
 

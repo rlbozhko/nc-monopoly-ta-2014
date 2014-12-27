@@ -8,10 +8,14 @@ public class Wallet {
     }
 
     public void addMoney(int amount) {
-        money +=amount;
+        money += amount;
     }
 
-    public void subtractMoney(int amount) {
-        money -=amount;
+	public boolean subtractMoney(int amount) {
+        if (money >= amount) {
+        	money -= amount;
+        	return true;
+		}
+    	return false;
     }
 }

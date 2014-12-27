@@ -13,8 +13,7 @@ public class PayBailAction implements Action {
     @Override
     public void performAction(Player player) {
         IO playerIO = ActionUtils.getPlayerIO(player);
-        if (player.getMoney() >= BAIL) {
-            player.subtractMoney(BAIL);
+        if (player.subtractMoney(BAIL)) {            
             playerIO.showMessage("Вы заплатили залог в размере " + BAIL + "$.\n " +
                     "Впредь будьте более удачливы. Можете быть свободны.");
             player.setJailTerm(RESET_JAIL_TERM);
@@ -29,3 +28,4 @@ public class PayBailAction implements Action {
         return "Pay bail";
     }
 }
+

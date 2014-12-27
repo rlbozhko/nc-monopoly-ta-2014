@@ -9,6 +9,6 @@ package com.monopoly.board.player;
  */
 public interface MoneyOperations {
     void addMoney(int money);
-    void subtractMoney(int money);
+    boolean subtractMoney(int money);
     int getMoney();
 }

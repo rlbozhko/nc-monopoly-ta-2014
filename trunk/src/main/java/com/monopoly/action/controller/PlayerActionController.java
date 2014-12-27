@@ -55,9 +55,9 @@ public class PlayerActionController implements ActionController {
             }
         }
 
-        if (Status.START_TURN.equals(player.getStatus())) {
+        if (Status.START_TURN == player.getStatus()) {
             result.add(new StartTurnAction());
-        } else if (Status.ACTIVE.equals(player.getStatus())) {
+        } else if (Status.ACTIVE == player.getStatus()) {
             result.add(new EndTurnAction());
         }
 

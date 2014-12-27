@@ -87,7 +87,7 @@ public class Board implements CellOperations, PlayerOperations {
             next = players.get(index + 1);
         }
         currentPlayer = next;
-        if (Status.FINISH.equals(next.getStatus())) {
+        if (Status.FINISH == next.getStatus()) {
             next = getNextPlayer();
         }
         return next;

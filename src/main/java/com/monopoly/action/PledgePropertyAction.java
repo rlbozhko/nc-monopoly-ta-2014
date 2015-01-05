@@ -31,8 +31,7 @@ public class PledgePropertyAction implements Action {
         IO playerIO = ActionUtils.getPlayerIO(player);
 
         PropertyCell property = (PropertyCell) selectPropertyToPledge(player, playerIO);
-        if (property != null) {
-
+        if (property != null) {        	
             //выбирается игроком
             int turnsToPayBack = MAX_TURNS_TO_PAY_BACK;
             int payment = (int) (property.getPrice() * MAX_PERCENT_FROM_PROPERTY);

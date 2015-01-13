@@ -20,8 +20,9 @@ import java.util.List;
  * Created by Roma on 20.11.2014.
  */
 public class GameSession implements Session {
-	private static volatile Session session;
-
+	private static Session session;
+	private static SessionStatus status = SessionStatus.NOT_EXISTS;
+	
 	private Board board;
 	private ActionController actionController;
 	private PropertyManager propertyManager;
@@ -44,10 +45,10 @@ public class GameSession implements Session {
 		ios.add(new DummyIO(p2));
 		ios.add(new DummyIO(p3));
 
-		TestSessionBuilder.setBoard(newBoard(players, START_MONEY));
-		TestSessionBuilder.setActionController(new PlayerActionController());
-		TestSessionBuilder.setPropertyManager(new PropertyManager(players));
-		TestSessionBuilder.setIOs(ios);
+		GameSessionBuilder.setBoard(newBoard(players, START_MONEY));
+		GameSessionBuilder.setActionController(new PlayerActionController());
+		GameSessionBuilder.setPropertyManager(new PropertyManager(players));
+		GameSessionBuilder.setIOs(ios);
 
 		Session gameSession = GameSession.getInstance();
 
@@ -69,9 +70,9 @@ public class GameSession implements Session {
 			synchronized (GameSession.class) {
 				localInstance = session;
 				if (localInstance == null) {
-					session = localInstance = new GameSession(TestSessionBuilder.getBoard(),
-							TestSessionBuilder.getActionController(), TestSessionBuilder.getIos(),
-							TestSessionBuilder.getPropertyManager());
+					session = localInstance = new GameSession(GameSessionBuilder.getBoard(),
+							GameSessionBuilder.getActionController(), GameSessionBuilder.getIos(),
+							GameSessionBuilder.getPropertyManager());
 				}
 			}
 		}
@@ -85,29 +86,29 @@ public class GameSession implements Session {
 		this.propertyManager = propertyManager;
 	}
 
-	public static class TestSessionBuilder {
+	public static class GameSessionBuilder {
 		private static Board board;
 		private static PropertyManager propertyManager;
 		private static ActionController actionController;
 		private static List<IO> ios;
 
-		private TestSessionBuilder() {
+		private GameSessionBuilder() {
 		}
 
 		public static void setBoard(Board board) {
-			TestSessionBuilder.board = board;
+			GameSessionBuilder.board = board;
 		}
 
 		public static void setPropertyManager(PropertyManager propertyManager) {
-			TestSessionBuilder.propertyManager = propertyManager;
+			GameSessionBuilder.propertyManager = propertyManager;
 		}
 
 		public static void setActionController(ActionController actionController) {
-			TestSessionBuilder.actionController = actionController;
+			GameSessionBuilder.actionController = actionController;
 		}
 
 		public static void setIOs(List<IO> ios) {
-			TestSessionBuilder.ios = ios;
+			GameSessionBuilder.ios = ios;
 		}
 
 		public static ActionController getActionController() {
@@ -125,6 +126,14 @@ public class GameSession implements Session {
 		public static List<IO> getIos() {
 			return ios;
 		}
+	}
+
+	public static SessionStatus getStatus() {
+		return status;
+	}
+
+	public static void setStatus(SessionStatus status) {
+		GameSession.status = status;
 	}
 
 	public static Board newBoard(List<Player> players, int startMoney) {
@@ -227,5 +236,15 @@ public class GameSession implements Session {
 	@Override
 	public List<IO> getIO() {
 		return ios;
+	}
+
+	@Override
+	public void close() {
+		session = null;
+		setStatus(SessionStatus.NOT_EXISTS);
+		GameSessionBuilder.setActionController(null);
+		GameSessionBuilder.setBoard(null);;
+		GameSessionBuilder.setIOs(null);
+		GameSessionBuilder.setPropertyManager(null);		
 	}
 }

@@ -15,4 +15,5 @@ public interface Session {
     PropertyManager getPropertyManager();
     ActionController getActionController();
     List<IO> getIO();
+    void close();
 }

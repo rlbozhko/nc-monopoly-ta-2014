@@ -12,9 +12,11 @@ import com.monopoly.board.player.Status;
 import com.monopoly.io.ConsoleIO;
 import com.monopoly.io.DummyIO;
 import com.monopoly.io.IO;
+import com.monopoly.bean.User;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 /**
  * Created by Roma on 20.11.2014.
@@ -27,6 +29,8 @@ public class GameSession implements Session {
 	private ActionController actionController;
 	private PropertyManager propertyManager;
 	private List<IO> ios;
+	private Map<User, IO> userIO;
+	
 	private static final int START_MONEY = 5000;
 
 	public static void main(String[] args) {
@@ -72,18 +76,20 @@ public class GameSession implements Session {
 				if (localInstance == null) {
 					session = localInstance = new GameSession(GameSessionBuilder.getBoard(),
 							GameSessionBuilder.getActionController(), GameSessionBuilder.getIos(),
-							GameSessionBuilder.getPropertyManager());
+							GameSessionBuilder.getPropertyManager(), GameSessionBuilder.getUserIO());
 				}
 			}
 		}
 		return localInstance;
 	}
 
-	private GameSession(Board board, ActionController actionController, List<IO> ios, PropertyManager propertyManager) {
+	private GameSession(Board board, ActionController actionController, List<IO> ios, PropertyManager propertyManager, 
+			Map<User, IO> userIO) {
 		this.board = board;
 		this.actionController = actionController;
 		this.ios = ios;
 		this.propertyManager = propertyManager;
+		this.userIO = userIO;
 	}
 
 	public static class GameSessionBuilder {
@@ -91,6 +97,7 @@ public class GameSession implements Session {
 		private static PropertyManager propertyManager;
 		private static ActionController actionController;
 		private static List<IO> ios;
+		private static Map<User, IO> userIO;		
 
 		private GameSessionBuilder() {
 		}
@@ -99,33 +106,41 @@ public class GameSession implements Session {
 			GameSessionBuilder.board = board;
 		}
 
-		public static void setPropertyManager(PropertyManager propertyManager) {
-			GameSessionBuilder.propertyManager = propertyManager;
-		}
-
-		public static void setActionController(ActionController actionController) {
-			GameSessionBuilder.actionController = actionController;
-		}
-
-		public static void setIOs(List<IO> ios) {
-			GameSessionBuilder.ios = ios;
-		}
-
-		public static ActionController getActionController() {
-			return actionController;
-		}
-
 		public static Board getBoard() {
 			return board;
+		}
+
+		public static void setPropertyManager(PropertyManager propertyManager) {
+			GameSessionBuilder.propertyManager = propertyManager;
 		}
 
 		public static PropertyManager getPropertyManager() {
 			return propertyManager;
 		}
 
+		public static void setActionController(ActionController actionController) {
+			GameSessionBuilder.actionController = actionController;
+		}
+
+		public static ActionController getActionController() {
+			return actionController;
+		}
+
+		public static void setIOs(List<IO> ios) {
+			GameSessionBuilder.ios = ios;
+		}
+		
 		public static List<IO> getIos() {
 			return ios;
 		}
+
+		public static void setUserIO(Map<User, IO> userIO) {
+			GameSessionBuilder.userIO = userIO;
+		}
+
+		public static Map<User, IO> getUserIO() {
+			return userIO;
+		}		
 	}
 
 	public static SessionStatus getStatus() {
@@ -246,5 +261,10 @@ public class GameSession implements Session {
 		GameSessionBuilder.setBoard(null);;
 		GameSessionBuilder.setIOs(null);
 		GameSessionBuilder.setPropertyManager(null);		
+	}
+
+	@Override
+	public IO getUserIO(User user) {		
+		return userIO.get(user);
 	}
 }

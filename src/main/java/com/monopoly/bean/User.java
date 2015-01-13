@@ -34,4 +34,28 @@ public class User {
 	public void setHash(String hash) {
 		this.hash = hash;
 	}
+
+	@Override
+	public int hashCode() {
+		return hash.hashCode();
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj) {
+			return true;
+		}
+		if (obj == null) {
+			return false;
+		}
+		if (!(obj instanceof User)) {
+			return false;
+		}		
+		User other = (User) obj; 
+		if (this.email.equals(other.email)) {
+			return true;
+		}		
+		
+		return false;
+	}
 }

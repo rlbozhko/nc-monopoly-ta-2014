@@ -1,6 +1,7 @@
 package com.monopoly.game.session;
 
 import com.monopoly.action.controller.ActionController;
+import com.monopoly.bean.User;
 import com.monopoly.board.Board;
 import com.monopoly.board.player.PropertyManager;
 import com.monopoly.io.IO;
@@ -16,4 +17,5 @@ public interface Session {
     ActionController getActionController();
     List<IO> getIO();
     void close();
+    IO getUserIO(User user);
 }

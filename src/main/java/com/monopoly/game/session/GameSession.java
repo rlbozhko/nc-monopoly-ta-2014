@@ -22,7 +22,7 @@ import java.util.Map;
  * Created by Roma on 20.11.2014.
  */
 public class GameSession implements Session {
-	private static Session session;
+	private static volatile Session session;
 	private static SessionStatus status = SessionStatus.NOT_EXISTS;
 	
 	private Board board;

@@ -31,7 +31,7 @@ public class PlayerActionController implements ActionController {
         }
 
         result.add(new DealAction());
-        result.add(new GiveUpAction());
+        result.add(new FinishGameAction());
         result.add(new WaitAction());
         result.add(new PledgePropertyAction());
         if (player.hasPledgedProperty()) {
@@ -42,12 +42,16 @@ public class PlayerActionController implements ActionController {
             result.addAll(getJailActions(player));
             return result;
         }
+        
+        if (player.getCurrentCell().hasEscapedPlayers()) {
+        	result.add(new BetrayalActioin());
+        }
 
         if (player.isPayRent()) {
             result.add(new PayRentAction());
         }
 
-        Cell cell = session.getBoard().getCells().get(player.getPosition());
+        Cell cell = player.getCurrentCell();
         if (CellType.PROPERTY_CELL == cell.getCellType()) {
             PropertyCell propertyCell = (PropertyCell) cell;
             if (propertyManager.getPropertyOwner(propertyCell) == null) {

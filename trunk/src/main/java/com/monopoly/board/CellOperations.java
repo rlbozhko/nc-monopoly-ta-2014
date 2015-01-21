@@ -21,4 +21,6 @@ public interface CellOperations {
     void performStartEvent();
 
     Cell getJailCell();
+    
+    Cell getGoToJailCell();
 }

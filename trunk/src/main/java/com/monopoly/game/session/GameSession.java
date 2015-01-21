@@ -24,13 +24,13 @@ import java.util.Map;
 public class GameSession implements Session {
 	private static volatile Session session;
 	private static SessionStatus status = SessionStatus.NOT_EXISTS;
-	
+
 	private Board board;
 	private ActionController actionController;
 	private PropertyManager propertyManager;
 	private List<IO> ios;
 	private Map<User, IO> userIO;
-	
+
 	private static final int START_MONEY = 5000;
 
 	public static void main(String[] args) {
@@ -83,7 +83,7 @@ public class GameSession implements Session {
 		return localInstance;
 	}
 
-	private GameSession(Board board, ActionController actionController, List<IO> ios, PropertyManager propertyManager, 
+	private GameSession(Board board, ActionController actionController, List<IO> ios, PropertyManager propertyManager,
 			Map<User, IO> userIO) {
 		this.board = board;
 		this.actionController = actionController;
@@ -97,7 +97,7 @@ public class GameSession implements Session {
 		private static PropertyManager propertyManager;
 		private static ActionController actionController;
 		private static List<IO> ios;
-		private static Map<User, IO> userIO;		
+		private static Map<User, IO> userIO;
 
 		private GameSessionBuilder() {
 		}
@@ -129,7 +129,7 @@ public class GameSession implements Session {
 		public static void setIOs(List<IO> ios) {
 			GameSessionBuilder.ios = ios;
 		}
-		
+
 		public static List<IO> getIos() {
 			return ios;
 		}
@@ -140,7 +140,7 @@ public class GameSession implements Session {
 
 		public static Map<User, IO> getUserIO() {
 			return userIO;
-		}		
+		}
 	}
 
 	public static SessionStatus getStatus() {
@@ -254,17 +254,17 @@ public class GameSession implements Session {
 	}
 
 	@Override
-	public void close() {
+	public synchronized void close() {
 		session = null;
 		setStatus(SessionStatus.NOT_EXISTS);
 		GameSessionBuilder.setActionController(null);
-		GameSessionBuilder.setBoard(null);;
+		GameSessionBuilder.setBoard(null);
 		GameSessionBuilder.setIOs(null);
-		GameSessionBuilder.setPropertyManager(null);		
+		GameSessionBuilder.setPropertyManager(null);
 	}
 
 	@Override
-	public IO getUserIO(User user) {		
+	public IO getUserIO(User user) {
 		return userIO.get(user);
 	}
 }

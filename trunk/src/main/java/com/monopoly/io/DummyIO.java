@@ -4,6 +4,7 @@ import com.monopoly.action.*;
 import com.monopoly.action.controller.ActionController;
 import com.monopoly.board.building.Building;
 import com.monopoly.board.cells.Property;
+import com.monopoly.board.dice.Dice;
 import com.monopoly.board.player.Player;
 import com.monopoly.board.player.Status;
 import com.monopoly.game.session.GameSession;
@@ -35,7 +36,7 @@ public class DummyIO implements IO, Runnable {
             outputAvailableActions();
             for (Action action : actions) {
                 if (player.getMoney() == 0) {
-                    performAction(new GiveUpAction());
+                    performAction(new FinishGameAction());
                     break;
                 }
                 if (action instanceof PayRentAction) {
@@ -54,7 +55,7 @@ public class DummyIO implements IO, Runnable {
         if (player.getMoney() >= property.getRent()) {
             performAction(action);
         } else {
-            performAction(new GiveUpAction());
+            performAction(new FinishGameAction());
         }
     }
 
@@ -124,4 +125,11 @@ public class DummyIO implements IO, Runnable {
     public void showMessage(String message) {
         //System.out.println(player.getName() + ": " + message);
     }
+    
+    @Override
+	public void showDice() {
+		Dice dice = Dice.getInstance();
+		ActionUtils.sendMessageToAll(player.getName() + " бросил кости: " + dice.getFaceDie1() + " "
+				+ dice.getFaceDie2());		
+	}
 }

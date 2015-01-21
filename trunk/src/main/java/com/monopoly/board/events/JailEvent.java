@@ -1,27 +1,23 @@
 package com.monopoly.board.events;
 
 import com.monopoly.action.ActionUtils;
-import com.monopoly.action.EndTurnAction;
+import com.monopoly.action.GoToJailAction;
 import com.monopoly.board.player.Player;
+import com.monopoly.board.player.Status;
 import com.monopoly.game.session.GameSession;
 import com.monopoly.io.IO;
 
 public class JailEvent extends BaseEvent {
-
-    private int jailPosition = 10;//temporary jail location
-    private final int JAIL_TERM = 5;
-
+	private final int ADD_JAIL_TERM = 3;
     @Override
     public void performEvent() {
-        Player player = GameSession.getInstance().getBoard().getCurrentPlayer();
+		Player player = GameSession.getInstance().getBoard().getCurrentPlayer();
         IO playerIO = ActionUtils.getPlayerIO(player);
-        playerIO.showMessage("Вы попали в тюрьму. Ближайшие 5 ходов вы будете сидеть на нарах и хлебать баланду.");
-        new GoToJail().performEvent(player);
-//        player.setStatus(Status.JAILED);
-//        player.setJailTerm(JAIL_TERM);
-//        if (player.getPosition() != jailPosition) {
-//            player.goToPosition(jailPosition);
-//        }
-        new EndTurnAction().performAction(player);
+        if (Status.CLEAN == player.getJailStatus()) {
+        	playerIO.showMessage("Вы пришли в тюрьму как посетитель");
+        } else if (Status.ESCAPE == player.getJailStatus()) {
+        	playerIO.showMessage("Вы пришли в тюрьму и Вас словили");
+        	new GoToJailAction(player.getJailTerm() + ADD_JAIL_TERM).performAction(player);
+        }
     }
 }

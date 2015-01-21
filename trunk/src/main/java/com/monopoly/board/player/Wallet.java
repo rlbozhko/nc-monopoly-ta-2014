@@ -1,17 +1,17 @@
 package com.monopoly.board.player;
 
 public class Wallet {
-    int money;
+    private int money;
 
-    public int getMoney() {
+    public synchronized int getMoney() {
         return money;
     }
 
-    public void addMoney(int amount) {
+    public synchronized void addMoney(int amount) {
         money += amount;
     }
 
-	public boolean subtractMoney(int amount) {
+	public synchronized boolean subtractMoney(int amount) {
         if (money >= amount) {
         	money -= amount;
         	return true;

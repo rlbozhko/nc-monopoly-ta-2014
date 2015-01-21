@@ -9,7 +9,7 @@ import com.monopoly.board.events.JailEvent;
 import com.monopoly.board.player.Player;
 import com.monopoly.board.player.PropertyManager;
 import com.monopoly.board.player.Status;
-import com.monopoly.game.session.GameSession.TestSessionBuilder;
+import com.monopoly.game.session.GameSession.GameSessionBuilder;
 import com.monopoly.io.ConsoleIO;
 import com.monopoly.io.DummyIO;
 import com.monopoly.io.IO;
@@ -33,10 +33,10 @@ public class SessionTest {
 		ios.add(new DummyIO(p2));
 		ios.add(new DummyIO(p3));
 
-		TestSessionBuilder.setBoard(GameSession.newBoard(players, START_MONEY));
-		TestSessionBuilder.setActionController(new PlayerActionController());
-		TestSessionBuilder.setPropertyManager(new PropertyManager(players));
-		TestSessionBuilder.setIOs(ios);
+		GameSessionBuilder.setBoard(GameSession.newBoard(players, START_MONEY));
+		GameSessionBuilder.setActionController(new PlayerActionController());
+		GameSessionBuilder.setPropertyManager(new PropertyManager(players));
+		GameSessionBuilder.setIOs(ios);
 
 		Session test = GameSession.getInstance();
 

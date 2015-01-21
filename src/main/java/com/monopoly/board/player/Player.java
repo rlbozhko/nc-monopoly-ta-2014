@@ -128,10 +128,8 @@ public class Player implements MoneyOperations, MoveOperations, PropertyOperatio
 	}
 
 	@Override
-	public boolean subtractMoney(int money) {
-		synchronized (wallet) {
-			return wallet.subtractMoney(money);
-		}
+	public boolean subtractMoney(int money) {		
+		return wallet.subtractMoney(money);		
 	}
 
 	@Override

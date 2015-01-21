@@ -28,4 +28,6 @@ public interface IO {
     boolean yesNoDialog(String message);
 
     void showMessage(String message);
+    
+    void showDice();
 }

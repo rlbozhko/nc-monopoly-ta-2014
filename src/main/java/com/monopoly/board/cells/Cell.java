@@ -1,5 +1,11 @@
 package com.monopoly.board.cells;
 
+import java.util.List;
+
+import com.monopoly.board.player.Player;
+import com.monopoly.board.player.Status;
+import com.monopoly.game.session.GameSession;
+
 /**
  * Created by Roma on 31.10.2014.
  */
@@ -34,6 +40,16 @@ public abstract class Cell {
 
     public int getPosition() {
         return position;
+    }
+    
+    public boolean hasEscapedPlayers() {
+    	List<Player> players = GameSession.getInstance().getBoard().getPlayers(); 
+    	for (Player player : players) {
+    		if (player.getJailStatus() == Status.ESCAPE) {
+    			return true;
+    		}
+    	}
+    	return false;
     }
 
     @Override

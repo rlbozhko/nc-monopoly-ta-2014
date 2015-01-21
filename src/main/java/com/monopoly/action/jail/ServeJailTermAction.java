@@ -9,24 +9,23 @@ import com.monopoly.io.IO;
 
 public class ServeJailTermAction implements Action {
 
-    EndTurnAction end = new EndTurnAction();
+	EndTurnAction end = new EndTurnAction();
 
-    @Override
-    public void performAction(Player player) {
-        if (player.getJailTerm() > 0) {
-            IO playerIO = ActionUtils.getPlayerIO(player);
-            //добавить склонение слова ход
-            playerIO.showMessage("Вам еще сидеть " + player.getJailTerm() + " ходов");
-            player.subtractJailTerm();
-            new EndTurnAction().performAction(player);
-            if (player.getJailTerm() == 0) {
-                player.setJailStatus(Status.CLEAN);
-            }
-        }
-    }
+	@Override
+	public void performAction(Player player) {
+		IO playerIO = ActionUtils.getPlayerIO(player);
+		player.subtractJailTerm();		
+		if (player.getJailTerm() == 0) {
+			player.setJailStatus(Status.CLEAN);
+			playerIO.showMessage("Вы отсидели свой срок. Можете быть свободны.");
+		} else {
+			playerIO.showMessage("Вам еще сидеть " + player.getJailTerm() + " ход(ов)");
+		}
+		new EndTurnAction().performAction(player);		
+	}
 
-    @Override
-    public String getName() {
-        return "Кантоваться(отсидеть срок)";
-    }
+	@Override
+	public String getName() {
+		return "Кантоваться(отсидеть срок)";
+	}
 }

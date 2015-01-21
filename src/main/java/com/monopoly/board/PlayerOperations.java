@@ -12,9 +12,11 @@ import java.util.List;
  * ОперацииСИгроками
  */
 public interface PlayerOperations {
-    public List<Player> getPlayers();
+    List<Player> getPlayers();
 
-    public Player getNextPlayer();
+    Player getNextPlayer();
 
-    public Player getCurrentPlayer();
+    Player getCurrentPlayer();
+    
+    List<Player> getActivePlayers();
 }

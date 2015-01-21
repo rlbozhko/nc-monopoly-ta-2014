@@ -1,26 +1,27 @@
 package com.monopoly.io;
 
-import com.monopoly.action.Action;
-import com.monopoly.action.controller.ActionController;
-import com.monopoly.action.deal.*;
-import com.monopoly.board.Board;
-import com.monopoly.board.building.Building;
-import com.monopoly.board.cells.Cell;
-import com.monopoly.board.cells.CellType;
-import com.monopoly.board.cells.Property;
-import com.monopoly.board.player.Player;
-import com.monopoly.board.player.PropertyManager;
-import com.monopoly.board.player.Status;
-import com.monopoly.game.session.GameSession;
-import com.monopoly.game.session.Session;
-
 import java.io.BufferedWriter;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.List;
 import java.util.Scanner;
 
-import static org.apache.commons.collections4.CollectionUtils.isEmpty;
+import com.monopoly.action.Action;
+import com.monopoly.action.ActionUtils;
+import com.monopoly.action.controller.ActionController;
+import com.monopoly.action.deal.Deal;
+import com.monopoly.action.deal.DealContainer;
+import com.monopoly.board.Board;
+import com.monopoly.board.building.Building;
+import com.monopoly.board.cells.Cell;
+import com.monopoly.board.cells.CellType;
+import com.monopoly.board.cells.Property;
+import com.monopoly.board.dice.Dice;
+import com.monopoly.board.player.Player;
+import com.monopoly.board.player.PropertyManager;
+import com.monopoly.board.player.Status;
+import com.monopoly.game.session.GameSession;
+import com.monopoly.game.session.Session;
 
 /**
  * Created by Roma on 20.11.2014.
@@ -244,4 +245,11 @@ public class ConsoleIO implements IO, Runnable {
             e.printStackTrace();
         }
     }
+
+	@Override
+	public void showDice() {
+		Dice dice = Dice.getInstance();
+		ActionUtils.sendMessageToAll(player.getName() + " бросил кости: " + dice.getFaceDie1() + " "
+				+ dice.getFaceDie2());		
+	}
 }

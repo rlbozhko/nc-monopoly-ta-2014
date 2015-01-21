@@ -5,7 +5,7 @@ import java.util.List;
 
 import com.monopoly.action.controller.PlayerActionController;
 import com.monopoly.board.cells.Property;
-import com.monopoly.board.events.JailEvent;
+import com.monopoly.board.events.GoToJailEvent;
 import com.monopoly.board.player.Player;
 import com.monopoly.board.player.PropertyManager;
 import com.monopoly.board.player.Status;
@@ -59,13 +59,13 @@ public class SessionTest {
 
 		testPropertyManager.setPropertyOwner(p1, testProperty1);
 		testPropertyManager.setPropertyOwner(p1, testProperty2);
-		// p2.subtractMoney(START_MONEY);
+		p1.subtractMoney(START_MONEY - 1);
 		// p3.addMoney(5000);*/
 		//
 
 		player.start();
 		dummy1.start();
 		dummy2.start();
-		new JailEvent().performEvent();
+		new GoToJailEvent().performEvent();
 	}
 }

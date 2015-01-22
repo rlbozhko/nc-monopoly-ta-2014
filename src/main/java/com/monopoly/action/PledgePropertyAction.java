@@ -56,7 +56,7 @@ public class PledgePropertyAction implements Action {
         if (property != null) {
             if (property.isPledged()) {
                 playerIO.showMessage("Нельзя заложить уже заложеную собственность!!!");
-            } else if (property.hasBuildings()) {
+            } else if (property.hasBuilding()) {
                 playerIO.showMessage("Нельзя заложить собственность с постройками!!!");
             } else {
                 return property;

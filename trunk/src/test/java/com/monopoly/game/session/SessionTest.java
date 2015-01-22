@@ -56,16 +56,18 @@ public class SessionTest {
 
 		Property testProperty1 = (Property) test.getBoard().getCells().get(1);
 		Property testProperty2 = (Property) test.getBoard().getCells().get(3);
+		Property testProperty3 = (Property) test.getBoard().getCells().get(4);
 
 		testPropertyManager.setPropertyOwner(p1, testProperty1);
 		testPropertyManager.setPropertyOwner(p1, testProperty2);
-		p1.subtractMoney(START_MONEY - 1);
+		testPropertyManager.setPropertyOwner(p1, testProperty3);
+		//p1.subtractMoney(START_MONEY - 1);
 		// p3.addMoney(5000);*/
 		//
 
 		player.start();
 		dummy1.start();
 		dummy2.start();
-		new GoToJailEvent().performEvent();
+		//new GoToJailEvent().performEvent();
 	}
 }

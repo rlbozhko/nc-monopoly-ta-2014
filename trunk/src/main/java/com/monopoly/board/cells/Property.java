@@ -2,8 +2,6 @@ package com.monopoly.board.cells;
 
 import com.monopoly.board.building.Building;
 
-import java.util.List;
-
 /**
  * Created by Roma on 31.10.2014.
  */
@@ -13,47 +11,45 @@ import java.util.List;
  */
 public interface Property {
 
-    List<Building> getBuildings();
+	Building getBuilding();
 
-    boolean buildBuilding(Building building, int listIndex);
+	boolean buildBuilding(Building building);
 
-    boolean upgradeBuilding(Building building);
+	boolean upgradeBuilding();
 
-    boolean sellBuilding(Building building);
+	boolean sellBuilding();
 
-    int getPrice();
+	int getPrice();
 
-    int getRent();
+	int getRent();
 
-    Monopoly getMonopoly();
+	Monopoly getMonopoly();
 
-    boolean isPledged();
+	boolean isPledged();
 
-    void setStatus(PropertyStatus propertyStatus);
+	void setStatus(PropertyStatus propertyStatus);
 
-    PropertyStatus getStatus();
+	PropertyStatus getStatus();
 
-    boolean hasBuildings();
+	boolean hasBuilding();
 
-    int getMaxLevel();
+	int getMaxLevel();	
 
-    int getMaxBuildings();
+	void setTurnsToPayBack(int turnsToPayBack);
 
-    void setTurnsToPayBack(int turnsToPayBack);
+	void decrementTurnsToPayBack();
 
-    void decrementTurnsToPayBack();
+	int getTurnsToPayBack();
 
-    int getTurnsToPayBack();
+	int getPayBackMoney();
 
-    int getPayBackMoney();
+	void setPayBackMoney(int payBackMoney);
 
-    void setPayBackMoney(int payBackMoney);
+	void risePayBackMoney();
 
-    void risePayBackMoney();
+	double getPledgePercent();
 
-    double getPledgePercent();
+	void setPledgePercent(double pledgePercent);
 
-    void setPledgePercent(double pledgePercent);
-
-    void resetPledge();
+	void resetPledge();
 }

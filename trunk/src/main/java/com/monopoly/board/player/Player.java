@@ -15,6 +15,7 @@ public class Player implements MoneyOperations, MoveOperations, PropertyOperatio
 	private boolean payRent;
 	private int jailTerm = 0;
 	private Status jailStatus;
+	private boolean offerADeal;
 
 	public Player(String name) {
 		position = 0;
@@ -241,5 +242,15 @@ public class Player implements MoneyOperations, MoveOperations, PropertyOperatio
 			return this;
 
 		}
+	}
+
+	@Override
+	public boolean isOfferADeal() {
+		return offerADeal;
+	}
+
+	@Override
+	public void setOfferADeal(boolean offerADeal) {
+		this.offerADeal = offerADeal;		
 	}
 }

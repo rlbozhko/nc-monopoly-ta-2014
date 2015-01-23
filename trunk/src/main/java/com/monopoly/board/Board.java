@@ -100,11 +100,15 @@ public class Board implements CellOperations, PlayerOperations {
             next = players.get(0);
         } else {
             next = players.get(index + 1);
-        }
-        currentPlayer = next;
+        }        
+        next.setOfferADeal(false);
         if (Status.FINISH == next.getStatus()) {
             next = getNextPlayer();
+        } else if (Status.SKIP_TURN == next.getStatus()) {
+        	next.setStatus(Status.WAIT);
+        	next = getNextPlayer();
         }
+        currentPlayer = next;
         return next;
     }
 

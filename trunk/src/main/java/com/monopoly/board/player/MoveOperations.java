@@ -21,4 +21,8 @@ public interface MoveOperations {
     boolean isPayRent();
 
     void setPayRent(boolean payRent);
+    
+    boolean isOfferADeal();
+    
+    void setOfferADeal(boolean askedDeal);
 }

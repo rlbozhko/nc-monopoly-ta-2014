@@ -22,7 +22,7 @@ public class DealAction implements Action {
         if (deal == null) {
             return;
         }
-
+        player.setOfferADeal(true);
         boolean answer = otherIO.yesNoDialog(deal.message());
         if (answer && deal.isValid()) {
             deal.performDeal();

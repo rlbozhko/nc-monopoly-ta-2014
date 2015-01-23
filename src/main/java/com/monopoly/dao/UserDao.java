@@ -8,7 +8,7 @@ import com.monopoly.bean.User;
 
 @Repository
 public class UserDao {
-	private List<User> usersList = TestUesrs.getUsersList();
+	private List<User> usersList = TestUsers.getUsersList();
 
 	public User getUser(String hash) {
 		// TODO вернуть юзера из базы по хэшу

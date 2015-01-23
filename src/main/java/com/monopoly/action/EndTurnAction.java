@@ -34,8 +34,8 @@ public class EndTurnAction implements Action {
 			playerIO.showMessage("С отрицательным балансом на счету нельзя продолжать играть. Пополните свой счет или сдавайтесь");
 		} else {
 			checkForEscape();
-			player.setStatus(Status.WAIT);
-			board.getNextPlayer().setStatus(Status.START_TURN);
+			player.setStatus(Status.WAIT);			
+			board.getNextPlayer().setStatus(Status.START_TURN);			
 			checkAndStartAuction();
 		}
 	}

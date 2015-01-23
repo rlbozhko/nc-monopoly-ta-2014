@@ -44,7 +44,9 @@ public class PlayerActionController implements ActionController {
 			return result;
 		}
 
-		result.add(new DealAction());
+		if (!player.isOfferADeal()) {
+			result.add(new DealAction());
+		}
 		result.add(new FinishGameAction());
 		result.add(new WaitAction());
 		result.add(new PledgePropertyAction());

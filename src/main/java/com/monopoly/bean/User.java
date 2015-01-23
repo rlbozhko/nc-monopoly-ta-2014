@@ -1,9 +1,12 @@
 package com.monopoly.bean;
 
+import com.monopoly.board.player.Player;
+
 public class User {
 	private String email;
 	private String password;
 	private String hash;
+	private Player player;
 
 	public User(String email, String password, String hash) {
 		this.email = email;
@@ -33,6 +36,14 @@ public class User {
 
 	public void setHash(String hash) {
 		this.hash = hash;
+	}
+	
+	public Player getPlayer() {
+		return player;
+	}
+
+	public void setPlayer(Player player) {
+		this.player = player;
 	}
 
 	@Override

@@ -31,6 +31,7 @@ import com.monopoly.io.IO;
 public class GameSession implements Session {
 	private static volatile Session session;
 	private static SessionStatus status = SessionStatus.NOT_EXISTS;
+	public static List<User> usersList = new ArrayList<User>();
 
 	private Board board;
 	private ActionController actionController;

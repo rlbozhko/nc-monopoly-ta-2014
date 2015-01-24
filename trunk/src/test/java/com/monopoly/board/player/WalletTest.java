@@ -12,14 +12,13 @@ public class WalletTest {
 
     @Test
     public void addmoneyTest() {
-        wallet.money=0;
         wallet.addMoney(100);
         Assert.assertEquals(100, wallet.getMoney());
     }
 
     @Test
     public void subtractmoneyTest() {
-        wallet.money=100;
+        wallet.addMoney(100);
         wallet.subtractMoney(50);
         Assert.assertEquals(50, wallet.getMoney());
         wallet.subtractMoney(200);

@@ -67,6 +67,9 @@ public class ConsoleIO implements IO, Runnable {
 		System.out.println("Вы на позиции: " + position + " " + session.getBoard().getCells().get(position).getName());
 		System.out.println("У Вас на счету $" + player.getMoney() + ". У Вас в собственности: "
 				+ propertyManager.getPlayerProperties(player));
+		if (player.isTimerStarted()) {
+			System.out.println("ОСТАЛОСЬ ВРЕМЕНИ НА ХОД: " + Math.round(player.getRemainingTime() / 100.) / 10.);
+		}
 		for (Player other : players) {
 			if (!player.equals(other)) {
 				System.out.println(other.getName() + " -- на позиции: " + other.getPosition());

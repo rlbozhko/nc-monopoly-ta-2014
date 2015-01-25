@@ -15,6 +15,7 @@ import com.monopoly.board.cells.RandomEventCell;
 import com.monopoly.board.cells.SingleEventCell;
 import com.monopoly.board.events.EmergencyEvent;
 import com.monopoly.board.events.Event;
+import com.monopoly.board.events.GoToJailEvent;
 import com.monopoly.board.events.JailEvent;
 import com.monopoly.board.events.MoneyEvent;
 import com.monopoly.board.events.RandomMoneyEvent;
@@ -71,6 +72,7 @@ public class GameSession implements Session {
 		Thread dummy1 = new Thread(dummyIO1);
 		Thread dummy2 = new Thread(dummyIO2);
 
+		gameSession.getBoard().getCurrentPlayer().startTimer();
 		player.start();
 		dummy1.start();
 		dummy2.start();
@@ -82,22 +84,19 @@ public class GameSession implements Session {
 			synchronized (GameSession.class) {
 				localInstance = session;
 				if (localInstance == null) {
-					session = localInstance = new GameSession(GameSessionBuilder.getBoard(),
-							GameSessionBuilder.getActionController(), GameSessionBuilder.getIos(),
-							GameSessionBuilder.getPropertyManager(), GameSessionBuilder.getUserIO());
+					session = localInstance = new GameSession();
 				}
 			}
 		}
 		return localInstance;
 	}
 
-	private GameSession(Board board, ActionController actionController, List<IO> ios, PropertyManager propertyManager,
-			Map<User, IO> userIO) {
-		this.board = board;
-		this.actionController = actionController;
-		this.ios = ios;
-		this.propertyManager = propertyManager;
-		this.userIO = userIO;
+	private GameSession() {
+		this.board = GameSessionBuilder.getBoard();
+		this.actionController = GameSessionBuilder.getActionController();
+		this.ios = GameSessionBuilder.getIos();
+		this.propertyManager = GameSessionBuilder.getPropertyManager();
+		this.userIO = GameSessionBuilder.getUserIO();
 	}
 
 	public static class GameSessionBuilder {
@@ -194,9 +193,8 @@ public class GameSession implements Session {
 		incomeTax.setStartCash(-200);
 		cells.add(new SingleEventCell("Уплатите налог", "Подоходный налог -$200", cells.size(), incomeTax));
 		cells.add(new PropertyCell("c3m2", "c3m2 desc", cells.size(), null, 1500, 300, monopoly2));
-		MoneyEvent jailEvent = new MoneyEvent("Тюрьма", "Вы можете кого то посетить");
-		jailEvent.setStartCash(0);
-		cells.add(new SingleEventCell("Тюрьма", "Вы можете кого то посетить", cells.size(), jailEvent));
+		Event jailEvent = new JailEvent("Тюрьма", "Это место лучше пройти мимо");
+		cells.add(new SingleEventCell("Тюрьма", "Это место лучше пройти мимо", cells.size(), jailEvent));
 		cells.add(new PropertyCell("c1m3", "c1m3 desc", cells.size(), null, 3000, 300, monopoly3));
 		cells.add(new PropertyCell("c2m3", "c2m3 desc", cells.size(), null, 3000, 300, monopoly3));
 		cells.add(new RandomEventCell("Шанс", "Случайное событие", cells.size(), chanceEvents));
@@ -222,8 +220,8 @@ public class GameSession implements Session {
 		cells.add(new RandomEventCell("Шанс", "Случайное событие", cells.size(), chanceEvents));
 		cells.add(new PropertyCell("c2m6", "c2m6 desc", cells.size(), null, 4000, 400, monopoly6));
 		cells.add(new PropertyCell("c3m6", "c3m6 desc", cells.size(), null, 4000, 400, monopoly6));
-		JailEvent goToJail = new JailEvent();
-		cells.add(new SingleEventCell("Событие в Тюрьму", "Место для События В тюрьму", cells.size(), goToJail));
+		Event goToJail = new GoToJailEvent("Событие в Тюрьму", "Отправляйтесь в тюьму");
+		cells.add(new SingleEventCell("Событие в Тюрьму", "Отправляйтесь в тюьму", cells.size(), goToJail));
 		cells.add(new PropertyCell("c1m7", "c1m7 desc", cells.size(), null, 4200, 420, monopoly7));
 		cells.add(new SingleEventCell("Уплатите налог", "Налог на роскошь", cells.size(), luxTax));
 		cells.add(new PropertyCell("c2m7", "c2m7 desc", cells.size(), null, 4200, 420, monopoly7));

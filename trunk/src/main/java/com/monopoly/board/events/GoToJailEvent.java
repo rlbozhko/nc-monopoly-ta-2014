@@ -6,12 +6,16 @@ import com.monopoly.board.player.Player;
 import com.monopoly.game.session.GameSession;
 
 public class GoToJailEvent extends BaseEvent {
-	private final int JAIL_TERM = 5;
-
+	
+	public GoToJailEvent(String name, String description) {
+		this.name = name;
+		this.description = description;
+	}
+	
 	@Override
 	public void performEvent() {
 		Player player = GameSession.getInstance().getBoard().getCurrentPlayer();
-		new GoToJailAction(JAIL_TERM).performAction(player);
+		new GoToJailAction(GoToJailAction.FIRST_JAIL_TERM).performAction(player);
 		new EndTurnAction().performAction(player);
 	}
 }

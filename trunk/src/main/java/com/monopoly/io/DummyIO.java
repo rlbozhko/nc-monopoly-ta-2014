@@ -9,6 +9,7 @@ import com.monopoly.action.FinishGameAction;
 import com.monopoly.action.PayRentAction;
 import com.monopoly.action.StartTurnAction;
 import com.monopoly.action.controller.ActionController;
+import com.monopoly.action.jail.ServeJailTermAction;
 import com.monopoly.board.cells.Property;
 import com.monopoly.board.dice.Dice;
 import com.monopoly.board.player.Player;
@@ -46,7 +47,8 @@ public class DummyIO implements IO, Runnable {
 				if (action instanceof PayRentAction) {
 					performPayRent(action);
 					break;
-				} else if (action instanceof StartTurnAction || action instanceof EndTurnAction) {
+				} else if (action instanceof StartTurnAction || action instanceof EndTurnAction 
+						|| action instanceof ServeJailTermAction) {
 					performAction(action);
 					break;
 				}

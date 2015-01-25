@@ -16,6 +16,8 @@ public class Player implements MoneyOperations, MoveOperations, PropertyOperatio
 	private int jailTerm = 0;
 	private Status jailStatus;
 	private boolean offerADeal;
+	private PlayerTimer timer;
+	private int doublesCount;
 
 	public Player(String name) {
 		position = 0;
@@ -25,6 +27,7 @@ public class Player implements MoneyOperations, MoveOperations, PropertyOperatio
 		status = Status.WAIT;
 		payRent = false;
 		jailStatus = Status.CLEAN;
+		timer = new PlayerTimer(this);
 	}
 
 	public Status getJailStatus() {
@@ -252,5 +255,51 @@ public class Player implements MoneyOperations, MoveOperations, PropertyOperatio
 	@Override
 	public void setOfferADeal(boolean offerADeal) {
 		this.offerADeal = offerADeal;		
+	}
+	
+	@Override
+	public void addTime() {
+		timer.addTime();
+	}
+
+	@Override
+	public void resetTimer() {
+		timer.reset();		
+	}
+
+	@Override
+	public boolean hasRamainingTime() {
+		return timer.hasRamainingTime();
+	}
+
+	@Override
+	public long getRemainingTime() {		
+		return timer.getRemainingTime();
+	}
+
+	@Override
+	public void startTimer() {
+		timer.start();
+		
+	}
+	
+	@Override
+	public void incrementDoublesCount() {
+		doublesCount++;
+	}
+	
+	@Override
+	public int getDoublesCount() {
+		return doublesCount;
+	}
+	
+	@Override
+	public void resetDoublesCount() {
+		doublesCount = 0;
+	}
+
+	@Override
+	public boolean isTimerStarted() {		
+		return timer.isStarted();
 	}
 }

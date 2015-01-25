@@ -24,6 +24,8 @@ public class SessionTest {
 		Player p3 = new Player("Player 3");
 
 		p1.setStatus(Status.START_TURN);
+		//p1.setStatus(Status.SKIP_TURN);
+		//p2.setStatus(Status.START_TURN);
 		players.add(p1);
 		players.add(p2);
 		players.add(p3);
@@ -61,10 +63,11 @@ public class SessionTest {
 		testPropertyManager.setPropertyOwner(p1, testProperty1);
 		testPropertyManager.setPropertyOwner(p1, testProperty2);
 		testPropertyManager.setPropertyOwner(p1, testProperty3);
+		//p1.addMoney(-10000);
 		//p1.subtractMoney(START_MONEY - 1);
 		// p3.addMoney(5000);*/
 		//
-
+		test.getBoard().getCurrentPlayer().startTimer();
 		player.start();
 		dummy1.start();
 		dummy2.start();

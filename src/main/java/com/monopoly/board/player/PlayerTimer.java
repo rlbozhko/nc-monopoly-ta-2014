@@ -17,16 +17,16 @@ public class PlayerTimer {
 	private boolean started;
 
 	public PlayerTimer(Player player) {
-		this.player = player;		
+		this.player = player;
+		timer = new Timer(true);
 	}
 
-	public void start() {
-		timer = new Timer(true);
-		timerEnd = System.currentTimeMillis() + START_TIME;		
+	public void start() {		
+		timerEnd = System.currentTimeMillis() + START_TIME;
+		started = true;
 		task = new TimerTask() {
 			@Override
-			public void run() {
-				started = true;
+			public void run() {				
 				if (!hasRamainingTime()) {				
 					new FinishGameAction().performAction(player);
 					ActionUtils.getPlayerIO(player).showMessage("Ваше время истекло. Вы проиграли");
@@ -50,7 +50,8 @@ public class PlayerTimer {
 
 	public void reset() {		
 		timer.cancel();
-		started = false;		
+		started = false;
+		timer = new Timer(true);
 	}
 
 	public long getRemainingTime() {
@@ -64,8 +65,16 @@ public class PlayerTimer {
 	public static void main(String[] args) throws InterruptedException {
 		PlayerTimer playerTimer = new PlayerTimer(new Player("Player"));		
 		playerTimer.start();
-		Thread.sleep(3000);
-		playerTimer.addTime();
+		System.out.println("First Timer started");
+		playerTimer.addTime();		
+		while (playerTimer.getRemainingTime() > 55000) {
+			Thread.sleep(1000);
+			System.out.println(playerTimer.getRemainingTime());
+		}
+		
+		playerTimer.reset();
+		playerTimer.start();
+		System.out.println("New Timer started");
 		while (playerTimer.isStarted()) {
 			Thread.sleep(1000);
 			System.out.println(playerTimer.getRemainingTime());

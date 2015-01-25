@@ -30,12 +30,14 @@ public class EndTurnAction implements Action {
 		playerIO = ActionUtils.getPlayerIO(player);
 		if (player.isPayRent()) {
 			playerIO.showMessage("Для завершения хода уплатите аренду");
+			player.addTime();
 		} else if (player.getMoney() <= 0) {
 			playerIO.showMessage("С отрицательным балансом на счету нельзя продолжать играть. Пополните свой счет или сдавайтесь");
+			player.addTime();
 		} else {
 			checkForEscape();
-			player.setStatus(Status.WAIT);			
-			board.getNextPlayer().setStatus(Status.START_TURN);			
+			player.setStatus(Status.WAIT);
+			board.getNextPlayer().setStatus(Status.START_TURN);
 			checkAndStartAuction();
 		}
 	}
@@ -49,7 +51,6 @@ public class EndTurnAction implements Action {
 			} else {
 				playerIO.showMessage("Ваc будут искать еще " + player.getJailTerm() + " ход(ов)");
 			}
-
 		}
 	}
 

@@ -25,4 +25,22 @@ public interface MoveOperations {
     boolean isOfferADeal();
     
     void setOfferADeal(boolean askedDeal);
+    
+    void startTimer();
+    
+    void addTime();
+    
+    void resetTimer();
+    
+    boolean isTimerStarted();
+    
+    boolean hasRamainingTime();
+    
+    long getRemainingTime();
+    
+    void incrementDoublesCount();
+	
+	int getDoublesCount();
+	
+	void resetDoublesCount();
 }

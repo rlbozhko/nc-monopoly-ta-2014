@@ -8,16 +8,21 @@ import com.monopoly.game.session.GameSession;
 import com.monopoly.io.IO;
 
 public class JailEvent extends BaseEvent {
-	private final int ADD_JAIL_TERM = 3;
-    @Override
-    public void performEvent() {
+
+	public JailEvent(String name, String description) {
+		this.name = name;
+		this.description = description;
+	}
+
+	@Override
+	public void performEvent() {
 		Player player = GameSession.getInstance().getBoard().getCurrentPlayer();
-        IO playerIO = ActionUtils.getPlayerIO(player);
-        if (Status.CLEAN == player.getJailStatus()) {
-        	playerIO.showMessage("Вы пришли в тюрьму как посетитель");
-        } else if (Status.ESCAPE == player.getJailStatus()) {
-        	playerIO.showMessage("Вы пришли в тюрьму и Вас словили");
-        	new GoToJailAction(player.getJailTerm() + ADD_JAIL_TERM).performAction(player);
-        }
-    }
+		IO playerIO = ActionUtils.getPlayerIO(player);
+		if (Status.CLEAN == player.getJailStatus()) {
+			playerIO.showMessage("Вы пришли в тюрьму как посетитель");
+		} else if (Status.ESCAPE == player.getJailStatus()) {
+			playerIO.showMessage("Вы пришли в тюрьму и Вас словили");
+			new GoToJailAction(player.getJailTerm() + GoToJailAction.ADD_JAIL_TERM).performAction(player);
+		}
+	}
 }

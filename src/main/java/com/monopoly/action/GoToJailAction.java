@@ -6,6 +6,9 @@ import com.monopoly.board.player.Status;
 import com.monopoly.game.session.GameSession;
 
 public class GoToJailAction implements Action {
+	public final static int FIRST_JAIL_TERM = 5;
+	public final static int ADD_JAIL_TERM = 3;
+	
 	private int jailTerm;    
 	
 	public GoToJailAction(int jailTerm) {

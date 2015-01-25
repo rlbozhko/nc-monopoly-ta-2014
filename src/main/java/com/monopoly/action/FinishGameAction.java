@@ -27,12 +27,9 @@ public class FinishGameAction implements Action {
 
 	@Override
 	public void performAction(Player player) {
-		PropertyManager propertyManager = GameSession.getInstance().getPropertyManager();
-		Player nextPlayer = board.getNextPlayer();
-		if (Status.ACTIVE == player.getStatus() || Status.START_TURN == player.getStatus()) {
-			if (!player.equals(nextPlayer)) {
-				nextPlayer.setStatus(Status.START_TURN);
-			}
+		PropertyManager propertyManager = GameSession.getInstance().getPropertyManager();		
+		if (Status.ACTIVE == player.getStatus() || Status.START_TURN == player.getStatus()) {			
+				board.getNextPlayer().setStatus(Status.START_TURN);							
 		}
 		
 		List<Property> properties = new ArrayList<>(propertyManager.getPlayerProperties(player));
@@ -47,8 +44,9 @@ public class FinishGameAction implements Action {
 			if (activePlayers.size() == 1) {				
 				Player lastPlayer = activePlayers.get(0);
 				lastPlayer.setStatus(Status.FINISH);
+				lastPlayer.resetTimer();
 				ActionUtils.getPlayerIO(lastPlayer).showMessage("Поздравляю!!! Вы стали абсолютным монополистом!!!");
-				ActionUtils.sendMessageToAll("Игрок " + lastPlayer + "победил!!!");				
+				ActionUtils.sendMessageToAll("Игрок " + lastPlayer.getName() + " победил!!!");				
 			}
 		}
 	}

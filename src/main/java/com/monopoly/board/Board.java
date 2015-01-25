@@ -27,7 +27,7 @@ public class Board implements CellOperations, PlayerOperations {
         this.cells = cells;
         updateCellLists();
         this.players = players;
-        currentPlayer = players.get(0);
+        currentPlayer = findStartPlayer();
     }
 
     public Board(List<Player> players, Player currentPlayer, List<Cell> cells) {
@@ -51,6 +51,15 @@ public class Board implements CellOperations, PlayerOperations {
                 }
             }
         }
+    }
+    
+    private Player findStartPlayer() {
+    	for (Player player : players) {
+			if (player.getStatus() == Status.START_TURN) {
+				return player;
+			}
+		}
+    	return players.get(0);
     }
 
     public List<Cell> getCells() {
@@ -88,27 +97,34 @@ public class Board implements CellOperations, PlayerOperations {
     }
 
     @Override
-    public Player getCurrentPlayer() {
+    public synchronized Player getCurrentPlayer() {
         return currentPlayer;
     }
 
     @Override
-    public Player getNextPlayer() {
+    public synchronized Player getNextPlayer() {        
+        currentPlayer.resetTimer();
+    	currentPlayer = nextPlayer();
+        currentPlayer.startTimer();
+        return currentPlayer;
+    }
+    
+    private Player nextPlayer() {
         int index = players.indexOf(currentPlayer);
         Player next;
         if (index == players.size() - 1) {
             next = players.get(0);
         } else {
             next = players.get(index + 1);
-        }        
-        next.setOfferADeal(false);
-        if (Status.FINISH == next.getStatus()) {
-            next = getNextPlayer();
-        } else if (Status.SKIP_TURN == next.getStatus()) {
-        	next.setStatus(Status.WAIT);
-        	next = getNextPlayer();
         }
         currentPlayer = next;
+        next.setOfferADeal(false);
+        if (Status.FINISH == next.getStatus()) {
+            next = nextPlayer();
+        } else if (Status.SKIP_TURN == next.getStatus()) {
+        	next.setStatus(Status.WAIT);
+        	next = nextPlayer();
+        }
         return next;
     }
 

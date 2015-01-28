@@ -96,7 +96,7 @@ public class GameSession implements Session {
 		this.actionController = GameSessionBuilder.getActionController();
 		this.ios = GameSessionBuilder.getIos();
 		this.propertyManager = GameSessionBuilder.getPropertyManager();
-		this.userIO = GameSessionBuilder.getUserIO();
+		this.userIO = GameSessionBuilder.getUsersIO();
 	}
 
 	public static class GameSessionBuilder {
@@ -105,6 +105,7 @@ public class GameSession implements Session {
 		private static ActionController actionController;
 		private static List<IO> ios;
 		private static Map<User, IO> userIO;
+		private static int maxPlayers;
 
 		private GameSessionBuilder() {
 		}
@@ -141,12 +142,20 @@ public class GameSession implements Session {
 			return ios;
 		}
 
-		public static void setUserIO(Map<User, IO> userIO) {
+		public static void setUsersIO(Map<User, IO> userIO) {
 			GameSessionBuilder.userIO = userIO;
 		}
 
-		public static Map<User, IO> getUserIO() {
+		public static Map<User, IO> getUsersIO() {
 			return userIO;
+		}
+
+		public static int getMaxPlayers() {
+			return maxPlayers;
+		}
+
+		public static void setMaxPlayers(int maxPlayers) {
+			GameSessionBuilder.maxPlayers = maxPlayers;
 		}
 	}
 

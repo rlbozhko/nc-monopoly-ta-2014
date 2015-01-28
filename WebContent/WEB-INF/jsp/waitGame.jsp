@@ -9,7 +9,7 @@
 </head>
 <body>
 
-	<a href="signin.action?signout">Sign out [${email}] </a>	
+	<a href="signin.action?signout">Sign out [${email}] </a>
 	
 	<form action="index.action" method="get">
 		<input type="hidden" name="playerName" value="${playerName}"> 
@@ -17,8 +17,8 @@
 		<input type="submit" value="Refresh">
 	</form>
 
-	<h1>Game</h1>
-
+	<h1>Waiting room</h1>
+	
 	<div>
 		<c:forEach var="each" items="${players}">
 					${each.getName()}

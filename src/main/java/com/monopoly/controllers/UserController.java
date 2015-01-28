@@ -48,9 +48,9 @@ public class UserController {
 
         if (cookie != null) {
             response.addCookie(cookie);
-            return new ModelAndView("redirect:index.action");
+            return new ModelAndView("redirect:index.action");           
         }
-        return new ModelAndView("redirect:signin.action?isVerificationUser=false");
+        return new ModelAndView("redirect:signin.action?isVerificationUser=false");        
     }
 }
 

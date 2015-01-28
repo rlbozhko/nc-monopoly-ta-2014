@@ -48,7 +48,7 @@ public class User {
 
 	@Override
 	public int hashCode() {
-		return hash.hashCode();
+		return email.hashCode();
 	}
 
 	@Override

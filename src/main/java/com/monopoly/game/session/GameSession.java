@@ -3,6 +3,7 @@ package com.monopoly.game.session;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 
 import com.monopoly.action.controller.ActionController;
 import com.monopoly.action.controller.PlayerActionController;
@@ -281,5 +282,10 @@ public class GameSession implements Session {
 	@Override
 	public IO getUserIO(User user) {
 		return userIO.get(user);
+	}
+	
+	@Override
+	public Set<User> getUsers() {
+		return userIO.keySet();
 	}
 }

@@ -4,6 +4,7 @@ import java.io.BufferedWriter;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.List;
+import java.util.Queue;
 import java.util.Scanner;
 
 import com.monopoly.action.Action;
@@ -22,6 +23,8 @@ import com.monopoly.board.player.PropertyManager;
 import com.monopoly.board.player.Status;
 import com.monopoly.game.session.GameSession;
 import com.monopoly.game.session.Session;
+import com.monopoly.io.WebIO.SelectPropertyHelper;
+import com.monopoly.io.WebIO.YesNoDialog;
 
 /**
  * Created by Roma on 20.11.2014.
@@ -29,7 +32,7 @@ import com.monopoly.game.session.Session;
 public class ConsoleIO implements IO, Runnable {
 	private Player player;
 	private List<Action> actions;
-	PropertyManager propertyManager;
+	private PropertyManager propertyManager;
 
 	public ConsoleIO(Player player) {
 		this.player = player;
@@ -53,11 +56,10 @@ public class ConsoleIO implements IO, Runnable {
 	}
 
 	@Override
-	public Player getUser() {
+	public Player getOwner() {
 		return player;
 	}
-
-	@Override
+	
 	public void outputBoardState() {
 		Session session = GameSession.getInstance();
 		System.out.println();
@@ -78,7 +80,6 @@ public class ConsoleIO implements IO, Runnable {
 		System.out.println();
 	}
 
-	@Override
 	public void outputAvailableActions() {
 		ActionController actionController = GameSession.getInstance().getActionController();
 		actions = actionController.getAvailableActions(player);
@@ -89,7 +90,6 @@ public class ConsoleIO implements IO, Runnable {
 		System.out.println();
 	}
 
-	@Override
 	public void performAction(Action action) {
 		action.performAction(player);
 	}
@@ -232,11 +232,90 @@ public class ConsoleIO implements IO, Runnable {
 			e.printStackTrace();
 		}
 	}
-
+	
 	@Override
 	public void showDice() {
 		Dice dice = Dice.getInstance();
 		ActionUtils.sendMessageToAll(player.getName() + " бросил кости: " + dice.getFaceDie1() + " "
 				+ dice.getFaceDie2());
+	}
+	
+	@Override
+	public boolean hasSelectPlayerRequest() {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+	@Override
+	public void setSelectedPlayer(Player selectedPlayer) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public SelectPropertyHelper getSelectPropertyHelper() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public void setCreatedDeal(Deal deal) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public boolean hasCreateDealRequest() {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+	@Override
+	public boolean hasYesNoDialog() {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+	@Override
+	public YesNoDialog getYesNoDialog() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public String getLastMessage() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public Queue<String> getAllMessages() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public boolean hasMessages() {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+	@Override
+	public void showWarning(String message) {
+		System.out.println();
+		System.out.println("Warning: " + message);
+		
+	}
+
+	@Override
+	public String getWarning() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public boolean hasWarning() {
+		// TODO Auto-generated method stub
+		return false;
 	}
 }

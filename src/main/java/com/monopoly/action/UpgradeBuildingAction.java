@@ -14,15 +14,15 @@ public class UpgradeBuildingAction implements Action {
 	public void performAction(Player aPlayer) {
 		player = aPlayer;
 		io = ActionUtils.getPlayerIO(player);
-		io.showMessage("Где повысить уровень здания?");
+		io.showWarning("Где повысить уровень здания?");
 		property = io.selectProperty(player);
 		if (property == null) {
-			io.showMessage("Собственность не выбрана");
+			io.showWarning("Собственность не выбрана");
 			return;
 		}		
 		Building building = property.getBuilding();
 		if (building == null) {
-			io.showMessage("Нечего повышать");
+			io.showWarning("Нечего повышать");
 			return;
 		}
 		if (buildingCheck(building)) {
@@ -40,9 +40,9 @@ public class UpgradeBuildingAction implements Action {
 
 	private void showErrorMessage(Building building) {
 		if (building.getMaxLevel() == building.currentLevel()) {
-			io.showMessage("Нельзя повысить! Максимальный Уровень здания");
+			io.showWarning("Нельзя повысить! Максимальный Уровень здания");
 		} else if (player.getMoney() < building.currentPrice()) {
-			io.showMessage("Не достаточно средств!");
+			io.showWarning("Не достаточно средств!");
 		}
 	}
 

@@ -26,7 +26,7 @@ public class PayRentAction implements Action {
             playerIO.showMessage("Вы уплатили аренду в размере $" + rent);
             ownerIO.showMessage(player.getName() + " уплатил аренду в размере $" + rent);
         } else {
-            playerIO.showMessage("Не достаточно денег для оплаты аренды");
+            playerIO.showWarning("Не достаточно денег для оплаты аренды");
         }
     }
 

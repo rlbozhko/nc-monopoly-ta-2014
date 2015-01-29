@@ -14,15 +14,15 @@ public class SellBuildingLevelAction implements Action {
 	public void performAction(Player aPlayer) {
 		player = aPlayer;
 		io = ActionUtils.getPlayerIO(player);
-		io.showMessage("Где понизить уровень здания?");
+		io.showWarning("Где понизить уровень здания?");
 		property = io.selectProperty(player);
 		if (property == null) {
-			io.showMessage("Собственность не выбрана");
+			io.showWarning("Собственность не выбрана");
 			return;
 		}
 		Building building = property.getBuilding();
 		if (building == null) {
-			io.showMessage("Нечего понижать");
+			io.showWarning("Нечего понижать");
 			return;
 		}
 		if (buildingCheck(building)) {

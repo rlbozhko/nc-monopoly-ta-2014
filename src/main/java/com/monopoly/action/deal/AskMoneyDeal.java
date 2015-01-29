@@ -30,7 +30,7 @@ public class AskMoneyDeal extends WrapperDeal {
     public boolean isValid() {
         boolean result = true;
         if (getTarget().getMoney() < money) {
-            getTargetIO().showMessage("У Вас не достаточно денег");
+            getTargetIO().showWarning("У Вас не достаточно денег");
             result = false;
         }
         return deal.isValid() && result;

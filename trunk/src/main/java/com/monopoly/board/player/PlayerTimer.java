@@ -29,7 +29,7 @@ public class PlayerTimer {
 			public void run() {
 				if (!hasRamainingTime()) {
 					new FinishGameAction().performAction(player);
-					ActionUtils.getPlayerIO(player).showMessage("Ваше время истекло. Вы проиграли");
+					ActionUtils.getPlayerIO(player).showWarning("Ваше время истекло. Вы проиграли");
 					ActionUtils.sendMessageToAll(player.getName() + " выбыл из игры");
 					reset();
 				}

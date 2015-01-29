@@ -29,10 +29,10 @@ public class EndTurnAction implements Action {
 		player = aPlayer;
 		playerIO = ActionUtils.getPlayerIO(player);
 		if (player.isPayRent()) {
-			playerIO.showMessage("Для завершения хода уплатите аренду");
+			playerIO.showWarning("Для завершения хода уплатите аренду");
 			player.addTime();
 		} else if (player.getMoney() <= 0) {
-			playerIO.showMessage("С отрицательным балансом на счету нельзя продолжать играть. Пополните свой счет или сдавайтесь");
+			playerIO.showWarning("С отрицательным балансом на счету нельзя продолжать играть. Пополните свой счет или сдавайтесь");
 			player.addTime();
 		} else {
 			checkForEscape();

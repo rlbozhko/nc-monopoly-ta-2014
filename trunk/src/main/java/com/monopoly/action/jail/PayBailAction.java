@@ -19,7 +19,7 @@ public class PayBailAction implements Action {
 					+ "Впредь будьте более удачливы. Можете быть свободны.");
 			player.setJailTerm(RESET_JAIL_TERM);
 		} else {
-			playerIO.showMessage("Недостаточно денег для выплаты залога. Требуется $" + bail);
+			playerIO.showWarning("Недостаточно денег для выплаты залога. Требуется $" + bail);
 		}
 	}
 

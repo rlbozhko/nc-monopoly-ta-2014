@@ -25,7 +25,7 @@ public class PayBackAction implements Action {
 				tryPayBack(payBackMoney);
 			}
 		} else {
-			playerIO.showMessage("Эта собственность не заложена!");
+			playerIO.showWarning("Эта собственность не заложена!");
 		}
 	}
 

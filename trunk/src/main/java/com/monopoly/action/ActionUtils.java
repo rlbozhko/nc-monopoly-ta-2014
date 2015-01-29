@@ -13,7 +13,7 @@ public class ActionUtils {
     public static IO getPlayerIO(Player player) {
         List<IO> ioList = GameSession.getInstance().getIO();
         for (IO io : ioList) {
-            Player user = io.getUser();
+            Player user = io.getOwner();
             if (player.equals(user)) {
                 return io;
             }

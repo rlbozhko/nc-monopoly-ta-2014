@@ -1,6 +1,7 @@
 package com.monopoly.io;
 
 import java.util.List;
+import java.util.Queue;
 
 import com.monopoly.action.Action;
 import com.monopoly.action.ActionUtils;
@@ -9,13 +10,15 @@ import com.monopoly.action.FinishGameAction;
 import com.monopoly.action.PayRentAction;
 import com.monopoly.action.StartTurnAction;
 import com.monopoly.action.controller.ActionController;
+import com.monopoly.action.deal.Deal;
 import com.monopoly.action.jail.ServeJailTermAction;
 import com.monopoly.board.cells.Property;
 import com.monopoly.board.dice.Dice;
 import com.monopoly.board.player.Player;
 import com.monopoly.board.player.Status;
 import com.monopoly.game.session.GameSession;
-import com.monopoly.game.session.Session;
+import com.monopoly.io.WebIO.SelectPropertyHelper;
+import com.monopoly.io.WebIO.YesNoDialog;
 
 /**
  * Created by Roma on 20.11.2014.
@@ -65,34 +68,17 @@ public class DummyIO implements IO, Runnable {
 		}
 	}
 
-	@Override
-	public void outputBoardState() {
-		Session session = GameSession.getInstance();
-		System.out.println("Информация об игре");
-		List<Player> players = session.getBoard().getPlayers();
-		System.out.println("Вы на позиции: " + player.getPosition());
-		int i = 0;
-		for (Player other : players) {
-			if (!player.equals(other)) {
-				System.out.println("Другой игрок " + i + "на позиции: " + other.getPosition());
-			}
-			i++;
-		}
-	}
-
-	@Override
 	public void outputAvailableActions() {
 		ActionController actionController = GameSession.getInstance().getActionController();
 		actions = actionController.getAvailableActions(player);
 	}
 
-	@Override
 	public void performAction(Action action) {
 		action.performAction(player);
 	}
 
 	@Override
-	public Player getUser() {
+	public Player getOwner() {
 		return player;
 	}
 
@@ -106,10 +92,6 @@ public class DummyIO implements IO, Runnable {
 		return null;
 	}
 
-	/*
-	 * @Override public Building selectBuilding(Property property) { return
-	 * null; }
-	 */
 	@Override
 	public com.monopoly.action.deal.Deal dealDialog(Player otherPlayer) {
 		return null;
@@ -136,5 +118,83 @@ public class DummyIO implements IO, Runnable {
 		Dice dice = Dice.getInstance();
 		ActionUtils.sendMessageToAll(player.getName() + " бросил кости: " + dice.getFaceDie1() + " "
 				+ dice.getFaceDie2());
+	}
+
+	@Override
+	public boolean hasSelectPlayerRequest() {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+	@Override
+	public void setSelectedPlayer(Player selectedPlayer) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public SelectPropertyHelper getSelectPropertyHelper() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public void setCreatedDeal(Deal deal) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public boolean hasCreateDealRequest() {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+	@Override
+	public boolean hasYesNoDialog() {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+	@Override
+	public YesNoDialog getYesNoDialog() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public String getLastMessage() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public Queue<String> getAllMessages() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public boolean hasMessages() {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+	@Override
+	public void showWarning(String message) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public String getWarning() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public boolean hasWarning() {
+		// TODO Auto-generated method stub
+		return false;
 	}
 }

@@ -29,7 +29,7 @@ public class GiveMoneyDeal extends WrapperDeal {
 	public boolean isValid() {
 		boolean result = true;
 		if (getSource().getMoney() < money) {
-			getSourceIO().showMessage("У Вас не достаточно денег!");
+			getSourceIO().showWarning("У Вас не достаточно денег!");
 			result = false;
 		}
 		return deal.isValid() && result;

@@ -16,10 +16,10 @@ public class BuildAction implements Action {
 	public void performAction(Player aPlayer) {
 		player = aPlayer;
 		io = ActionUtils.getPlayerIO(player);
-		io.showMessage("Где построить здание?");
+		io.showWarning("Где построить здание?");
 		property = io.selectProperty(player);
 		if (property == null) {
-			io.showMessage("Собственность не выбрана");
+			io.showWarning("Собственность не выбрана");
 			return;
 		}
 		
@@ -33,11 +33,11 @@ public class BuildAction implements Action {
 
 	private void showErrorMessage() {
 		if (!property.getMonopoly().hasSameOwner(player)) {
-			io.showMessage("Здание не построено! Вся монополия должна принадлежать Вам");
+			io.showWarning("Здание не построено! Вся монополия должна принадлежать Вам");
 		} else if (player.getMoney() < BUILDING_PRICE) {
-			io.showMessage("Здание не построено! У Вас не достатточно средств");
+			io.showWarning("Здание не построено! У Вас не достатточно средств");
 		} else if (property.hasBuilding()) {
-			io.showMessage("Тут уже есть здание!");
+			io.showWarning("Тут уже есть здание!");
 		}		
 	}
 

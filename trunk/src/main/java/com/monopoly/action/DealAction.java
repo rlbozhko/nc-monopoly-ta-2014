@@ -13,7 +13,7 @@ public class DealAction implements Action {
         IO playerIO = ActionUtils.getPlayerIO(player);
         Player otherPlayer = playerIO.selectPlayer();
         if (otherPlayer == null) {
-            playerIO.showMessage("Вы не выбрали Игрока для сделки");
+            playerIO.showWarning("Вы не выбрали Игрока для сделки!");
             return;
         }
 

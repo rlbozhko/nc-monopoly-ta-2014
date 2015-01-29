@@ -2,7 +2,6 @@ package com.monopoly.action;
 
 import com.monopoly.board.cells.PropertyCell;
 import com.monopoly.board.player.Player;
-import com.monopoly.game.session.GameSession;
 import com.monopoly.io.IO;
 
 /**
@@ -18,11 +17,11 @@ public class BuyPropertyAction implements Action {
             if (player.buyProperty(property)) {
                 playerIO.showMessage("Вы купили " + property.getName() + " за $" + property.getPrice());
             } else {
-                playerIO.showMessage("У Вас не достаточно средств");
+                playerIO.showWarning("У Вас не достаточно средств");
             }
         }
     }
-
+		
     @Override
     public String getName() {
         return "Buy Property";

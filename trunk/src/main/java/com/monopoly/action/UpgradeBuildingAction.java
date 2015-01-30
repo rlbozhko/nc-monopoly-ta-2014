@@ -9,6 +9,7 @@ public class UpgradeBuildingAction implements Action {
 	private IO io;
 	private Property property;
 	private Player player;
+	public final static ActionType type = ActionType.UPGRADE_BUILDING;
 
 	@Override
 	public void performAction(Player aPlayer) {
@@ -49,6 +50,16 @@ public class UpgradeBuildingAction implements Action {
 	@Override
 	public String getName() {
 		return "Upgrade Building";
+	}
+	
+	@Override
+	public int hashCode() {		
+		return type.hashCode();
+	}
+
+	@Override
+	public boolean equals(Object obj) {		
+		return type.equals(obj);
 	}
 
 }

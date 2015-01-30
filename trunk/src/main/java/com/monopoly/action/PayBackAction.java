@@ -12,6 +12,7 @@ public class PayBackAction implements Action {
 	private Player player;
 	private IO playerIO;
 	private Property property;
+	public final static ActionType type = ActionType.PAY_BACK;
 
 	@Override
 	public void performAction(Player aPlayer) {
@@ -41,5 +42,15 @@ public class PayBackAction implements Action {
 	@Override
 	public String getName() {
 		return "Pay Back";
+	}
+	
+	@Override
+	public int hashCode() {		
+		return type.hashCode();
+	}
+
+	@Override
+	public boolean equals(Object obj) {		
+		return type.equals(obj);
 	}
 }

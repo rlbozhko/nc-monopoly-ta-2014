@@ -296,7 +296,7 @@ public class ConsoleIO implements IO, Runnable {
 	}
 
 	@Override
-	public boolean hasMessages() {
+	public boolean hasMessage() {
 		// TODO Auto-generated method stub
 		return false;
 	}
@@ -316,6 +316,12 @@ public class ConsoleIO implements IO, Runnable {
 
 	@Override
 	public boolean hasWarning() {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+	@Override
+	public boolean hasSelectPropertyRequest() {
 		// TODO Auto-generated method stub
 		return false;
 	}

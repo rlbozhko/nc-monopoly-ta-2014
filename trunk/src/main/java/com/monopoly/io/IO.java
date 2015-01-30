@@ -44,7 +44,7 @@ public interface IO {
 
 	Queue<String> getAllMessages();
 
-	boolean hasMessages();
+	boolean hasMessage();
 
 	void showWarning(String message);
 
@@ -55,4 +55,6 @@ public interface IO {
 	void showDice();
 
 	void performAction(Action action);
+
+	boolean hasSelectPropertyRequest();
 }

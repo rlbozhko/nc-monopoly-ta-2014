@@ -23,7 +23,7 @@ import com.monopoly.io.IO;
 
 public class PledgePropertyAction implements Action {
     public static final double MAX_PERCENT_FROM_PROPERTY = 0.7;
-    public static final int MAX_TURNS_TO_PAY_BACK = 1;
+    public static final int MAX_TURNS_TO_PAY_BACK = 4;
     public static final double MAX_PLEDGE_PERCENT_PER_TURN = 0.1;
 
     @Override

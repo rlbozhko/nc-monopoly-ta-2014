@@ -1,6 +1,7 @@
-package com.monopoly.game.session;
+	package com.monopoly.game.session;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
@@ -32,13 +33,12 @@ import com.monopoly.io.IO;
  */
 public class GameSession implements Session {
 	private static volatile Session session;
-	private static SessionStatus status = SessionStatus.NOT_EXISTS;
-	public static List<User> usersList = new ArrayList<User>();
+	private static SessionStatus status = SessionStatus.NOT_EXISTS;	
 
 	private Board board;
 	private ActionController actionController;
 	private PropertyManager propertyManager;
-	private List<IO> ios;
+	//private List<IO> ios;
 	private Map<User, IO> userIO;
 
 	private static final int START_MONEY = 5000;
@@ -52,17 +52,18 @@ public class GameSession implements Session {
 		p1.setStatus(Status.START_TURN);
 		players.add(p1);
 		players.add(p2);
-		players.add(p3);
-
-		List<IO> ios = new ArrayList<>();
-		ios.add(new ConsoleIO(p1));
-		ios.add(new DummyIO(p2));
-		ios.add(new DummyIO(p3));
-
+		players.add(p3);		
+		
+		Map<User, IO> usersIO = new HashMap<User, IO>();
+		usersIO.put(new User("p1@test.ua", "123", "hash1"), new ConsoleIO(p1));
+		usersIO.put(new User("p2@test.ua", "123", "hash2"), new DummyIO(p2));
+		usersIO.put(new User("p3@test.ua", "123", "hash3"), new DummyIO(p3));
+		
+		
 		GameSessionBuilder.setBoard(newBoard(players, START_MONEY));
 		GameSessionBuilder.setActionController(new PlayerActionController());
 		GameSessionBuilder.setPropertyManager(new PropertyManager(players));
-		GameSessionBuilder.setIOs(ios);
+		GameSessionBuilder.setUsersIO(usersIO);
 
 		Session gameSession = GameSession.getInstance();
 
@@ -94,8 +95,7 @@ public class GameSession implements Session {
 
 	private GameSession() {
 		this.board = GameSessionBuilder.getBoard();
-		this.actionController = GameSessionBuilder.getActionController();
-		this.ios = GameSessionBuilder.getIos();
+		this.actionController = GameSessionBuilder.getActionController();		
 		this.propertyManager = GameSessionBuilder.getPropertyManager();
 		this.userIO = GameSessionBuilder.getUsersIO();
 	}
@@ -103,8 +103,7 @@ public class GameSession implements Session {
 	public static class GameSessionBuilder {
 		private static Board board;
 		private static PropertyManager propertyManager;
-		private static ActionController actionController;
-		private static List<IO> ios;
+		private static ActionController actionController;		
 		private static Map<User, IO> userIO;
 		private static int maxPlayers;
 
@@ -133,15 +132,7 @@ public class GameSession implements Session {
 
 		public static ActionController getActionController() {
 			return actionController;
-		}
-
-		public static void setIOs(List<IO> ios) {
-			GameSessionBuilder.ios = ios;
-		}
-
-		public static List<IO> getIos() {
-			return ios;
-		}
+		}		
 
 		public static void setUsersIO(Map<User, IO> userIO) {
 			GameSessionBuilder.userIO = userIO;
@@ -160,11 +151,11 @@ public class GameSession implements Session {
 		}
 	}
 
-	public static SessionStatus getStatus() {
+	public synchronized static SessionStatus getStatus() {
 		return status;
 	}
 
-	public static void setStatus(SessionStatus status) {
+	public synchronized static void setStatus(SessionStatus status) {
 		GameSession.status = status;
 	}
 
@@ -266,7 +257,7 @@ public class GameSession implements Session {
 
 	@Override
 	public List<IO> getIO() {
-		return ios;
+		return new ArrayList<>(userIO.values());
 	}
 
 	@Override
@@ -275,7 +266,7 @@ public class GameSession implements Session {
 		setStatus(SessionStatus.NOT_EXISTS);
 		GameSessionBuilder.setActionController(null);
 		GameSessionBuilder.setBoard(null);
-		GameSessionBuilder.setIOs(null);
+		GameSessionBuilder.setUsersIO(null);
 		GameSessionBuilder.setPropertyManager(null);
 	}
 

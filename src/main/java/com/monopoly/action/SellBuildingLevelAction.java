@@ -9,6 +9,7 @@ public class SellBuildingLevelAction implements Action {
 	private IO io;
 	private Property property;
 	private Player player;
+	public final static ActionType type = ActionType.SELL_BUILDING;
 
 	@Override
 	public void performAction(Player aPlayer) {
@@ -38,5 +39,14 @@ public class SellBuildingLevelAction implements Action {
 	public String getName() {
 		return "Sell one Building level";
 	}
+	
+	@Override
+	public int hashCode() {		
+		return type.hashCode();
+	}
 
+	@Override
+	public boolean equals(Object obj) {		
+		return type.equals(obj);
+	}
 }

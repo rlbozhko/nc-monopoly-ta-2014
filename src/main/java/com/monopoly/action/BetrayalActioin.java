@@ -7,7 +7,9 @@ import com.monopoly.board.player.Status;
 import com.monopoly.game.session.GameSession;
 
 public class BetrayalActioin implements Action {
-	private final int ADD_JAIL_TERM = 3;
+	public final static ActionType type = ActionType.BETRAYAL;
+	
+	private final int ADD_JAIL_TERM = 3;	
 
 	@Override
 	public void performAction(Player player) {
@@ -23,5 +25,15 @@ public class BetrayalActioin implements Action {
 	@Override
 	public String getName() {
 		return "Call Police";
+	}
+
+	@Override
+	public int hashCode() {		
+		return type.hashCode();
+	}
+
+	@Override
+	public boolean equals(Object obj) {		
+		return type.equals(obj);
 	}
 }

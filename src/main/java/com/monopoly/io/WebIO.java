@@ -1,25 +1,27 @@
 package com.monopoly.io;
 
 import java.util.LinkedList;
+import java.util.List;
 import java.util.Queue;
 
 import com.monopoly.action.Action;
 import com.monopoly.action.deal.Deal;
 import com.monopoly.board.cells.Property;
 import com.monopoly.board.player.Player;
+import com.monopoly.game.session.GameSession;
 
 public class WebIO implements IO {
-	private Player player;	
+	private Player player;
 
-	private boolean selectPlayerRequest;	
+	private volatile boolean selectPlayerRequest;
 	private Object selectPlayerLock = new Object();
 	private Player selectedPlayer;
 
-	private boolean selectPropertyRequest;
+	private volatile boolean selectPropertyRequest;
 	private Object selectPropertyLock = new Object();
 	private SelectPropertyHelper selectPropertyHelper;
 
-	private boolean createDealRequest;
+	private volatile boolean createDealRequest;
 	private Object createDealLock = new Object();
 	private Deal createdDeal;
 
@@ -52,7 +54,7 @@ public class WebIO implements IO {
 		}
 		return selectedPlayer;
 	}
-	
+
 	@Override
 	public boolean hasSelectPlayerRequest() {
 		synchronized (selectPlayerLock) {
@@ -70,9 +72,9 @@ public class WebIO implements IO {
 	}
 
 	@Override
-	public Property selectProperty(Player player) {
+	public Property selectProperty(Player targetPlayer) {
 		synchronized (selectPropertyLock) {
-			selectPropertyHelper = new SelectPropertyHelper();
+			selectPropertyHelper = new SelectPropertyHelper(targetPlayer);
 			selectPropertyRequest = true;
 			while (selectPropertyRequest) {
 				try {
@@ -87,6 +89,13 @@ public class WebIO implements IO {
 		}
 	}
 	
+	@Override
+	public boolean hasSelectPropertyRequest() {
+		synchronized (selectPropertyLock) {
+			return selectPropertyRequest;
+		}
+	}
+
 	@Override
 	public SelectPropertyHelper getSelectPropertyHelper() {
 		synchronized (selectPropertyLock) {
@@ -119,7 +128,7 @@ public class WebIO implements IO {
 			createDealLock.notifyAll();
 		}
 	}
-	
+
 	@Override
 	public boolean hasCreateDealRequest() {
 		synchronized (createDealLock) {
@@ -132,14 +141,16 @@ public class WebIO implements IO {
 		YesNoDialog dialog = new YesNoDialog(message);
 		synchronized (yesNoDialogs) {
 			yesNoDialogs.add(dialog);
-			while (!dialog.isAnswered()) {
-				try {
-					dialog.wait();
-				} catch (InterruptedException e) {
-					e.printStackTrace();
+			synchronized (dialog) {
+				while (!dialog.isAnswered()) {
+					try {
+						dialog.wait();
+					} catch (InterruptedException e) {
+						e.printStackTrace();
+					}
 				}
+				return dialog.getAnswer();
 			}
-			return dialog.getAnswer();
 		}
 	}
 
@@ -170,14 +181,14 @@ public class WebIO implements IO {
 			return messages.peek();
 		}
 	}
-	
+
 	@Override
 	public Queue<String> getAllMessages() {
 		return messages;
 	}
 
 	@Override
-	public boolean hasMessages() {
+	public boolean hasMessage() {
 		synchronized (messages) {
 			return !messages.isEmpty();
 		}
@@ -203,19 +214,24 @@ public class WebIO implements IO {
 		synchronized (warnings) {
 			return !warnings.isEmpty();
 		}
-	}	
+	}
 
 	public class SelectPropertyHelper {
 		private Property property;
-
-		public Player getPlayer() {
-			return player;
+		private Player owner;
+		
+		public SelectPropertyHelper(Player owner) {
+			this.owner = owner;
+		}
+		
+		public Player getOwner() {
+			return owner;
 		}
 
 		public void setProperty(Property property) {
-			synchronized (this) {
+			synchronized (selectPropertyLock) {
 				this.property = property;
-				selectPlayerRequest = false;
+				selectPropertyRequest = false;
 				this.notifyAll();
 			}
 		}
@@ -227,8 +243,8 @@ public class WebIO implements IO {
 
 	public class YesNoDialog {
 		private String message;
-		private boolean answer;
-		private boolean answered;
+		private volatile boolean answer;
+		private volatile boolean answered;
 
 		public YesNoDialog(String message) {
 			this.message = message;
@@ -241,21 +257,23 @@ public class WebIO implements IO {
 
 		public void setAnswer(boolean answer) {
 			synchronized (yesNoDialogs) {
-				this.answer = answer;
-				answered = true;
-				yesNoDialogs.remove(this);
-				this.notifyAll();
+				synchronized (this) {
+					this.answer = answer;
+					answered = true;
+					yesNoDialogs.remove(this);
+					this.notifyAll();
+				}
 			}
 		}
 
 		public boolean getAnswer() {
-			synchronized (yesNoDialogs) {
+			synchronized (this) {
 				return answer;
 			}
 		}
 
 		public boolean isAnswered() {
-			synchronized (yesNoDialogs) {
+			synchronized (this) {
 				return answered;
 			}
 		}
@@ -264,16 +282,23 @@ public class WebIO implements IO {
 	@Override
 	public void showDice() {
 		// TODO Auto-generated method stub
-		
+
 	}
 
 	@Override
 	public void performAction(final Action action) {
-		new Thread(new Runnable() {			
-			@Override
-			public void run() {
-				action.performAction(player);				
-			}
-		});	
+		if (hasAvailableAction(action)) {
+			new Thread(new Runnable() {
+				@Override
+				public void run() {
+					action.performAction(player);
+				}
+			});
+		}
+	}
+
+	private boolean hasAvailableAction(Action action) {
+		List<Action> actions = GameSession.getInstance().getActionController().getAvailableActions(player);
+		return actions.contains(action);
 	}
 }

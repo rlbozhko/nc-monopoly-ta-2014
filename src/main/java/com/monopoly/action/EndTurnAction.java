@@ -15,7 +15,8 @@ import com.monopoly.io.IO;
  * Created by Roma on 20.11.2014.
  */
 public class EndTurnAction implements Action {
-
+	public final static ActionType type = ActionType.END_TURN;
+	
 	private Board board;
 	private Player player;
 	private IO playerIO;
@@ -78,5 +79,15 @@ public class EndTurnAction implements Action {
 	@Override
 	public String getName() {
 		return "End Turn";
+	}
+	
+	@Override
+	public int hashCode() {		
+		return type.hashCode();
+	}
+
+	@Override
+	public boolean equals(Object obj) {		
+		return type.equals(obj);
 	}
 }

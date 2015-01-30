@@ -8,7 +8,8 @@ import com.monopoly.io.IO;
  * Created by Roma on 28.11.2014.
  */
 public class BuyPropertyAction implements Action {
-
+	public final static ActionType type = ActionType.BUY_PROPERTY;
+	
     @Override
     public void performAction(Player player) {
         PropertyCell property = (PropertyCell) player.getCurrentCell();
@@ -26,4 +27,14 @@ public class BuyPropertyAction implements Action {
     public String getName() {
         return "Buy Property";
     }
+    
+    @Override
+	public int hashCode() {		
+		return type.hashCode();
+	}
+
+	@Override
+	public boolean equals(Object obj) {		
+		return type.equals(obj);
+	}
 }

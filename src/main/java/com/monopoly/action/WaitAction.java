@@ -10,11 +10,8 @@ import com.monopoly.board.player.Player;
  * Created by Roma on 20.11.2014.
  */
 public class WaitAction implements Action {
-
-
-    public WaitAction() {
-    }
-
+	public final static ActionType type = ActionType.WAIT;
+    
     @Override
     public void performAction(Player player) {
     }
@@ -23,4 +20,14 @@ public class WaitAction implements Action {
     public String getName() {
         return "Wait";
     }
+    
+    @Override
+	public int hashCode() {		
+		return type.hashCode();
+	}
+
+	@Override
+	public boolean equals(Object obj) {		
+		return type.equals(obj);
+	}
 }

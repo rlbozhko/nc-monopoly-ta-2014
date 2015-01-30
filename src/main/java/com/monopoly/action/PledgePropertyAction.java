@@ -25,6 +25,7 @@ public class PledgePropertyAction implements Action {
     public static final double MAX_PERCENT_FROM_PROPERTY = 0.7;
     public static final int MAX_TURNS_TO_PAY_BACK = 1;
     public static final double MAX_PLEDGE_PERCENT_PER_TURN = 0.1;
+    public static final ActionType type = ActionType.PLEDGE_PROPERTY;
 
     @Override
     public void performAction(Player player) {
@@ -69,4 +70,14 @@ public class PledgePropertyAction implements Action {
     public String getName() {
         return "Pledge Property";
     }
+    
+    @Override
+	public int hashCode() {		
+		return type.hashCode();
+	}
+
+	@Override
+	public boolean equals(Object obj) {		
+		return type.equals(obj);
+	}
 }

@@ -10,14 +10,15 @@ import com.monopoly.io.IO;
  * Created by Roma on 27.11.2014.
  */
 public class PayRentAction implements Action {
-
+	public final static ActionType type = ActionType.PAY_RENT;
+	
     @Override
     public void performAction(Player player) {
         PropertyManager propertyManager = GameSession.getInstance().getPropertyManager();
         Property property = (Property) player.getCurrentCell();
         Player owner = propertyManager.getPropertyOwner(property);
         IO playerIO = ActionUtils.getPlayerIO(player);
-        IO ownerIO = ActionUtils.getPlayerIO(owner);
+        IO ownerIO = ActionUtils.getPlayerIO(owner);        
 
         int rent = property.getRent();
         if (player.subtractMoney(rent)) {            
@@ -34,4 +35,14 @@ public class PayRentAction implements Action {
     public String getName() {
         return "Pay Rent";
     }
+    
+    @Override
+	public int hashCode() {		
+		return type.hashCode();
+	}
+
+	@Override
+	public boolean equals(Object obj) {		
+		return type.equals(obj);
+	}
 }

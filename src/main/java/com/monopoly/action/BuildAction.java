@@ -7,10 +7,12 @@ import com.monopoly.board.player.Player;
 import com.monopoly.io.IO;
 
 public class BuildAction implements Action {
+	public final static ActionType type = ActionType.BUILD;
+	
 	private final int BUILDING_PRICE = 1000;
 	private IO io;
 	private Property property;
-	private Player player;
+	private Player player;	
 	
 	@Override
 	public void performAction(Player aPlayer) {
@@ -44,6 +46,16 @@ public class BuildAction implements Action {
 	@Override
 	public String getName() {		
 		return "Build";
+	}
+	
+	@Override
+	public int hashCode() {		
+		return type.hashCode();
+	}
+
+	@Override
+	public boolean equals(Object obj) {		
+		return type.equals(obj);
 	}
 
 }

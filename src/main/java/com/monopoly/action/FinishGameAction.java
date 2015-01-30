@@ -15,7 +15,8 @@ import com.monopoly.game.session.Session;
  * Created by Roma on 20.11.2014.
  */
 public class FinishGameAction implements Action {
-	private static final Object statusLock = new Object();
+	private final static Object statusLock = new Object();
+	public final static ActionType type = ActionType.FINISH_GAME;
 	
 	private Session session;
 	private Board board;
@@ -54,6 +55,16 @@ public class FinishGameAction implements Action {
 	@Override
 	public String getName() {
 		return "Finish Game";
+	}
+	
+	@Override
+	public int hashCode() {		
+		return type.hashCode();
+	}
+
+	@Override
+	public boolean equals(Object obj) {		
+		return type.equals(obj);
 	}
 
 }

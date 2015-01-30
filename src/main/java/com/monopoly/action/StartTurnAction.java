@@ -9,6 +9,7 @@ import com.monopoly.board.player.Status;
  */
 public class StartTurnAction implements Action {
 	private static final int MAX_DOUBLES = 3;
+	public final static ActionType type = ActionType.START_TURN;
 
 	@Override
 	public void performAction(Player player) {
@@ -45,5 +46,15 @@ public class StartTurnAction implements Action {
 	@Override
 	public String getName() {
 		return "Start Turn";
+	}
+	
+	@Override
+	public int hashCode() {		
+		return type.hashCode();
+	}
+
+	@Override
+	public boolean equals(Object obj) {		
+		return type.equals(obj);
 	}
 }

@@ -37,7 +37,7 @@ public class GameController {
 		Session gameSession = GameSession.getInstance();
 		
 		List<Cell> cellsList = gameSession.getBoard().getCells();
-		
+
 		mav.addObject("email", email);
 		mav.addObject("cellsList", cellsList);
 

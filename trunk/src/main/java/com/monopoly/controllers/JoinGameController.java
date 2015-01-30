@@ -18,6 +18,7 @@ import com.monopoly.bean.User;
 import com.monopoly.board.Board;
 import com.monopoly.board.player.Player;
 import com.monopoly.board.player.PropertyManager;
+import com.monopoly.board.player.Status;
 import com.monopoly.game.session.GameSession;
 import com.monopoly.game.session.GameSession.GameSessionBuilder;
 import com.monopoly.game.session.SessionStatus;
@@ -100,6 +101,7 @@ public class JoinGameController {
 			for (Entry<User, IO> entry : usersIO.entrySet()) {
 				players.add(entry.getKey().getPlayer());
 			}
+			players.get(0).setStatus(Status.START_TURN);
 			Board board = GameSession.newBoard(players, GameSessionBuilder.getStartMoney());
 			GameSessionBuilder.setBoard(board);
 			GameSessionBuilder	.setActionController(new PlayerActionController());

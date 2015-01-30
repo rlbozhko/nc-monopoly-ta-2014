@@ -1,9 +1,12 @@
 package com.monopoly.game.session;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import com.monopoly.action.controller.PlayerActionController;
+import com.monopoly.bean.User;
 import com.monopoly.board.cells.Property;
 import com.monopoly.board.events.GoToJailEvent;
 import com.monopoly.board.player.Player;
@@ -30,15 +33,15 @@ public class SessionTest {
 		players.add(p2);
 		players.add(p3);
 
-		List<IO> ios = new ArrayList<>();
-		ios.add(new ConsoleIO(p1));
-		ios.add(new DummyIO(p2));
-		ios.add(new DummyIO(p3));
-
+		Map<User, IO> usersIO = new HashMap<User, IO>();
+		usersIO.put(new User("p1@test.ua", "123", "hash1"), new ConsoleIO(p1));
+		usersIO.put(new User("p2@test.ua", "123", "hash2"), new DummyIO(p2));
+		usersIO.put(new User("p3@test.ua", "123", "hash3"), new DummyIO(p3));
+		
 		GameSessionBuilder.setBoard(GameSession.newBoard(players, START_MONEY));
 		GameSessionBuilder.setActionController(new PlayerActionController());
 		GameSessionBuilder.setPropertyManager(new PropertyManager(players));
-		GameSessionBuilder.setIOs(ios);
+		GameSessionBuilder.setUsersIO(usersIO);
 
 		Session test = GameSession.getInstance();
 

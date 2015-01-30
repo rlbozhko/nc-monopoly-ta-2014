@@ -1,5 +1,7 @@
 package com.monopoly.controllers;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.CookieValue;
@@ -8,42 +10,43 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.monopoly.bean.User;
+import com.monopoly.board.cells.Cell;
 import com.monopoly.game.session.GameSession;
-import com.monopoly.game.session.SessionStatus;
+import com.monopoly.game.session.Session;
 import com.monopoly.services.UserService;
 
 @Controller
-public class IndexController {
-
+public class GameController {
 	@Autowired
 	private UserService userService;
-
-	@RequestMapping(value = "/index.action", method = RequestMethod.GET)
-	public ModelAndView getIndex(
-			@CookieValue(value = "bb_data", required = false) String hash) {
-
-		ModelAndView mav = new ModelAndView("index");
+	
+	@RequestMapping(value = "/game.action", method = RequestMethod.GET)
+	public ModelAndView getLogin(@CookieValue(value = "bb_data", required = false) String hash) {
+		
+		ModelAndView mav = new ModelAndView("game");
+		
 
 		User user = userService.getUser(hash);
-		
+
 		if (user == null) {
 			return new ModelAndView("redirect:signin.action");
 		}
 		
 		String email = user.getEmail();
 		
-		mav.addObject("email", email);
-
-		SessionStatus sessionStatus = GameSession.getStatus();
-
-		if (sessionStatus == SessionStatus.CREATING) {
-			return new ModelAndView("redirect:join_game.action");
-		}
+		Session gameSession = GameSession.getInstance();
 		
-		if (sessionStatus == SessionStatus.RUN) {
-			return new ModelAndView("redirect:game.action");
-		}
+		List<Cell> cellsList = gameSession.getBoard().getCells();
+		
+		mav.addObject("email", email);
+		mav.addObject("cellsList", cellsList);
+
+		
+		
 		
 		return mav;
 	}
+	
 }
+
+

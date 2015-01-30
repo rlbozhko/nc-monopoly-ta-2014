@@ -104,8 +104,9 @@ public class GameSession implements Session {
 		private static Board board;
 		private static PropertyManager propertyManager;
 		private static ActionController actionController;		
-		private static Map<User, IO> userIO;
+		private static Map<User, IO> userIO = new HashMap<User, IO>();
 		private static int maxPlayers;
+		private static int startMoney;
 
 		private GameSessionBuilder() {
 		}
@@ -148,6 +149,14 @@ public class GameSession implements Session {
 
 		public static void setMaxPlayers(int maxPlayers) {
 			GameSessionBuilder.maxPlayers = maxPlayers;
+		}
+
+		public static int getStartMoney() {
+			return startMoney;
+		}
+
+		public static void setStartMoney(int startMoney) {
+			GameSessionBuilder.startMoney = startMoney;
 		}
 	}
 

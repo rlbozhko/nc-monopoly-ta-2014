@@ -42,7 +42,8 @@ public class UserController {
 	}
 	
 	@RequestMapping(value = "/signin.action", method = RequestMethod.POST)
-    public ModelAndView postLogin(HttpServletRequest request, HttpServletResponse response, @RequestParam(value = "email", required = true) String email,
+    public ModelAndView postLogin(HttpServletRequest request, HttpServletResponse response,
+    		@RequestParam(value = "email", required = true) String email,
             @RequestParam(value = "password", required = true) String password) {
         Cookie cookie = userService.signIn(email, password);
 

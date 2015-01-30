@@ -162,6 +162,10 @@ public class Player implements MoneyOperations, MoveOperations, PropertyOperatio
 		}
 		return false;
 	}
+	
+	public boolean hasProperty() {
+		return !GameSession.getInstance().getPropertyManager().getPlayerProperties(this).isEmpty();
+	}
 
 	@Override
 	public boolean hasPledgedProperty() {

@@ -89,7 +89,8 @@ public class ConsoleIO implements IO, Runnable {
 		}
 		System.out.println();
 	}
-
+	
+	@Override
 	public void performAction(Action action) {
 		action.performAction(player);
 	}

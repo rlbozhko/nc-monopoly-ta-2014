@@ -5,21 +5,21 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Monopoly - index</title>
+<title>Join game</title>
 </head>
 <body>
 	<a href="signin.action?signout">Sign out [${email}] </a>
 
-	${sessionStatus} ${isJoinToGame}
-
-	<c:forEach var="each" items="${usersList}">
-		${each.getName()}
+	<c:forEach var="entry" items="${usersIO}">
+		${entry.key.getPlayer().getName()}
 	</c:forEach>
 
-	<form action="joinGame.action" method="get">
+	<form action="join_game.action" method="get">
 		<input type="text" name="playerName" value="${playerName}" autofocus required> 
-		<input type="hidden" name="isJoinToGame" value="true"> 
+		<input type="hidden" name="isJoinToGame" value="true">
 		<input type="submit" value="Join to game">`
 	</form>
+	<form><input type=button value="Refresh" onClick="window.location.reload()"></form> 
+
 </body>
 </html>

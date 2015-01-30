@@ -11,11 +11,7 @@
 
 	<a href="signin.action?signout">Sign out [${email}] </a>	
 	
-	<form action="index.action" method="get">
-		<input type="hidden" name="playerName" value="${playerName}"> 
-		<input type="hidden" name="isJoinToGame" value="true"> 
-		<input type="submit" value="Refresh">
-	</form>
+	<form><input type=button value="Refresh" onClick="history.go()"></form>
 
 	<h1>Game</h1>
 

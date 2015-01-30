@@ -7,9 +7,7 @@ import com.monopoly.board.player.Player;
 import com.monopoly.board.player.Status;
 import com.monopoly.io.IO;
 
-public class ServeJailTermAction implements Action {
-
-	EndTurnAction end = new EndTurnAction();
+public class ServeJailTermAction implements Action {	
 
 	@Override
 	public void performAction(Player player) {

@@ -49,9 +49,13 @@ public class PlayerActionController implements ActionController {
 		}
 		result.add(new FinishGameAction());
 		result.add(new WaitAction());
-		result.add(new PledgePropertyAction());
-		if (player.hasPledgedProperty()) {
-			result.add(new PayBackAction());
+		
+		if (player.hasProperty()) {
+			result.add(new PledgePropertyAction());
+			
+			if (player.hasPledgedProperty()) {
+				result.add(new PayBackAction());
+			}
 		}
 
 		if (player.isJailed()) {

@@ -5,6 +5,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import com.monopoly.action.ActionType;
 import com.monopoly.action.controller.PlayerActionController;
 import com.monopoly.bean.User;
 import com.monopoly.board.cells.Property;
@@ -52,11 +53,7 @@ public class SessionTest {
 		Thread dummy1 = new Thread(dummyIO1);
 		Thread dummy2 = new Thread(dummyIO2);
 
-		// Для тестирования Действий с собственностью
-		/*
-		 * for (Cell property : test.getBoard().getPropertyCell()) { ((Property)
-		 * property).setAndAddToOwner(p1); }
-		 */
+		
 		PropertyManager testPropertyManager = test.getPropertyManager();
 
 		Property testProperty1 = (Property) test.getBoard().getCells().get(1);

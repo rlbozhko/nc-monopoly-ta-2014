@@ -58,7 +58,8 @@ public class EndTurnAction implements Action {
 		if (player.hasPledgedProperty()) {
 			PropertyManager propertyManager = GameSession.getInstance().getPropertyManager();
 			List<Property> auctionProperty = new ArrayList<>();
-			for (Property property : propertyManager.getPlayerProperties(player)) {
+			List<Property> playerProperty = new ArrayList<>(propertyManager.getPlayerProperties(player));
+			for (Property property : playerProperty) {
 				if (isСonfiscateProperty(property)) {
 					auctionProperty.add(property);
 					propertyManager.resetPropertyOwner(property);

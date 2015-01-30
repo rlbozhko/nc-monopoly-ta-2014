@@ -3,6 +3,7 @@ package com.monopoly.io;
 import java.util.LinkedList;
 import java.util.Queue;
 
+import com.monopoly.action.Action;
 import com.monopoly.action.deal.Deal;
 import com.monopoly.board.cells.Property;
 import com.monopoly.board.player.Player;
@@ -264,5 +265,15 @@ public class WebIO implements IO {
 	public void showDice() {
 		// TODO Auto-generated method stub
 		
+	}
+
+	@Override
+	public void performAction(final Action action) {
+		new Thread(new Runnable() {			
+			@Override
+			public void run() {
+				action.performAction(player);				
+			}
+		});	
 	}
 }

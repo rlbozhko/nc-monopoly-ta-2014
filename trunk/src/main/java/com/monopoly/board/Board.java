@@ -57,9 +57,11 @@ public class Board implements CellOperations, PlayerOperations {
     	for (Player player : players) {
 			if (player.getStatus() == Status.START_TURN) {
 				return player;
-			}
+			}			
 		}
-    	return players.get(0);
+    	Player defaultPlayer = players.get(0);
+    	defaultPlayer.setStatus(Status.START_TURN);
+    	return defaultPlayer;
     }
 
     public List<Cell> getCells() {

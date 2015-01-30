@@ -66,7 +66,7 @@ public class AuctionAction implements Action {
 	}
 
 	private void makeOffer(Iterator<Player> participantsIterator, Player participant) {
-	    if (!participant.equals(winner)) {
+	    if (participant.equals(winner)) {
 	        return;
 	    }
 	    IO participantIO = ActionUtils.getPlayerIO(participant);

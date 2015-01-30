@@ -13,6 +13,7 @@ import com.monopoly.game.session.GameSession;
  * ЯчейкаСобственности
  */
 public class PropertyCell extends Cell implements Property {
+	private static final double PAY_BACK_RATE = 0.1;
 	private static final float RENT_RATE = 0.2F;
 	private Building building;
 	private int basePrice;
@@ -220,7 +221,7 @@ public class PropertyCell extends Cell implements Property {
 
 	@Override
 	public void risePayBackMoney() {
-		payBackMoney = payBackMoney * (1 + payBackMoney);
+		payBackMoney = (int) (payBackMoney * (1 + PAY_BACK_RATE));
 	}
 
 	@Override

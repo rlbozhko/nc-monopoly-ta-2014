@@ -2,7 +2,7 @@ package com.monopoly.io;
 
 import java.util.Queue;
 
-import com.monopoly.action.Action;
+import com.monopoly.action.ActionType;
 import com.monopoly.action.deal.Deal;
 import com.monopoly.board.cells.Property;
 import com.monopoly.board.player.Player;
@@ -54,7 +54,7 @@ public interface IO {
 
 	void showDice();
 
-	void performAction(Action action);
+	void performAction(ActionType action);
 
 	boolean hasSelectPropertyRequest();
 }

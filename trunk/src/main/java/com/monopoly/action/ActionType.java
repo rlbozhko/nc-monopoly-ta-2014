@@ -3,9 +3,6 @@ package com.monopoly.action;
 import com.monopoly.action.jail.EscapeAction;
 import com.monopoly.action.jail.PayBailAction;
 import com.monopoly.action.jail.ServeJailTermAction;
-import com.monopoly.board.player.Player;
-import com.monopoly.io.IO;
-import com.monopoly.io.WebIO;
 
 public enum ActionType {
 	START_TURN {
@@ -106,14 +103,4 @@ public enum ActionType {
 	};
 
 	abstract public Action create();
-
-	public static void main(String[] args) {
-		System.out.println("Before");
-		Player player = new Player("name");
-		
-		
-		IO io = new WebIO(player);		
-		io.performAction(ActionType.valueOf("WAIT").create());
-		System.out.println("After");
-	}
 }

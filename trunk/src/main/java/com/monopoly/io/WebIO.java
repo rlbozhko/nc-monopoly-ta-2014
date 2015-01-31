@@ -4,7 +4,7 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.Queue;
 
-import com.monopoly.action.Action;
+import com.monopoly.action.ActionType;
 import com.monopoly.action.deal.Deal;
 import com.monopoly.board.cells.Property;
 import com.monopoly.board.player.Player;
@@ -88,7 +88,7 @@ public class WebIO implements IO {
 			return property;
 		}
 	}
-	
+
 	@Override
 	public boolean hasSelectPropertyRequest() {
 		synchronized (selectPropertyLock) {
@@ -219,11 +219,11 @@ public class WebIO implements IO {
 	public class SelectPropertyHelper {
 		private Property property;
 		private Player owner;
-		
+
 		public SelectPropertyHelper(Player owner) {
 			this.owner = owner;
 		}
-		
+
 		public Player getOwner() {
 			return owner;
 		}
@@ -286,19 +286,19 @@ public class WebIO implements IO {
 	}
 
 	@Override
-	public void performAction(final Action action) {
-		if (hasAvailableAction(action)) {
+	public void performAction(final ActionType actionType) {
+		if (hasAvailableAction(actionType)) {
 			new Thread(new Runnable() {
 				@Override
 				public void run() {
-					action.performAction(player);
+					actionType.create().performAction(player);
 				}
 			});
 		}
 	}
 
-	private boolean hasAvailableAction(Action action) {
-		List<Action> actions = GameSession.getInstance().getActionController().getAvailableActions(player);
-		return actions.contains(action);
+	private boolean hasAvailableAction(ActionType actionType) {
+		List<ActionType> actions = GameSession.getInstance().getActionController().getAvailableActions(player);
+		return actions.contains(actionType);
 	}
 }

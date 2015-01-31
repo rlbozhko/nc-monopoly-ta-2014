@@ -7,7 +7,7 @@ import java.util.List;
 import java.util.Queue;
 import java.util.Scanner;
 
-import com.monopoly.action.Action;
+import com.monopoly.action.ActionType;
 import com.monopoly.action.ActionUtils;
 import com.monopoly.action.controller.ActionController;
 import com.monopoly.action.deal.Deal;
@@ -31,7 +31,7 @@ import com.monopoly.io.WebIO.YesNoDialog;
  */
 public class ConsoleIO implements IO, Runnable {
 	private Player player;
-	private List<Action> actions;
+	private List<ActionType> actions;
 	private PropertyManager propertyManager;
 
 	public ConsoleIO(Player player) {
@@ -85,14 +85,14 @@ public class ConsoleIO implements IO, Runnable {
 		actions = actionController.getAvailableActions(player);
 		System.out.println("Доступные действия:");
 		for (int i = 0; i < actions.size(); i++) {
-			System.out.println(i + " " + actions.get(i).getName());
+			System.out.println(i + " " + actions.get(i));
 		}
 		System.out.println();
 	}
 	
 	@Override
-	public void performAction(Action action) {
-		action.performAction(player);
+	public void performAction(ActionType actionType) {
+		actionType.create().performAction(player);
 	}
 
 	@Override

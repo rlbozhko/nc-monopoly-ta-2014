@@ -9,4 +9,6 @@ public interface Action {
     void performAction(Player player);
 
     String getName();
+    
+    ActionType getType();
 }

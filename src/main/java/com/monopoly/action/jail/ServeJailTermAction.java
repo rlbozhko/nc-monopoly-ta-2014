@@ -1,6 +1,7 @@
 package com.monopoly.action.jail;
 
 import com.monopoly.action.Action;
+import com.monopoly.action.ActionType;
 import com.monopoly.action.ActionUtils;
 import com.monopoly.action.EndTurnAction;
 import com.monopoly.board.player.Player;
@@ -8,7 +9,8 @@ import com.monopoly.board.player.Status;
 import com.monopoly.io.IO;
 
 public class ServeJailTermAction implements Action {	
-
+	public final static ActionType type = ActionType.SERVE_JAIL_TERM;
+	
 	@Override
 	public void performAction(Player player) {
 		IO playerIO = ActionUtils.getPlayerIO(player);
@@ -25,5 +27,10 @@ public class ServeJailTermAction implements Action {
 	@Override
 	public String getName() {
 		return "Кантоваться(отсидеть срок)";
+	}
+	
+	@Override
+	public ActionType getType() {		
+		return type;
 	}
 }

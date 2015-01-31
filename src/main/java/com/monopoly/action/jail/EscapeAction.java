@@ -1,6 +1,7 @@
 package com.monopoly.action.jail;
 
 import com.monopoly.action.Action;
+import com.monopoly.action.ActionType;
 import com.monopoly.action.ActionUtils;
 import com.monopoly.action.EndTurnAction;
 import com.monopoly.board.dice.Dice;
@@ -9,8 +10,8 @@ import com.monopoly.board.player.Status;
 import com.monopoly.io.IO;
 
 public class EscapeAction implements Action {
-
-	private final int ESCAPE_COMBINATION = 11;
+	public final static ActionType type = ActionType.ESCAPE;
+	private final int ESCAPE_COMBINATION = 9;
 	private final int PUNISHMENT = 3;	
 
 	@Override
@@ -25,7 +26,7 @@ public class EscapeAction implements Action {
 			player.goToPosition(player.getPosition() + goodLuckCombination);
 			playerIO.showMessage("Поздравляем!!! Вам удалось совершить побег. Но в течении " + player.getJailTerm()
 					+ " ходов Вас будут разыскивать. Не попадитесь");
-			ActionUtils.sendMessageToAll("Розыскивается сбежавший преступник " + player.getName() + "!!!");
+			ActionUtils.sendMessageToAll("Розыскивается сбежавший преступник " + player.getName() + " !!!");
 		} else {
 			player.setJailTerm(player.getJailTerm() + PUNISHMENT);
 			playerIO.showMessage("План побега не удался. За попытку побега вам добавили к сроку " + PUNISHMENT
@@ -37,5 +38,10 @@ public class EscapeAction implements Action {
 	@Override
 	public String getName() {
 		return "Escape from jail";
+	}
+	
+	@Override
+	public ActionType getType() {		
+		return type;
 	}
 }

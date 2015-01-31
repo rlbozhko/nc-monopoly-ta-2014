@@ -1,12 +1,14 @@
 package com.monopoly.action.jail;
 
 import com.monopoly.action.Action;
+import com.monopoly.action.ActionType;
 import com.monopoly.action.ActionUtils;
 import com.monopoly.board.player.Player;
+import com.monopoly.board.player.Status;
 import com.monopoly.io.IO;
 
 public class PayBailAction implements Action {
-
+	public final static ActionType type = ActionType.PAY_BAIL;
 	private final int BAIL_RATE = 400;
 	private final int RESET_JAIL_TERM = 0;
 
@@ -18,6 +20,7 @@ public class PayBailAction implements Action {
 			playerIO.showMessage("Вы заплатили залог в размере $" + bail + ".\n "
 					+ "Впредь будьте более удачливы. Можете быть свободны.");
 			player.setJailTerm(RESET_JAIL_TERM);
+			player.setJailStatus(Status.CLEAN);
 		} else {
 			playerIO.showWarning("Недостаточно денег для выплаты залога. Требуется $" + bail);
 		}
@@ -26,5 +29,10 @@ public class PayBailAction implements Action {
 	@Override
 	public String getName() {
 		return "Pay bail";
+	}
+	
+	@Override
+	public ActionType getType() {		
+		return type;
 	}
 }

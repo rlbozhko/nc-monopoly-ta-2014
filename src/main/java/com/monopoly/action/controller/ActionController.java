@@ -1,13 +1,13 @@
 package com.monopoly.action.controller;
 
-import com.monopoly.action.Action;
-import com.monopoly.board.player.Player;
-
 import java.util.List;
+
+import com.monopoly.action.ActionType;
+import com.monopoly.board.player.Player;
 
 /**
  * Created by Roma on 19.11.2014.
  */
 public interface ActionController {
-    List<Action> getAvailableActions(Player player);
+    List<ActionType> getAvailableActions(Player player);
 }

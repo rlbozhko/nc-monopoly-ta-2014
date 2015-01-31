@@ -8,6 +8,7 @@ import java.util.Map;
 import com.monopoly.action.ActionType;
 import com.monopoly.action.controller.PlayerActionController;
 import com.monopoly.bean.User;
+import com.monopoly.board.cells.EventCell;
 import com.monopoly.board.cells.Property;
 import com.monopoly.board.events.GoToJailEvent;
 import com.monopoly.board.player.Player;
@@ -71,6 +72,6 @@ public class SessionTest {
 		player.start();
 		dummy1.start();
 		dummy2.start();
-		//new GoToJailEvent().performEvent();
+		((EventCell) GameSession.getInstance().getBoard().getGoToJailCell()).getEvent().performEvent();		
 	}
 }

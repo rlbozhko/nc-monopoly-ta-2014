@@ -3,20 +3,7 @@ package com.monopoly.action.controller;
 import java.util.ArrayList;
 import java.util.List;
 
-import com.monopoly.action.Action;
-import com.monopoly.action.BetrayalActioin;
-import com.monopoly.action.BuildAction;
-import com.monopoly.action.BuyPropertyAction;
-import com.monopoly.action.DealAction;
-import com.monopoly.action.EndTurnAction;
-import com.monopoly.action.FinishGameAction;
-import com.monopoly.action.PayBackAction;
-import com.monopoly.action.PayRentAction;
-import com.monopoly.action.PledgePropertyAction;
-import com.monopoly.action.SellBuildingLevelAction;
-import com.monopoly.action.StartTurnAction;
-import com.monopoly.action.UpgradeBuildingAction;
-import com.monopoly.action.WaitAction;
+import com.monopoly.action.ActionType;
 import com.monopoly.board.cells.Cell;
 import com.monopoly.board.cells.CellType;
 import com.monopoly.board.cells.Property;
@@ -35,26 +22,26 @@ public class PlayerActionController implements ActionController {
 	private PropertyManager propertyManager;
 
 	@Override
-	public List<Action> getAvailableActions(Player player) {
+	public List<ActionType> getAvailableActions(Player player) {
 		session = GameSession.getInstance();
 		propertyManager = session.getPropertyManager();
 
-		List<Action> result = new ArrayList<>();
+		List<ActionType> result = new ArrayList<>();
 		if (Status.FINISH == player.getStatus()) {
 			return result;
 		}
 
 		if (!player.isOfferADeal()) {
-			result.add(new DealAction());
+			result.add(ActionType.DEAL);
 		}
-		result.add(new FinishGameAction());
-		result.add(new WaitAction());
-		
+		result.add(ActionType.FINISH_GAME);
+		result.add(ActionType.WAIT);
+
 		if (player.hasProperty()) {
-			result.add(new PledgePropertyAction());
-			
+			result.add(ActionType.PLEDGE_PROPERTY);
+
 			if (player.hasPledgedProperty()) {
-				result.add(new PayBackAction());
+				result.add(ActionType.PAY_BACK);
 			}
 		}
 
@@ -64,34 +51,34 @@ public class PlayerActionController implements ActionController {
 		}
 
 		if (player.getCurrentCell().hasEscapedPlayers()) {
-			result.add(new BetrayalActioin());
+			result.add(ActionType.BETRAYAL);
 		}
 
 		if (player.isPayRent()) {
-			result.add(new PayRentAction());
+			result.add(ActionType.PAY_RENT);
 		}
 
 		if (hasMonopoly(player)) {
-			result.add(new BuildAction());
+			result.add(ActionType.BUILD);
 		}
-		
+
 		if (hasBuildigs(player)) {
-			result.add(new UpgradeBuildingAction());
-			result.add(new SellBuildingLevelAction());
+			result.add(ActionType.UPGRADE_BUILDING);
+			result.add(ActionType.SELL_BUILDING);
 		}
 
 		Cell cell = player.getCurrentCell();
 		if (CellType.PROPERTY_CELL == cell.getCellType()) {
 			PropertyCell propertyCell = (PropertyCell) cell;
 			if (propertyManager.getPropertyOwner(propertyCell) == null) {
-				result.add(new BuyPropertyAction());
+				result.add(ActionType.BUY_PROPERTY);
 			}
 		}
 
 		if (Status.START_TURN == player.getStatus()) {
-			result.add(new StartTurnAction());
+			result.add(ActionType.START_TURN);
 		} else if (Status.ACTIVE == player.getStatus()) {
-			result.add(new EndTurnAction());
+			result.add(ActionType.END_TURN);
 		}
 
 		return result;
@@ -105,7 +92,7 @@ public class PlayerActionController implements ActionController {
 		}
 		return false;
 	}
-	
+
 	private boolean hasBuildigs(Player player) {
 		for (Property property : propertyManager.getPlayerProperties(player)) {
 			if (property.hasBuilding()) {

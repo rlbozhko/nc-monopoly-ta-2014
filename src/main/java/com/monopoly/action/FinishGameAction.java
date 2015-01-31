@@ -66,5 +66,9 @@ public class FinishGameAction implements Action {
 	public boolean equals(Object obj) {		
 		return type.equals(obj);
 	}
-
+	
+	@Override
+	public ActionType getType() {		
+		return type;
+	}
 }

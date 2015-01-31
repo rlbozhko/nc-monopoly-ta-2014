@@ -3,15 +3,10 @@ package com.monopoly.io;
 import java.util.List;
 import java.util.Queue;
 
-import com.monopoly.action.Action;
+import com.monopoly.action.ActionType;
 import com.monopoly.action.ActionUtils;
-import com.monopoly.action.EndTurnAction;
-import com.monopoly.action.FinishGameAction;
-import com.monopoly.action.PayRentAction;
-import com.monopoly.action.StartTurnAction;
 import com.monopoly.action.controller.ActionController;
 import com.monopoly.action.deal.Deal;
-import com.monopoly.action.jail.ServeJailTermAction;
 import com.monopoly.board.cells.Property;
 import com.monopoly.board.dice.Dice;
 import com.monopoly.board.player.Player;
@@ -26,7 +21,7 @@ import com.monopoly.io.WebIO.YesNoDialog;
 public class DummyIO implements IO, Runnable {
 
 	private Player player;
-	private List<Action> actions;
+	private List<ActionType> actions;
 	private boolean answer = true;
 
 	public DummyIO(Player player) {
@@ -42,29 +37,29 @@ public class DummyIO implements IO, Runnable {
 				e.printStackTrace();
 			}
 			outputAvailableActions();
-			for (Action action : actions) {
+			for (ActionType actionType : actions) {
 				if (player.getMoney() == 0) {
-					performAction(new FinishGameAction());
+					performAction(ActionType.FINISH_GAME);
 					break;
 				}
-				if (action instanceof PayRentAction) {
-					performPayRent(action);
+				if (actionType == ActionType.PAY_RENT) {
+					performPayRent(actionType);
 					break;
-				} else if (action instanceof StartTurnAction || action instanceof EndTurnAction 
-						|| action instanceof ServeJailTermAction) {
-					performAction(action);
+				} else if (actionType == ActionType.START_TURN || actionType == ActionType.END_TURN
+						|| actionType == ActionType.SERVE_JAIL_TERM) {
+					performAction(actionType);
 					break;
 				}
 			}
 		} while (Status.FINISH != player.getStatus());
 	}
 
-	private void performPayRent(Action action) {
-		Property property = (Property) GameSession.getInstance().getBoard().getCells().get(player.getPosition());
+	private void performPayRent(ActionType actionType) {
+		Property property = (Property) player.getCurrentCell();
 		if (player.getMoney() >= property.getRent()) {
-			performAction(action);
+			performAction(actionType);
 		} else {
-			performAction(new FinishGameAction());
+			performAction(ActionType.FINISH_GAME);
 		}
 	}
 
@@ -73,8 +68,9 @@ public class DummyIO implements IO, Runnable {
 		actions = actionController.getAvailableActions(player);
 	}
 
-	public void performAction(Action action) {
-		action.performAction(player);
+	@Override
+	public void performAction(ActionType actionType) {
+		actionType.create().performAction(player);
 	}
 
 	@Override
@@ -129,7 +125,7 @@ public class DummyIO implements IO, Runnable {
 	@Override
 	public void setSelectedPlayer(Player selectedPlayer) {
 		// TODO Auto-generated method stub
-		
+
 	}
 
 	@Override
@@ -141,7 +137,7 @@ public class DummyIO implements IO, Runnable {
 	@Override
 	public void setCreatedDeal(Deal deal) {
 		// TODO Auto-generated method stub
-		
+
 	}
 
 	@Override
@@ -183,7 +179,7 @@ public class DummyIO implements IO, Runnable {
 	@Override
 	public void showWarning(String message) {
 		// TODO Auto-generated method stub
-		
+
 	}
 
 	@Override

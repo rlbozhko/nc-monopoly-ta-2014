@@ -112,4 +112,10 @@ public class AuctionAction implements Action {
     public String getName() {
         return "Auction";
     }
+
+	@Override
+	public ActionType getType() {
+		// TODO Auto-generated method stub
+		return null;
+	}
 }

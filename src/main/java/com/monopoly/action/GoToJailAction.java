@@ -32,9 +32,8 @@ public class GoToJailAction implements Action {
 		return "Go to Jail";
 	}
 	
-	
-
-
-    
-
+	@Override
+	public ActionType getType() {		
+		return null;
+	}
 }

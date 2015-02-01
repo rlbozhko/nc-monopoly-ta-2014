@@ -50,7 +50,7 @@ public class PlayerActionController implements ActionController {
 			return result;
 		}
 
-		if (player.getCurrentCell().hasEscapedPlayers()) {
+		if (player.getJailStatus() != Status.ESCAPE && player.getCurrentCell().hasEscapedPlayers()) {
 			result.add(ActionType.BETRAYAL);
 		}
 

@@ -275,7 +275,7 @@ public class GameSession implements Session {
 		setStatus(SessionStatus.NOT_EXISTS);
 		GameSessionBuilder.setActionController(null);
 		GameSessionBuilder.setBoard(null);
-		GameSessionBuilder.setUsersIO(null);
+		GameSessionBuilder.getUsersIO().clear();
 		GameSessionBuilder.setPropertyManager(null);
 	}
 

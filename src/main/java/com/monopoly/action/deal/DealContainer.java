@@ -62,24 +62,32 @@ public class DealContainer {
         this.giveMoney = giveMoney;
     }
 
-    public List<Property> getAskProperties() {
-        return new LinkedList<>(askProperties);
-    }
-
     public void addAskProperty(Property askProperty) {
         if (askProperty != null) {
             this.askProperties.add(askProperty);
         }
     }
+    
+    public void addGiveProperty(Property giveProperty) {
+	    if (giveProperty != null) {
+	        this.giveProperties.add(giveProperty);
+	    }
+	}
+
+	public void setAskProperties(Set<Property> askProperties) {
+		this.askProperties = askProperties;
+	}
+    
+    public List<Property> getAskProperties() {
+	    return new ArrayList<>(askProperties);
+	}
+
+	public void setGiveProperties(Set<Property> giveProperties) {
+		this.giveProperties = giveProperties;
+	}
 
     public List<Property> getGiveProperties() {
-        return new LinkedList<>(giveProperties);
-    }
-
-    public void addGiveProperty(Property giveProperty) {
-        if (giveProperty != null) {
-            this.giveProperties.add(giveProperty);
-        }
+        return new ArrayList<>(giveProperties);
     }
 
     public String message() {
@@ -92,5 +100,4 @@ public class DealContainer {
                 .append("Собственность: ").append(getAskProperties()).append("\n");
         return message.toString();
     }
-
 }

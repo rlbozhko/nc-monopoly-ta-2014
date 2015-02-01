@@ -11,93 +11,104 @@ import static org.apache.commons.collections4.CollectionUtils.isEmpty;
  * Created by Roma on 24.11.2014.
  */
 public class DealContainer {
-    private int askMoney;
-    private int giveMoney;
-    private Set<Property> askProperties;
-    private Set<Property> giveProperties;
-    private Player source;
-    private Player target;
+	private int askMoney;
+	private int giveMoney;
+	private Set<Property> askProperties = new LinkedHashSet<>();;
+	private Set<Property> giveProperties = new LinkedHashSet<>();
+	private Player source;
+	private Player target;
 
-    public DealContainer(Player source, Player target) {
-        askProperties = new LinkedHashSet<>();
-        giveProperties = new LinkedHashSet<>();
-        this.source = source;
-        this.target = target;
-    }
+	public DealContainer() {
+	}
 
-    public Player getSource() {
-        return source;
-    }
+	public DealContainer(Player source, Player target) {
+		this.source = source;
+		this.target = target;
+	}
 
-    public Deal createDeal() {
-        Deal deal = new EmptyDeal(source, target);
-        if (getAskMoney() != 0) {
-            deal = new AskMoneyDeal(deal, getAskMoney());
-        }
-        if (getGiveMoney() != 0) {
-            deal = new GiveMoneyDeal(deal, getGiveMoney());
-        }
-        if (!isEmpty(getAskProperties())) {
-            deal = new AskPropertyDeal(deal, getAskProperties());
-        }
-        if (!isEmpty(getGiveProperties())) {
-            deal = new GivePropertyDeal(deal, getGiveProperties());
-        }
-        return deal;
-    }
+	public Deal createDeal() {
+		Deal deal = new EmptyDeal(source, target);
+		if (getAskMoney() != 0) {
+			deal = new AskMoneyDeal(deal, getAskMoney());
+		}
+		if (getGiveMoney() != 0) {
+			deal = new GiveMoneyDeal(deal, getGiveMoney());
+		}
+		if (!isEmpty(getAskProperties())) {
+			deal = new AskPropertyDeal(deal, getAskProperties());
+		}
+		if (!isEmpty(getGiveProperties())) {
+			deal = new GivePropertyDeal(deal, getGiveProperties());
+		}
+		return deal;
+	}
 
-    public int getAskMoney() {
-        return askMoney;
-    }
+	public void setSource(Player source) {
+		this.source = source;
+	}
 
-    public void setAskMoney(int askMoney) {
-        this.askMoney = askMoney;
-    }
+	public Player getSource() {
+		return source;
+	}
 
-    public int getGiveMoney() {
-        return giveMoney;
-    }
+	public void setTarget(Player target) {
+		this.target = target;
+	}
 
-    public void setGiveMoney(int giveMoney) {
-        this.giveMoney = giveMoney;
-    }
+	public Player getTarget() {
+		return target;
+	}
 
-    public void addAskProperty(Property askProperty) {
-        if (askProperty != null) {
-            this.askProperties.add(askProperty);
-        }
-    }
-    
-    public void addGiveProperty(Property giveProperty) {
-	    if (giveProperty != null) {
-	        this.giveProperties.add(giveProperty);
-	    }
+	public int getAskMoney() {
+		return askMoney;
+	}
+
+	public void setAskMoney(int askMoney) {
+		this.askMoney = askMoney;
+	}
+
+	public int getGiveMoney() {
+		return giveMoney;
+	}
+
+	public void setGiveMoney(int giveMoney) {
+		this.giveMoney = giveMoney;
+	}
+
+	public void addAskProperty(Property askProperty) {
+		if (askProperty != null) {
+			this.askProperties.add(askProperty);
+		}
+	}
+
+	public void addGiveProperty(Property giveProperty) {
+		if (giveProperty != null) {
+			this.giveProperties.add(giveProperty);
+		}
 	}
 
 	public void setAskProperties(Set<Property> askProperties) {
 		this.askProperties = askProperties;
 	}
-    
-    public List<Property> getAskProperties() {
-	    return new ArrayList<>(askProperties);
+
+	public List<Property> getAskProperties() {
+		return new ArrayList<>(askProperties);
 	}
 
 	public void setGiveProperties(Set<Property> giveProperties) {
 		this.giveProperties = giveProperties;
 	}
 
-    public List<Property> getGiveProperties() {
-        return new ArrayList<>(giveProperties);
-    }
+	public List<Property> getGiveProperties() {
+		return new ArrayList<>(giveProperties);
+	}
 
-    public String message() {
-        StringBuilder message = new StringBuilder();
-        message.append(source.getName()).append(" ").append("Предлагает\n")
-                .append("Денег: ").append(getGiveMoney()).append("\n")
-                .append("Собственность: ").append(getGiveProperties()).append("\n")
-                .append("Просит\n")
-                .append("Денег: ").append(getAskMoney()).append("\n")
-                .append("Собственность: ").append(getAskProperties()).append("\n");
-        return message.toString();
-    }
+	public String message() {
+		StringBuilder message = new StringBuilder();
+		message.append(source.getName()).append(" ").append("Предлагает\n").append("Денег: ").append(getGiveMoney())
+				.append("\n").append("Собственность: ").append(getGiveProperties()).append("\n").append("Просит\n")
+				.append("Денег: ").append(getAskMoney()).append("\n").append("Собственность: ")
+				.append(getAskProperties()).append("\n");
+		return message.toString();
+	}
 }

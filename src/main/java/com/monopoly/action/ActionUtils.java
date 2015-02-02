@@ -26,5 +26,16 @@ public class ActionUtils {
             io.showMessage(message);
         }
     }
-
+    
+    public static Player getPlayerByName(String name) {
+    	Player result = null;
+    	List<Player> players = GameSession.getInstance().getBoard().getPlayers();
+    	for (Player player : players) {
+			if (player.getName().equals(name)) {
+				return player;
+			}
+		}
+    	
+    	return result;
+    }
 }

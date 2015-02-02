@@ -199,4 +199,10 @@ public class DummyIO implements IO, Runnable {
 		// TODO Auto-generated method stub
 		return false;
 	}
+
+	@Override
+	public Player getDealTarget() {
+		// TODO Auto-generated method stub
+		return null;
+	}
 }

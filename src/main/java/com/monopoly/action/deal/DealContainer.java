@@ -1,7 +1,10 @@
 package com.monopoly.action.deal;
 
+import com.monopoly.board.Board;
+import com.monopoly.board.cells.Cell;
 import com.monopoly.board.cells.Property;
 import com.monopoly.board.player.Player;
+import com.monopoly.game.session.GameSession;
 
 import java.util.*;
 
@@ -17,6 +20,8 @@ public class DealContainer {
 	private Set<Property> giveProperties = new LinkedHashSet<>();
 	private Player source;
 	private Player target;
+	private List<Integer> askPropertiesIDs;
+	private List<Integer> givePropertiesIDs;
 
 	public DealContainer() {
 	}
@@ -41,6 +46,23 @@ public class DealContainer {
 			deal = new GivePropertyDeal(deal, getGiveProperties());
 		}
 		return deal;
+	}
+	
+	public void setAskPropertiesIDs(List<Integer> askPropertiesIDs) {
+		this.askPropertiesIDs = askPropertiesIDs;
+		fillProperties(askPropertiesIDs);
+	}
+
+	private void fillProperties(List<Integer> askPropertiesIDs) {
+		List<Cell> cells = GameSession.getInstance().getBoard().getCells();
+		for (Integer integer : askPropertiesIDs) {
+			askProperties.add((Property) cells.get(integer));
+		}
+	}
+	
+	public void setGivePropertiesIDs(List<Integer> givePropertiesIDs) {
+		this.givePropertiesIDs = givePropertiesIDs;
+		fillProperties(givePropertiesIDs);
 	}
 
 	public void setSource(Player source) {

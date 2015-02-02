@@ -12,7 +12,7 @@ import com.monopoly.game.session.GameSession;
 /**
  * ЯчейкаСобственности
  */
-public class PropertyCell extends Cell implements Property {
+public class PropertyCell extends Property {
 	private static final double PAY_BACK_RATE = 0.1;
 	private static final float RENT_RATE = 0.2F;
 	private Building building;

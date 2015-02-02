@@ -11,8 +11,8 @@ public class DealAction implements Action {
 	public final static ActionType type = ActionType.DEAL;
 	
 	@Override
-    public void performAction(Player player) {
-        IO playerIO = ActionUtils.getPlayerIO(player);
+    public void performAction(Player player) {        
+		IO playerIO = ActionUtils.getPlayerIO(player);
         Player otherPlayer = playerIO.selectPlayer();
         if (otherPlayer == null) {
             playerIO.showWarning("Вы не выбрали Игрока для сделки!");

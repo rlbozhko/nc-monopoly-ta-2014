@@ -9,47 +9,51 @@ import com.monopoly.board.building.Building;
 /**
  * Собственность
  */
-public interface Property {
+public abstract class Property extends Cell {
 
-	Building getBuilding();
+	public Property(String name, String description, CellType cellType, int position) {
+		super(name, description, cellType, position);		
+	}
 
-	boolean buildBuilding(Building building);
+	abstract public Building getBuilding();
 
-	boolean upgradeBuilding();
+	abstract public boolean buildBuilding(Building building);
 
-	boolean sellBuilding();
+	abstract public boolean upgradeBuilding();
 
-	int getPrice();
+	abstract public boolean sellBuilding();
 
-	int getRent();
+	abstract public int getPrice();
 
-	Monopoly getMonopoly();
+	abstract public int getRent();
 
-	boolean isPledged();
+	abstract public Monopoly getMonopoly();
 
-	void setStatus(PropertyStatus propertyStatus);
+	abstract public boolean isPledged();
 
-	PropertyStatus getStatus();
+	abstract public void setStatus(PropertyStatus propertyStatus);
 
-	boolean hasBuilding();
+	abstract public PropertyStatus getStatus();
 
-	int getMaxLevel();	
+	abstract public boolean hasBuilding();
 
-	void setTurnsToPayBack(int turnsToPayBack);
+	abstract public int getMaxLevel();	
 
-	void decrementTurnsToPayBack();
+	abstract public void setTurnsToPayBack(int turnsToPayBack);
 
-	int getTurnsToPayBack();
+	abstract public void decrementTurnsToPayBack();
 
-	int getPayBackMoney();
+	abstract public int getTurnsToPayBack();
 
-	void setPayBackMoney(int payBackMoney);
+	abstract public int getPayBackMoney();
 
-	void risePayBackMoney();
+	abstract public void setPayBackMoney(int payBackMoney);
 
-	double getPledgePercent();
+	abstract public void risePayBackMoney();
 
-	void setPledgePercent(double pledgePercent);
+	abstract public double getPledgePercent();
 
-	void resetPledge();
+	abstract public void setPledgePercent(double pledgePercent);
+
+	abstract public void resetPledge();
 }

@@ -23,6 +23,7 @@ public class WebIO implements IO {
 
 	private volatile boolean createDealRequest;
 	private Object createDealLock = new Object();
+	private Player dealTarget;
 	private Deal createdDeal;
 
 	private Queue<String> messages = new LinkedList<>();
@@ -85,6 +86,7 @@ public class WebIO implements IO {
 			}
 			Property property = selectPropertyHelper.getProperty();
 			selectPropertyHelper = null;
+			System.out.println("end of io.selectProperty()");
 			return property;
 		}
 	}
@@ -107,6 +109,7 @@ public class WebIO implements IO {
 	public Deal dealDialog(Player otherPlayer) {
 		synchronized (createDealLock) {
 			createDealRequest = true;
+			dealTarget = otherPlayer;
 			while (createDealRequest) {
 				try {
 					createDealLock.wait();
@@ -116,7 +119,16 @@ public class WebIO implements IO {
 			}
 			Deal result = createdDeal;
 			createdDeal = null;
+			dealTarget = null;
+			System.out.println("end of io.createDeal()");
 			return result;
+		}
+	}
+	
+	@Override
+	public Player getDealTarget() {
+		synchronized (createDealLock) {
+			return dealTarget;
 		}
 	}
 
@@ -293,8 +305,9 @@ public class WebIO implements IO {
 				public void run() {
 					actionType.create().performAction(player);
 				}
-			});
+			}).start();
 		}
+		System.out.println("IO.performAction(" + actionType + ")");
 	}
 
 	private boolean hasAvailableAction(ActionType actionType) {

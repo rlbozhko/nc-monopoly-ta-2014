@@ -57,4 +57,6 @@ public interface IO {
 	void performAction(ActionType action);
 
 	boolean hasSelectPropertyRequest();
+
+	Player getDealTarget();
 }

@@ -77,11 +77,17 @@ public class JoinGameController {
 		if (user == null) {
 			return new ModelAndView("redirect:signin.action");
 		}
-
+		
+		SessionStatus sessionStatus = GameSession.getStatus();
+		
 		if (sessionStatusText != null) {
 			GameSession.setStatus(SessionStatus.valueOf(sessionStatusText));
-			SessionStatus sessionStatus = GameSession.getStatus();
+			sessionStatus = GameSession.getStatus();
 			mav.addObject("sessionStatus", sessionStatus);
+		}
+		
+		if (sessionStatus == SessionStatus.RUN) {
+			return new ModelAndView("redirect:game.action");
 		}
 
 		Map<User, IO> usersIO = GameSessionBuilder.getUsersIO();

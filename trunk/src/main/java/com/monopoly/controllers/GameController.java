@@ -1,5 +1,6 @@
 package com.monopoly.controllers;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -9,8 +10,12 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.monopoly.action.ActionType;
+import com.monopoly.action.controller.ActionController;
 import com.monopoly.bean.User;
 import com.monopoly.board.cells.Cell;
+import com.monopoly.board.player.Player;
+import com.monopoly.board.player.PropertyManager;
 import com.monopoly.game.session.GameSession;
 import com.monopoly.game.session.Session;
 import com.monopoly.services.UserService;
@@ -37,13 +42,24 @@ public class GameController {
 		Session gameSession = GameSession.getInstance();
 		
 		List<Cell> cellsList = gameSession.getBoard().getCells();
-
+		List<Player>players = gameSession.getBoard().getPlayers();
+		PropertyManager propertyManager = gameSession.getPropertyManager();
+		ActionController playerActionController = gameSession.getActionController();
+		List<ActionType> actionTypes = playerActionController.getAvailableActions(user.getPlayer());
+		List<String> stringActions = new ArrayList<>();
+		
+		for (ActionType each: actionTypes) {
+		   stringActions.add(each.toString());
+		  }
+		
+		System.out.println(actionTypes);
+		
+		mav.addObject("strActions", stringActions);
 		mav.addObject("email", email);
 		mav.addObject("cellsList", cellsList);
-
-		
-		
-		
+		mav.addObject("players", players);
+		mav.addObject("propertyManager", propertyManager);
+		mav.addObject("actionTypes", actionTypes);
 		return mav;
 	}
 	

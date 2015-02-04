@@ -1,91 +1,112 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-<%@ page import="com.monopoly.action.ActionType" %>
+
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Game</title>
-
-<style type="text/css">
-body{
-	margin:0;
-	padding:0
-}
-div.table{
-	height:0;
-}
-div.tr{
-	height:0;
-}
-
-div.table[class] {height:auto; display: table;}
-div.tr[class] { height:auto; display: table-row;}
-div.td[class] {float:none; display: table-cell;}
-
-div.td{
-	height: 100%; 
- 	float: left; 
-}
-#main{
-	width:100%;
-}
-#first{
-	position:relative;
-	z-index:1;
-	width:200px;
-	background:#ccf;
-}
-#second{
-	width:100%;
-	background:#cfc;
-	margin:0 -30% 0 -200px; 
-	padding:0 30% 0 200px;
-}
-
-#second[id]{
-	width:auto;
-	margin:0;
-	padding:0;
-}
-#third{
-	width:30%;
-	background:#fcc;
-}
-</style>
-
-
+<title>Monopoly - index</title>
 </head>
 <body>
 
-	<a href="signin.action?signout">Sign out [${email}] </a>	
-	
+	<a href="signin.action?signout">Sign out [${email}] </a>
+
+	<form>
+		<input type=button value="Refresh" onClick="history.go()">
+	</form>
+
 	<h1>Game</h1>
-<div id="main" class="table">
-	<div class="tr">
-		<div id="first" class="td">
-			<c:forEach var="each" items="${players}">
-				<div style="border: 1px solid black; margin-bottom: 20px; margin-left: 10px; margin-right: 20px;">
-					Player: ${each.getName()} <br>
-					Money: ${each.getMoney()} <br>
-					Property: ${propertyManager.getPlayerProperties(each)}
-				</div>		
-			</c:forEach>
-		</div>
-		<div id="second" class="td">			
-	        	<c:forEach var="each" items="${cellsList}">
-						<div style="height: 100px; width: 109px; float: left; margin-bottom: 20px; margin-left: 10px; border: 1px solid black;">
+
+<table>
+		<tbody>
+	    	<tr>
+		   		<td style="width: 10%; border: 1px solid black; vertical-align: top;">
+					<div style="position:relative; height:100%;">
+						<c:forEach var="each" items="${players}">
+							<div style="border: 1px solid black; margin-bottom: 20px; padding: 0px;">
+								Player: ${each.getName()} <br>
+								Money: ${each.getMoney()} <br>
+								Position: ${cellsList.get(each.getPosition()).getName()} <br>
+								Property: ${propertyManager.getPlayerProperties(each)}
+							</div>		
+						</c:forEach>
+						</div>
+		   		</td>
+		   		<td style="width: 57%; border: 1px solid black;">
+		   			<c:forEach var="each" items="${cellsList}">
+						<div	style="height: 100px; width: 109px; float: left; overflow: hidden; border: 1px solid black; margin-bottom: 10px; margin-left: 10px" align="center">
 						<div style="border: 1px solid black;">${each.getName()}</div>
 						<div>${each.getDescription()}</div>
-				</div>
-			</c:forEach>
-		</div>
-		<div id="third" class="td">
-			<input type="submit" value="Start turn"  <c:if test="${actionTypes.contains('START_TURN')}">disabled</c:if>>
-			
-		</div>
+						</div>
+					</c:forEach>
+		   		</td>
+		   		<td style="vertical-align: top;">
+					<div>
+		<%-- <c:forEach items="${actions}" var="action">
+			<p>${actions.contains(ActionsType.valueOf('WAIT').create)}</p>			
+			<p>${ActionsType.valueOf('WAIT').create}</p>
+			<p>Loop</p>
+			<p>${strActions.contains('WAIT')}</p>
+			<p>${strActions.contains('notcontains')}</p>
+		</c:forEach>
+		 --%>
+		<form action="game.action" method="get">
+			<button type="submit" name="actionType" value="WAIT"
+				<c:if test="${!strActions.contains('WAIT')}">disabled="disabled"</c:if>>Wait</button>
+			<button type="submit" name="actionType" value="START_TURN"
+				<c:if test="${!strActions.contains('START_TURN')}">disabled="disabled"</c:if>>Start	turn</button>
+			<button type="submit" name="actionType" value="END_TURN"
+				<c:if test="${!strActions.contains('END_TURN')}">disabled="disabled"</c:if>>End turn</button>	
+			<button type="submit" name="actionType" value="DEAL"
+				<c:if test="${!strActions.contains('DEAL')}">disabled="disabled"</c:if>>Deal</button>
+			<button type="submit" name="actionType" value="FINISH_GAME"
+				<c:if test="${!strActions.contains('FINISH_GAME')}">disabled="disabled"</c:if>>FINISH_GAME</button>
+		</form>
+
 	</div>
-</div>
+	
+	<p>selectPlayerRequest = ${selectPlayerRequest}</p>
+	
+	<c:if test="${selectPlayerRequest}">
+		<div>
+			<form action="game.action"  method="get">
+				<select name="selectedPlayerName">
+					<c:forEach items="${selectabelPlayers}" var="cursor">
+						<option value="${cursor.getName()}">${cursor.getName()}</option>
+					</c:forEach>
+				</select>
+				<button type="submit">Select</button>
+			</form>
+		</div>
+	</c:if>
+	
+	<c:if test="${dealRequest}">
+		<div>
+			<form action="game.action"  method="get">				
+				Ask money <input type="text" name="askMoney" value="0"><br>
+				Give money <input type="text" name="giveMoney" value="0"><br>
+				<p>Ask property</p>				
+				<select name="askPropertiesIDs" multiple="multiple">
+					<c:forEach items="${targetProperty}" var="cursor">
+						<option value="${cursor.getPosition()}">${cursor.getName()}</option>
+					</c:forEach>
+				</select>
+				<br>
+				<p>Give property</p>
+				<select name="givePropertiesIDs" multiple="multiple">
+					<c:forEach items="${sourceProperty}" var="cursor">
+						<option value="${cursor.getPosition()}">${cursor.getName()}</option>
+					</c:forEach>
+				</select>
+				<br>					
+				<button type="submit" name="dealTargetName" value="${targetPlayer}">Send Deal</button>
+			</form>
+		</div>
+	</c:if>				
+				</td>
+		  </tr>
+	    </tbody>
+	</table>
 </body>
 </html>

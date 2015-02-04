@@ -11,15 +11,13 @@
 	<a href="signin.action?signout">Sign out [${email}] </a>
 
 	<c:forEach var="entry" items="${usersIO}">
-		${entry.key.getPlayer().getName()}
+		${entry.getValue().getOwner().getName()}
 	</c:forEach>
 
 	<form action="join_game.action" method="get">
-		<input type="text" name="playerName" value="${playerName}" autofocus required> 
 		<input type="hidden" name="isJoinToGame" value="true">
 		<input type="submit" value="Join to game">`
 	</form>
 	<form><input type=button value="Refresh" onClick="window.location.reload()"></form> 
-
 </body>
 </html>

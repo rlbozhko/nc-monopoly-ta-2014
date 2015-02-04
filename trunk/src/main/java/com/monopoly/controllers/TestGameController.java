@@ -49,7 +49,11 @@ public class TestGameController {
 		Session gameSession = GameSession.getInstance();
 
 		List<Cell> cellsList = gameSession.getBoard().getCells();
-
+		Board board = gameSession.getBoard();
+		
+		List<Player> players = board.getPlayers();
+		mav.addObject("players", players);
+		
 		List<ActionType> actions = gameSession.getActionController().getAvailableActions(
 				gameSession.getUserIO(user).getOwner());
 
@@ -61,7 +65,7 @@ public class TestGameController {
 		IO io = gameSession.getUserIO(user);
 		System.out.println("io.hasSelectPlayerRequest() = " + io.hasSelectPlayerRequest());
 		if (io.hasSelectPlayerRequest()) {
-			Board board = gameSession.getBoard();
+			board = gameSession.getBoard();
 			List<Player> selectabelPlayers = board.getActivePlayers();
 			selectabelPlayers.remove(io.getOwner());
 			mav.addObject("selectabelPlayers", selectabelPlayers);

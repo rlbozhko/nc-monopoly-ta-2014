@@ -23,21 +23,22 @@
 
 	<div>
 		<c:forEach var="each" items="${players}">
-					${each.getName()}
-				</c:forEach>
+				<div style="width: 10%; float:right; ; border: 1px solid black; margin-bottom: 20px; margin-left: 10px; margin-right: 20px;">
+					Player: ${each.getName()} <br>
+					Money: ${each.getMoney()} <br>
+					Position: ${cellsList.get(each.getPosition()).getName()} <br>
+					Property: ${propertyManager.getPlayerProperties(each)}
+				</div>		
+			</c:forEach>
 	</div>
-	<div style="border: 1px solid black;" align="center">
-		<div style="width: 60%; border: 2px solid black;" align="center">
+		<div style="width: 60%;" align="center">
 			<c:forEach var="each" items="${cellsList}">
-				<div
-					style="height: 100px; width: 109px; float: left; overflow: hidden; border: 1px solid black;">
+				<div	style="height: 100px; width: 109px; float: left; overflow: hidden; border: 1px solid black;">
 					<div style="border: 1px solid black;">${each.getName()}</div>
 					<div>${each.getDescription()}</div>
 				</div>
 			</c:forEach>
 		</div>
-	</div>
-
 	<div>
 		<%-- <c:forEach items="${actions}" var="action">
 			<p>${actions.contains(ActionsType.valueOf('WAIT').create)}</p>			
@@ -47,16 +48,17 @@
 			<p>${strActions.contains('notcontains')}</p>
 		</c:forEach>
 		 --%>
-		<p>${players}</p>
-
 		<form action="test_game.action" method="get">
 			<button type="submit" name="actionType" value="WAIT"
 				<c:if test="${!strActions.contains('WAIT')}">disabled="disabled"</c:if>>Wait</button>
 			<button type="submit" name="actionType" value="START_TURN"
-				<c:if test="${!strActions.contains('START_TURN')}">disabled="disabled"</c:if>>Start
-				turn</button>
+				<c:if test="${!strActions.contains('START_TURN')}">disabled="disabled"</c:if>>Start	turn</button>
+			<button type="submit" name="actionType" value="END_TURN"
+				<c:if test="${!strActions.contains('END_TURN')}">disabled="disabled"</c:if>>End turn</button>	
 			<button type="submit" name="actionType" value="DEAL"
 				<c:if test="${!strActions.contains('DEAL')}">disabled="disabled"</c:if>>Deal</button>
+			<button type="submit" name="actionType" value="FINISH_GAME"
+				<c:if test="${!strActions.contains('FINISH_GAME')}">disabled="disabled"</c:if>>FINISH_GAME</button>
 		</form>
 
 	</div>

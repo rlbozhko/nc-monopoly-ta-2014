@@ -38,7 +38,6 @@ public class JoinGameController {
 			@RequestParam(value = "countPlayers", required = false) Integer countPlayers,
 			@RequestParam(value = "sessionStatusText", required = false) String sessionStatusText,
 			@RequestParam(value = "startMoney", required = false) Integer startMoney,
-			@RequestParam(value = "playerName", required = false) String playerName,
 			@RequestParam(value = "isJoinToGame", required = false, defaultValue = "false") Boolean isJoinToGame) {
 		ModelAndView mav = new ModelAndView("join_game");
 
@@ -68,7 +67,6 @@ public class JoinGameController {
 	public ModelAndView getJoinGame(
 			@CookieValue(value = "bb_data", required = false) String hash,
 			@RequestParam(value = "sessionStatusText", required = false) String sessionStatusText,
-			@RequestParam(value = "playerName", required = false) String playerName,
 			@RequestParam(value = "isJoinToGame", required = false, defaultValue = "false") Boolean isJoinToGame) {
 		ModelAndView mav = new ModelAndView("join_game");
 
@@ -93,8 +91,7 @@ public class JoinGameController {
 		Map<User, IO> usersIO = GameSessionBuilder.getUsersIO();
 
 		if (isJoinToGame) {
-			Player player = new Player(playerName);
-			user.setPlayer(player);
+			Player player = new Player(user.getNickName());
 			IO io = new WebIO(player);
 			usersIO.put(user, io);
 		}
@@ -105,7 +102,7 @@ public class JoinGameController {
 			List<Player> players = new ArrayList<Player>();
 
 			for (Entry<User, IO> entry : usersIO.entrySet()) {
-				players.add(entry.getKey().getPlayer());
+				players.add(entry.getValue().getOwner());
 			}
 			players.get(0).setStatus(Status.START_TURN);
 			Board board = GameSession.newBoard(players, GameSessionBuilder.getStartMoney());

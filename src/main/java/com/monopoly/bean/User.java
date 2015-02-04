@@ -1,17 +1,17 @@
 package com.monopoly.bean;
 
-import com.monopoly.board.player.Player;
 
 public class User {
 	private String email;
 	private String password;
 	private String hash;
-	private Player player;
+	private String nickName;
 
-	public User(String email, String password, String hash) {
+	public User(String email, String password, String hash, String nickName) {
 		this.email = email;
 		this.password = password;
 		this.hash = hash;
+		this.nickName = nickName;
 	}
 
 	public String getEmail() {
@@ -38,12 +38,12 @@ public class User {
 		this.hash = hash;
 	}
 	
-	public Player getPlayer() {
-		return player;
+	public String getNickName() {
+		return nickName;
 	}
 
-	public void setPlayer(Player player) {
-		this.player = player;
+	public void setNickName(String nickName) {
+		this.nickName = nickName;
 	}
 
 	@Override

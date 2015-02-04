@@ -55,9 +55,9 @@ public class GameSession implements Session {
 		players.add(p3);		
 		
 		Map<User, IO> usersIO = new HashMap<User, IO>();
-		usersIO.put(new User("p1@test.ua", "123", "hash1"), new ConsoleIO(p1));
-		usersIO.put(new User("p2@test.ua", "123", "hash2"), new DummyIO(p2));
-		usersIO.put(new User("p3@test.ua", "123", "hash3"), new DummyIO(p3));
+		usersIO.put(new User("p1@test.ua", "123", "hash1", "p1"), new ConsoleIO(p1));
+		usersIO.put(new User("p2@test.ua", "123", "hash2", "p2"), new DummyIO(p2));
+		usersIO.put(new User("p3@test.ua", "123", "hash3","p3"), new DummyIO(p3));
 		
 		
 		GameSessionBuilder.setBoard(newBoard(players, START_MONEY));

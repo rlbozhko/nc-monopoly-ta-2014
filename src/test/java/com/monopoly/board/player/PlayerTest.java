@@ -37,9 +37,9 @@ public class PlayerTest{
         players.add(p2);
         players.add(p3);
 
-        usersIO.put(new User("p1@test.ua", "123", "hash1"), new ConsoleIO(p1));
-        usersIO.put(new User("p2@test.ua", "123", "hash2"), new DummyIO(p2));
-        usersIO.put(new User("p3@test.ua", "123", "hash3"), new DummyIO(p3));
+        usersIO.put(new User("p1@test.ua", "123", "hash1", "p1"), new ConsoleIO(p1));
+        usersIO.put(new User("p2@test.ua", "123", "hash2", "p2"), new DummyIO(p2));
+        usersIO.put(new User("p3@test.ua", "123", "hash3", "p3"), new DummyIO(p3));
 
         GameSession.GameSessionBuilder.setBoard( GameSession.newBoard(players, START_MONEY));
         GameSession.GameSessionBuilder.setActionController(new PlayerActionController());

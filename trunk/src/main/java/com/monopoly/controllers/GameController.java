@@ -142,9 +142,6 @@ public class GameController {
 
 		System.out.println("perform " + actionType);
 
-		if (ActionType.valueOf(actionType).equals(ActionType.START_TURN)) {
-			io.showDice();
-		}
 		try {
 			Thread.sleep(100);
 		} catch (InterruptedException e) {

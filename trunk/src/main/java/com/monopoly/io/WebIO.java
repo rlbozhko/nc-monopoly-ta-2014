@@ -5,8 +5,10 @@ import java.util.List;
 import java.util.Queue;
 
 import com.monopoly.action.ActionType;
+import com.monopoly.action.ActionUtils;
 import com.monopoly.action.deal.Deal;
 import com.monopoly.board.cells.Property;
+import com.monopoly.board.dice.Dice;
 import com.monopoly.board.player.Player;
 import com.monopoly.game.session.GameSession;
 
@@ -293,8 +295,9 @@ public class WebIO implements IO {
 
 	@Override
 	public void showDice() {
-		// TODO Auto-generated method stub
-
+		Dice dice = Dice.getInstance();
+		ActionUtils.sendMessageToAll(player.getName() + " бросил кости: " + dice.getFaceDie1() + " "
+				+ dice.getFaceDie2());
 	}
 
 	@Override

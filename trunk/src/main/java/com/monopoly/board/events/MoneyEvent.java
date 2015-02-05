@@ -6,26 +6,26 @@ import com.monopoly.game.session.GameSession;
 
 public class MoneyEvent extends BaseEvent {
 
-    private int startCash;
+    private int value;
 
     public MoneyEvent(String name, String description) {
         this.name = name;
         this.description = description;
-        this.startCash = 200;
+        this.value = 200;
     }
 
     @Override
     public void performEvent() {
         Player player = GameSession.getInstance().getBoard().getCurrentPlayer();
-        player.addMoney(startCash);
+        player.addMoney(value);
         ActionUtils.getPlayerIO(player).showMessage(description);
     }
 
 	public synchronized int getStartCash() {
-		return startCash;
+		return value;
 	}
 
 	public synchronized void setStartCash(int startCash) {
-		this.startCash = startCash;
+		this.value = startCash;
 	}
 }

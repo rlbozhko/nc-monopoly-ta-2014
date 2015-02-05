@@ -16,7 +16,7 @@ public class BuyPropertyAction implements Action {
         IO playerIO = ActionUtils.getPlayerIO(player);
         if (playerIO.yesNoDialog("Хотите купить " + property.getName() + " за $" + property.getPrice() + "?")) {
             if (player.buyProperty(property)) {
-                playerIO.showMessage("Вы купили " + property.getName() + " за $" + property.getPrice());
+                ActionUtils.sendMessageToAll(player.getName() + " купил " + property.getName() + " за $" + property.getPrice());
             } else {
                 playerIO.showWarning("У Вас не достаточно средств");
             }

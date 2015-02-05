@@ -3,8 +3,8 @@ package com.monopoly.board.events;
 import java.util.List;
 import java.util.Random;
 
+import com.monopoly.action.ActionUtils;
 import com.monopoly.board.Board;
-import com.monopoly.board.building.Building;
 import com.monopoly.board.cells.Cell;
 import com.monopoly.board.cells.Property;
 import com.monopoly.game.session.GameSession;
@@ -33,9 +33,16 @@ public class EmergencyEvent extends BaseEvent {
 		List<Cell> cells = board.getPropertyCell();
 		for (int i = 0; i < cellCount; i++) {
 			int randomIndex = random.nextInt(cells.size());
-			Building building = ((Property) cells.get(randomIndex)).getBuilding();
-			if (building != null) {
-				building.levelDown();
+			Property property = (Property) cells.get(randomIndex);
+			if (property.hasBuilding()) {
+				property.getBuilding().levelDown();
+				String message = null;
+				if (property.hasBuilding()) {
+					message = description + " и у здания на ячейке " + property.getName() + " понижен уровень!";
+				} else {
+					message = description + " и у здания на ячейке " + property.getName() + " больше нет здания!";
+				}
+				ActionUtils.sendMessageToAll(message);
 			}
 		}
 	}

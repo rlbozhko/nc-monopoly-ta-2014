@@ -31,12 +31,12 @@ public class RandomMoneyEvent extends BaseEvent {
 
 		if (isAddMoney) {
 			player.addMoney(amountMoney);
-			playerIO.showMessage("Поздравляем! Вы выйграли $" + amountMoney
-					+ ".");
+			playerIO.showMessage("Поздравляем! Вы выйграли $" + amountMoney	+ ".");
+			ActionUtils.sendMessageToAll(player.getName() + " выйграл $" + amountMoney	+ ".");
 		} else {
 			player.addMoney(-amountMoney);
-			playerIO.showMessage("Сеголня был не Ваш день! Вы проиграли $"
-					+ amountMoney + ".");
+			playerIO.showMessage("Сеголня был не Ваш день! Вы проиграли $" + amountMoney + ".");
+			ActionUtils.sendMessageToAll(player.getName() + " проиграл $" + amountMoney	+ ".");
 		}
 	}
 

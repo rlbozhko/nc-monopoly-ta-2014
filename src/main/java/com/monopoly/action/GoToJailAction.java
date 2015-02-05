@@ -24,7 +24,7 @@ public class GoToJailAction implements Action {
         if (player.getPosition() != jailCell.getPosition()) {
             player.goToPosition(jailCell.getPosition());
         }
-        ActionUtils.getPlayerIO(player).showMessage("Вас посадили в тюрьму на " + jailTerm + " ходов");
+        ActionUtils.sendMessageToAll(player.getName() + " сел в тюрьму на " + jailTerm + " ходов");
 	}
 
 	@Override

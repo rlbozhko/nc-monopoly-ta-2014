@@ -23,8 +23,8 @@ public class StartTurnAction implements Action {
 			new EndTurnAction().performAction(player);
 			return;
 		}
-		player.goToPosition(player.getPosition() + dice.getFaceDie1() + dice.getFaceDie2());
 		player.setStatus(Status.ACTIVE);
+		player.goToPosition(player.getPosition() + dice.getFaceDie1() + dice.getFaceDie2());		
 	}
 
 	private boolean hasMaxDoubles(Player player) {

@@ -17,15 +17,13 @@ public class PayRentAction implements Action {
         PropertyManager propertyManager = GameSession.getInstance().getPropertyManager();
         Property property = (Property) player.getCurrentCell();
         Player owner = propertyManager.getPropertyOwner(property);
-        IO playerIO = ActionUtils.getPlayerIO(player);
-        IO ownerIO = ActionUtils.getPlayerIO(owner);        
+        IO playerIO = ActionUtils.getPlayerIO(player);                
 
         int rent = property.getRent();
         if (player.subtractMoney(rent)) {            
             owner.addMoney(rent);
-            player.setPayRent(false);
-            playerIO.showMessage("Вы уплатили аренду в размере $" + rent);
-            ownerIO.showMessage(player.getName() + " уплатил аренду в размере $" + rent);
+            player.setPayRent(false);            
+            ActionUtils.sendMessageToAll(player.getName() + " уплатил аренду в размере $" + rent);
         } else {
             playerIO.showWarning("Не достаточно денег для оплаты аренды");
         }

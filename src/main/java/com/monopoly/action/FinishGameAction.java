@@ -17,7 +17,7 @@ import com.monopoly.game.session.Session;
 public class FinishGameAction implements Action {
 	private final static Object statusLock = new Object();
 	public final static ActionType type = ActionType.FINISH_GAME;
-	
+
 	private Session session;
 	private Board board;
 
@@ -28,26 +28,28 @@ public class FinishGameAction implements Action {
 
 	@Override
 	public void performAction(Player player) {
-		PropertyManager propertyManager = GameSession.getInstance().getPropertyManager();		
-		if (Status.ACTIVE == player.getStatus() || Status.START_TURN == player.getStatus()) {			
-				board.getNextPlayer().setStatus(Status.START_TURN);							
-		}
-		
-		List<Property> properties = new ArrayList<>(propertyManager.getPlayerProperties(player));
-		for (Property property : properties) {
-			propertyManager.resetPropertyOwner(property);
-		}
-		
+		PropertyManager propertyManager = GameSession.getInstance().getPropertyManager();
 		synchronized (statusLock) {
-			player.setStatus(Status.FINISH);
+			if (Status.ACTIVE == player.getStatus() || Status.START_TURN == player.getStatus()) {
+				player.setStatus(Status.FINISH);
+				board.getNextPlayer().setStatus(Status.START_TURN);
+			} else {
+				player.setStatus(Status.FINISH);
+			}
+
+			List<Property> properties = new ArrayList<>(propertyManager.getPlayerProperties(player));
+			for (Property property : properties) {
+				propertyManager.resetPropertyOwner(property);
+			}
+			
 			ActionUtils.sendMessageToAll(player.getName() + " сдался");
 			List<Player> activePlayers = board.getActivePlayers();
-			if (activePlayers.size() == 1) {				
+			if (activePlayers.size() == 1) {
 				Player lastPlayer = activePlayers.get(0);
 				lastPlayer.setStatus(Status.FINISH);
 				lastPlayer.resetTimer();
 				ActionUtils.getPlayerIO(lastPlayer).showMessage("Поздравляю!!! Вы стали абсолютным монополистом!!!");
-				ActionUtils.sendMessageToAll("Игрок " + lastPlayer.getName() + " победил!!!");				
+				ActionUtils.sendMessageToAll("Игрок " + lastPlayer.getName() + " победил!!!");
 			}
 		}
 	}
@@ -56,19 +58,19 @@ public class FinishGameAction implements Action {
 	public String getName() {
 		return "Finish Game";
 	}
-	
+
 	@Override
-	public int hashCode() {		
+	public int hashCode() {
 		return type.hashCode();
 	}
 
 	@Override
-	public boolean equals(Object obj) {		
+	public boolean equals(Object obj) {
 		return type.equals(obj);
 	}
-	
+
 	@Override
-	public ActionType getType() {		
+	public ActionType getType() {
 		return type;
 	}
 }

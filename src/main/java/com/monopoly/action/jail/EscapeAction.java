@@ -31,6 +31,8 @@ public class EscapeAction implements Action {
 			player.setJailTerm(player.getJailTerm() + PUNISHMENT);
 			playerIO.showMessage("План побега не удался. За попытку побега вам добавили к сроку " + PUNISHMENT
 					+ " ходов");
+			ActionUtils.sendMessageToAll(player.getName() + " За попытку побега получил плюс " + PUNISHMENT
+					+ " ходов к сроку");
 			new EndTurnAction().performAction(player);
 		}
 	}

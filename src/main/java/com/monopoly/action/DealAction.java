@@ -30,6 +30,7 @@ public class DealAction implements Action {
             deal.performDeal();
             playerIO.showMessage("Сделка состоялась");
             otherIO.showMessage("Сделка состоялась");
+            ActionUtils.sendMessageToAll(player.getName() + " и " + otherPlayer.getName() + " заключили сделку");
         } else {
             playerIO.showMessage("Сделка не состоялась");
             otherIO.showMessage("Сделка не состоялась");

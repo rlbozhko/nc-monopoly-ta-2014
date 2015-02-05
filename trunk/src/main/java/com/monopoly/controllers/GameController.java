@@ -2,6 +2,7 @@ package com.monopoly.controllers;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Queue;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -33,7 +34,8 @@ public class GameController {
 	private UserService userService;
 
 	@RequestMapping(value = "/game.action", method = RequestMethod.GET)
-	public ModelAndView getLogin(@CookieValue(value = "bb_data", required = false) String hash) {
+	public ModelAndView getLogin(
+			@CookieValue(value = "bb_data", required = false) String hash) {
 
 		ModelAndView mav = new ModelAndView("game");
 
@@ -49,22 +51,23 @@ public class GameController {
 
 		List<Cell> cellsList = gameSession.getBoard().getCells();
 		Board board = gameSession.getBoard();
-		
+
 		List<Player> players = board.getPlayers();
 
-		List<ActionType> actions = gameSession.getActionController().getAvailableActions(
-				gameSession.getUserIO(user).getOwner());
+		List<ActionType> actions = gameSession.getActionController()
+				.getAvailableActions(gameSession.getUserIO(user).getOwner());
 
 		List<String> stringActions = new ArrayList<>();
 		for (ActionType actionType : actions) {
 			stringActions.add(actionType.toString());
 		}
-		
+
 		PropertyManager propertyManager = gameSession.getPropertyManager();
-		
+
 		IO io = gameSession.getUserIO(user);
-		System.out.println("io.hasSelectPlayerRequest() = " + io.hasSelectPlayerRequest());
-		testProperty();
+		System.out.println("io.hasSelectPlayerRequest() = "
+				+ io.hasSelectPlayerRequest());
+//		testProperty();
 		if (io.hasSelectPlayerRequest()) {
 			board = gameSession.getBoard();
 			List<Player> selectabelPlayers = board.getActivePlayers();
@@ -73,15 +76,21 @@ public class GameController {
 			mav.addObject("selectPlayerRequest", true);
 		}
 
-		System.out.println("io.hasCreateDealRequest() = " + io.hasCreateDealRequest());
+		System.out.println("io.hasCreateDealRequest() = "
+				+ io.hasCreateDealRequest());
 		if (io.hasCreateDealRequest()) {
 			Player target = io.getDealTarget();
 			mav.addObject("targetPlayer", target.getName());
-			mav.addObject("targetProperty", propertyManager.getPlayerProperties(target));
-			mav.addObject("sourceProperty", propertyManager.getPlayerProperties(io.getOwner()));
+			mav.addObject("targetProperty",
+					propertyManager.getPlayerProperties(target));
+			mav.addObject("sourceProperty",
+					propertyManager.getPlayerProperties(io.getOwner()));
 			mav.addObject("dealRequest", true);
 		}
 		
+		Queue<String> messageQueue = io.getAllMessages();
+		
+		mav.addObject("messageQueue", messageQueue);
 		mav.addObject("players", players);
 		mav.addObject("propertyManager", propertyManager);
 		mav.addObject("email", email);
@@ -95,25 +104,31 @@ public class GameController {
 		Session session = GameSession.getInstance();
 		PropertyManager testPropertyManager = session.getPropertyManager();
 
-		Property testProperty1 = (Property) session.getBoard().getCells().get(1);
-		Property testProperty2 = (Property) session.getBoard().getCells().get(3);
-		Property testProperty3 = (Property) session.getBoard().getCells().get(4);
-		Property testProperty4 = (Property) session.getBoard().getCells().get(5);
-		Property testProperty5 = (Property) session.getBoard().getCells().get(6);
+		Property testProperty1 = (Property) session.getBoard().getCells()
+				.get(1);
+		Property testProperty2 = (Property) session.getBoard().getCells()
+				.get(3);
+		Property testProperty3 = (Property) session.getBoard().getCells()
+				.get(4);
+		Property testProperty4 = (Property) session.getBoard().getCells()
+				.get(5);
+		Property testProperty5 = (Property) session.getBoard().getCells()
+				.get(6);
 
 		Player p1 = session.getBoard().getPlayers().get(0);
 		Player p2 = session.getBoard().getPlayers().get(1);
-		
+
 		testPropertyManager.setPropertyOwner(p1, testProperty1);
 		testPropertyManager.setPropertyOwner(p1, testProperty2);
 		testPropertyManager.setPropertyOwner(p1, testProperty3);
-		
+
 		testPropertyManager.setPropertyOwner(p2, testProperty4);
 		testPropertyManager.setPropertyOwner(p2, testProperty5);
 	}
 
 	@RequestMapping(value = "/game.action", method = RequestMethod.GET, params = { "actionType" })
-	public ModelAndView clickAction(@CookieValue(value = "bb_data", required = false) String hash,
+	public ModelAndView clickAction(
+			@CookieValue(value = "bb_data", required = false) String hash,
 			@RequestParam String actionType) {
 		ModelAndView mav = new ModelAndView("redirect:game.action");
 
@@ -126,19 +141,24 @@ public class GameController {
 		io.performAction(ActionType.valueOf(actionType));
 
 		System.out.println("perform " + actionType);
+
+		if (ActionType.valueOf(actionType).equals(ActionType.START_TURN)) {
+			io.showDice();
+		}
 		try {
 			Thread.sleep(100);
 		} catch (InterruptedException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		System.out.println("clickACtion() -- io.hasSelectPlayerRequest() = " + io.hasSelectPlayerRequest());
-
+		System.out.println("clickACtion() -- io.hasSelectPlayerRequest() = "
+				+ io.hasSelectPlayerRequest());
 		return mav;
 	}
 
 	@RequestMapping(value = "/game.action", method = RequestMethod.GET, params = "selectedPlayerName")
-	public ModelAndView selectPlayer(@CookieValue(value = "bb_data", required = false) String hash,
+	public ModelAndView selectPlayer(
+			@CookieValue(value = "bb_data", required = false) String hash,
 			@RequestParam String selectedPlayerName) {
 		ModelAndView mav = new ModelAndView("redirect:game.action");
 		System.out.println("inside selectPlayer()");
@@ -154,9 +174,11 @@ public class GameController {
 		return mav;
 	}
 
-	@RequestMapping(value = "/game.action", method = RequestMethod.GET, params = { "dealTargetName"})
-	public ModelAndView createDeal(@CookieValue(value = "bb_data", required = false) String hash,
-			@ModelAttribute DealContainer dealContainer, @RequestParam String dealTargetName) {
+	@RequestMapping(value = "/game.action", method = RequestMethod.GET, params = { "dealTargetName" })
+	public ModelAndView createDeal(
+			@CookieValue(value = "bb_data", required = false) String hash,
+			@ModelAttribute DealContainer dealContainer,
+			@RequestParam String dealTargetName) {
 		ModelAndView mav = new ModelAndView("redirect:game.action");
 		System.out.println("inside createDeal");
 		User user = userService.getUser(hash);
@@ -168,7 +190,7 @@ public class GameController {
 
 		dealContainer.setTarget(ActionUtils.getPlayerByName(dealTargetName));
 		dealContainer.setSource(io.getOwner());
-		Deal deal = dealContainer.createDeal();		
+		Deal deal = dealContainer.createDeal();
 		io.setCreatedDeal(deal);
 
 		System.out.println(deal.message());

@@ -38,7 +38,7 @@ public class GameSession implements Session {
 	private Board board;
 	private ActionController actionController;
 	private PropertyManager propertyManager;
-	//private List<IO> ios;
+	private long id;
 	private Map<User, IO> userIO;
 
 	private static final int START_MONEY = 5000;
@@ -86,7 +86,7 @@ public class GameSession implements Session {
 			synchronized (GameSession.class) {
 				localInstance = session;
 				if (localInstance == null) {
-					session = localInstance = new GameSession();
+					session = localInstance = new GameSession();					 
 				}
 			}
 		}
@@ -98,6 +98,7 @@ public class GameSession implements Session {
 		this.actionController = GameSessionBuilder.getActionController();		
 		this.propertyManager = GameSessionBuilder.getPropertyManager();
 		this.userIO = GameSessionBuilder.getUsersIO();
+		this.id = System.currentTimeMillis();
 	}
 
 	public static class GameSessionBuilder {
@@ -287,5 +288,9 @@ public class GameSession implements Session {
 	@Override
 	public Set<User> getUsers() {
 		return userIO.keySet();
+	}
+
+	public long getId() {
+		return id;
 	}
 }

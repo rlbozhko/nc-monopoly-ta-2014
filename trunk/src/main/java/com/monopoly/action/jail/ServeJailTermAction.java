@@ -18,6 +18,7 @@ public class ServeJailTermAction implements Action {
 		if (player.getJailTerm() == 0) {
 			player.setJailStatus(Status.CLEAN);
 			playerIO.showMessage("Вы отсидели свой срок. Можете быть свободны.");
+			ActionUtils.sendMessageToAll(player.getName() + " отсидел свой срок.");
 		} else {
 			playerIO.showMessage("Вам еще сидеть " + player.getJailTerm() + " ход(ов)");
 		}

@@ -46,8 +46,8 @@ public class PledgePropertyAction implements Action {
                 property.setTurnsToPayBack(turnsToPayBack);
                 property.setPledgePercent(pledgePercent);
                 property.setPayBackMoney(payment);
-                playerIO.showMessage("Вы заложили " + property.getName() + " за $" + payment + ".\n" +
-                        " На " + turnsToPayBack + " ходов");
+                ActionUtils.sendMessageToAll(player.getName() + " заложил " + property.getName() + " за $" + payment 
+                		+ ". На " + turnsToPayBack + " ходов");
             }
         }
     }

@@ -106,26 +106,26 @@ public class Board implements CellOperations, PlayerOperations {
     @Override
     public synchronized Player getNextPlayer() {        
         currentPlayer.resetTimer();
-    	currentPlayer = nextPlayer();
+    	currentPlayer = nextPlayer(currentPlayer);
         currentPlayer.startTimer();
         return currentPlayer;
     }
     
-    private Player nextPlayer() {
-        int index = players.indexOf(currentPlayer);
+    private Player nextPlayer(Player cursor) {
+        int index = players.indexOf(cursor);
         Player next;
         if (index == players.size() - 1) {
             next = players.get(0);
         } else {
             next = players.get(index + 1);
         }
-        currentPlayer = next;
+        cursor = next;
         next.setOfferADeal(false);
         if (Status.FINISH == next.getStatus()) {
-            next = nextPlayer();
+            next = nextPlayer(cursor);
         } else if (Status.SKIP_TURN == next.getStatus()) {
         	next.setStatus(Status.WAIT);
-        	next = nextPlayer();
+        	next = nextPlayer(cursor);
         }
         return next;
     }

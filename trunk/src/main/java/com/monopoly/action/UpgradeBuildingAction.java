@@ -27,7 +27,7 @@ public class UpgradeBuildingAction implements Action {
 			return;
 		}
 		if (buildingCheck(building)) {
-			io.showMessage("Уровень здания повышен до " + building.currentLevel() + " уровня");
+			ActionUtils.sendMessageToAll(player.getName() + "повысил здание до " + building.currentLevel() + " уровня.");
 		} else {
 			showErrorMessage(building);
 		}

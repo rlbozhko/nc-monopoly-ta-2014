@@ -22,5 +22,6 @@ public class SkipTurnEvent extends BaseEvent{
 
         player.setStatus(Status.SKIP_TURN);
         playerIO.showMessage("Жизнь хорошо, когда ешь не спеша. Вы пропускаете 1 ход");
+        ActionUtils.sendMessageToAll(player.getName() + " пропускает 1 ход");
 	}
 }

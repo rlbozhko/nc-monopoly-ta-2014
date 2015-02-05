@@ -84,6 +84,8 @@ public class Player implements MoneyOperations, MoveOperations, PropertyOperatio
 		}
 
 		Cell currentCell = GameSession.getInstance().getBoard().getCells().get(this.getPosition());
+		
+		ActionUtils.sendMessageToAll(this.getName() + " перешел на ячейку " + getCurrentCell().getName());
 		if (CellType.EVENT_CELL == currentCell.getCellType()) {
 			((EventCell) currentCell).getEvent().performEvent();
 		} else if (CellType.PROPERTY_CELL == currentCell.getCellType()) {
@@ -92,7 +94,7 @@ public class Player implements MoneyOperations, MoveOperations, PropertyOperatio
 			if (null != owner && !this.equals(owner)) {
 				this.setPayRent(true);
 			}
-		}
+		}		
 	}
 
 	@Override

@@ -38,7 +38,9 @@ public class EndTurnAction implements Action {
 		} else {
 			checkForEscape();
 			player.setStatus(Status.WAIT);
-			board.getNextPlayer().setStatus(Status.START_TURN);
+			Player nextPlayer = board.getNextPlayer();
+			nextPlayer.setStatus(Status.START_TURN);
+			ActionUtils.sendMessageToAll(player.getName() + " передал ход " + nextPlayer.getName());			
 			checkAndStartAuction();
 		}
 	}
@@ -47,8 +49,8 @@ public class EndTurnAction implements Action {
 		if (player.getJailStatus() == Status.ESCAPE) {
 			player.subtractJailTerm();
 			if (player.getJailTerm() == 0) {
-				player.setJailStatus(Status.CLEAN);
-				playerIO.showMessage("Вы отсидели свой срок. Можете быть свободны.");
+				player.setJailStatus(Status.CLEAN);				
+				ActionUtils.sendMessageToAll(player.getName() + " отсиделся и его больше не разыскивают");
 			} else {
 				playerIO.showMessage("Ваc будут искать еще " + player.getJailTerm() + " ход(ов)");
 			}

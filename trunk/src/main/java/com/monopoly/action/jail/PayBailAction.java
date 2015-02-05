@@ -19,6 +19,7 @@ public class PayBailAction implements Action {
 		if (player.subtractMoney(bail)) {
 			playerIO.showMessage("Вы заплатили залог в размере $" + bail + ".\n "
 					+ "Впредь будьте более удачливы. Можете быть свободны.");
+			ActionUtils.sendMessageToAll(player.getName() + " заплатил залог в размере $" + bail + " и вышел из тюрьмы");
 			player.setJailTerm(RESET_JAIL_TERM);
 			player.setJailStatus(Status.CLEAN);
 		} else {

@@ -33,9 +33,9 @@ public class PayBackAction implements Action {
 	private void tryPayBack(int payBackMoney) {
 		if (player.subtractMoney(payBackMoney)) {
 			property.resetPledge();
-			playerIO.showMessage(((Cell) property).getName() + " выкуплено за " + payBackMoney);
+			ActionUtils.sendMessageToAll(player.getName() + " выкупил " + property.getName() + " за " + payBackMoney);
 		} else {
-			playerIO.showMessage("У Вас не достаточно средств!");
+			playerIO.showWarning("У Вас не достаточно средств!");
 		}
 	}
 

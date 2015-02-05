@@ -29,5 +29,6 @@ public class ExtraTurnEvent extends BaseEvent{
 
         player.setStatus(Status.START_TURN);
         playerIO.showMessage("Сегодня ваш день! Вы получили возможность походить еще раз!!!");
+        ActionUtils.sendMessageToAll(player.getName() + " получил дополнительный ход.");
     }
 }

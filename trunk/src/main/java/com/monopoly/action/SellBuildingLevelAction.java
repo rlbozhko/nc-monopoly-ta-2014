@@ -27,7 +27,7 @@ public class SellBuildingLevelAction implements Action {
 			return;
 		}
 		if (buildingCheck(building)) {
-			io.showMessage("Уровень здания понижен");
+			ActionUtils.sendMessageToAll(player.getName() + " понизил уровень Здания на ячейке " + property.getName());
 		}
 	}
 

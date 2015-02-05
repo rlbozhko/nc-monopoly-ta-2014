@@ -28,6 +28,7 @@ public class BuildAction implements Action {
 		if (io.yesNoDialog("Построить здание за " + BUILDING_PRICE + "?")
 				&& property.buildBuilding(new Building(BuildingType.CASTLE, BUILDING_PRICE))) {
 			io.showMessage("Здание построено");
+			ActionUtils.sendMessageToAll(player.getName() + "построил Здание на ячейке " + property.getName());
 		} else {
 			showErrorMessage();
 		}		

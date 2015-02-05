@@ -18,7 +18,7 @@ public class MoneyEvent extends BaseEvent {
     public void performEvent() {
         Player player = GameSession.getInstance().getBoard().getCurrentPlayer();
         player.addMoney(value);
-        ActionUtils.getPlayerIO(player).showMessage(description);
+        ActionUtils.sendMessageToAll(player.getName() + " " + description);
     }
 
 	public synchronized int getStartCash() {

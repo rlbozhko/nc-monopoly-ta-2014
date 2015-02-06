@@ -32,10 +32,10 @@
 		<table>
 			<tbody>
 				<tr>
-					<td style="width: 10%; border: 1px solid black; vertical-align: top;">
+					<td style="width: 10%; vertical-align: top;">
 						<div style="position:relative; height:100%;">
 							<c:forEach var="each" items="${players}">
-								<div style="border: 1px solid black; margin-bottom: 20px; padding: 0px;">
+								<div style="border: 2px solid ${each.getPlayerColor()}; margin-bottom: 20px; padding: 0px;">
 										Player: ${each.getName()} <br>
 										Money: ${each.getMoney()} <br>
 										Position: ${cellsList.get(each.getPosition()).getName()} <br>
@@ -44,11 +44,18 @@
 							</c:forEach>
 						</div>
 				   	</td>
-				   	<td style="width: 57%; border: 1px solid black;">
-				   		<c:forEach var="each" items="${cellsList}">
-							<div	style="height: 100px; width: 109px; float: left; overflow: hidden; border: 1px solid black; margin-bottom: 10px; margin-left: 10px" align="center">
-								<div style="border: 1px solid black;">${each.getName()}</div>
-								<div>${each.getDescription()}</div>
+				   	<td style="width: 55%;">
+				   		<c:forEach var="eachCell" items="${cellsList}">
+							 <div	style="height: 100px; width: 109px; float: left; overflow: hidden; border: 1px solid black; margin-bottom: 10px; margin-left: 10px" align="center">
+								<div style="border: 1px solid black;">${eachCell.getName()}</div>
+									<div>${eachCell.getDescription()}</div>
+									<c:forEach var="eachPlayer" items="${players}">
+										<c:choose>
+											<c:when test="${eachCell.getPosition() == eachPlayer.getPosition()}">
+												<div style="background: ${eachPlayer.getPlayerColor()}; width: 20%; float: left; margin-left: 5px;">&nbsp</div>
+											</c:when>
+										</c:choose>	
+									</c:forEach>
 							</div>
 						</c:forEach>
 				   	</td>
@@ -116,4 +123,7 @@
 			</tbody>
 		</table>
 	</body>
+	<script type="text/javascript">
+   		document.getElementById("chatbox").scrollTop = document.getElementById("chatbox").scrollHeight
+ 	</script>
 </html>

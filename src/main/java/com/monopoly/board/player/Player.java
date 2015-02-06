@@ -18,6 +18,7 @@ public class Player implements MoneyOperations, MoveOperations, PropertyOperatio
 	private boolean offerADeal;
 	private PlayerTimer timer;
 	private int doublesCount;
+	private String playerColor;
 
 	public Player(String name) {
 		position = 0;
@@ -63,6 +64,14 @@ public class Player implements MoneyOperations, MoveOperations, PropertyOperatio
 		return getJailStatus() == Status.JAILED;
 	}
 
+	public String getPlayerColor() {
+		return playerColor;
+	}
+
+	public void setPlayerColor(String playerColor) {
+		this.playerColor = playerColor;
+	}
+	
 	@Override
 	public int getLastPosition() {
 		return lastPosition;

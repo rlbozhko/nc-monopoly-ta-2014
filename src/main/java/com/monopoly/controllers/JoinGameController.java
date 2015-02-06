@@ -67,7 +67,8 @@ public class JoinGameController {
 	public ModelAndView getJoinGame(
 			@CookieValue(value = "bb_data", required = false) String hash,
 			@RequestParam(value = "sessionStatusText", required = false) String sessionStatusText,
-			@RequestParam(value = "isJoinToGame", required = false, defaultValue = "false") Boolean isJoinToGame) {
+			@RequestParam(value = "isJoinToGame", required = false, defaultValue = "false") Boolean isJoinToGame,
+			@RequestParam(value = "playerColor", required = false) String playerColor) {
 		ModelAndView mav = new ModelAndView("join_game");
 
 		User user = userService.getUser(hash);
@@ -93,6 +94,7 @@ public class JoinGameController {
 		if (isJoinToGame) {
 			Player player = new Player(user.getNickName());
 			IO io = new WebIO(player);
+			player.setPlayerColor(playerColor);
 			usersIO.put(user, io);
 		}
 
@@ -116,7 +118,7 @@ public class JoinGameController {
 		}
 
 		String email = user.getEmail();
-
+		mav.addObject("playerColor", playerColor);
 		mav.addObject("usersIO", usersIO);
 		mav.addObject("email", email);
 

@@ -90,6 +90,9 @@ public class GameController {
 		
 		Queue<String> messageQueue = io.getAllMessages();
 		
+		Player player = io.getOwner();
+		
+		mav.addObject("player", player);
 		mav.addObject("messageQueue", messageQueue);
 		mav.addObject("players", players);
 		mav.addObject("propertyManager", propertyManager);
@@ -148,6 +151,7 @@ public class GameController {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+		
 		System.out.println("clickACtion() -- io.hasSelectPlayerRequest() = "
 				+ io.hasSelectPlayerRequest());
 		return mav;

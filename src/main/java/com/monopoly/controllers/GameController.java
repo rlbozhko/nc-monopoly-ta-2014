@@ -151,6 +151,12 @@ public class GameController {
 		if (user == null) {
 			return new ModelAndView("redirect:signin.action");
 		}
+		
+		SessionStatus sessionStatus = GameSession.getStatus();
+
+		if (sessionStatus == SessionStatus.NOT_EXISTS) {
+			return new ModelAndView("redirect:index.action");
+		}
 		IO io = GameSession.getInstance().getUserIO(user);
 		io.performAction(ActionType.valueOf(actionType));
 

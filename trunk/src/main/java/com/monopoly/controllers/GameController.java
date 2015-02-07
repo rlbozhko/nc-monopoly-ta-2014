@@ -25,6 +25,7 @@ import com.monopoly.board.player.Player;
 import com.monopoly.board.player.PropertyManager;
 import com.monopoly.game.session.GameSession;
 import com.monopoly.game.session.Session;
+import com.monopoly.game.session.SessionStatus;
 import com.monopoly.io.IO;
 import com.monopoly.services.UserService;
 
@@ -47,12 +48,20 @@ public class GameController {
 
 		String email = user.getEmail();
 
+		SessionStatus sessionStatus = GameSession.getStatus();
+
+		if (sessionStatus == SessionStatus.NOT_EXISTS) {
+			return new ModelAndView("redirect:index.action");
+		}
+
+
 		Session gameSession = GameSession.getInstance();
 
 		List<Cell> cellsList = gameSession.getBoard().getCells();
 		Board board = gameSession.getBoard();
-
+		
 		List<Player> players = board.getPlayers();
+		List<Player> activePlayers = board.getActivePlayers();
 
 		List<ActionType> actions = gameSession.getActionController()
 				.getAvailableActions(gameSession.getUserIO(user).getOwner());
@@ -88,13 +97,15 @@ public class GameController {
 			mav.addObject("dealRequest", true);
 		}
 		
+		if(io.hasYesNoDialog()) {
+			String test = "TESTTESTETS";
+			mav.addObject("test", test);
+		}
 		Queue<String> messageQueue = io.getAllMessages();
 		
-		Player player = io.getOwner();
-		
-		mav.addObject("player", player);
 		mav.addObject("messageQueue", messageQueue);
 		mav.addObject("players", players);
+		mav.addObject("activePlayers", activePlayers);
 		mav.addObject("propertyManager", propertyManager);
 		mav.addObject("email", email);
 		mav.addObject("cellsList", cellsList);
@@ -198,4 +209,16 @@ public class GameController {
 
 		return mav;
 	}
+	
+	@RequestMapping(value = "/game_over.action", method = RequestMethod.GET)
+	public ModelAndView getLogin() {
+		if (GameSession.getInstance().getBoard().getActivePlayers().size() == 0) {
+			GameSession.getInstance().close();
+			return new ModelAndView("redirect:index.action");
+		}
+		
+		return new ModelAndView("redirect:index.action");
+	}
+			
+
 }

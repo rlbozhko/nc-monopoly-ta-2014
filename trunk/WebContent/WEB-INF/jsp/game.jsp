@@ -28,7 +28,6 @@
 		</form>
 	
 		<h1>Game</h1>
-	
 		<table>
 			<tbody>
 				<tr>
@@ -79,6 +78,11 @@
 								<button type="submit" name="actionType" value="FINISH_GAME"
 									<c:if test="${!strActions.contains('FINISH_GAME')}">disabled="disabled"</c:if>>FINISH_GAME</button>
 							</form>
+							<c:if test="${activePlayers.size() == 0 }">
+								<form action="game_over.action" method="get">
+									<input type="submit" value="GAME_OVER">
+								</form>
+							 </c:if>
 						</div>
 			<%-- 		<p>selectPlayerRequest = ${selectPlayerRequest}</p> --%>
 			

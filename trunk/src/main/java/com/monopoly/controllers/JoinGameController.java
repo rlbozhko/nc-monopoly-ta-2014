@@ -46,13 +46,18 @@ public class JoinGameController {
 		if (user == null) {
 			return new ModelAndView("redirect:signin.action");
 		}
+		
+		SessionStatus sessionStatus = GameSession.getStatus();
+		if (sessionStatus == SessionStatus.CREATING) {
+			return new ModelAndView("redirect:join_game.action");
+		}
 
 		GameSessionBuilder.setMaxPlayers(countPlayers);
 		GameSessionBuilder.setStartMoney(startMoney);
 
 		if (sessionStatusText != null) {
 			GameSession.setStatus(SessionStatus.valueOf(sessionStatusText));
-			SessionStatus sessionStatus = GameSession.getStatus();
+			sessionStatus = GameSession.getStatus();
 			mav.addObject("sessionStatus", sessionStatus);
 		}
 
@@ -83,6 +88,10 @@ public class JoinGameController {
 			GameSession.setStatus(SessionStatus.valueOf(sessionStatusText));
 			sessionStatus = GameSession.getStatus();
 			mav.addObject("sessionStatus", sessionStatus);
+		}
+		
+		if (sessionStatus == SessionStatus.NOT_EXISTS) {
+			return new ModelAndView("redirect:index.action");
 		}
 		
 		if (sessionStatus == SessionStatus.RUN) {

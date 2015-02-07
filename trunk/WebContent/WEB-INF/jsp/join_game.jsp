@@ -35,7 +35,7 @@
 				<option style="color: teal;" value="teal">Teal</option>
 				<option selected="selected" style="color: yellow;" value="yellow">Yellow</option>
 			</select>
-		<input type="submit" value="Join to game">`
+		<input type="submit" value="Join to game">
 	</form>
 
 	<form><input type=button value="Refresh" onClick="window.location.reload()"></form> 

@@ -27,16 +27,18 @@ public class MoveEvent extends BaseEvent {
 	public void performEvent() {
 		Board board = GameSession.getInstance().getBoard();
 		Player player = board.getCurrentPlayer();		
-		boolean isAdvance = random.nextBoolean();
-
+		boolean isAdvance = random.nextBoolean();		
+		int goToPosition = 0; 
 		int valueMove = xorShiftRandom.nextInt(MAX_VALUE_MOVE_PLAYER);
 		if (isAdvance) {
-			player.goToPosition(valueMove);
-			ActionUtils.sendMessageToAll(player.getName() + "отправился на " + valueMove
+			goToPosition = player.getPosition() + valueMove;
+			player.goToPosition(goToPosition);
+			ActionUtils.sendMessageToAll(player.getName() + " отправился на " + valueMove
 					+ " клеток вперед.");
 		} else {
-			player.goToPosition(-valueMove);
-			ActionUtils.sendMessageToAll(player.getName() + "отправился на " + valueMove
+			goToPosition = player.getPosition() - valueMove;			
+			player.goToPosition(goToPosition);
+			ActionUtils.sendMessageToAll(player.getName() + " отправился на " + valueMove
 					+ " клеток назад.");			
 		}
 	}

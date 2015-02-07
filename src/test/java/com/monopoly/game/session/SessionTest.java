@@ -11,6 +11,8 @@ import com.monopoly.bean.User;
 import com.monopoly.board.cells.EventCell;
 import com.monopoly.board.cells.Property;
 import com.monopoly.board.events.GoToJailEvent;
+import com.monopoly.board.events.MoneyEvent;
+import com.monopoly.board.events.MoveEvent;
 import com.monopoly.board.player.Player;
 import com.monopoly.board.player.PropertyManager;
 import com.monopoly.board.player.Status;
@@ -73,5 +75,6 @@ public class SessionTest {
 		dummy1.start();
 		dummy2.start();
 		//((EventCell) GameSession.getInstance().getBoard().getGoToJailCell()).getEvent().performEvent();
+		new MoveEvent("", "").performEvent();
 	}
 }

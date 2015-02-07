@@ -82,19 +82,23 @@ public class Player implements MoneyOperations, MoveOperations, PropertyOperatio
 		int boardSize = GameSession.getInstance().getBoard().getCells().size();
 		PropertyManager propertyManager = GameSession.getInstance().getPropertyManager();
 		this.lastPosition = this.position;
-		boolean nextCircle = isNextCircle(position);
-		this.position = position % boardSize;
-		if (nextCircle) {
+		
+		if (isNextCircle(position)) {
 			GameSession.getInstance().getBoard().performStartEvent();
 		}
-
+		
 		if (hasPledgedProperty()) {
 			pledgedPropertyCheck();
 		}
+		if (position < 0) {
+			this.position = (boardSize + position) % boardSize;
+		} else {
+			this.position = position % boardSize;
+		}		
 
-		Cell currentCell = GameSession.getInstance().getBoard().getCells().get(this.getPosition());
+		Cell currentCell = getCurrentCell();
 		
-		ActionUtils.sendMessageToAll(this.getName() + " перешел на ячейку " + getCurrentCell().getName());
+		ActionUtils.sendMessageToAll(this.getName() + " перешел на ячейку " + currentCell.getName());
 		if (CellType.EVENT_CELL == currentCell.getCellType()) {
 			((EventCell) currentCell).getEvent().performEvent();
 		} else if (CellType.PROPERTY_CELL == currentCell.getCellType()) {

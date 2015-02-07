@@ -273,13 +273,15 @@ public class GameSession implements Session {
 	}
 
 	@Override
-	public synchronized void close() {
-		session = null;
-		setStatus(SessionStatus.NOT_EXISTS);
-		GameSessionBuilder.setActionController(null);
-		GameSessionBuilder.setBoard(null);
-		GameSessionBuilder.getUsersIO().clear();
-		GameSessionBuilder.setPropertyManager(null);
+	public void close() {
+		synchronized (GameSession.class) {
+			setStatus(SessionStatus.NOT_EXISTS);
+			session = null;
+			GameSessionBuilder.setActionController(null);
+			GameSessionBuilder.setBoard(null);
+			GameSessionBuilder.getUsersIO().clear();
+			GameSessionBuilder.setPropertyManager(null);
+		}
 	}
 
 	@Override

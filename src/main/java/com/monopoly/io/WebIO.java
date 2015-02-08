@@ -126,7 +126,7 @@ public class WebIO implements IO {
 			return result;
 		}
 	}
-	
+
 	@Override
 	public Player getDealTarget() {
 		synchronized (createDealLock) {
@@ -155,16 +155,16 @@ public class WebIO implements IO {
 		YesNoDialog dialog = new YesNoDialog(message);
 		synchronized (yesNoDialogs) {
 			yesNoDialogs.add(dialog);
-			synchronized (dialog) {
-				while (!dialog.isAnswered()) {
-					try {
-						dialog.wait();
-					} catch (InterruptedException e) {
-						e.printStackTrace();
-					}
+		}
+		synchronized (dialog) {
+			while (!dialog.isAnswered()) {
+				try {
+					dialog.wait();
+				} catch (InterruptedException e) {
+					e.printStackTrace();
 				}
-				return dialog.getAnswer();
 			}
+			return dialog.getAnswer();
 		}
 	}
 

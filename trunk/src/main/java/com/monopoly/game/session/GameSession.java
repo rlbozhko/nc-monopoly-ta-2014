@@ -15,6 +15,7 @@ import com.monopoly.board.cells.Monopoly;
 import com.monopoly.board.cells.PropertyCell;
 import com.monopoly.board.cells.RandomEventCell;
 import com.monopoly.board.cells.SingleEventCell;
+import com.monopoly.board.dice.Dice;
 import com.monopoly.board.events.EmergencyEvent;
 import com.monopoly.board.events.Event;
 import com.monopoly.board.events.ExtraTurnEvent;
@@ -88,7 +89,8 @@ public class GameSession implements Session {
 			synchronized (GameSession.class) {
 				localInstance = session;
 				if (localInstance == null) {
-					session = localInstance = new GameSession();					 
+					session = localInstance = new GameSession();
+					Dice.getInstance();
 				}
 			}
 		}
@@ -281,6 +283,7 @@ public class GameSession implements Session {
 			GameSessionBuilder.setBoard(null);
 			GameSessionBuilder.getUsersIO().clear();
 			GameSessionBuilder.setPropertyManager(null);
+			Dice.getInstance().finish();
 		}
 	}
 

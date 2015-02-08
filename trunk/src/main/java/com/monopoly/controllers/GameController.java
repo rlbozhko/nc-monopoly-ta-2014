@@ -77,6 +77,8 @@ public class GameController {
 		System.out.println("io.hasSelectPlayerRequest() = "
 				+ io.hasSelectPlayerRequest());
 //		testProperty();
+		System.out.println("hasYesNo = " + io.hasYesNoDialog());
+		System.out.println("YesNo = " + io.getYesNoDialog());
 		if (io.hasSelectPlayerRequest()) {
 			board = gameSession.getBoard();
 			List<Player> selectabelPlayers = board.getActivePlayers();

@@ -15,9 +15,9 @@
 			<div id="setup">
 				Enter number of players.
 				 <select id="playernumber" name="countPlayers" title="countPlayers">
-					<option value="2">2</option>
+					<option value="2" selected>2</option>
 					<option value="3">3</option>
-					<option value="4" selected>4</option>
+					<option value="4" >4</option>
 					<option value="5">5</option>
 				</select>
 			</div>

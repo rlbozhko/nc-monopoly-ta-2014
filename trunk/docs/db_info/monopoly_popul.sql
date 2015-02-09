@@ -116,6 +116,27 @@ INSERT INTO OBJECTS (OBJECT_ID,PARENT_ID,OBJECT_TYPE_ID,NAME,DESCRIPTION) VALUES
       INSERT INTO OBJREFERENCE (ATTR_ID,OBJECT_ID,REFERENCE) VALUES (32,20,17);
       --
     INSERT INTO OBJECTS (OBJECT_ID,PARENT_ID,OBJECT_TYPE_ID,NAME,DESCRIPTION) VALUES (21,23,9,'IO 2',NULL);
+    
+
+--------------------------------------------------------------
+-- TEST Users
+--------------------------------------------------------------
+INSERT INTO OBJECTS (OBJECT_ID,PARENT_ID,OBJECT_TYPE_ID,NAME,DESCRIPTION) VALUES (500,NULL,7,'Petrucho','');
+  --atr
+  INSERT INTO attributes (attr_id, object_id, value, date_value) VALUES (35,500,'petya@test.ua',NULL); -- email
+  INSERT INTO attributes (attr_id, object_id, value, date_value) VALUES (38,500,'123',NULL); -- password
+--
+INSERT INTO OBJECTS (OBJECT_ID,PARENT_ID,OBJECT_TYPE_ID,NAME,DESCRIPTION) VALUES (501,NULL,7,'Vasya_32','');
+  --atr
+  INSERT INTO attributes (attr_id, object_id, value, date_value) VALUES (35,501,'vasya@test.ua',NULL); -- email
+  INSERT INTO attributes (attr_id, object_id, value, date_value) VALUES (38,501,'123',NULL); -- password
+--
+INSERT INTO OBJECTS (OBJECT_ID,PARENT_ID,OBJECT_TYPE_ID,NAME,DESCRIPTION) VALUES (502,NULL,7,'Anka iz tanka','');
+  --atr
+  INSERT INTO attributes (attr_id, object_id, value, date_value) VALUES (35,502,'anna@test.ua',NULL); -- email
+  INSERT INTO attributes (attr_id, object_id, value, date_value) VALUES (38,502,'123',NULL); -- password
+--
+
   
 -----------------------------------------------------------
 --New Board

@@ -7,7 +7,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.FileSystemXmlApplicationContext;
 import org.springframework.stereotype.Component;
-import org.springframework.stereotype.Service;
 
 import com.monopoly.board.Board;
 import com.monopoly.board.cells.Cell;
@@ -19,14 +18,14 @@ import com.monopoly.database.dao.PropertyCellDao;
 
 @Component
 public class DbService {
-	
+
 	@Autowired
 	private EventCellDao eventCellDao;
-	
+
 	@Autowired
 	private PropertyCellDao propertyCellDao;
 
-	public Board newBoard(List<Player> players, int startMoney) {		
+	public Board newBoard(List<Player> players, int startMoney) {
 		List<PropertyCell> proertyCells = propertyCellDao.getAllByParentKey(101);
 		List<EventCell> eventCells = eventCellDao.getAllByParentKey(101);
 		int size = proertyCells.size() + eventCells.size();
@@ -37,22 +36,21 @@ public class DbService {
 
 		for (PropertyCell cell : proertyCells) {
 			cells.set(cell.getPosition(), cell);
-//			System.out.println(cell.getPosition());
+			// System.out.println(cell.getPosition());
 		}
-		
+
 		for (EventCell cell : eventCells) {
 			cells.set(cell.getPosition(), cell);
-			System.out.println(cell.getName());
-			System.out.println(cell.getDescription());
-			System.out.println(cell.getPosition());
-			System.out.println(cell.getCellType());
-			System.out.println(cell.getEvent().getDescription());
+			// System.out.println(cell.getName());
+			// System.out.println(cell.getDescription());
+			// System.out.println(cell.getPosition());
+			// System.out.println(cell.getCellType());
+			// System.out.println(cell.getEvent().getDescription());
 		}
-		
-		System.out.println(proertyCells);
-		System.out.println(eventCells);
-		System.out.println(cells);	
-		
+
+		// System.out.println(proertyCells);
+		// System.out.println(eventCells);
+		// System.out.println(cells);
 
 		for (Player player : players) {
 			player.addMoney(startMoney);
@@ -64,10 +62,10 @@ public class DbService {
 	public static void main(String[] args) {
 		ApplicationContext context = new FileSystemXmlApplicationContext("test_files\\beans.xml");
 		DbService dbs = context.getBean(DbService.class);
-		List<Player>players = new ArrayList<Player>();
+		List<Player> players = new ArrayList<Player>();
 		players.add(new Player("p1"));
 		players.add(new Player("p2"));
-		
+
 		Board board = dbs.newBoard(players, 5000);
 		System.out.println(board);
 	}

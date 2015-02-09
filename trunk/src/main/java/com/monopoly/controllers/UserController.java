@@ -13,12 +13,14 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.monopoly.bean.User;
+import com.monopoly.services.UserDbService;
 import com.monopoly.services.UserService;
 
 @Controller
 public class UserController {
 	@Autowired
-	private UserService userService;
+	private UserDbService userService;
+//	private UserService userService;
 	
 	@RequestMapping(value = "/signin.action", method = RequestMethod.GET)
 	public ModelAndView getLogin(@CookieValue(value = "bb_data", required = false) String hash,

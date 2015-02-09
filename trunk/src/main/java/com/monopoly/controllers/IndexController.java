@@ -10,13 +10,15 @@ import org.springframework.web.servlet.ModelAndView;
 import com.monopoly.bean.User;
 import com.monopoly.game.session.GameSession;
 import com.monopoly.game.session.SessionStatus;
+import com.monopoly.services.UserDbService;
 import com.monopoly.services.UserService;
 
 @Controller
 public class IndexController {
 
 	@Autowired
-	private UserService userService;
+	private UserDbService userService;
+//	private UserService userService;
 
 	@RequestMapping(value = "/index.action", method = RequestMethod.GET)
 	public ModelAndView getIndex(

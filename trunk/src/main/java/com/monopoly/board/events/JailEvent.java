@@ -6,10 +6,9 @@ import com.monopoly.board.player.Player;
 import com.monopoly.board.player.Status;
 import com.monopoly.game.session.GameSession;
 
-public class JailEvent extends BaseEvent {
+public class JailEvent extends Event {
 
-	public JailEvent(String name, String description) {
-		this.name = name;
+	public JailEvent(String description) {		
 		this.description = description;
 	}
 

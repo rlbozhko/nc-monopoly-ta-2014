@@ -16,12 +16,11 @@ import com.monopoly.game.session.GameSession;
 /**
  * ЧПСобытие
  */
-public class EmergencyEvent extends BaseEvent {
+public class EmergencyEvent extends Event {
 	private int cellCount;
 	private Random random;
 
-	public EmergencyEvent(String name, String description) {
-		this.name = name;
+	public EmergencyEvent(String description) {		
 		this.description = description;
 		this.cellCount = 1;
 		random = new Random(cellCount);
@@ -40,7 +39,7 @@ public class EmergencyEvent extends BaseEvent {
 				if (property.hasBuilding()) {
 					message = description + " и у здания на ячейке " + property.getName() + " понижен уровень!";
 				} else {
-					message = description + " и у здания на ячейке " + property.getName() + " больше нет здания!";
+					message = description + " и на ячейке " + property.getName() + " больше нет здания!";
 				}
 				ActionUtils.sendMessageToAll(message);
 			}

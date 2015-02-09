@@ -75,6 +75,6 @@ public class SessionTest {
 		dummy1.start();
 		dummy2.start();
 		//((EventCell) GameSession.getInstance().getBoard().getGoToJailCell()).getEvent().performEvent();
-		new MoveEvent("", "").performEvent();
+		new MoveEvent("").performEvent();
 	}
 }

@@ -12,11 +12,10 @@ import com.monopoly.board.player.Player;
 import com.monopoly.game.session.GameSession;
 import com.monopoly.tools.XORShiftStrategy;
 
-public class MoveEvent extends BaseEvent {
+public class MoveEvent extends Event {
 	private static final int MAX_VALUE_MOVE_PLAYER = 7;
 
-	public MoveEvent(String name, String description) {
-		this.name = name;
+	public MoveEvent(String description) {		
 		this.description = description;
 	}
 

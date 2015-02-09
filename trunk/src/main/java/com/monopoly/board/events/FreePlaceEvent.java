@@ -4,9 +4,9 @@ import com.monopoly.action.ActionUtils;
 import com.monopoly.board.player.Player;
 import com.monopoly.game.session.GameSession;
 
-public class ExchangeEvent extends Event {
+public class FreePlaceEvent extends Event {
 
-	public ExchangeEvent (String description) {        
+	public FreePlaceEvent (String description) {        
         this.description = description;
     }
 	

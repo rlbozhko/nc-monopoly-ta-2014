@@ -7,6 +7,7 @@ import com.monopoly.board.events.GoToJailEvent;
 import com.monopoly.board.events.JailEvent;
 import com.monopoly.board.player.Player;
 import com.monopoly.board.player.Status;
+import com.monopoly.entity.BoardEntity;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -29,6 +30,13 @@ public class Board implements CellOperations, PlayerOperations {
         this.players = players;
         currentPlayer = findStartPlayer();
     }
+    
+    public Board(BoardEntity entity) {
+        this.cells = entity.getCells();
+        updateCellLists();
+        this.players = entity.getPlayers();
+        currentPlayer = findStartPlayer();
+    }
 
     public Board(List<Player> players, Player currentPlayer, List<Cell> cells) {
         this.players = players;
@@ -39,7 +47,7 @@ public class Board implements CellOperations, PlayerOperations {
 
     private void updateCellLists() {
         for (Cell cell : cells) {
-            if (CellType.PROPERTY_CELL.equals(cell.getCellType())) {
+            if (CellType.PROPERTY_CELL == cell.getCellType()) {
                 propertyCells.add(cell);
             } else {
                 eventCells.add(cell);

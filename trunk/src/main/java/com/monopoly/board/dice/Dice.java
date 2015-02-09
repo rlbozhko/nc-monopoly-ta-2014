@@ -54,8 +54,11 @@ public class Dice {
 		this.faceDie2 = valueGeneratorForDice.getValue2();
 	}
 	
-	public synchronized void finish() {
-		valueGeneratorForDice.finish();
+	public void finish() {
+		synchronized (Dice.class) {
+			valueGeneratorForDice.finish();
+			dice = null;
+		}
 	}
 
 	public synchronized int getFaceDie1() {

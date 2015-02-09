@@ -10,25 +10,23 @@ import com.monopoly.io.IO;
  * Created by kos on 24.11.2014.
  */
 
-
 /**
  * дополнительный ход
  */
 
-public class ExtraTurnEvent extends BaseEvent{
+public class ExtraTurnEvent extends Event {
 
-    public ExtraTurnEvent(String name, String description){
-        this.name = name;
-        this.description = description;
-    }
+	public ExtraTurnEvent(String description) {
+		this.description = description;
+	}
 
-    @Override
-    public void performEvent() {
-        Player player = GameSession.getInstance().getBoard().getCurrentPlayer();
-        IO playerIO = ActionUtils.getPlayerIO(player);
+	@Override
+	public void performEvent() {
+		Player player = GameSession.getInstance().getBoard().getCurrentPlayer();
+		IO playerIO = ActionUtils.getPlayerIO(player);
 
-        player.setStatus(Status.START_TURN);
-        playerIO.showMessage("Сегодня ваш день! Вы получили возможность походить еще раз!!!");
-        ActionUtils.sendMessageToAll(player.getName() + " получил дополнительный ход.");
-    }
+		player.setStatus(Status.START_TURN);
+		playerIO.showMessage("Сегодня ваш день! Вы получили возможность походить еще раз!!!");
+		ActionUtils.sendMessageToAll(player.getName() + " получил дополнительный ход.");
+	}
 }

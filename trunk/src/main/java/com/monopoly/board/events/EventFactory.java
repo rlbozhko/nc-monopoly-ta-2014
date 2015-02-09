@@ -1,27 +1,26 @@
 package com.monopoly.board.events;
 
 public class EventFactory {
-	public static Event getEvent(EventType eventType, String name,
-			String description) {
+	public static Event getEvent(EventType eventType, String description) {
 		switch (eventType) {
 
 		case MOVE:
-			return new MoveEvent(name, description);
+			return new MoveEvent(description);
 
 		case RANDOM_MONEY:
-			return new RandomMoneyEvent(name, description);
+			return new RandomMoneyEvent(description);
 
 		case SKIP_TURN:
-			return new SkipTurnEvent(name, description);
+			return new SkipTurnEvent(description);
 
 		case EXTRA_TURN:
-			return new ExtraTurnEvent(name, description);
+			return new ExtraTurnEvent(description);
 
 		case EMERGENCY:
-			return new EmergencyEvent(name, description);
+			return new EmergencyEvent(description);
 
 		case MONEY:
-			return new MoneyEvent(name, description);
+			return new MoneyEvent(description);
 
 		default:
 			throw new RuntimeException("Can't create event: " + eventType);

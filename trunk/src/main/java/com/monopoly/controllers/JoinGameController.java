@@ -24,6 +24,7 @@ import com.monopoly.game.session.GameSession.GameSessionBuilder;
 import com.monopoly.game.session.SessionStatus;
 import com.monopoly.io.IO;
 import com.monopoly.io.WebIO;
+import com.monopoly.services.DbService;
 import com.monopoly.services.UserService;
 
 @Controller
@@ -31,6 +32,9 @@ public class JoinGameController {
 
 	@Autowired
 	private UserService userService;
+	
+	@Autowired
+	private DbService dbs; 
 
 	@RequestMapping(value = "/join_game.action", method = RequestMethod.POST)
 	public ModelAndView postJoinGame(
@@ -116,9 +120,10 @@ public class JoinGameController {
 				players.add(entry.getValue().getOwner());
 			}
 			players.get(0).setStatus(Status.START_TURN);
-			Board board = GameSession.newBoard(players, GameSessionBuilder.getStartMoney());
+//			Board board = GameSession.newBoard(players, GameSessionBuilder.getStartMoney());
+			Board board = dbs.newBoard(players, GameSessionBuilder.getStartMoney());
 			GameSessionBuilder.setBoard(board);
-			GameSessionBuilder	.setActionController(new PlayerActionController());
+			GameSessionBuilder.setActionController(new PlayerActionController());
 			GameSessionBuilder.setPropertyManager(new PropertyManager(players));
 			GameSessionBuilder.setUsersIO(usersIO);
 			

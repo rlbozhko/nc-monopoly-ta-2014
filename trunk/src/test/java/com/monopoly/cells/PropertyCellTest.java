@@ -8,6 +8,7 @@ import com.monopoly.bean.User;
 import com.monopoly.board.building.Building;
 import com.monopoly.board.building.BuildingType;
 import com.monopoly.board.cells.Monopoly;
+import com.monopoly.board.cells.MonopolyType;
 import com.monopoly.board.cells.PropertyCell;
 
 import java.util.*;
@@ -21,6 +22,7 @@ import com.monopoly.game.session.Session;
 import com.monopoly.io.ConsoleIO;
 import com.monopoly.io.DummyIO;
 import com.monopoly.io.IO;
+
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
@@ -28,7 +30,7 @@ import org.junit.Assert;
 
 
 public class PropertyCellTest {
-    Monopoly abc = new Monopoly("MonopolyType");
+    Monopoly abc = new Monopoly(MonopolyType.MONOPOLY1);
     Building building = new Building(BuildingType.getTypeByText("CASTLE"), 100);
     PropertyCell prop = new PropertyCell("Name","Some property Cell",5,null,500,10,abc);
     public static final int START_MONEY=5000;

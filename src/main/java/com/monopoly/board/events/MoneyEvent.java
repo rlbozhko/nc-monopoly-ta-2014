@@ -4,12 +4,11 @@ import com.monopoly.action.ActionUtils;
 import com.monopoly.board.player.Player;
 import com.monopoly.game.session.GameSession;
 
-public class MoneyEvent extends BaseEvent {
+public class MoneyEvent extends Event {
 
     private int value;
 
-    public MoneyEvent(String name, String description) {
-        this.name = name;
+    public MoneyEvent(String description) {        
         this.description = description;
         this.value = 200;
     }
@@ -21,11 +20,11 @@ public class MoneyEvent extends BaseEvent {
         ActionUtils.sendMessageToAll(player.getName() + " " + description);
     }
 
-	public synchronized int getStartCash() {
+	public int getStartCash() {
 		return value;
 	}
 
-	public synchronized void setStartCash(int startCash) {
+	public void setStartCash(int startCash) {
 		this.value = startCash;
 	}
 }

@@ -8,10 +8,9 @@ import com.monopoly.board.player.Status;
 import com.monopoly.game.session.GameSession;
 import com.monopoly.io.IO;
 
-public class SkipTurnEvent extends BaseEvent{
+public class SkipTurnEvent extends Event{
 	
-	public SkipTurnEvent(String eventName, String description) {
-		this.name = eventName;
+	public SkipTurnEvent(String description) {		
 		this.description = description;
 	}
 

@@ -3,6 +3,7 @@ package com.monopoly.board.cells;
 import com.monopoly.board.building.Building;
 import com.monopoly.board.player.Player;
 import com.monopoly.board.player.PropertyManager;
+import com.monopoly.entity.PropertyCellEntity;
 import com.monopoly.game.session.GameSession;
 
 /**
@@ -103,6 +104,20 @@ public class PropertyCell extends Property {
 		monopoly.addProperty(this);
 		this.building = building;
 		this.status = PropertyStatus.UNPLEDGED;
+	}	
+	
+	public PropertyCell(PropertyCellEntity entity) {
+		super(entity.getName(), entity.getDescription(), CellType.PROPERTY_CELL, entity.getPosition());
+		this.basePrice = entity.getBasePrice();
+		this.baseRent = entity.getBaseRent();
+		this.building = entity.getBuilding();
+		this.maxLevel = entity.getMaxLevel();
+		this.monopoly = entity.getMonopoly();
+		this.monopoly.addProperty(this);
+		this.payBackMoney = entity.getPayBackMoney();
+		this.pledgePercent = entity.getPledgePercent();
+		this.status = entity.getStatus();
+		this.turnsToPayBack = entity.getTurnsToPayBack();
 	}
 
 	@Override

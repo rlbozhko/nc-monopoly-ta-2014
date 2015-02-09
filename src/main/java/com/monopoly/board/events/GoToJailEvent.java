@@ -5,10 +5,9 @@ import com.monopoly.action.GoToJailAction;
 import com.monopoly.board.player.Player;
 import com.monopoly.game.session.GameSession;
 
-public class GoToJailEvent extends BaseEvent {
+public class GoToJailEvent extends Event {
 	
-	public GoToJailEvent(String name, String description) {
-		this.name = name;
+	public GoToJailEvent(String description) {		
 		this.description = description;
 	}
 	

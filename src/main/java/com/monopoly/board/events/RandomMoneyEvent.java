@@ -9,11 +9,10 @@ import com.monopoly.game.session.GameSession;
 import com.monopoly.io.IO;
 import com.monopoly.tools.XORShiftStrategy;
 
-public class RandomMoneyEvent extends BaseEvent {
+public class RandomMoneyEvent extends Event {
 	private static final int MAX_VALUE_MONEY_FOR_MONEYEVENT = 200;
 
-	public RandomMoneyEvent(String name, String description) {
-		this.name = name;
+	public RandomMoneyEvent(String description) {		
 		this.description = description;
 	}
 
@@ -32,7 +31,7 @@ public class RandomMoneyEvent extends BaseEvent {
 		if (isAddMoney) {
 			player.addMoney(amountMoney);
 			playerIO.showMessage("Поздравляем! Вы выйграли $" + amountMoney	+ ".");
-			ActionUtils.sendMessageToAll(player.getName() + " выйграл $" + amountMoney	+ ".");
+			ActionUtils.sendMessageToAll(player.getName() + " выиграл $" + amountMoney	+ ".");
 		} else {
 			player.addMoney(-amountMoney);
 			playerIO.showMessage("Сеголня был не Ваш день! Вы проиграли $" + amountMoney + ".");

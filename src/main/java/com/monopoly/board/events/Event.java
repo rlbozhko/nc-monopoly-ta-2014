@@ -1,15 +1,12 @@
 package com.monopoly.board.events;
 
-/**
- * Created by Roma on 31.10.2014.
- */
+public abstract class Event {	
+	protected String description;
+	
+	public abstract void performEvent();	
+	
+	public synchronized String getDescription() {
+		return description;
+	}
 
-
-/**
- * Событие
- */
-public interface Event {
-    public void performEvent();
-    public String getName();
-    public String getDescription();
 }

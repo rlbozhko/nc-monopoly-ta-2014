@@ -12,6 +12,7 @@ import com.monopoly.bean.User;
 import com.monopoly.board.Board;
 import com.monopoly.board.cells.Cell;
 import com.monopoly.board.cells.Monopoly;
+import com.monopoly.board.cells.MonopolyType;
 import com.monopoly.board.cells.PropertyCell;
 import com.monopoly.board.cells.RandomEventCell;
 import com.monopoly.board.cells.SingleEventCell;
@@ -174,32 +175,31 @@ public class GameSession implements Session {
 	}
 
 	public static Board newBoard(List<Player> players, int startMoney) {
-		Monopoly monopoly1 = new Monopoly("Monopoly1");
-		Monopoly monopoly2 = new Monopoly("Monopoly2");
-		Monopoly monopoly3 = new Monopoly("Monopoly3");
-		Monopoly monopoly4 = new Monopoly("Monopoly4");
-		Monopoly monopoly5 = new Monopoly("Monopoly5");
-		Monopoly monopoly6 = new Monopoly("Monopoly6");
-		Monopoly monopoly7 = new Monopoly("Monopoly7");
-		Monopoly monopoly8 = new Monopoly("Monopoly8");
-		Monopoly monopoly9 = new Monopoly("Monopoly9");
+		Monopoly monopoly1 = new Monopoly(MonopolyType.MONOPOLY1);
+		Monopoly monopoly2 = new Monopoly(MonopolyType.MONOPOLY2);
+		Monopoly monopoly3 = new Monopoly(MonopolyType.MONOPOLY3);
+		Monopoly monopoly4 = new Monopoly(MonopolyType.MONOPOLY4);
+		Monopoly monopoly5 = new Monopoly(MonopolyType.MONOPOLY5);
+		Monopoly monopoly6 = new Monopoly(MonopolyType.MONOPOLY6);
+		Monopoly monopoly7 = new Monopoly(MonopolyType.MONOPOLY7);
+		Monopoly monopoly8 = new Monopoly(MonopolyType.MONOPOLY8);
+		Monopoly monopoly9 = new Monopoly(MonopolyType.MONOPOLY9);
 
 		List<Event> chanceEvents = new ArrayList<>();
-		chanceEvents.add(new EmergencyEvent("Emergency Event", "Случился пожар"));
-		chanceEvents.add(new MoneyEvent("Получите деньги", " повезло и он получил $200"));
-		MoneyEvent additionalOutcome = new MoneyEvent("Заплатите", "проиграл $200");
+		chanceEvents.add(new EmergencyEvent("Случился пожар"));
+		chanceEvents.add(new MoneyEvent(" повезло и он получил $200"));
+		MoneyEvent additionalOutcome = new MoneyEvent("проиграл $200");
 		additionalOutcome.setStartCash(-200);
 		chanceEvents.add(additionalOutcome);
-		Event goToJail = new GoToJailEvent("Событие в Тюрьму", "Отправляйтесь в тюьму");
+		Event goToJail = new GoToJailEvent("Отправляйтесь в тюьму");
 		chanceEvents.add(goToJail);
-		chanceEvents.add(new RandomMoneyEvent("Казино", "Может выиграете, а может и проиграете"));
-		Event moveEvent = new MoveEvent("Событие хода", "Перейти на другую ячейку");
+		chanceEvents.add(new RandomMoneyEvent("Может выиграете, а может и проиграете"));
+		Event moveEvent = new MoveEvent("Перейти на другую ячейку");
 		chanceEvents.add(moveEvent);
-		chanceEvents.add(new ExtraTurnEvent("Дополнителный ход", "Получите дополнительный ход"));
+		chanceEvents.add(new ExtraTurnEvent("Получите дополнительный ход"));
 		
 		List<Cell> cells = new ArrayList<>();
-		cells.add(new SingleEventCell("Начало", "Начало", 0, new MoneyEvent("Begin Event",
-				"прошел полный круг и Получил $200")));
+		cells.add(new SingleEventCell("Начало", "Начало", 0, new MoneyEvent("прошел полный круг и Получил $200")));
 		cells.add(new PropertyCell("c1m1", "c1m1 desc", cells.size(), null, 1000, 200, monopoly1));
 		cells.add(new RandomEventCell("Шанс", "Случайное событие", cells.size(), chanceEvents));
 		cells.add(new PropertyCell("c2m1", "c2m1 desc", cells.size(), null, 1000, 200, monopoly1));
@@ -207,11 +207,11 @@ public class GameSession implements Session {
 		cells.add(new PropertyCell("c1m9", "c1m9 desc", cells.size(), null, 2000, 250, monopoly9));
 		cells.add(new PropertyCell("c1m2", "c1m2 desc", cells.size(), null, 1500, 300, monopoly2));
 		cells.add(new PropertyCell("c2m2", "c2m2 desc", cells.size(), null, 1500, 300, monopoly2));
-		MoneyEvent incomeTax = new MoneyEvent("Уплатите налог", "уплатил подоходный налог -$200");
+		MoneyEvent incomeTax = new MoneyEvent("уплатил подоходный налог -$200");
 		incomeTax.setStartCash(-200);
 		cells.add(new SingleEventCell("Уплатите налог", "Подоходный налог -$200", cells.size(), incomeTax));
 		cells.add(new PropertyCell("c3m2", "c3m2 desc", cells.size(), null, 1500, 300, monopoly2));
-		Event jailEvent = new JailEvent("Тюрьма", "Это место лучше пройти мимо");
+		Event jailEvent = new JailEvent("Это место лучше пройти мимо");
 		cells.add(new SingleEventCell("Тюрьма", "Это место лучше пройти мимо", cells.size(), jailEvent));
 		cells.add(new PropertyCell("c1m3", "c1m3 desc", cells.size(), null, 3000, 300, monopoly3));
 		cells.add(new PropertyCell("c2m3", "c2m3 desc", cells.size(), null, 3000, 300, monopoly3));
@@ -220,23 +220,23 @@ public class GameSession implements Session {
 		cells.add(new PropertyCell("c2m9", "c2m9 desc", cells.size(), null, 2000, 250, monopoly9));
 		cells.add(new RandomEventCell("Шанс", "Случайное событие", cells.size(), chanceEvents));
 		cells.add(new PropertyCell("c1m4", "c1m4 desc", cells.size(), null, 3300, 330, monopoly4));
-		MoneyEvent luxTax = new MoneyEvent("Уплатите налог", "уплатил налог на роскошь $100");
+		MoneyEvent luxTax = new MoneyEvent("уплатил налог на роскошь -$100");
 		luxTax.setStartCash(-100);
 		cells.add(new SingleEventCell("Уплатите налог", "Налог на роскошь -$100", cells.size(), luxTax));
 		cells.add(new PropertyCell("c2m4", "c2m4 desc", cells.size(), null, 3300, 330, monopoly4));
-		MoneyEvent freePlace = new MoneyEvent("Бесплатная стоянка", "Можете передохнуть");
+		MoneyEvent freePlace = new MoneyEvent("Можете передохнуть");
 		freePlace.setStartCash(0);
 		cells.add(new SingleEventCell("Бесплатная стоянка", "Можете передохнуть", cells.size(), freePlace));
 		cells.add(new PropertyCell("c1m5", "c1m5 desc", cells.size(), null, 3500, 350, monopoly5));
 		cells.add(new RandomEventCell("Шанс", "Случайное событие", cells.size(), chanceEvents));
 		cells.add(new PropertyCell("c2m5", "c2m5 desc", cells.size(), null, 3500, 350, monopoly5));
-		cells.add(new SingleEventCell("Событие Хода", "Место для События хода", cells.size(), moveEvent));
+		cells.add(new SingleEventCell("Событие Хода", "Переместит вперед или назад", cells.size(), moveEvent));
 		cells.add(new PropertyCell("c3m9", "c3m9 desc", cells.size(), null, 2000, 250, monopoly9));
 		cells.add(new PropertyCell("c1m6", "c1m6 desc", cells.size(), null, 4000, 400, monopoly6));
 		cells.add(new RandomEventCell("Шанс", "Случайное событие", cells.size(), chanceEvents));
 		cells.add(new PropertyCell("c2m6", "c2m6 desc", cells.size(), null, 4000, 400, monopoly6));
 		cells.add(new PropertyCell("c3m6", "c3m6 desc", cells.size(), null, 4000, 400, monopoly6));		
-		cells.add(new SingleEventCell("Событие в Тюрьму", "Отправляйтесь в тюьму", cells.size(), goToJail));
+		cells.add(new SingleEventCell("В Тюрьму", "Отправляйтесь в тюрьму", cells.size(), goToJail));
 		cells.add(new PropertyCell("c1m7", "c1m7 desc", cells.size(), null, 4200, 420, monopoly7));
 		cells.add(new SingleEventCell("Уплатите налог", "Налог на роскошь", cells.size(), luxTax));
 		cells.add(new PropertyCell("c2m7", "c2m7 desc", cells.size(), null, 4200, 420, monopoly7));
@@ -283,6 +283,7 @@ public class GameSession implements Session {
 			GameSessionBuilder.setBoard(null);
 			GameSessionBuilder.getUsersIO().clear();
 			GameSessionBuilder.setPropertyManager(null);
+			Monopoly.resetAll();
 			Dice.getInstance().finish();
 		}
 	}

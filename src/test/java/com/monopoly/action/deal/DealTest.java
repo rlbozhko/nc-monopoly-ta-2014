@@ -5,6 +5,7 @@ import java.util.LinkedList;
 import java.util.List;
 
 import com.monopoly.board.cells.Monopoly;
+import com.monopoly.board.cells.MonopolyType;
 import com.monopoly.board.cells.Property;
 import com.monopoly.board.cells.PropertyCell;
 import com.monopoly.board.player.Player;
@@ -21,7 +22,7 @@ public class DealTest {
 		players.add(source);
 		players.add(target);
 
-		Monopoly monopoly1 = new Monopoly("Monopoly1");
+		Monopoly monopoly1 = new Monopoly(MonopolyType.MONOPOLY1);
 		Property property1 = new PropertyCell("c2m1", "c2m1 desc", 1, null, 1000, 200, monopoly1);
 		Property property2 = new PropertyCell("c3m1", "c3m1 desc", 2, null, 1000, 200, monopoly1);
 

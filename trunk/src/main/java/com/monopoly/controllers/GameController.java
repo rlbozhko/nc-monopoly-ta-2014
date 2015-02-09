@@ -27,6 +27,7 @@ import com.monopoly.game.session.GameSession;
 import com.monopoly.game.session.Session;
 import com.monopoly.game.session.SessionStatus;
 import com.monopoly.io.IO;
+import com.monopoly.io.WebIO.YesNoDialog;
 import com.monopoly.services.UserService;
 
 @Controller
@@ -54,12 +55,11 @@ public class GameController {
 			return new ModelAndView("redirect:index.action");
 		}
 
-
 		Session gameSession = GameSession.getInstance();
 
 		List<Cell> cellsList = gameSession.getBoard().getCells();
 		Board board = gameSession.getBoard();
-		
+
 		List<Player> players = board.getPlayers();
 		List<Player> activePlayers = board.getActivePlayers();
 
@@ -76,9 +76,14 @@ public class GameController {
 		IO io = gameSession.getUserIO(user);
 		System.out.println("io.hasSelectPlayerRequest() = "
 				+ io.hasSelectPlayerRequest());
-//		testProperty();
-		System.out.println("hasYesNo = " + io.hasYesNoDialog());
-		System.out.println("YesNo = " + io.getYesNoDialog());
+		
+		// testProperty();
+		if (io.hasYesNoDialog()) {
+			YesNoDialog yesNoDialog = io.getYesNoDialog();
+			mav.addObject("hasYesNoDialog", io.hasYesNoDialog());
+			mav.addObject("yesNoDialog", yesNoDialog.getMessage());
+		}
+
 		if (io.hasSelectPlayerRequest()) {
 			board = gameSession.getBoard();
 			List<Player> selectabelPlayers = board.getActivePlayers();
@@ -98,13 +103,9 @@ public class GameController {
 					propertyManager.getPlayerProperties(io.getOwner()));
 			mav.addObject("dealRequest", true);
 		}
-		
-		if(io.hasYesNoDialog()) {
-			String test = "TESTTESTETS";
-			mav.addObject("test", test);
-		}
+
 		Queue<String> messageQueue = io.getAllMessages();
-		
+
 		mav.addObject("messageQueue", messageQueue);
 		mav.addObject("players", players);
 		mav.addObject("activePlayers", activePlayers);
@@ -153,12 +154,17 @@ public class GameController {
 		if (user == null) {
 			return new ModelAndView("redirect:signin.action");
 		}
-		
+
 		SessionStatus sessionStatus = GameSession.getStatus();
 
 		if (sessionStatus == SessionStatus.NOT_EXISTS) {
 			return new ModelAndView("redirect:index.action");
 		}
+		
+		if (sessionStatus == SessionStatus.CREATING) {
+			return new ModelAndView("redirect:join_game.action");
+		}
+		
 		IO io = GameSession.getInstance().getUserIO(user);
 		io.performAction(ActionType.valueOf(actionType));
 
@@ -170,7 +176,7 @@ public class GameController {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		
+
 		System.out.println("clickACtion() -- io.hasSelectPlayerRequest() = "
 				+ io.hasSelectPlayerRequest());
 		return mav;
@@ -217,16 +223,33 @@ public class GameController {
 
 		return mav;
 	}
-	
+
 	@RequestMapping(value = "/game_over.action", method = RequestMethod.GET)
 	public ModelAndView getLogin() {
 		if (GameSession.getInstance().getBoard().getActivePlayers().size() == 0) {
 			GameSession.getInstance().close();
 			return new ModelAndView("redirect:index.action");
 		}
-		
+
 		return new ModelAndView("redirect:index.action");
 	}
-			
+	
+	@RequestMapping(value = "/buy_property.action", method = RequestMethod.GET)
+	public ModelAndView getAnwser(
+			@CookieValue(value = "bb_data", required = false) String hash,
+			@RequestParam(value = "isAnswer", required = false, defaultValue = "false") Boolean isAnswer) {
+		
+		User user = userService.getUser(hash);
+
+		if (user == null) {
+			return new ModelAndView("redirect:signin.action");
+		}
+		System.out.println("ANSWER " + isAnswer);
+		IO io = GameSession.getInstance().getUserIO(user);
+		YesNoDialog yesNo = io.getYesNoDialog();
+		yesNo.setAnswer(isAnswer);
+		
+		return new ModelAndView("redirect:game.action");
+	}
 
 }

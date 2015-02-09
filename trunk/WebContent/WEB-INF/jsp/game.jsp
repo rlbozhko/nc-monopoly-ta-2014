@@ -19,6 +19,7 @@
 				overflow: auto;
 			}
 		</style>
+		<script src="//code.jquery.com/jquery-1.10.2.js"></script>
 	</head>
 	<body>
 		<a href="signin.action?signout">Sign out [${email}] </a>
@@ -83,6 +84,12 @@
 									<input type="submit" value="GAME_OVER">
 								</form>
 							 </c:if>
+							 ${hasYesNoDialog}
+							 <c:if test="${hasYesNoDialog == true}">
+							 	<form id='buy' name='buy' action='buy_property.action' method='GET'>
+            						<input id="isAnswer" type="hidden" name='isAnswer' value="${hasYesNoDialog}" onload="clicked('${yesNoDialog}')">
+        						</form> 
+        					</c:if>
 						</div>
 			<%-- 		<p>selectPlayerRequest = ${selectPlayerRequest}</p> --%>
 			
@@ -128,6 +135,26 @@
 		</table>
 	</body>
 	<script type="text/javascript">
+	 $( document ).ready(function() {
+		    if ($("#isAnswer").val() == 'true') {
+		    	if(confirm('${yesNoDialog}')) {
+		    		$("#buy").submit();
+		    	} else {
+		    		$("#isAnswer").val("false");
+		    		$("#buy").submit();
+		    	}
+		    }
+		  });
+// 		function clicked(message) {
+// 			if (confirm(message)) {
+// 				document.getElementById('isAnswer').value = 'true';
+// 				document.forms["buy"].submit();
+// 		    } else {
+// 		    	document.forms["buy"].submit();
+// 		    }
+// 		}
+
+
    		document.getElementById("chatbox").scrollTop = document.getElementById("chatbox").scrollHeight
  	</script>
 </html>

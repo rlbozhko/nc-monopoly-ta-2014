@@ -25,13 +25,15 @@ import com.monopoly.game.session.SessionStatus;
 import com.monopoly.io.IO;
 import com.monopoly.io.WebIO;
 import com.monopoly.services.DbService;
+import com.monopoly.services.UserDbService;
 import com.monopoly.services.UserService;
 
 @Controller
 public class JoinGameController {
 
 	@Autowired
-	private UserService userService;
+	private UserDbService userService;
+//	private UserService userService;
 	
 	@Autowired
 	private DbService dbs; 

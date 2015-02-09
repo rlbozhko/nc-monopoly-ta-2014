@@ -30,20 +30,56 @@ where ses.object_type_id = 1 and
   ios.parent_id = user_io_map.object_id;
 
 --users
-select users.name user_obj_name, u_email.value email, u_hash.value "hash",
-  u_name.value "name",u_password.value "password"
-from objects users, attributes u_name, attributes u_email,attributes u_password,
-  attributes u_hash
+select users.name name, u_email.value email,
+  u_password.value password, users.description "hash"
+from objects users, attributes u_email,attributes u_password  
 where users.object_type_id = 7 and
   u_email.attr_id = 35 and
-  u_hash.attr_id = 36 and
-  u_name.attr_id = 37 and
   u_password.attr_id = 38 and 
   u_email.object_id = users.object_id and
-  u_hash.object_id = users.object_id and
-  u_name.object_id = users.object_id and
   u_password.object_id = users.object_id;
 ----
+select users.object_id, users.name name, u_email.value email,
+  u_password.value password, users.description "hash"
+from objects users, attributes u_email,attributes u_password  
+where users.object_type_id = 7 and
+  u_email.attr_id = 35 and
+  u_password.attr_id = 38 and 
+  u_email.object_id = users.object_id and
+  u_password.object_id = users.object_id and
+  u_email.value = 'petya@test.ua' and --var
+  u_password.value = '123'; -- var
+----
+--update user
+update objects
+set name = 'new Name' --var
+where object_id = 500; --var
+
+update objects
+set description = 'new hash' --var
+where object_id = 500; --var
+
+update attributes email
+set email.value = 'new@email.com' --var
+where email.object_id = 500 and --var
+  email.attr_id = 35; 
+
+update attributes password
+set password.value = '321' --var
+where password.object_id = 500 and   --var
+  password.attr_id = 38;
+--
+
+select users.object_id, users.name name, u_email.value email,
+  u_password.value password, users.description "hash"
+from objects users, attributes u_email,attributes u_password  
+where users.object_type_id = 7 and
+  u_email.attr_id = 35 and
+  u_password.attr_id = 38 and 
+  u_email.object_id = users.object_id and
+  u_password.object_id = users.object_id and
+  users.object_id = 500; -- var
+
 --board_event_cells
 select event_cells.name event_cell, event.name event, event.description event_value
 from objects event_cells, objects event

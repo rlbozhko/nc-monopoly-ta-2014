@@ -28,12 +28,14 @@ import com.monopoly.game.session.Session;
 import com.monopoly.game.session.SessionStatus;
 import com.monopoly.io.IO;
 import com.monopoly.io.WebIO.YesNoDialog;
+import com.monopoly.services.UserDbService;
 import com.monopoly.services.UserService;
 
 @Controller
 public class GameController {
 	@Autowired
-	private UserService userService;
+	private UserDbService userService;
+//	private UserService userService;
 
 	@RequestMapping(value = "/game.action", method = RequestMethod.GET)
 	public ModelAndView getLogin(
@@ -51,18 +53,25 @@ public class GameController {
 
 		SessionStatus sessionStatus = GameSession.getStatus();
 
-		if (sessionStatus == SessionStatus.NOT_EXISTS) {
+		if (sessionStatus != SessionStatus.RUN) {
 			return new ModelAndView("redirect:index.action");
 		}
-
+		
 		Session gameSession = GameSession.getInstance();
-
+		
 		List<Cell> cellsList = gameSession.getBoard().getCells();
 		Board board = gameSession.getBoard();
 
 		List<Player> players = board.getPlayers();
 		List<Player> activePlayers = board.getActivePlayers();
 
+		if (gameSession.getUserIO(user) == null) {
+			mav.addObject("players", players);
+			mav.addObject("activePlayers", activePlayers);
+			mav.addObject("cellsList", cellsList);
+			return mav;
+		}
+		
 		List<ActionType> actions = gameSession.getActionController()
 				.getAvailableActions(gameSession.getUserIO(user).getOwner());
 

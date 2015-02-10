@@ -45,6 +45,7 @@ public class DealContainer {
 		if (!isEmpty(getGiveProperties())) {
 			deal = new GivePropertyDeal(deal, getGiveProperties());
 		}
+		
 		return deal;
 	}
 
@@ -53,9 +54,9 @@ public class DealContainer {
 		fillProperties(askPropertiesIDs, askProperties);
 	}
 
-	private void fillProperties(List<Integer> askPropertiesIDs, Set<Property> properties) {
+	private void fillProperties(List<Integer> propertiesIDs, Set<Property> properties) {
 		List<Cell> cells = GameSession.getInstance().getBoard().getCells();
-		for (Integer integer : askPropertiesIDs) {
+		for (Integer integer : propertiesIDs) {
 			properties.add((Property) cells.get(integer));
 		}
 	}

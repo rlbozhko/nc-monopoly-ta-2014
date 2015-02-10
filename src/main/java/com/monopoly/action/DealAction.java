@@ -12,19 +12,22 @@ public class DealAction implements Action {
 	
 	@Override
     public void performAction(Player player) {        
+		player.setOfferADeal(true);
 		IO playerIO = ActionUtils.getPlayerIO(player);
         Player otherPlayer = playerIO.selectPlayer();
         if (otherPlayer == null) {
             playerIO.showWarning("Вы не выбрали Игрока для сделки!");
+            player.setOfferADeal(false);
             return;
         }
 
         IO otherIO = ActionUtils.getPlayerIO(otherPlayer);
         Deal deal = playerIO.dealDialog(otherPlayer);
         if (deal == null) {
+        	player.setOfferADeal(false);
             return;
         }
-        player.setOfferADeal(true);
+        
         boolean answer = otherIO.yesNoDialog(deal.message());
         if (answer && deal.isValid()) {
             deal.performDeal();

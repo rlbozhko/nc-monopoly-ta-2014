@@ -20,11 +20,12 @@ public class GoToJailAction implements Action {
 		Cell jailCell = GameSession.getInstance().getBoard().getJailCell();
 		player.setPayRent(false);
         player.setJailStatus(Status.JAILED);
-        player.setJailTerm(jailTerm);
+        player.setJailTerm(jailTerm + player.getJailTerm());
+        player.setExtraTurn(false);
         if (player.getPosition() != jailCell.getPosition()) {
             player.goToPosition(jailCell.getPosition());
         }
-        ActionUtils.sendMessageToAll(player.getName() + " сел в тюрьму на " + jailTerm + " ходов");
+        ActionUtils.sendMessageToAll(player.getName() + " сел в тюрьму на " + player.getJailTerm() + " ходов");
 	}
 
 	@Override

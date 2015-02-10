@@ -19,6 +19,7 @@ public class Player implements MoneyOperations, MoveOperations, PropertyOperatio
 	private PlayerTimer timer;
 	private int doublesCount;
 	private String playerColor;
+	private boolean extraTurn;
 
 	public Player(String name) {
 		position = 0;
@@ -320,5 +321,13 @@ public class Player implements MoneyOperations, MoveOperations, PropertyOperatio
 	@Override
 	public boolean isTimerStarted() {		
 		return timer.isStarted();
+	}
+	
+	public boolean hasExtraTurn() {
+		return extraTurn;
+	}
+	
+	public void setExtraTurn(boolean extraTurn) {
+		this.extraTurn = extraTurn;
 	}
 }

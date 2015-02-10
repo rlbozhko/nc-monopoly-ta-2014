@@ -18,7 +18,7 @@ public class BetrayalActioin implements Action {
 		for (Player otherPlayer : players) {
 			if ((myPosition == otherPlayer.getPosition()) && (otherPlayer.getJailStatus() == Status.ESCAPE)) {
 				ActionUtils.sendMessageToAll(player.getName() + " сдал " + otherPlayer.getName() + " полиции!");
-				new GoToJailAction(otherPlayer.getJailTerm() + ADD_JAIL_TERM).performAction(otherPlayer);
+				new GoToJailAction(ADD_JAIL_TERM).performAction(otherPlayer);
 			}			
 		}
 	}

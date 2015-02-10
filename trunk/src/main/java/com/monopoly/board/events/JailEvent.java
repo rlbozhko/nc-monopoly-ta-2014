@@ -19,7 +19,7 @@ public class JailEvent extends Event {
 			ActionUtils.sendMessageToAll(player.getName() + " пришел в тюрьму как посетитель");
 		} else if (Status.ESCAPE == player.getJailStatus()) {
 			ActionUtils.sendMessageToAll(player.getName() +" пришел в тюрьму и его словили!");
-			new GoToJailAction(player.getJailTerm() + GoToJailAction.ADD_JAIL_TERM).performAction(player);
+			new GoToJailAction(GoToJailAction.ADD_JAIL_TERM).performAction(player);
 		}
 	}
 }

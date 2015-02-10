@@ -3,6 +3,7 @@ package com.monopoly.action;
 import com.monopoly.board.dice.Dice;
 import com.monopoly.board.player.Player;
 import com.monopoly.board.player.Status;
+import com.monopoly.performer.GoToJailPerformer;
 
 /**
  * Created by Roma on 19.11.2014.
@@ -22,7 +23,7 @@ public class StartTurnAction implements Action {
 		if (hasMaxDoubles(player)) {
 			ActionUtils.sendMessageToAll(player.getName() + " слишком часто выбрасывает дубли. Видимо он жульничает");
 			player.setExtraTurn(false);
-			new GoToJailAction(GoToJailAction.ADD_JAIL_TERM).performAction(player);
+			new GoToJailPerformer(GoToJailPerformer.ADD_JAIL_TERM).perform(player);
 			new EndTurnAction().performAction(player);
 			return;
 		}

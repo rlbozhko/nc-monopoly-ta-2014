@@ -10,6 +10,7 @@ import com.monopoly.board.player.PropertyManager;
 import com.monopoly.board.player.Status;
 import com.monopoly.game.session.GameSession;
 import com.monopoly.io.IO;
+import com.monopoly.performer.AuctionPerformer;
 
 /**
  * Created by Roma on 20.11.2014.
@@ -76,7 +77,7 @@ public class EndTurnAction implements Action {
 				}
 			}
 			for (Property property : auctionProperty) {
-				new AuctionAction(property).performAction(player);
+				new AuctionPerformer(property).perform(player);
 			}
 		}
 	}

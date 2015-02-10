@@ -50,19 +50,19 @@ public class DealContainer {
 
 	public void setAskPropertiesIDs(List<Integer> askPropertiesIDs) {
 		this.askPropertiesIDs = askPropertiesIDs;
-		fillProperties(askPropertiesIDs);
+		fillProperties(askPropertiesIDs, askProperties);
 	}
 
-	private void fillProperties(List<Integer> askPropertiesIDs) {
+	private void fillProperties(List<Integer> askPropertiesIDs, Set<Property> properties) {
 		List<Cell> cells = GameSession.getInstance().getBoard().getCells();
 		for (Integer integer : askPropertiesIDs) {
-			askProperties.add((Property) cells.get(integer));
+			properties.add((Property) cells.get(integer));
 		}
 	}
 
 	public void setGivePropertiesIDs(List<Integer> givePropertiesIDs) {
 		this.givePropertiesIDs = givePropertiesIDs;
-		fillProperties(givePropertiesIDs);
+		fillProperties(givePropertiesIDs, giveProperties);
 	}
 
 	public void setSource(Player source) {

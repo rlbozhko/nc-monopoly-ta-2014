@@ -16,14 +16,15 @@ public class WebIO implements IO {
 	private Player player;
 
 	private volatile boolean selectPlayerRequest;
+	private volatile boolean processSelectPlayerRequest;
 	private Object selectPlayerLock = new Object();
 	private Player selectedPlayer;
 
-	private volatile boolean selectPropertyRequest;
+	private volatile boolean selectPropertyRequest;	
 	private Object selectPropertyLock = new Object();
 	private SelectPropertyHelper selectPropertyHelper;
 
-	private volatile boolean createDealRequest;
+	private volatile boolean createDealRequest;	
 	private Object createDealLock = new Object();
 	private Player dealTarget;
 	private Deal createdDeal;
@@ -46,6 +47,14 @@ public class WebIO implements IO {
 	@Override
 	public Player selectPlayer() {
 		synchronized (selectPlayerLock) {
+			while (processSelectPlayerRequest) {
+				try {
+					selectPlayerLock.wait();
+				} catch (InterruptedException e) {				
+					e.printStackTrace();
+				}
+			}
+			processSelectPlayerRequest = true;
 			selectPlayerRequest = true;
 			while (selectPlayerRequest) {
 				try {
@@ -54,8 +63,12 @@ public class WebIO implements IO {
 					e.printStackTrace();
 				}
 			}
+			Player result = selectedPlayer;
+			selectedPlayer = null;
+			selectPlayerLock.notifyAll();
+			processSelectPlayerRequest = false;
+			return result;
 		}
-		return selectedPlayer;
 	}
 
 	@Override
@@ -77,6 +90,13 @@ public class WebIO implements IO {
 	@Override
 	public Property selectProperty(Player targetPlayer) {
 		synchronized (selectPropertyLock) {
+			while (selectPropertyHelper != null) {
+				try {
+					selectPropertyLock.wait();
+				} catch (InterruptedException e) {				
+					e.printStackTrace();
+				}
+			}
 			selectPropertyHelper = new SelectPropertyHelper(targetPlayer);
 			selectPropertyRequest = true;
 			while (selectPropertyRequest) {
@@ -88,7 +108,8 @@ public class WebIO implements IO {
 			}
 			Property property = selectPropertyHelper.getProperty();
 			selectPropertyHelper = null;
-			System.out.println("end of io.selectProperty()");
+			selectPropertyLock.notifyAll();
+			
 			return property;
 		}
 	}
@@ -110,6 +131,13 @@ public class WebIO implements IO {
 	@Override
 	public Deal dealDialog(Player otherPlayer) {
 		synchronized (createDealLock) {
+			while (dealTarget != null) {
+				try {
+					createDealLock.wait();
+				} catch (InterruptedException e) {
+					e.printStackTrace();
+				}
+			}
 			createDealRequest = true;
 			dealTarget = otherPlayer;
 			while (createDealRequest) {
@@ -122,7 +150,7 @@ public class WebIO implements IO {
 			Deal result = createdDeal;
 			createdDeal = null;
 			dealTarget = null;
-			System.out.println("end of io.createDeal()");
+			createDealLock.notifyAll();
 			return result;
 		}
 	}

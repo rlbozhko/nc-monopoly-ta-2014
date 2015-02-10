@@ -47,7 +47,7 @@ public class DealContainer {
 		}
 		return deal;
 	}
-	
+
 	public void setAskPropertiesIDs(List<Integer> askPropertiesIDs) {
 		this.askPropertiesIDs = askPropertiesIDs;
 		fillProperties(askPropertiesIDs);
@@ -59,7 +59,7 @@ public class DealContainer {
 			askProperties.add((Property) cells.get(integer));
 		}
 	}
-	
+
 	public void setGivePropertiesIDs(List<Integer> givePropertiesIDs) {
 		this.givePropertiesIDs = givePropertiesIDs;
 		fillProperties(givePropertiesIDs);
@@ -127,10 +127,16 @@ public class DealContainer {
 
 	public String message() {
 		StringBuilder message = new StringBuilder();
-		message.append(source.getName()).append(" ").append("Предлагает\n").append("Денег: ").append(getGiveMoney())
-				.append("\n").append("Собственность: ").append(getGiveProperties()).append("\n").append("Просит\n")
-				.append("Денег: ").append(getAskMoney()).append("\n").append("Собственность: ")
-				.append(getAskProperties()).append("\n");
-		return message.toString();
+//		message.append(" ").append("Предлагает ").append("Денег: ").append(" ")
+//		.append("Собственность: ").append(" ").append("Просит ")
+//		.append("Денег: ").append(" ").append("Собственность: ")
+//		.append(" ");
+//		return message.toString();
+
+		 message.append(source.getName()).append(" ").append("Предлагает ").append("Денег: ").append(getGiveMoney())
+		 .append(" ").append("Собственность: ").append(getGiveProperties()).append(" n").append("Просит ")
+		 .append("Денег: ").append(getAskMoney()).append(" ").append("Собственность: ")
+		 .append(getAskProperties()).append(" ");
+		 return message.toString();
 	}
 }

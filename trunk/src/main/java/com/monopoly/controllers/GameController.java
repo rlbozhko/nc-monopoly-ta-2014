@@ -20,7 +20,6 @@ import com.monopoly.action.deal.DealContainer;
 import com.monopoly.bean.User;
 import com.monopoly.board.Board;
 import com.monopoly.board.cells.Cell;
-import com.monopoly.board.cells.Property;
 import com.monopoly.board.player.Player;
 import com.monopoly.board.player.PropertyManager;
 import com.monopoly.game.session.GameSession;
@@ -29,12 +28,13 @@ import com.monopoly.game.session.SessionStatus;
 import com.monopoly.io.IO;
 import com.monopoly.io.WebIO.YesNoDialog;
 import com.monopoly.services.UserDbService;
-import com.monopoly.services.UserService;
 
 @Controller
 public class GameController {
 	@Autowired
 	private UserDbService userService;
+	
+	private YesNoDialog yesNoDialog;
 //	private UserService userService;
 
 	@RequestMapping(value = "/game.action", method = RequestMethod.GET)
@@ -88,7 +88,7 @@ public class GameController {
 		
 		// testProperty();
 		if (io.hasYesNoDialog()) {
-			YesNoDialog yesNoDialog = io.getYesNoDialog();
+			yesNoDialog = io.getYesNoDialog();
 			mav.addObject("hasYesNoDialog", io.hasYesNoDialog());
 			mav.addObject("yesNoDialog", yesNoDialog.getMessage());
 		}
@@ -124,32 +124,6 @@ public class GameController {
 		mav.addObject("strActions", stringActions);
 
 		return mav;
-	}
-
-	private void testProperty() {
-		Session session = GameSession.getInstance();
-		PropertyManager testPropertyManager = session.getPropertyManager();
-
-		Property testProperty1 = (Property) session.getBoard().getCells()
-				.get(1);
-		Property testProperty2 = (Property) session.getBoard().getCells()
-				.get(3);
-		Property testProperty3 = (Property) session.getBoard().getCells()
-				.get(4);
-		Property testProperty4 = (Property) session.getBoard().getCells()
-				.get(5);
-		Property testProperty5 = (Property) session.getBoard().getCells()
-				.get(6);
-
-		Player p1 = session.getBoard().getPlayers().get(0);
-		Player p2 = session.getBoard().getPlayers().get(1);
-
-		testPropertyManager.setPropertyOwner(p1, testProperty1);
-		testPropertyManager.setPropertyOwner(p1, testProperty2);
-		testPropertyManager.setPropertyOwner(p1, testProperty3);
-
-		testPropertyManager.setPropertyOwner(p2, testProperty4);
-		testPropertyManager.setPropertyOwner(p2, testProperty5);
 	}
 
 	@RequestMapping(value = "/game.action", method = RequestMethod.GET, params = { "actionType" })
@@ -243,7 +217,7 @@ public class GameController {
 		return new ModelAndView("redirect:index.action");
 	}
 	
-	@RequestMapping(value = "/buy_property.action", method = RequestMethod.GET)
+	@RequestMapping(value = "/dialog.action", method = RequestMethod.GET)
 	public ModelAndView getAnwser(
 			@CookieValue(value = "bb_data", required = false) String hash,
 			@RequestParam(value = "isAnswer", required = false, defaultValue = "false") Boolean isAnswer) {
@@ -253,10 +227,10 @@ public class GameController {
 		if (user == null) {
 			return new ModelAndView("redirect:signin.action");
 		}
-		System.out.println("ANSWER " + isAnswer);
+
 		IO io = GameSession.getInstance().getUserIO(user);
-		YesNoDialog yesNo = io.getYesNoDialog();
-		yesNo.setAnswer(isAnswer);
+		yesNoDialog = io.getYesNoDialog();
+		yesNoDialog.setAnswer(isAnswer);
 		
 		return new ModelAndView("redirect:game.action");
 	}

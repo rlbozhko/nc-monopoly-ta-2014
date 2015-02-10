@@ -22,7 +22,7 @@ public class AskPropertyDeal extends WrapperDeal {
     public String message() {
         StringBuilder message = new StringBuilder();
         message.append("Требует ")
-                .append("Собственность: ").append(properties).append("\n");
+                .append("Собственность: ").append(properties).append(" ");
         return super.message() + message.toString();
     }
 

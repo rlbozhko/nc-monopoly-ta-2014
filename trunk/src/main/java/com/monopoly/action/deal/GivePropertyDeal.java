@@ -22,7 +22,7 @@ public class GivePropertyDeal extends WrapperDeal {
     public String message() {
         StringBuilder message = new StringBuilder();
         message.append("Предлагает ")
-                .append("Собственность: ").append(properties).append("\n");
+                .append("Собственность: ").append(properties).append(" ");
         return super.message() + message.toString();
     }
 
@@ -41,7 +41,7 @@ public class GivePropertyDeal extends WrapperDeal {
         boolean result = true;
         for (Property property : properties) {
             if (property.isPledged()) {
-                getSourceIO().showWarning("Собственность " + ((Cell) property).getName() + " заложена.\nСделка отменяется");
+                getSourceIO().showWarning("Собственность " + ((Cell) property).getName() + " заложена. Сделка отменяется");
                 result = false;
                 break;
             }

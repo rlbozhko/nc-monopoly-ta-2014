@@ -37,11 +37,18 @@ public class EndTurnAction implements Action {
 			player.addTime();
 		} else {
 			checkForEscape();
-			player.setStatus(Status.WAIT);
-			Player nextPlayer = board.getNextPlayer();
-			nextPlayer.setStatus(Status.START_TURN);
-			ActionUtils.sendMessageToAll(player.getName() + " передал ход " + nextPlayer.getName());			
-			checkAndStartAuction();
+			
+			if (player.hasExtraTurn()) {
+				player.setStatus(Status.START_TURN);
+				ActionUtils.sendMessageToAll(player.getName() + " ходит еще раз!");
+				player.setExtraTurn(false);
+			} else {
+				player.setStatus(Status.WAIT);
+				Player nextPlayer = board.getNextPlayer();
+				nextPlayer.setStatus(Status.START_TURN);
+				ActionUtils.sendMessageToAll(player.getName() + " передал ход " + nextPlayer.getName());
+				checkAndStartAuction();
+			}
 		}
 	}
 

@@ -11,7 +11,7 @@ import com.monopoly.io.IO;
 
 public class EscapeAction implements Action {
 	public final static ActionType type = ActionType.ESCAPE;
-	private final int ESCAPE_COMBINATION = 9;
+	private final int ESCAPE_COMBINATION = 8;
 	private final int PUNISHMENT = 3;	
 
 	@Override

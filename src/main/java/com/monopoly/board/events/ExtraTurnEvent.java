@@ -2,7 +2,6 @@ package com.monopoly.board.events;
 
 import com.monopoly.action.ActionUtils;
 import com.monopoly.board.player.Player;
-import com.monopoly.board.player.Status;
 import com.monopoly.game.session.GameSession;
 import com.monopoly.io.IO;
 
@@ -25,7 +24,7 @@ public class ExtraTurnEvent extends Event {
 		Player player = GameSession.getInstance().getBoard().getCurrentPlayer();
 		IO playerIO = ActionUtils.getPlayerIO(player);
 
-		player.setStatus(Status.START_TURN);
+		player.setExtraTurn(true);
 		playerIO.showMessage("Сегодня ваш день! Вы получили возможность походить еще раз!!!");
 		ActionUtils.sendMessageToAll(player.getName() + " получил дополнительный ход.");
 	}

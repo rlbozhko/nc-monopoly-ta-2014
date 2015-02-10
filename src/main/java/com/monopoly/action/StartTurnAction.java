@@ -16,12 +16,18 @@ public class StartTurnAction implements Action {
 		Dice dice = Dice.getInstance();
 		dice.generateNewDiceValue();
 		ActionUtils.getPlayerIO(player).showDice();
-		checkDoubles(player, dice);
+		if (checkDoubles(player, dice)) {			
+			player.setExtraTurn(true);
+		}
 		if (hasMaxDoubles(player)) {
 			ActionUtils.sendMessageToAll(player.getName() + " слишком часто выбрасывает дубли. Видимо он жульничает");
-			new GoToJailAction(GoToJailAction.FIRST_JAIL_TERM).performAction(player);
+			player.setExtraTurn(false);
+			new GoToJailAction(GoToJailAction.ADD_JAIL_TERM).performAction(player);
 			new EndTurnAction().performAction(player);
 			return;
+		}
+		if (player.hasExtraTurn()) {
+			ActionUtils.sendMessageToAll(player.getName() + " выбросил дубль и получил дополнительный ход!");
 		}
 		player.setStatus(Status.ACTIVE);
 		player.goToPosition(player.getPosition() + dice.getFaceDie1() + dice.getFaceDie2());		
@@ -35,11 +41,13 @@ public class StartTurnAction implements Action {
 		return false;
 	}
 
-	private void checkDoubles(Player player, Dice dice) {
+	private boolean checkDoubles(Player player, Dice dice) {
 		if (dice.isSame()) {		
 			player.incrementDoublesCount();
+			return true;
 		} else {
 			player.resetDoublesCount();
+			return false;
 		}
 	}
 

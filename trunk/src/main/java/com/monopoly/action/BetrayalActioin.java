@@ -5,6 +5,7 @@ import java.util.List;
 import com.monopoly.board.player.Player;
 import com.monopoly.board.player.Status;
 import com.monopoly.game.session.GameSession;
+import com.monopoly.performer.GoToJailPerformer;
 
 public class BetrayalActioin implements Action {
 	public final static ActionType type = ActionType.BETRAYAL;
@@ -18,7 +19,7 @@ public class BetrayalActioin implements Action {
 		for (Player otherPlayer : players) {
 			if ((myPosition == otherPlayer.getPosition()) && (otherPlayer.getJailStatus() == Status.ESCAPE)) {
 				ActionUtils.sendMessageToAll(player.getName() + " сдал " + otherPlayer.getName() + " полиции!");
-				new GoToJailAction(ADD_JAIL_TERM).performAction(otherPlayer);
+				new GoToJailPerformer(ADD_JAIL_TERM).perform(otherPlayer);
 			}			
 		}
 	}

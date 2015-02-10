@@ -1,8 +1,8 @@
 /* 
 
-Пример реализации реляционной модели 
-EAV/CR – Entity-Attribute-Value with Classes and Relationships 
-(Сущность-Атрибут-Значение с Классами и Отношениями)." 
+РџСЂРёРјРµСЂ СЂРµР°Р»РёР·Р°С†РёРё СЂРµР»СЏС†РёРѕРЅРЅРѕР№ РјРѕРґРµР»Рё 
+EAV/CR вЂ“ Entity-Attribute-Value with Classes and Relationships 
+(РЎСѓС‰РЅРѕСЃС‚СЊ-РђС‚СЂРёР±СѓС‚-Р—РЅР°С‡РµРЅРёРµ СЃ РљР»Р°СЃСЃР°РјРё Рё РћС‚РЅРѕС€РµРЅРёСЏРјРё)." 
 
 */
 
@@ -12,7 +12,7 @@ drop table OBJECTS CASCADE CONSTRAINTS;
 drop table ATTRIBUTES CASCADE CONSTRAINTS;
 drop table OBJREFERENCE CASCADE CONSTRAINTS;
 
--- Таблица описаний объектных типов
+-- РўР°Р±Р»РёС†Р° РѕРїРёСЃР°РЅРёР№ РѕР±СЉРµРєС‚РЅС‹С… С‚РёРїРѕРІ
 CREATE TABLE OBJTYPE
   (
     OBJECT_TYPE_ID NUMBER(20) NOT NULL ENABLE,
@@ -24,24 +24,24 @@ CREATE TABLE OBJTYPE
     CONSTRAINT CON_PARENT_ID FOREIGN KEY (PARENT_ID) REFERENCES OBJTYPE (OBJECT_TYPE_ID) ON DELETE CASCADE ENABLE
   );
 
-COMMENT ON TABLE OBJTYPE IS 'Таблица описаний объектных типов'; 
-COMMENT ON COLUMN OBJTYPE.OBJECT_TYPE_ID IS 'Идентификатор объектного типа';
-COMMENT ON COLUMN OBJTYPE.PARENT_ID IS 'ссылка на идентификатор родительского объектного типа';
-COMMENT ON COLUMN OBJTYPE.CODE IS 'название объектного типа в английской кодировке';
-COMMENT ON COLUMN OBJTYPE.NAME IS 'название объектного типа в национальной кодировке (для GUI)';
-COMMENT ON COLUMN OBJTYPE.DESCRIPTION IS 'разверное описание объектного типа в национальной кодировке (для GUI)';
+COMMENT ON TABLE OBJTYPE IS 'РўР°Р±Р»РёС†Р° РѕРїРёСЃР°РЅРёР№ РѕР±СЉРµРєС‚РЅС‹С… С‚РёРїРѕРІ'; 
+COMMENT ON COLUMN OBJTYPE.OBJECT_TYPE_ID IS 'РРґРµРЅС‚РёС„РёРєР°С‚РѕСЂ РѕР±СЉРµРєС‚РЅРѕРіРѕ С‚РёРїР°';
+COMMENT ON COLUMN OBJTYPE.PARENT_ID IS 'СЃСЃС‹Р»РєР° РЅР° РёРґРµРЅС‚РёС„РёРєР°С‚РѕСЂ СЂРѕРґРёС‚РµР»СЊСЃРєРѕРіРѕ РѕР±СЉРµРєС‚РЅРѕРіРѕ С‚РёРїР°';
+COMMENT ON COLUMN OBJTYPE.CODE IS 'РЅР°Р·РІР°РЅРёРµ РѕР±СЉРµРєС‚РЅРѕРіРѕ С‚РёРїР° РІ Р°РЅРіР»РёР№СЃРєРѕР№ РєРѕРґРёСЂРѕРІРєРµ';
+COMMENT ON COLUMN OBJTYPE.NAME IS 'РЅР°Р·РІР°РЅРёРµ РѕР±СЉРµРєС‚РЅРѕРіРѕ С‚РёРїР° РІ РЅР°С†РёРѕРЅР°Р»СЊРЅРѕР№ РєРѕРґРёСЂРѕРІРєРµ (РґР»СЏ GUI)';
+COMMENT ON COLUMN OBJTYPE.DESCRIPTION IS 'СЂР°Р·РІРµСЂРЅРѕРµ РѕРїРёСЃР°РЅРёРµ РѕР±СЉРµРєС‚РЅРѕРіРѕ С‚РёРїР° РІ РЅР°С†РёРѕРЅР°Р»СЊРЅРѕР№ РєРѕРґРёСЂРѕРІРєРµ (РґР»СЏ GUI)';
 
 
 /* 
-При переходе от UML-диаграмме к EAV-модели рекомендуется:
-1) каждый класс - это строка в таблице OBJTYPE с именем класса в колонке OBJTYPE.NAME
-2) связь типа "обобщение" между классами можно сохранить в колонки OBJTYPE.OBJECT_TYPE_ID и OBJTYPE.PARENT_ID,
-где OBJTYPE.OBJECT_TYPE_ID - идентификатор класса-наследника, OBJTYPE.PARENT_ID - идентификатор класса-родителя
-3) связь типа "агрегатная ассоциация" между классами можно сохранить в колонки OBJTYPE.OBJECT_TYPE_ID и OBJTYPE.PARENT_ID,
-где OBJTYPE.OBJECT_TYPE_ID - идентификатор класса типа "частное", OBJTYPE.PARENT_ID - идентификатор класса типа "целое"
+РџСЂРё РїРµСЂРµС…РѕРґРµ РѕС‚ UML-РґРёР°РіСЂР°РјРјРµ Рє EAV-РјРѕРґРµР»Рё СЂРµРєРѕРјРµРЅРґСѓРµС‚СЃСЏ:
+1) РєР°Р¶РґС‹Р№ РєР»Р°СЃСЃ - СЌС‚Рѕ СЃС‚СЂРѕРєР° РІ С‚Р°Р±Р»РёС†Рµ OBJTYPE СЃ РёРјРµРЅРµРј РєР»Р°СЃСЃР° РІ РєРѕР»РѕРЅРєРµ OBJTYPE.NAME
+2) СЃРІСЏР·СЊ С‚РёРїР° "РѕР±РѕР±С‰РµРЅРёРµ" РјРµР¶РґСѓ РєР»Р°СЃСЃР°РјРё РјРѕР¶РЅРѕ СЃРѕС…СЂР°РЅРёС‚СЊ РІ РєРѕР»РѕРЅРєРё OBJTYPE.OBJECT_TYPE_ID Рё OBJTYPE.PARENT_ID,
+РіРґРµ OBJTYPE.OBJECT_TYPE_ID - РёРґРµРЅС‚РёС„РёРєР°С‚РѕСЂ РєР»Р°СЃСЃР°-РЅР°СЃР»РµРґРЅРёРєР°, OBJTYPE.PARENT_ID - РёРґРµРЅС‚РёС„РёРєР°С‚РѕСЂ РєР»Р°СЃСЃР°-СЂРѕРґРёС‚РµР»СЏ
+3) СЃРІСЏР·СЊ С‚РёРїР° "Р°РіСЂРµРіР°С‚РЅР°СЏ Р°СЃСЃРѕС†РёР°С†РёСЏ" РјРµР¶РґСѓ РєР»Р°СЃСЃР°РјРё РјРѕР¶РЅРѕ СЃРѕС…СЂР°РЅРёС‚СЊ РІ РєРѕР»РѕРЅРєРё OBJTYPE.OBJECT_TYPE_ID Рё OBJTYPE.PARENT_ID,
+РіРґРµ OBJTYPE.OBJECT_TYPE_ID - РёРґРµРЅС‚РёС„РёРєР°С‚РѕСЂ РєР»Р°СЃСЃР° С‚РёРїР° "С‡Р°СЃС‚РЅРѕРµ", OBJTYPE.PARENT_ID - РёРґРµРЅС‚РёС„РёРєР°С‚РѕСЂ РєР»Р°СЃСЃР° С‚РёРїР° "С†РµР»РѕРµ"
 
 */
--- Таблица описаний атрибутных типов
+-- РўР°Р±Р»РёС†Р° РѕРїРёСЃР°РЅРёР№ Р°С‚СЂРёР±СѓС‚РЅС‹С… С‚РёРїРѕРІ
 CREATE TABLE ATTRTYPE (
     ATTR_ID      		NUMBER(20) NOT NULL ENABLE,
     OBJECT_TYPE_ID 		NUMBER(20) NOT NULL ENABLE,
@@ -54,17 +54,17 @@ CREATE TABLE ATTRTYPE (
 );
  
 COMMENT ON TABLE ATTRTYPE 
-	IS 'Таблица описаний атрибутных типов';
+	IS 'РўР°Р±Р»РёС†Р° РѕРїРёСЃР°РЅРёР№ Р°С‚СЂРёР±СѓС‚РЅС‹С… С‚РёРїРѕРІ';
 COMMENT ON COLUMN ATTRTYPE.OBJECT_TYPE_ID
-	IS 'ссылка на идентификатор объектного типа класса, который характеризует данный атрибутный тип';
+	IS 'СЃСЃС‹Р»РєР° РЅР° РёРґРµРЅС‚РёС„РёРєР°С‚РѕСЂ РѕР±СЉРµРєС‚РЅРѕРіРѕ С‚РёРїР° РєР»Р°СЃСЃР°, РєРѕС‚РѕСЂС‹Р№ С…Р°СЂР°РєС‚РµСЂРёР·СѓРµС‚ РґР°РЅРЅС‹Р№ Р°С‚СЂРёР±СѓС‚РЅС‹Р№ С‚РёРї';
 COMMENT ON COLUMN ATTRTYPE.OBJECT_TYPE_ID_REF 
-	IS 'ссылка на идентификатор объектного типа класса, который может находтся в любой кратности с объектным типом класса из ATTRTYPE.OBJECT_TYPE_ID';
+	IS 'СЃСЃС‹Р»РєР° РЅР° РёРґРµРЅС‚РёС„РёРєР°С‚РѕСЂ РѕР±СЉРµРєС‚РЅРѕРіРѕ С‚РёРїР° РєР»Р°СЃСЃР°, РєРѕС‚РѕСЂС‹Р№ РјРѕР¶РµС‚ РЅР°С…РѕРґС‚СЃСЏ РІ Р»СЋР±РѕР№ РєСЂР°С‚РЅРѕСЃС‚Рё СЃ РѕР±СЉРµРєС‚РЅС‹Рј С‚РёРїРѕРј РєР»Р°СЃСЃР° РёР· ATTRTYPE.OBJECT_TYPE_ID';
 COMMENT ON COLUMN ATTRTYPE.CODE 
-	IS 'название атрибутного типа в английской кодировке';
+	IS 'РЅР°Р·РІР°РЅРёРµ Р°С‚СЂРёР±СѓС‚РЅРѕРіРѕ С‚РёРїР° РІ Р°РЅРіР»РёР№СЃРєРѕР№ РєРѕРґРёСЂРѕРІРєРµ';
 COMMENT ON COLUMN ATTRTYPE.NAME 
-	IS 'название атрибутного типа в национальной кодировке (для GUI)';
+	IS 'РЅР°Р·РІР°РЅРёРµ Р°С‚СЂРёР±СѓС‚РЅРѕРіРѕ С‚РёРїР° РІ РЅР°С†РёРѕРЅР°Р»СЊРЅРѕР№ РєРѕРґРёСЂРѕРІРєРµ (РґР»СЏ GUI)';
 
--- Таблица описаний экземпляров объектов
+-- РўР°Р±Р»РёС†Р° РѕРїРёСЃР°РЅРёР№ СЌРєР·РµРјРїР»СЏСЂРѕРІ РѕР±СЉРµРєС‚РѕРІ
 CREATE TABLE OBJECTS (
     OBJECT_ID      NUMBER(20) NOT NULL ENABLE,
     PARENT_ID      NUMBER(20),
@@ -76,9 +76,9 @@ CREATE TABLE OBJECTS (
     CONSTRAINT CON_OBJ_TYPE_ID FOREIGN KEY (OBJECT_TYPE_ID) REFERENCES OBJTYPE (OBJECT_TYPE_ID) ENABLE
 );
 
-COMMENT ON TABLE OBJECTS IS 'Таблица описаний экземпляров объектов';
+COMMENT ON TABLE OBJECTS IS 'РўР°Р±Р»РёС†Р° РѕРїРёСЃР°РЅРёР№ СЌРєР·РµРјРїР»СЏСЂРѕРІ РѕР±СЉРµРєС‚РѕРІ';
 
--- Таблица описаний значений атрибутов экземпляров объектов
+-- РўР°Р±Р»РёС†Р° РѕРїРёСЃР°РЅРёР№ Р·РЅР°С‡РµРЅРёР№ Р°С‚СЂРёР±СѓС‚РѕРІ СЌРєР·РµРјРїР»СЏСЂРѕРІ РѕР±СЉРµРєС‚РѕРІ
 CREATE TABLE ATTRIBUTES
   (
     ATTR_ID    NUMBER(20) NOT NULL ENABLE,
@@ -90,11 +90,11 @@ CREATE TABLE ATTRIBUTES
     CONSTRAINT CON_AATTR_ID FOREIGN KEY (ATTR_ID) REFERENCES ATTRTYPE (ATTR_ID) ON DELETE CASCADE ENABLE
   );  
 
-COMMENT ON TABLE ATTRIBUTES IS 'Таблица описаний атрибутов экземпляров объектов';
-COMMENT ON COLUMN ATTRIBUTES.VALUE IS 'Значение атрибута экземпляра объекта в виде строки или числа';
-COMMENT ON COLUMN ATTRIBUTES.DATE_VALUE IS 'Значение атрибута экземпляра объекта в виде даты';
+COMMENT ON TABLE ATTRIBUTES IS 'РўР°Р±Р»РёС†Р° РѕРїРёСЃР°РЅРёР№ Р°С‚СЂРёР±СѓС‚РѕРІ СЌРєР·РµРјРїР»СЏСЂРѕРІ РѕР±СЉРµРєС‚РѕРІ';
+COMMENT ON COLUMN ATTRIBUTES.VALUE IS 'Р—РЅР°С‡РµРЅРёРµ Р°С‚СЂРёР±СѓС‚Р° СЌРєР·РµРјРїР»СЏСЂР° РѕР±СЉРµРєС‚Р° РІ РІРёРґРµ СЃС‚СЂРѕРєРё РёР»Рё С‡РёСЃР»Р°';
+COMMENT ON COLUMN ATTRIBUTES.DATE_VALUE IS 'Р—РЅР°С‡РµРЅРёРµ Р°С‚СЂРёР±СѓС‚Р° СЌРєР·РµРјРїР»СЏСЂР° РѕР±СЉРµРєС‚Р° РІ РІРёРґРµ РґР°С‚С‹';
 
--- Таблица описаний связей "простая ассоциация" между экземплярами объектов
+-- РўР°Р±Р»РёС†Р° РѕРїРёСЃР°РЅРёР№ СЃРІСЏР·РµР№ "РїСЂРѕСЃС‚Р°СЏ Р°СЃСЃРѕС†РёР°С†РёСЏ" РјРµР¶РґСѓ СЌРєР·РµРјРїР»СЏСЂР°РјРё РѕР±СЉРµРєС‚РѕРІ
 CREATE TABLE OBJREFERENCE
   (
     ATTR_ID   NUMBER(20) NOT NULL ENABLE,
@@ -106,10 +106,10 @@ CREATE TABLE OBJREFERENCE
     CONSTRAINT CON_RATTR_ID FOREIGN KEY (ATTR_ID) REFERENCES ATTRTYPE (ATTR_ID) ON DELETE CASCADE ENABLE
   ); 
 
-COMMENT ON TABLE OBJREFERENCE IS 'Таблица описаний связей между экземплярами объектов';
-COMMENT ON COLUMN OBJREFERENCE.ATTR_ID IS 'ссылка на атрибутный тип как ассоциативная связь между экземплярами объектов';
-COMMENT ON COLUMN OBJREFERENCE.OBJECT_ID IS 'ссылка на экземпляр 1-го объекта ассоциативной связи';
-COMMENT ON COLUMN OBJREFERENCE.REFERENCE IS 'ссылка на экземпляр 2-го объекта ассоциативной связи';
+COMMENT ON TABLE OBJREFERENCE IS 'РўР°Р±Р»РёС†Р° РѕРїРёСЃР°РЅРёР№ СЃРІСЏР·РµР№ РјРµР¶РґСѓ СЌРєР·РµРјРїР»СЏСЂР°РјРё РѕР±СЉРµРєС‚РѕРІ';
+COMMENT ON COLUMN OBJREFERENCE.ATTR_ID IS 'СЃСЃС‹Р»РєР° РЅР° Р°С‚СЂРёР±СѓС‚РЅС‹Р№ С‚РёРї РєР°Рє Р°СЃСЃРѕС†РёР°С‚РёРІРЅР°СЏ СЃРІСЏР·СЊ РјРµР¶РґСѓ СЌРєР·РµРјРїР»СЏСЂР°РјРё РѕР±СЉРµРєС‚РѕРІ';
+COMMENT ON COLUMN OBJREFERENCE.OBJECT_ID IS 'СЃСЃС‹Р»РєР° РЅР° СЌРєР·РµРјРїР»СЏСЂ 1-РіРѕ РѕР±СЉРµРєС‚Р° Р°СЃСЃРѕС†РёР°С‚РёРІРЅРѕР№ СЃРІСЏР·Рё';
+COMMENT ON COLUMN OBJREFERENCE.REFERENCE IS 'СЃСЃС‹Р»РєР° РЅР° СЌРєР·РµРјРїР»СЏСЂ 2-РіРѕ РѕР±СЉРµРєС‚Р° Р°СЃСЃРѕС†РёР°С‚РёРІРЅРѕР№ СЃРІСЏР·Рё';
 
 --------------------------------------------------------------------
 --------------------------------------------------------------------

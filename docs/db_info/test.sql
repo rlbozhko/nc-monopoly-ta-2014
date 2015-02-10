@@ -147,7 +147,7 @@ INSERT INTO OBJECTS (OBJECT_ID,PARENT_ID,OBJECT_TYPE_ID,NAME,DESCRIPTION) VALUES
   --Board
   INSERT INTO OBJECTS (OBJECT_ID,PARENT_ID,OBJECT_TYPE_ID,NAME,DESCRIPTION) VALUES (101,100,2,'Board','New Board');
     --Cells
-    INSERT INTO OBJECTS (OBJECT_ID,PARENT_ID,OBJECT_TYPE_ID,NAME,DESCRIPTION) VALUES (102,101,6,'Начало','Тут все начинается');
+    INSERT INTO OBJECTS (OBJECT_ID,PARENT_ID,OBJECT_TYPE_ID,NAME,DESCRIPTION) VALUES (102,101,6,'РќР°С‡Р°Р»Рѕ','РўСѓС‚ РІСЃРµ РЅР°С‡РёРЅР°РµС‚СЃСЏ');
       INSERT INTO attributes (attr_id, object_id, value, date_value) VALUES (2,102,'0',NULL); -- position
       INSERT INTO OBJECTS (OBJECT_ID,PARENT_ID,OBJECT_TYPE_ID,NAME,DESCRIPTION) VALUES (150,102,10,'MONEY',NULL);
     INSERT INTO OBJECTS (OBJECT_ID,PARENT_ID,OBJECT_TYPE_ID,NAME,DESCRIPTION) VALUES (103,101,3,'c1m1','c1m1 desc');   
@@ -162,7 +162,7 @@ INSERT INTO OBJECTS (OBJECT_ID,PARENT_ID,OBJECT_TYPE_ID,NAME,DESCRIPTION) VALUES
       INSERT INTO attributes (attr_id, object_id, value, date_value) VALUES (22,103,'UNPLEDGED',NULL); -- status
       INSERT INTO attributes (attr_id, object_id, value, date_value) VALUES (23,103,'0',NULL); -- turnsToPayBack
       --          
-    INSERT INTO OBJECTS (OBJECT_ID,PARENT_ID,OBJECT_TYPE_ID,NAME,DESCRIPTION) VALUES (104,101,6,'Шанс','Случайное событие');
+    INSERT INTO OBJECTS (OBJECT_ID,PARENT_ID,OBJECT_TYPE_ID,NAME,DESCRIPTION) VALUES (104,101,6,'РЁР°РЅСЃ','РЎР»СѓС‡Р°Р№РЅРѕРµ СЃРѕР±С‹С‚РёРµ');
       INSERT INTO attributes (attr_id, object_id, value, date_value) VALUES (2,104,'2',NULL); -- position
       INSERT INTO OBJECTS (OBJECT_ID,PARENT_ID,OBJECT_TYPE_ID,NAME,DESCRIPTION) VALUES (151,104,10,'GO_TO_JAIL',NULL);
       INSERT INTO OBJECTS (OBJECT_ID,PARENT_ID,OBJECT_TYPE_ID,NAME,DESCRIPTION) VALUES (152,104,10,'RANDOM_MONEY',NULL);
@@ -231,7 +231,7 @@ INSERT INTO OBJECTS (OBJECT_ID,PARENT_ID,OBJECT_TYPE_ID,NAME,DESCRIPTION) VALUES
       INSERT INTO attributes (attr_id, object_id, value, date_value) VALUES (22,109,'UNPLEDGED',NULL); -- status
       INSERT INTO attributes (attr_id, object_id, value, date_value) VALUES (23,109,'0',NULL); -- turnsToPayBack
       -- 
-    INSERT INTO OBJECTS (OBJECT_ID,PARENT_ID,OBJECT_TYPE_ID,NAME,DESCRIPTION) VALUES (110,101,6,'Казино','Фортуна может улыбнуться');
+    INSERT INTO OBJECTS (OBJECT_ID,PARENT_ID,OBJECT_TYPE_ID,NAME,DESCRIPTION) VALUES (110,101,6,'РљР°Р·РёРЅРѕ','Р¤РѕСЂС‚СѓРЅР° РјРѕР¶РµС‚ СѓР»С‹Р±РЅСѓС‚СЊСЃСЏ');
       INSERT INTO attributes (attr_id, object_id, value, date_value) VALUES (2,110,'8',NULL); -- position
       INSERT INTO OBJECTS (OBJECT_ID,PARENT_ID,OBJECT_TYPE_ID,NAME,DESCRIPTION) VALUES (157,110,10,'RANDOM_MONEY',NULL);
     INSERT INTO OBJECTS (OBJECT_ID,PARENT_ID,OBJECT_TYPE_ID,NAME,DESCRIPTION) VALUES (141,101,3,'c3m2','c3m2 desc');
@@ -246,7 +246,7 @@ INSERT INTO OBJECTS (OBJECT_ID,PARENT_ID,OBJECT_TYPE_ID,NAME,DESCRIPTION) VALUES
       INSERT INTO attributes (attr_id, object_id, value, date_value) VALUES (22,141,'UNPLEDGED',NULL); -- status
       INSERT INTO attributes (attr_id, object_id, value, date_value) VALUES (23,141,'0',NULL); -- turnsToPayBack
       -- 
-    INSERT INTO OBJECTS (OBJECT_ID,PARENT_ID,OBJECT_TYPE_ID,NAME,DESCRIPTION) VALUES (111,101,6,'Тюрьма','Это место лучше пройти мимо');
+    INSERT INTO OBJECTS (OBJECT_ID,PARENT_ID,OBJECT_TYPE_ID,NAME,DESCRIPTION) VALUES (111,101,6,'РўСЋСЂСЊРјР°','Р­С‚Рѕ РјРµСЃС‚Рѕ Р»СѓС‡С€Рµ РїСЂРѕР№С‚Рё РјРёРјРѕ');
       INSERT INTO attributes (attr_id, object_id, value, date_value) VALUES (2,111,'10',NULL); -- position
       INSERT INTO OBJECTS (OBJECT_ID,PARENT_ID,OBJECT_TYPE_ID,NAME,DESCRIPTION) VALUES (158,111,10,'JAIL',null);
     INSERT INTO OBJECTS (OBJECT_ID,PARENT_ID,OBJECT_TYPE_ID,NAME,DESCRIPTION) VALUES (112,101,3,'c1m3','c1m3 desc');
@@ -273,7 +273,7 @@ INSERT INTO OBJECTS (OBJECT_ID,PARENT_ID,OBJECT_TYPE_ID,NAME,DESCRIPTION) VALUES
       INSERT INTO attributes (attr_id, object_id, value, date_value) VALUES (22,113,'UNPLEDGED',NULL); -- status
       INSERT INTO attributes (attr_id, object_id, value, date_value) VALUES (23,113,'0',NULL); -- turnsToPayBack
       -- 
-    INSERT INTO OBJECTS (OBJECT_ID,PARENT_ID,OBJECT_TYPE_ID,NAME,DESCRIPTION) VALUES (114,101,6,'Шанс','Случайное событие');
+    INSERT INTO OBJECTS (OBJECT_ID,PARENT_ID,OBJECT_TYPE_ID,NAME,DESCRIPTION) VALUES (114,101,6,'РЁР°РЅСЃ','РЎР»СѓС‡Р°Р№РЅРѕРµ СЃРѕР±С‹С‚РёРµ');
       INSERT INTO attributes (attr_id, object_id, value, date_value) VALUES (2,114,'13',NULL); -- position
       INSERT INTO OBJECTS (OBJECT_ID,PARENT_ID,OBJECT_TYPE_ID,NAME,DESCRIPTION) VALUES (159,114,10,'GO_TO_JAIL',NULL);
       INSERT INTO OBJECTS (OBJECT_ID,PARENT_ID,OBJECT_TYPE_ID,NAME,DESCRIPTION) VALUES (160,114,10,'RANDOM_MONEY',NULL);
@@ -305,7 +305,7 @@ INSERT INTO OBJECTS (OBJECT_ID,PARENT_ID,OBJECT_TYPE_ID,NAME,DESCRIPTION) VALUES
       INSERT INTO attributes (attr_id, object_id, value, date_value) VALUES (22,116,'UNPLEDGED',NULL); -- status
       INSERT INTO attributes (attr_id, object_id, value, date_value) VALUES (23,116,'0',NULL); -- turnsToPayBack
       --  
-    INSERT INTO OBJECTS (OBJECT_ID,PARENT_ID,OBJECT_TYPE_ID,NAME,DESCRIPTION) VALUES (117,101,6,'Шанс','Случайное событие');
+    INSERT INTO OBJECTS (OBJECT_ID,PARENT_ID,OBJECT_TYPE_ID,NAME,DESCRIPTION) VALUES (117,101,6,'РЁР°РЅСЃ','РЎР»СѓС‡Р°Р№РЅРѕРµ СЃРѕР±С‹С‚РёРµ');
       INSERT INTO attributes (attr_id, object_id, value, date_value) VALUES (2,117,'16',NULL); -- position
       INSERT INTO OBJECTS (OBJECT_ID,PARENT_ID,OBJECT_TYPE_ID,NAME,DESCRIPTION) VALUES (165,117,10,'GO_TO_JAIL',NULL);
       INSERT INTO OBJECTS (OBJECT_ID,PARENT_ID,OBJECT_TYPE_ID,NAME,DESCRIPTION) VALUES (166,117,10,'RANDOM_MONEY',NULL);
@@ -325,7 +325,7 @@ INSERT INTO OBJECTS (OBJECT_ID,PARENT_ID,OBJECT_TYPE_ID,NAME,DESCRIPTION) VALUES
       INSERT INTO attributes (attr_id, object_id, value, date_value) VALUES (22,118,'UNPLEDGED',NULL); -- status
       INSERT INTO attributes (attr_id, object_id, value, date_value) VALUES (23,118,'0',NULL); -- turnsToPayBack
       --  
-    INSERT INTO OBJECTS (OBJECT_ID,PARENT_ID,OBJECT_TYPE_ID,NAME,DESCRIPTION) VALUES (119,101,6,'Ипподром','Главное поставить на фаворита');
+    INSERT INTO OBJECTS (OBJECT_ID,PARENT_ID,OBJECT_TYPE_ID,NAME,DESCRIPTION) VALUES (119,101,6,'РРїРїРѕРґСЂРѕРј','Р“Р»Р°РІРЅРѕРµ РїРѕСЃС‚Р°РІРёС‚СЊ РЅР° С„Р°РІРѕСЂРёС‚Р°');
       INSERT INTO attributes (attr_id, object_id, value, date_value) VALUES (2,119,'18',NULL); -- position
       INSERT INTO OBJECTS (OBJECT_ID,PARENT_ID,OBJECT_TYPE_ID,NAME,DESCRIPTION) VALUES (171,119,10,'RANDOM_MONEY',NULL);
     INSERT INTO OBJECTS (OBJECT_ID,PARENT_ID,OBJECT_TYPE_ID,NAME,DESCRIPTION) VALUES (120,101,3,'c2m4','c2m4 desc');
@@ -340,7 +340,7 @@ INSERT INTO OBJECTS (OBJECT_ID,PARENT_ID,OBJECT_TYPE_ID,NAME,DESCRIPTION) VALUES
       INSERT INTO attributes (attr_id, object_id, value, date_value) VALUES (22,120,'UNPLEDGED',NULL); -- status
       INSERT INTO attributes (attr_id, object_id, value, date_value) VALUES (23,120,'0',NULL); -- turnsToPayBack
       --  
-    INSERT INTO OBJECTS (OBJECT_ID,PARENT_ID,OBJECT_TYPE_ID,NAME,DESCRIPTION) VALUES (121,101,6,'Бесплатная стоянка','Можете передохнуть');
+    INSERT INTO OBJECTS (OBJECT_ID,PARENT_ID,OBJECT_TYPE_ID,NAME,DESCRIPTION) VALUES (121,101,6,'Р‘РµСЃРїР»Р°С‚РЅР°СЏ СЃС‚РѕСЏРЅРєР°','РњРѕР¶РµС‚Рµ РїРµСЂРµРґРѕС…РЅСѓС‚СЊ');
       INSERT INTO attributes (attr_id, object_id, value, date_value) VALUES (2,121,'20',NULL); -- position
       INSERT INTO OBJECTS (OBJECT_ID,PARENT_ID,OBJECT_TYPE_ID,NAME,DESCRIPTION) VALUES (172,121,10,'FREE',null);
     INSERT INTO OBJECTS (OBJECT_ID,PARENT_ID,OBJECT_TYPE_ID,NAME,DESCRIPTION) VALUES (122,101,3,'c1m5','c1m5 desc');
@@ -355,7 +355,7 @@ INSERT INTO OBJECTS (OBJECT_ID,PARENT_ID,OBJECT_TYPE_ID,NAME,DESCRIPTION) VALUES
       INSERT INTO attributes (attr_id, object_id, value, date_value) VALUES (22,122,'UNPLEDGED',NULL); -- status
       INSERT INTO attributes (attr_id, object_id, value, date_value) VALUES (23,122,'0',NULL); -- turnsToPayBack
       --  
-    INSERT INTO OBJECTS (OBJECT_ID,PARENT_ID,OBJECT_TYPE_ID,NAME,DESCRIPTION) VALUES (123,101,6,'Шанс','Случайное событие');
+    INSERT INTO OBJECTS (OBJECT_ID,PARENT_ID,OBJECT_TYPE_ID,NAME,DESCRIPTION) VALUES (123,101,6,'РЁР°РЅСЃ','РЎР»СѓС‡Р°Р№РЅРѕРµ СЃРѕР±С‹С‚РёРµ');
       INSERT INTO attributes (attr_id, object_id, value, date_value) VALUES (2,123,'22',NULL); -- position
       INSERT INTO OBJECTS (OBJECT_ID,PARENT_ID,OBJECT_TYPE_ID,NAME,DESCRIPTION) VALUES (173,123,10,'GO_TO_JAIL',NULL);
       INSERT INTO OBJECTS (OBJECT_ID,PARENT_ID,OBJECT_TYPE_ID,NAME,DESCRIPTION) VALUES (174,123,10,'RANDOM_MONEY',NULL);
@@ -375,7 +375,7 @@ INSERT INTO OBJECTS (OBJECT_ID,PARENT_ID,OBJECT_TYPE_ID,NAME,DESCRIPTION) VALUES
       INSERT INTO attributes (attr_id, object_id, value, date_value) VALUES (22,124,'UNPLEDGED',NULL); -- status
       INSERT INTO attributes (attr_id, object_id, value, date_value) VALUES (23,124,'0',NULL); -- turnsToPayBack
       --  
-    INSERT INTO OBJECTS (OBJECT_ID,PARENT_ID,OBJECT_TYPE_ID,NAME,DESCRIPTION) VALUES (125,101,6,'Событие Хода','Переместит вперед или назад');
+    INSERT INTO OBJECTS (OBJECT_ID,PARENT_ID,OBJECT_TYPE_ID,NAME,DESCRIPTION) VALUES (125,101,6,'РЎРѕР±С‹С‚РёРµ РҐРѕРґР°','РџРµСЂРµРјРµСЃС‚РёС‚ РІРїРµСЂРµРґ РёР»Рё РЅР°Р·Р°Рґ');
       INSERT INTO attributes (attr_id, object_id, value, date_value) VALUES (2,125,'24',NULL); -- position
       INSERT INTO OBJECTS (OBJECT_ID,PARENT_ID,OBJECT_TYPE_ID,NAME,DESCRIPTION) VALUES (180,125,10,'MOVE',null);
     INSERT INTO OBJECTS (OBJECT_ID,PARENT_ID,OBJECT_TYPE_ID,NAME,DESCRIPTION) VALUES (126,101,3,'c3m9','c3m9 desc');
@@ -402,7 +402,7 @@ INSERT INTO OBJECTS (OBJECT_ID,PARENT_ID,OBJECT_TYPE_ID,NAME,DESCRIPTION) VALUES
       INSERT INTO attributes (attr_id, object_id, value, date_value) VALUES (22,127,'UNPLEDGED',NULL); -- status
       INSERT INTO attributes (attr_id, object_id, value, date_value) VALUES (23,127,'0',NULL); -- turnsToPayBack
       --  
-    INSERT INTO OBJECTS (OBJECT_ID,PARENT_ID,OBJECT_TYPE_ID,NAME,DESCRIPTION) VALUES (128,101,6,'Шанс','Случайное событие');
+    INSERT INTO OBJECTS (OBJECT_ID,PARENT_ID,OBJECT_TYPE_ID,NAME,DESCRIPTION) VALUES (128,101,6,'РЁР°РЅСЃ','РЎР»СѓС‡Р°Р№РЅРѕРµ СЃРѕР±С‹С‚РёРµ');
       INSERT INTO attributes (attr_id, object_id, value, date_value) VALUES (2,128,'27',NULL); -- position
       INSERT INTO OBJECTS (OBJECT_ID,PARENT_ID,OBJECT_TYPE_ID,NAME,DESCRIPTION) VALUES (181,128,10,'GO_TO_JAIL',NULL);
       INSERT INTO OBJECTS (OBJECT_ID,PARENT_ID,OBJECT_TYPE_ID,NAME,DESCRIPTION) VALUES (182,128,10,'RANDOM_MONEY',NULL);
@@ -434,7 +434,7 @@ INSERT INTO OBJECTS (OBJECT_ID,PARENT_ID,OBJECT_TYPE_ID,NAME,DESCRIPTION) VALUES
       INSERT INTO attributes (attr_id, object_id, value, date_value) VALUES (22,130,'UNPLEDGED',NULL); -- status
       INSERT INTO attributes (attr_id, object_id, value, date_value) VALUES (23,130,'0',NULL); -- turnsToPayBack
       --  
-    INSERT INTO OBJECTS (OBJECT_ID,PARENT_ID,OBJECT_TYPE_ID,NAME,DESCRIPTION) VALUES (131,101,6,'В Тюрьму','Отправляйтесь в тюрьму');
+    INSERT INTO OBJECTS (OBJECT_ID,PARENT_ID,OBJECT_TYPE_ID,NAME,DESCRIPTION) VALUES (131,101,6,'Р’ РўСЋСЂСЊРјСѓ','РћС‚РїСЂР°РІР»СЏР№С‚РµСЃСЊ РІ С‚СЋСЂСЊРјСѓ');
       INSERT INTO attributes (attr_id, object_id, value, date_value) VALUES (2,131,'30',NULL); -- position
       INSERT INTO OBJECTS (OBJECT_ID,PARENT_ID,OBJECT_TYPE_ID,NAME,DESCRIPTION) VALUES (187,131,10,'GO_TO_JAIL',NULL);
     INSERT INTO OBJECTS (OBJECT_ID,PARENT_ID,OBJECT_TYPE_ID,NAME,DESCRIPTION) VALUES (132,101,3,'c1m7','c1m7 desc');
@@ -449,7 +449,7 @@ INSERT INTO OBJECTS (OBJECT_ID,PARENT_ID,OBJECT_TYPE_ID,NAME,DESCRIPTION) VALUES
       INSERT INTO attributes (attr_id, object_id, value, date_value) VALUES (22,132,'UNPLEDGED',NULL); -- status
       INSERT INTO attributes (attr_id, object_id, value, date_value) VALUES (23,132,'0',NULL); -- turnsToPayBack
       --  
-    INSERT INTO OBJECTS (OBJECT_ID,PARENT_ID,OBJECT_TYPE_ID,NAME,DESCRIPTION) VALUES (133,101,6,'Бильярдная','Тут много азартных игроков');
+    INSERT INTO OBJECTS (OBJECT_ID,PARENT_ID,OBJECT_TYPE_ID,NAME,DESCRIPTION) VALUES (133,101,6,'Р‘РёР»СЊСЏСЂРґРЅР°СЏ','РўСѓС‚ РјРЅРѕРіРѕ Р°Р·Р°СЂС‚РЅС‹С… РёРіСЂРѕРєРѕРІ');
       INSERT INTO attributes (attr_id, object_id, value, date_value) VALUES (2,133,'32',NULL); -- position
       INSERT INTO OBJECTS (OBJECT_ID,PARENT_ID,OBJECT_TYPE_ID,NAME,DESCRIPTION) VALUES (188,133,10,'RANDOM_MONEY',NULL);
     INSERT INTO OBJECTS (OBJECT_ID,PARENT_ID,OBJECT_TYPE_ID,NAME,DESCRIPTION) VALUES (134,101,3,'c2m7','c2m7 desc');
@@ -500,7 +500,7 @@ INSERT INTO OBJECTS (OBJECT_ID,PARENT_ID,OBJECT_TYPE_ID,NAME,DESCRIPTION) VALUES
       INSERT INTO attributes (attr_id, object_id, value, date_value) VALUES (22,137,'UNPLEDGED',NULL); -- status
       INSERT INTO attributes (attr_id, object_id, value, date_value) VALUES (23,137,'0',NULL); -- turnsToPayBack
       --  
-    INSERT INTO OBJECTS (OBJECT_ID,PARENT_ID,OBJECT_TYPE_ID,NAME,DESCRIPTION) VALUES (138,101,6,'Шанс','Случайное событие');
+    INSERT INTO OBJECTS (OBJECT_ID,PARENT_ID,OBJECT_TYPE_ID,NAME,DESCRIPTION) VALUES (138,101,6,'РЁР°РЅСЃ','РЎР»СѓС‡Р°Р№РЅРѕРµ СЃРѕР±С‹С‚РёРµ');
       INSERT INTO attributes (attr_id, object_id, value, date_value) VALUES (2,138,'37',NULL); -- position
       INSERT INTO OBJECTS (OBJECT_ID,PARENT_ID,OBJECT_TYPE_ID,NAME,DESCRIPTION) VALUES (189,138,10,'GO_TO_JAIL',NULL);
       INSERT INTO OBJECTS (OBJECT_ID,PARENT_ID,OBJECT_TYPE_ID,NAME,DESCRIPTION) VALUES (190,138,10,'RANDOM_MONEY',NULL);

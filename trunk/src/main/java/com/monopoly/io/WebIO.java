@@ -274,7 +274,7 @@ public class WebIO implements IO {
 			synchronized (selectPropertyLock) {
 				this.property = property;
 				selectPropertyRequest = false;
-				selectPlayerLock.notifyAll();
+				selectPropertyLock.notifyAll();
 			}
 		}
 

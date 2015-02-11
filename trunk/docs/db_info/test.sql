@@ -66,11 +66,10 @@ INSERT INTO OBJECTS (OBJECT_ID,PARENT_ID,OBJECT_TYPE_ID,NAME,DESCRIPTION) VALUES
       INSERT INTO attributes (attr_id, object_id, value, date_value) VALUES (3,17,'0',NULL); -- doublesCount
       INSERT INTO attributes (attr_id, object_id, value, date_value) VALUES (4,17,'CLEAN',NULL); -- jailStatus
       INSERT INTO attributes (attr_id, object_id, value, date_value) VALUES (5,17,'0',NULL); -- jailTerm
-      INSERT INTO attributes (attr_id, object_id, value, date_value) VALUES (6,17,'Player 2',NULL); -- name
+      INSERT INTO attributes (attr_id, object_id, value, date_value) VALUES (6,17,'false',NULL); -- extraTurn
       INSERT INTO attributes (attr_id, object_id, value, date_value) VALUES (7,17,'false',NULL); -- offerADeal
       INSERT INTO attributes (attr_id, object_id, value, date_value) VALUES (8,17,'false',NULL); -- payRent
-      INSERT INTO attributes (attr_id, object_id, value, date_value) VALUES (9,17,'10',NULL); -- position
-      --INSERT INTO attributes (attr_id, object_id, value, date_value) VALUES (10,17,'0',NULL); -- property_ref
+      INSERT INTO attributes (attr_id, object_id, value, date_value) VALUES (9,17,'10',NULL); -- position      
       INSERT INTO attributes (attr_id, object_id, value, date_value) VALUES (11,17,'ACTIVE',NULL); -- status
       INSERT INTO attributes (attr_id, object_id, value, date_value) VALUES (12,17,'5000',NULL); -- wallet
       -- property_ref

@@ -1,14 +1,16 @@
 package com.monopoly.action.deal;
 
-import com.monopoly.board.Board;
+import static org.apache.commons.collections4.CollectionUtils.isEmpty;
+
+import java.util.ArrayList;
+import java.util.LinkedHashSet;
+import java.util.List;
+import java.util.Set;
+
 import com.monopoly.board.cells.Cell;
 import com.monopoly.board.cells.Property;
 import com.monopoly.board.player.Player;
 import com.monopoly.game.session.GameSession;
-
-import java.util.*;
-
-import static org.apache.commons.collections4.CollectionUtils.isEmpty;
 
 /**
  * Created by Roma on 24.11.2014.
@@ -20,9 +22,7 @@ public class DealContainer {
 	private Set<Property> giveProperties = new LinkedHashSet<>();
 	private Player source;
 	private Player target;
-	private List<Integer> askPropertiesIDs;
-	private List<Integer> givePropertiesIDs;
-
+	
 	public DealContainer() {
 	}
 
@@ -49,8 +49,7 @@ public class DealContainer {
 		return deal;
 	}
 
-	public void setAskPropertiesIDs(List<Integer> askPropertiesIDs) {
-		this.askPropertiesIDs = askPropertiesIDs;
+	public void setAskPropertiesIDs(List<Integer> askPropertiesIDs) {		
 		fillProperties(askPropertiesIDs, askProperties);
 	}
 
@@ -61,8 +60,7 @@ public class DealContainer {
 		}
 	}
 
-	public void setGivePropertiesIDs(List<Integer> givePropertiesIDs) {
-		this.givePropertiesIDs = givePropertiesIDs;
+	public void setGivePropertiesIDs(List<Integer> givePropertiesIDs) {		
 		fillProperties(givePropertiesIDs, giveProperties);
 	}
 

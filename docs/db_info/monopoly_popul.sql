@@ -1,4 +1,20 @@
-delete objects;    
+delete objects;
+drop sequence get_id_seq;
+--
+CREATE SEQUENCE get_id_seq START WITH 1000 MAXVALUE 999999 INCREMENT BY 1 NOCACHE CYCLE;
+
+-- Функция для получения уникального id 
+
+CREATE OR REPLACE FUNCTION get_id RETURN NUMBER
+  AS
+    v_ret NUMBER;
+  BEGIN
+    SELECT to_number(TO_CHAR(sysdate,'yyyymmddhh24miss') || lpad(TO_CHAR(get_id_seq.nextval),6,'0'))
+      INTO v_ret
+    FROM DUAL;
+    RETURN v_ret;
+  END;
+ /
 
 --------------------------------------------------------------
 -- TEST Users

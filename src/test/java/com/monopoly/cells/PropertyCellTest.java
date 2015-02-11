@@ -87,14 +87,14 @@ public class PropertyCellTest {
     public void UpgradeBuildingTest()
     {   p1.buyProperty(prop);
         prop.buildBuilding(building);
-        Assert.assertEquals(1, building.currentLevel());
+        Assert.assertEquals(1, building.getCurrentLevel());
         prop.upgradeBuilding();
-       Assert.assertEquals(2, building.currentLevel());
-        prop.upgradeBuilding();
-        prop.upgradeBuilding();
+       Assert.assertEquals(2, building.getCurrentLevel());
         prop.upgradeBuilding();
         prop.upgradeBuilding();
-        Assert.assertEquals(5, building.currentLevel());
+        prop.upgradeBuilding();
+        prop.upgradeBuilding();
+        Assert.assertEquals(5, building.getCurrentLevel());
     }
 
     @Test

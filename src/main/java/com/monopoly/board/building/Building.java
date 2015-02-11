@@ -5,12 +5,11 @@ package com.monopoly.board.building;
  */
 public class Building implements BuildingOperations {
 	
-    public static final float PERCENTAGE_FOR_NEW_BUILD = 0.1F;
+    public static final float PERCENTAGE_FOR_NEW_LEVEL = 0.5F;
 
     //TODO еобходимо еще реализовать поле по которому возможно узнавать и
     //использовать бонусы от постройки
-    
-    private int currentPrice;
+        
     private int primaryCost;
     private String name;
     private String description;
@@ -28,37 +27,26 @@ public class Building implements BuildingOperations {
     	this.name = settings.getName();
     	this.description = settings.getDescription();
     	this.maxLevel = settings.getMaxLevel();
-    	this.primaryCost = cost;
-        this.currentPrice = cost;
-        this.currentLevel = 1;
+    	this.primaryCost = cost;    	
+        this.currentLevel = 1;        
     }
     
 	public boolean levelUp() {
-		if (this.currentLevel <= this.maxLevel && this.currentLevel > 0) {
+		if (this.currentLevel < this.maxLevel) {
 			this.currentLevel++;
-			this.currentPrice = Math.round(this.currentPrice + this.currentPrice
-					* PERCENTAGE_FOR_NEW_BUILD);
 			return true;
 		}
 		return false;
 	}
 
 	public boolean levelDown() {
-		if (this.currentLevel > 0) {
-			//TODO подумать над тем когда будет продаваться последнее здание
-			//и ячейка должна будет быть пустой значит ее надо делать null
-			//и удалять из коллекции
-			this.currentLevel--;
-			this.currentPrice = Math.round(this.currentPrice - PERCENTAGE_FOR_NEW_BUILD * this.currentPrice);
+		if (this.currentLevel > 0) {			
+			this.currentLevel--;			
 			return true;
 		}
 		return false;
 	}
-
-    public int currentPrice() {
-        return currentPrice;
-    }
-
+    
     public String getBuildingName() {
         return name;
     }
@@ -66,11 +54,7 @@ public class Building implements BuildingOperations {
     public String getBuildingDescription() {
         return description;
     }
-
-    public int currentLevel() {
-        return currentLevel;
-    }
-    
+        
     public int getPrimaryCost() {
 		return primaryCost;
 	}
@@ -80,12 +64,17 @@ public class Building implements BuildingOperations {
     }
 
 	public int getCurrentPrice() {
-		return currentPrice;
+		return getPriceForLevel(currentLevel);
 	}
-
-	public void setCurrentPrice(int currentPrice) {
-		this.currentPrice = currentPrice;
+	
+	public int getNextPrice() {
+		return getPriceForLevel(currentLevel + 1);
 	}
+	
+	private int getPriceForLevel(int level) {
+		return Math.round(this.primaryCost  + this.primaryCost * (level - 1) 
+				* PERCENTAGE_FOR_NEW_LEVEL);
+	}	
 
 	public String getName() {
 		return name;

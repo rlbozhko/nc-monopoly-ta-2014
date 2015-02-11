@@ -12,8 +12,8 @@ public interface BuildingOperations {
     boolean levelUp();
     boolean levelDown();
     
-    int currentPrice();
-    int currentLevel();
+    int getCurrentPrice();
+    int getCurrentLevel();
     int getMaxLevel();
     int getPrimaryCost();
     

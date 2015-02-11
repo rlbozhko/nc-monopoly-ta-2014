@@ -2,7 +2,6 @@ package com.monopoly.database.dao;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.util.List;
 
 import javax.sql.DataSource;
 
@@ -17,7 +16,7 @@ import org.springframework.stereotype.Repository;
 import com.monopoly.bean.User;
 
 @Repository
-public class UserDbDao implements Dao<User> {
+public class UserDbDao {
 
 	private JdbcTemplate jdbcTemplate;
 
@@ -26,94 +25,67 @@ public class UserDbDao implements Dao<User> {
 		this.jdbcTemplate = new JdbcTemplate(dataSource);
 	}
 
-	@Override
-	public User getByKey(int key) {
-		// TODO Auto-generated method stub
-		return null;
+	public User insert(User user) throws SQLException {		
+		synchronized (UserDbDao.class) {
+			if (getByEmail(user.getEmail()) != null || getByName(user.getNickName()) != null) {
+				throw new SQLException("User " + user.getEmail() + " has already exists");
+			}
+			Long id = System.currentTimeMillis();
+			this.jdbcTemplate.update("INSERT INTO OBJECTS (OBJECT_ID,PARENT_ID,OBJECT_TYPE_ID,NAME,DESCRIPTION) "
+					+ "VALUES (? ,NULL,7, ? ,?)", id, user.getNickName(), user.getHash());
+			this.jdbcTemplate.update("INSERT INTO attributes (attr_id, object_id, value, date_value) "
+					+ "VALUES (35, ?, ?, NULL)", id, user.getEmail());
+			this.jdbcTemplate.update("INSERT INTO attributes (attr_id, object_id, value, date_value) "
+					+ "VALUES (38, ?, ?, NULL)", id, user.getPassword());
+			return user;
+		}
 	}
 
-	@Override
-	public User insert(User object) {
-		// TODO Auto-generated method stub
-		return null;
+	public void delete(User user) {
+		this.jdbcTemplate.update("delete from objects where objects.name = ?", user.getNickName());
 	}
 
-	@Override
-	public void update(User object) {
-		// TODO Auto-generated method stub
-
-	}
-
-	@Override
-	public void merge(User object) {
-		// TODO Auto-generated method stub
-
-	}
-
-	@Override
-	public void delete(User object) {
-		// TODO Auto-generated method stub
-
-	}
-
-	@Override
-	public List<User> getAllByParentKey(int key) {
-		
-		return null;
-	}
-	
-	public Integer getId(User user) {
-		String sql = 
-				"select users.object_id id, users.name name, u_email.value email, " +
-				"  u_password.value password, users.description hash " +
-				"  from objects users, attributes u_email,attributes u_password " +  
-				"  where users.object_type_id = 7 and " +
-				"    u_email.attr_id = 35 and " +
-				"    u_password.attr_id = 38 and " +
-				"    u_email.object_id = users.object_id and " +
-				"    u_password.object_id = users.object_id and " +
-				"    u_email.value = ? and " +
-				"    u_password.value = ?";
-		Integer id;
+	public Long getId(User user) {
+		String sql = "select users.object_id id, users.name name, u_email.value email, "
+				+ "  u_password.value password, users.description hash "
+				+ "  from objects users, attributes u_email,attributes u_password "
+				+ "  where users.object_type_id = 7 and " + "    u_email.attr_id = 35 and "
+				+ "    u_password.attr_id = 38 and " + "    u_email.object_id = users.object_id and "
+				+ "    u_password.object_id = users.object_id and " + "    u_email.value = ? and "
+				+ "    u_password.value = ?";
+		Long id;
 		try {
-			id = this.jdbcTemplate.queryForObject(sql, new Object[]{user.getEmail(), user.getPassword()},
-					new RowMapper<Integer>() {
-				public Integer mapRow(ResultSet rs, int rowNum) throws SQLException {
-					return Integer.parseInt(rs.getString("id"));					
-				}
-			});
+			id = this.jdbcTemplate.queryForObject(sql, new Object[] { user.getEmail(), user.getPassword() },
+					new RowMapper<Long>() {
+						public Long mapRow(ResultSet rs, int rowNum) throws SQLException {
+							return Long.parseLong(rs.getString("id"));
+						}
+					});
 		} catch (DataAccessException e) {
 			return null;
 		}
 		return id;
 	}
-	
-	public void updateHash(User user, String hash) {		
-		this.jdbcTemplate.update(
-		        "update objects set description = ? where object_id = ?",
-		        hash, getId(user));
+
+	public void updateHash(User user, String hash) {
+		this.jdbcTemplate.update("update objects set description = ? where object_id = ?", hash, getId(user));
 		user.setHash(hash);
 	}
-	
+
 	public User getByEmailPassword(String email, String password) {
-		String sql = 
-				"select users.name name, u_email.value email, " +
-				"  u_password.value password, users.description hash " +
-				"  from objects users, attributes u_email,attributes u_password " +  
-				"  where users.object_type_id = 7 and " +
-				"    u_email.attr_id = 35 and " +
-				"    u_password.attr_id = 38 and " +
-				"    u_email.object_id = users.object_id and " +
-				"    u_password.object_id = users.object_id and " +
-				"    u_email.value = ? and " +
-				"    u_password.value = ?";
+		String sql = "select users.name name, u_email.value email, "
+				+ "  u_password.value password, users.description hash "
+				+ "  from objects users, attributes u_email,attributes u_password "
+				+ "  where users.object_type_id = 7 and " + "    u_email.attr_id = 35 and "
+				+ "    u_password.attr_id = 38 and " + "    u_email.object_id = users.object_id and "
+				+ "    u_password.object_id = users.object_id and " + "    u_email.value = ? and "
+				+ "    u_password.value = ?";
 		User user;
 		try {
-			user = this.jdbcTemplate.queryForObject(sql, new Object[]{email, password},
-					new RowMapper<User>() {
+			user = this.jdbcTemplate.queryForObject(sql, new Object[] { email, password }, new RowMapper<User>() {
 				public User mapRow(ResultSet rs, int rowNum) throws SQLException {
-					return new User(rs.getString("email"), rs.getString("password"),
-							rs.getString("hash"), rs.getString("name"));					
+					return new User(rs.getString("email"), rs.getString("password"), rs.getString("hash"), rs
+							.getString("name"));
 				}
 			});
 		} catch (DataAccessException e) {
@@ -121,25 +93,62 @@ public class UserDbDao implements Dao<User> {
 		}
 		return user;
 	}
-	
+
+	public User getByEmail(String email) {
+		String sql = "select users.name name, u_email.value email, "
+				+ "  u_password.value password, users.description hash "
+				+ "  from objects users, attributes u_email,attributes u_password "
+				+ "  where users.object_type_id = 7 and " + "    u_email.attr_id = 35 and "
+				+ "    u_password.attr_id = 38 and " + "    u_email.object_id = users.object_id and "
+				+ "    u_password.object_id = users.object_id and " + "    u_email.value = ?";
+		User user;
+		try {
+			user = this.jdbcTemplate.queryForObject(sql, new Object[] { email }, new RowMapper<User>() {
+				public User mapRow(ResultSet rs, int rowNum) throws SQLException {
+					return new User(rs.getString("email"), rs.getString("password"), rs.getString("hash"), rs
+							.getString("name"));
+				}
+			});
+		} catch (DataAccessException e) {
+			return null;
+		}
+		return user;
+	}
+
+	public User getByName(String name) {
+		String sql = "select users.name name, u_email.value email, "
+				+ "  u_password.value password, users.description hash "
+				+ "  from objects users, attributes u_email,attributes u_password "
+				+ "  where users.object_type_id = 7 and " + "    u_email.attr_id = 35 and "
+				+ "    u_password.attr_id = 38 and " + "    u_email.object_id = users.object_id and "
+				+ "    u_password.object_id = users.object_id and " + "    users.name = ?";
+		User user;
+		try {
+			user = this.jdbcTemplate.queryForObject(sql, new Object[] { name }, new RowMapper<User>() {
+				public User mapRow(ResultSet rs, int rowNum) throws SQLException {
+					return new User(rs.getString("email"), rs.getString("password"), rs.getString("hash"), rs
+							.getString("name"));
+				}
+			});
+		} catch (DataAccessException e) {
+			return null;
+		}
+		return user;
+	}
+
 	public User getByHash(String hash) {
-		String sql = 
-				"select users.name name, u_email.value email, " +
-				"  u_password.value password, users.description hash " +
-				"  from objects users, attributes u_email,attributes u_password " +  
-				"  where users.object_type_id = 7 and " +
-				"    u_email.attr_id = 35 and " +
-				"    u_password.attr_id = 38 and " +
-				"    u_email.object_id = users.object_id and " +
-				"    u_password.object_id = users.object_id and " +
-				"    users.description = ?";
+		String sql = "select users.name name, u_email.value email, "
+				+ "  u_password.value password, users.description hash "
+				+ "  from objects users, attributes u_email,attributes u_password "
+				+ "  where users.object_type_id = 7 and " + "    u_email.attr_id = 35 and "
+				+ "    u_password.attr_id = 38 and " + "    u_email.object_id = users.object_id and "
+				+ "    u_password.object_id = users.object_id and " + "    users.description = ?";
 		User user;
 		try {
-			user = this.jdbcTemplate.queryForObject(sql, new Object[]{hash},
-					new RowMapper<User>() {
+			user = this.jdbcTemplate.queryForObject(sql, new Object[] { hash }, new RowMapper<User>() {
 				public User mapRow(ResultSet rs, int rowNum) throws SQLException {
-					return new User(rs.getString("email"), rs.getString("password"),
-							rs.getString("hash"), rs.getString("name"));					
+					return new User(rs.getString("email"), rs.getString("password"), rs.getString("hash"), rs
+							.getString("name"));
 				}
 			});
 		} catch (DataAccessException e) {
@@ -147,33 +156,47 @@ public class UserDbDao implements Dao<User> {
 		}
 		return user;
 	}
-	
 
 	public static void main(String[] args) {
 		ApplicationContext context = new FileSystemXmlApplicationContext("test_files\\beans.xml");
 		UserDbDao dao = context.getBean(UserDbDao.class);
 		User user = dao.getByEmailPassword("petya@test.ua", "123");
 		printUser(user);
-		
-		Integer id = dao.getId(user);
+
+		Long id = dao.getId(user);
 		System.out.println(id);
-		User newUser = new User("","","","");
+		User newUser = new User("", "", "", "");
 		id = dao.getId(newUser);
 		System.out.println(id);
 		printUser(newUser);
-		
+
 		String hash = "648421354";
 		dao.updateHash(user, hash);
-		User u2 = dao.getByEmailPassword("petya@test.ua", "123");		
+		User u2 = dao.getByEmailPassword("petya@test.ua", "123");
 		printUser(u2);
-		
+
 		dao.updateHash(newUser, "123");
-	
+
 		User hashUser = dao.getByHash(hash);
 		printUser(hashUser);
 		
+		User insertTest = new User("insert@mail.com", "123", "","insert");
+		
+		dao.delete(insertTest);
+		try {
+			dao.insert(insertTest);
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		printUser(dao.getByEmail(insertTest.getEmail()));
+		
+		try {
+			dao.insert(insertTest);
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
 	}
-	
+
 	private static void printUser(User user) {
 		System.out.println("Name = " + user.getNickName());
 		System.out.println("Email = " + user.getEmail());
@@ -181,4 +204,3 @@ public class UserDbDao implements Dao<User> {
 		System.out.println("Hash = " + user.getHash());
 	}
 }
-

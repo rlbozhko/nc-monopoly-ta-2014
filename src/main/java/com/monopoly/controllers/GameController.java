@@ -287,6 +287,12 @@ public class GameController {
 		if (user == null) {
 			return new ModelAndView("redirect:signin.action");
 		}
+		
+		SessionStatus sessionStatus = GameSession.getStatus();
+
+		if (sessionStatus != SessionStatus.RUN) {
+			return new ModelAndView("redirect:index.action");
+		}
 	
 		IO io = GameSession.getInstance().getUserIO(user);
 		io.setSelectedPlayer(ActionUtils.getPlayerByName(selectedPlayerName));
@@ -306,6 +312,13 @@ public class GameController {
 		if (user == null) {
 			return new ModelAndView("redirect:signin.action");
 		}
+		
+		SessionStatus sessionStatus = GameSession.getStatus();
+
+		if (sessionStatus != SessionStatus.RUN) {
+			return new ModelAndView("redirect:index.action");
+		}
+		
 		IO io = GameSession.getInstance().getUserIO(user);
 
 		dealContainer.setTarget(ActionUtils.getPlayerByName(dealTargetName));
@@ -338,6 +351,12 @@ public class GameController {
 		if (user == null) {
 			return new ModelAndView("redirect:signin.action");
 		}
+		
+		SessionStatus sessionStatus = GameSession.getStatus();
+
+		if (sessionStatus != SessionStatus.RUN) {
+			return new ModelAndView("redirect:index.action");
+		}
 
 		IO io = GameSession.getInstance().getUserIO(user);
 		yesNoDialog = io.getYesNoDialog();
@@ -357,6 +376,12 @@ public class GameController {
 
 		if (user == null) {
 			return new ModelAndView("redirect:signin.action");
+		}
+		
+		SessionStatus sessionStatus = GameSession.getStatus();
+
+		if (sessionStatus != SessionStatus.RUN) {
+			return new ModelAndView("redirect:index.action");
 		}
 		
 		System.out.println(propertyId);
@@ -380,6 +405,12 @@ public class GameController {
 
 		if (user == null) {
 			return new ModelAndView("redirect:signin.action");
+		}
+		
+		SessionStatus sessionStatus = GameSession.getStatus();
+
+		if (sessionStatus != SessionStatus.RUN) {
+			return new ModelAndView("redirect:index.action");
 		}
 		
 		System.out.println(propertyId);

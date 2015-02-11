@@ -5,6 +5,7 @@ import java.util.Random;
 
 import com.monopoly.action.ActionUtils;
 import com.monopoly.board.Board;
+import com.monopoly.board.building.Building;
 import com.monopoly.board.cells.Cell;
 import com.monopoly.board.cells.Property;
 import com.monopoly.game.session.GameSession;
@@ -34,11 +35,13 @@ public class EmergencyEvent extends Event {
 			int randomIndex = random.nextInt(cells.size());
 			Property property = (Property) cells.get(randomIndex);
 			if (property.hasBuilding()) {
-				property.getBuilding().levelDown();
+				Building building = property.getBuilding();
+				building.levelDown();
 				String message = null;
-				if (property.hasBuilding()) {
+				if (building.getCurrentLevel() > 0) {
 					message = description + " и у здания на ячейке " + property.getName() + " понижен уровень!";
 				} else {
+					property.destroyBuilding();
 					message = description + " и на ячейке " + property.getName() + " больше нет здания!";
 				}
 				ActionUtils.sendMessageToAll(message);

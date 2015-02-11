@@ -92,7 +92,8 @@ public class GameController {
 
 		PropertyManager propertyManager = gameSession.getPropertyManager();
 		
-		//testProperty();
+		//TODO
+		testProperty();
 		
 		if (io.hasYesNoDialog()) {
 			yesNoDialog = io.getYesNoDialog();
@@ -169,6 +170,42 @@ public class GameController {
 				.get(12);
 		Property testProperty9 = (Property) session.getBoard().getCells()
 				.get(7);
+		Property testProperty10 = (Property) session.getBoard().getCells()
+				.get(14);
+		Property testProperty11 = (Property) session.getBoard().getCells()
+				.get(15);
+		Property testProperty12 = (Property) session.getBoard().getCells()
+				.get(17);
+		Property testProperty13 = (Property) session.getBoard().getCells()
+				.get(19);
+		Property testProperty14 = (Property) session.getBoard().getCells()
+				.get(21);
+		Property testProperty15 = (Property) session.getBoard().getCells()
+				.get(23);
+		Property testProperty16 = (Property) session.getBoard().getCells()
+				.get(25);
+		Property testProperty17 = (Property) session.getBoard().getCells()
+				.get(26);
+		Property testProperty18 = (Property) session.getBoard().getCells()
+				.get(28);
+		Property testProperty19 = (Property) session.getBoard().getCells()
+				.get(29);
+		Property testProperty20 = (Property) session.getBoard().getCells()
+				.get(31);
+		Property testProperty21 = (Property) session.getBoard().getCells()
+				.get(33);
+		Property testProperty22 = (Property) session.getBoard().getCells()
+				.get(34);
+		Property testProperty23 = (Property) session.getBoard().getCells()
+				.get(35);
+		Property testProperty24 = (Property) session.getBoard().getCells()
+				.get(36);
+		Property testProperty25 = (Property) session.getBoard().getCells()
+				.get(38);
+		Property testProperty26 = (Property) session.getBoard().getCells()
+				.get(39);
+		
+		
 
 //		Player p1 = session.getBoard().getPlayers().get(0);
 		Player p2 = session.getBoard().getPlayers().get(1);
@@ -182,6 +219,23 @@ public class GameController {
 		testPropertyManager.setPropertyOwner(p2, testProperty7);
 		testPropertyManager.setPropertyOwner(p2, testProperty8);
 		testPropertyManager.setPropertyOwner(p2, testProperty9);
+		testPropertyManager.setPropertyOwner(p2, testProperty10);
+		testPropertyManager.setPropertyOwner(p2, testProperty11);
+		testPropertyManager.setPropertyOwner(p2, testProperty12);
+		testPropertyManager.setPropertyOwner(p2, testProperty13);
+		testPropertyManager.setPropertyOwner(p2, testProperty14);
+		testPropertyManager.setPropertyOwner(p2, testProperty15);
+		testPropertyManager.setPropertyOwner(p2, testProperty16);
+		testPropertyManager.setPropertyOwner(p2, testProperty17);
+		testPropertyManager.setPropertyOwner(p2, testProperty18);
+		testPropertyManager.setPropertyOwner(p2, testProperty19);
+		testPropertyManager.setPropertyOwner(p2, testProperty20);
+		testPropertyManager.setPropertyOwner(p2, testProperty21);
+		testPropertyManager.setPropertyOwner(p2, testProperty22);
+		testPropertyManager.setPropertyOwner(p2, testProperty23);
+		testPropertyManager.setPropertyOwner(p2, testProperty24);
+		testPropertyManager.setPropertyOwner(p2, testProperty25);
+		testPropertyManager.setPropertyOwner(p2, testProperty26);
 	}
 
 	@RequestMapping(value = "/action_type.action", method = RequestMethod.GET, params = { "actionType" })

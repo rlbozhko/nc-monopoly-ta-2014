@@ -65,7 +65,7 @@
 						</div>
 
 						<div>
-							<form action="game.action" method="get">
+							<form action="action_type.action" method="get">
 								<button type="submit" name="actionType" value="WAIT"
 									<c:if test="${!strActions.contains('WAIT')}">disabled="disabled"</c:if>>Wait</button>
 								<button type="submit" name="actionType" value="START_TURN"
@@ -78,31 +78,32 @@
 									<c:if test="${!strActions.contains('DEAL')}">disabled="disabled"</c:if>>Deal</button>
 								<button type="submit" name="actionType" value="FINISH_GAME"
 									<c:if test="${!strActions.contains('FINISH_GAME')}">disabled="disabled"</c:if>>FINISH_GAME</button>
+								<button type="submit" name="actionType" value="PAY_RENT"
+									<c:if test="${!strActions.contains('PAY_RENT')}">disabled="disabled"</c:if>>PAY_RENT</button>
+								<button type="submit" name="actionType" value="PLEDGE_PROPERTY"
+									<c:if test="${!strActions.contains('PLEDGE_PROPERTY')}">disabled="disabled"</c:if>>PLEDGE_PROPERTY</button>	
+									
+									
 							</form>
 							<c:if test="${activePlayers.size() == 0 }">
 								<form action="game_over.action" method="get">
 									<input type="submit" value="GAME_OVER">
 								</form>
 							 </c:if>
-							 ${hasYesNoDialog}<br>
-							 ${yesNoDialog}
 							 <c:if test="${hasYesNoDialog == true}">
 							 	<form id='dialog' name='dialog' action='dialog.action' method='GET'>
             						<input id="isAnswer" type="hidden" name='isAnswer' value="${hasYesNoDialog}">
             						<input type="text" value="TEST">
         						</form>
         					 </c:if>
-        					
-        						
 						</div>
-			<%-- 		<p>selectPlayerRequest = ${selectPlayerRequest}</p> --%>
 			
 						<c:if test="${selectPlayerRequest}">
 							<div>
-								<form action="game.action"  method="get">
+								<form action="select_player.action"  method="get">
 									<select name="selectedPlayerName">
-										<c:forEach items="${selectabelPlayers}" var="cursor">
-											<option value="${cursor.getName()}">${cursor.getName()}</option>
+										<c:forEach items="${selectabelPlayers}" var="each">
+											<option value="${each.getName()}">${each.getName()}</option>
 										</c:forEach>
 									</select>
 									<button type="submit">Select</button>
@@ -112,27 +113,43 @@
 			
 						<c:if test="${dealRequest}">
 							<div>
-								<form action="game.action"  method="get">				
+								<form action="deal_target.action"  method="get">				
 									Ask money <input type="text" name="askMoney" value="0"><br>
 									Give money <input type="text" name="giveMoney" value="0"><br>
 									<p>Ask property</p>				
 									<select name="askPropertiesIDs" multiple="multiple">
-										<c:forEach items="${targetProperty}" var="cursor">
-											<option value="${cursor.getPosition()}">${cursor.getName()}</option>
+										<c:forEach items="${targetProperty}" var="each">
+											<option value="${each.getPosition()}">${each.getName()}</option>
 										</c:forEach>
 									</select>
 									<br>
 									<p>Give property</p>
 									<select name="givePropertiesIDs" multiple="multiple">
-										<c:forEach items="${sourceProperty}" var="cursor">
-											<option value="${cursor.getPosition()}">${cursor.getName()}</option>
+										<c:forEach items="${sourceProperty}" var="each">
+											<option value="${each.getPosition()}">${each.getName()}</option>
 										</c:forEach>
 									</select>
 									<br>					
 									<button type="submit" name="dealTargetName" value="${targetPlayer}">Send Deal</button>
 								</form>
 							</div>
-						</c:if>				
+						</c:if>		
+						
+						<c:if test="${hasSelectPropertyRequest}">
+							<div>
+								<form action="pledge_property.action"  method="get">				
+									<p>Your properties</p>				
+									<select name="propertyId">
+										<c:set var="count" value="0"/>
+										<c:forEach items="${propertyList}" var="each">
+											<option value="${count}">${each.getName()}</option>
+											<c:set var="count" value="${count + 1}" />
+										</c:forEach>
+									</select>
+									<button type="submit">Select</button>
+								</form>
+							</div>
+						</c:if>		
 					</td>
 				</tr>
 			</tbody>

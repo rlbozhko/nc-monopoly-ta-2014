@@ -39,7 +39,7 @@ public class PledgePropertyAction implements Action {
             double pledgePercent = MAX_PLEDGE_PERCENT_PER_TURN;
             //
 
-            if (playerIO.yesNoDialog("Хотите заложить " + property.getName() + " за $" + payment + ".\n" +
+            if (playerIO.yesNoDialog("Хотите заложить " + property.getName() + " за $" + payment + "." +
                     " На " + turnsToPayBack + " ходов")) {
                 player.addMoney(payment);
                 property.setStatus(PropertyStatus.PLEDGED);

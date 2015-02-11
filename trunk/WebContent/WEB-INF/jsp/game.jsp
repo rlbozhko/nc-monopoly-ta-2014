@@ -90,7 +90,15 @@
 									<c:if test="${!strActions.contains('PAY_BAIL')}">disabled="disabled"</c:if>>PAY_BAIL</button>
 								<button type="submit" name="actionType" value="SERVE_JAIL_TERM"
 									<c:if test="${!strActions.contains('SERVE_JAIL_TERM')}">disabled="disabled"</c:if>>SERVE_JAIL_TERM</button>
-									
+								<button type="submit" name="actionType" value="BUILD"
+									<c:if test="${!strActions.contains('BUILD')}">disabled="disabled"</c:if>>BUILD</button>
+								<button type="submit" name="actionType" value="UPGRADE_BUILDING"
+									<c:if test="${!strActions.contains('UPGRADE_BUILDING')}">disabled="disabled"</c:if>>UPGRADE_BUILDING</button>
+								<button type="submit" name="actionType" value="SELL_BUILDING"
+									<c:if test="${!strActions.contains('SELL_BUILDING')}">disabled="disabled"</c:if>>SELL_BUILDING</button>
+								<button type="submit" name="actionType" value="BETRAYAL"
+									<c:if test="${!strActions.contains('BETRAYAL')}">disabled="disabled"</c:if>>BETRAYAL</button>	
+										
 							</form>
 							<c:if test="${activePlayers.size() == 0 }">
 								<form action="game_over.action" method="get">

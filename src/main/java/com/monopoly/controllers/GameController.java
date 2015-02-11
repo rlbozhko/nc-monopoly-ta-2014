@@ -89,7 +89,7 @@ public class GameController {
 		System.out.println("io.hasSelectPlayerRequest() = "
 				+ io.hasSelectPlayerRequest());
 
-		testProperty();
+		//testProperty();
 		
 		if (io.hasYesNoDialog()) {
 			yesNoDialog = io.getYesNoDialog();
@@ -301,7 +301,9 @@ public class GameController {
 		IO io = GameSession.getInstance().getUserIO(user);
 		PropertyManager propertyManager = GameSession.getInstance().getPropertyManager();
 		Property property = propertyManager.getPlayerProperties(io.getOwner()).get(propertyId);
-		System.out.println(property.getDescription());
+		SelectPropertyHelper selectPropertyHelper = io.getSelectPropertyHelper();
+		selectPropertyHelper.setProperty(property);
+		
 		return new ModelAndView("redirect:game.action");
 	}
 

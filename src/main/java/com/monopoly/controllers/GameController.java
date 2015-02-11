@@ -29,12 +29,15 @@ import com.monopoly.game.session.SessionStatus;
 import com.monopoly.io.IO;
 import com.monopoly.io.WebIO.SelectPropertyHelper;
 import com.monopoly.io.WebIO.YesNoDialog;
+import com.monopoly.services.GameService;
 import com.monopoly.services.UserDbService;
 
 @Controller
 public class GameController {
 	@Autowired
 	private UserDbService userService;
+	@Autowired
+	private GameService gameService;
 
 	private YesNoDialog yesNoDialog;
 
@@ -61,7 +64,8 @@ public class GameController {
 		}
 
 		Session gameSession = GameSession.getInstance();
-
+		IO io = gameSession.getUserIO(user);
+		
 		List<Cell> cellsList = gameSession.getBoard().getCells();
 		Board board = gameSession.getBoard();
 
@@ -72,11 +76,14 @@ public class GameController {
 			mav.addObject("players", players);
 			mav.addObject("activePlayers", activePlayers);
 			mav.addObject("cellsList", cellsList);
+			mav.addObject("email", email);
 			return mav;
 		}
-
+		
+		Player player = io.getOwner();
+		
 		List<ActionType> actions = gameSession.getActionController()
-				.getAvailableActions(gameSession.getUserIO(user).getOwner());
+				.getAvailableActions(player);
 
 		List<String> stringActions = new ArrayList<>();
 		for (ActionType actionType : actions) {
@@ -85,10 +92,6 @@ public class GameController {
 
 		PropertyManager propertyManager = gameSession.getPropertyManager();
 		
-		IO io = gameSession.getUserIO(user);
-		System.out.println("io.hasSelectPlayerRequest() = "
-				+ io.hasSelectPlayerRequest());
-
 		//testProperty();
 		
 		if (io.hasYesNoDialog()) {
@@ -100,30 +103,32 @@ public class GameController {
 		if (io.hasSelectPlayerRequest()) {
 			board = gameSession.getBoard();
 			List<Player> selectabelPlayers = board.getActivePlayers();
-			selectabelPlayers.remove(io.getOwner());
+			selectabelPlayers.remove(player);
 			mav.addObject("selectabelPlayers", selectabelPlayers);
 			mav.addObject("selectPlayerRequest", true);
 		}
 
-		System.out.println("io.hasCreateDealRequest() = "
-				+ io.hasCreateDealRequest());
 		if (io.hasCreateDealRequest()) {
 			Player target = io.getDealTarget();
 			mav.addObject("targetPlayer", target.getName());
 			mav.addObject("targetProperty",
 					propertyManager.getPlayerProperties(target));
 			mav.addObject("sourceProperty",
-					propertyManager.getPlayerProperties(io.getOwner()));
+					propertyManager.getPlayerProperties(player));
 			mav.addObject("dealRequest", true);
 		}
 
-		System.out.println("io.hasSelectPropertyRequest() = "
-				+ io.hasSelectPropertyRequest());
 		if (io.hasSelectPropertyRequest()) {
-			
-			List<Property> propertyList= propertyManager.getPlayerProperties(io.getOwner());
+			List<Property> propertyList= propertyManager.getPlayerProperties(player);
 			mav.addObject("hasSelectPropertyRequest", io.hasSelectPropertyRequest());
 			mav.addObject("propertyList", propertyList);
+		}
+		
+		if (player.hasPledgedProperty()) {
+			List<Property> propertyList= propertyManager.getPlayerProperties(player);
+			List<Property> pledgedPropertiesList = gameService.getPledgedProperty(propertyList);
+			
+			mav.addObject("pledgedPropertiesList", pledgedPropertiesList);
 		}
 
 		Queue<String> messageQueue = io.getAllMessages();
@@ -285,7 +290,30 @@ public class GameController {
 	}
 	
 	@RequestMapping(value = "/pledge_property.action", method = RequestMethod.GET)
-	public ModelAndView selectProperty(
+	public ModelAndView selectPropertyPledge(
+			@CookieValue(value = "bb_data", required = false) String hash,
+			@RequestParam(value = "propertyId", required = false) Integer propertyId) {
+		
+		System.out.println("inside selectPlayer()");
+
+		User user = userService.getUser(hash);
+
+		if (user == null) {
+			return new ModelAndView("redirect:signin.action");
+		}
+		
+		System.out.println(propertyId);
+		IO io = GameSession.getInstance().getUserIO(user);
+		PropertyManager propertyManager = GameSession.getInstance().getPropertyManager();
+		Property property = propertyManager.getPlayerProperties(io.getOwner()).get(propertyId);
+		SelectPropertyHelper selectPropertyHelper = io.getSelectPropertyHelper();
+		selectPropertyHelper.setProperty(property);
+		
+		return new ModelAndView("redirect:game.action");
+	}
+	
+	@RequestMapping(value = "/pay_back.action", method = RequestMethod.GET)
+	public ModelAndView selectPropertyUnpledge(
 			@CookieValue(value = "bb_data", required = false) String hash,
 			@RequestParam(value = "propertyId", required = false) Integer propertyId) {
 		

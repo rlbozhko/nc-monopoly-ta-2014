@@ -124,7 +124,7 @@ public class ConsoleIO implements IO, Runnable {
 			Building building = property.getBuilding();
 			if (building != null) {
 				System.out.print(" "
-						+ (" " + building.getBuildingName() + " ур." + building.currentLevel()));
+						+ (" " + building.getBuildingName() + " ур." + building.getCurrentLevel()));
 			}
 			System.out.println("");
 		}

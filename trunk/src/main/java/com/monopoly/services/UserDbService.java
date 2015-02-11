@@ -1,5 +1,6 @@
 package com.monopoly.services;
 
+import java.sql.SQLException;
 import java.util.UUID;
 
 import javax.servlet.http.Cookie;
@@ -50,6 +51,21 @@ public class UserDbService {
 		}
 
 		return null;
+	}
+	
+	@Transactional
+	public boolean createUser(User user) {
+		try {
+			userDao.insert(user);
+		} catch (SQLException e) {
+			return false; //if already exists
+		}
+		return true; // if successfully created
+	}
+	
+	@Transactional
+	public void deleteUser(User user) {
+		userDao.delete(user);
 	}
 
 }

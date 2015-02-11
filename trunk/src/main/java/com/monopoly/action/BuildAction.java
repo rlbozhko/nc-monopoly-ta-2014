@@ -9,7 +9,7 @@ import com.monopoly.io.IO;
 public class BuildAction implements Action {
 	public final static ActionType type = ActionType.BUILD;
 	
-	private final int BUILDING_PRICE = 1000;
+	private int buildingPrice;
 	private IO io;
 	private Property property;
 	private Player player;	
@@ -24,11 +24,12 @@ public class BuildAction implements Action {
 			io.showWarning("Собственность не выбрана");
 			return;
 		}
+		buildingPrice = property.getPrice() / 5;
 		
-		if (io.yesNoDialog("Построить здание за " + BUILDING_PRICE + "?")
-				&& property.buildBuilding(new Building(BuildingType.CASTLE, BUILDING_PRICE))) {
-			io.showMessage("Здание построено");
-			ActionUtils.sendMessageToAll(player.getName() + "построил Здание на ячейке " + property.getName());
+		if (io.yesNoDialog("Построить Здание за $" + buildingPrice + "?")
+				&& property.buildBuilding(new Building(BuildingType.CASTLE, buildingPrice))) {
+			io.showMessage("Здание построено за $" + property.getBuilding().getPrimaryCost());
+			ActionUtils.sendMessageToAll(player.getName() + " построил Здание на " + property.getName());
 		} else {
 			showErrorMessage();
 		}		
@@ -37,8 +38,8 @@ public class BuildAction implements Action {
 	private void showErrorMessage() {
 		if (!property.getMonopoly().hasSameOwner(player)) {
 			io.showWarning("Здание не построено! Вся монополия должна принадлежать Вам");
-		} else if (player.getMoney() < BUILDING_PRICE) {
-			io.showWarning("Здание не построено! У Вас не достатточно средств");
+		} else if (player.getMoney() < buildingPrice) {
+			io.showWarning("Здание не построено! У Вас не достаточно средств");
 		} else if (property.hasBuilding()) {
 			io.showWarning("Тут уже есть здание!");
 		}		

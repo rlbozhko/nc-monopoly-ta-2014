@@ -19,12 +19,12 @@ public class BuildingTest {
 
 	@Test
 	public void getCurrentPriceTest() {
-		Assert.assertEquals(100, building.currentPrice());
+		Assert.assertEquals(100, building.getCurrentPrice());
 	}
 
 	@Test
 	public void getCurrentLevelTest() {
-		Assert.assertEquals(1, building.currentLevel());
+		Assert.assertEquals(1, building.getCurrentLevel());
 	}
 
 	@Test
@@ -40,13 +40,13 @@ public class BuildingTest {
 	@Test
 	public void getLevelUpTest() {
 		building.levelUp();
-		Assert.assertEquals(2, building.currentLevel());
+		Assert.assertEquals(2, building.getCurrentLevel());
 	}
 
 	@Test
 	public void getLevelDownTest() {
 		building.levelDown();
-		Assert.assertEquals(0, building.currentLevel());
+		Assert.assertEquals(0, building.getCurrentLevel());
 	}
 }
 	/*@Test

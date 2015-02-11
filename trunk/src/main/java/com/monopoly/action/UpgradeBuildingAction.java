@@ -9,6 +9,7 @@ public class UpgradeBuildingAction implements Action {
 	private IO io;
 	private Property property;
 	private Player player;
+	private int currentPrice;
 	public final static ActionType type = ActionType.UPGRADE_BUILDING;
 
 	@Override
@@ -26,23 +27,26 @@ public class UpgradeBuildingAction implements Action {
 			io.showWarning("Нечего повышать");
 			return;
 		}
+		currentPrice = building.getNextPrice(); 
 		if (buildingCheck(building)) {
-			ActionUtils.sendMessageToAll(player.getName() + "повысил здание до " + building.currentLevel() + " уровня.");
+			io.showMessage("Вы повысили здание до " + building.getCurrentLevel() + " уровня за $"	+ currentPrice);
+			ActionUtils.sendMessageToAll(player.getName() + " повысил здание до " + building.getCurrentLevel() + " уровня на " +
+			property.getName());
 		} else {
 			showErrorMessage(building);
 		}
 	}
 
 	private boolean buildingCheck(Building building) {
-		return building.getMaxLevel() > building.currentLevel()
-				&& io.yesNoDialog("Повысить уровень " + building.getBuildingName() + "за $" + building.currentPrice())
+		return building.getMaxLevel() > building.getCurrentLevel()
+				&& io.yesNoDialog("Повысить уровень Здания за $" + currentPrice)
 				&& property.upgradeBuilding();
 	}
 
 	private void showErrorMessage(Building building) {
-		if (building.getMaxLevel() == building.currentLevel()) {
+		if (building.getMaxLevel() == building.getCurrentLevel()) {
 			io.showWarning("Нельзя повысить! Максимальный Уровень здания");
-		} else if (player.getMoney() < building.currentPrice()) {
+		} else if (player.getMoney() < building.getCurrentPrice()) {
 			io.showWarning("Не достаточно средств!");
 		}
 	}

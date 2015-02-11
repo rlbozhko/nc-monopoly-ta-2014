@@ -25,14 +25,15 @@ public class SellBuildingLevelAction implements Action {
 		if (building == null) {
 			io.showWarning("Нечего понижать");
 			return;
-		}
-		if (buildingCheck(building)) {
-			ActionUtils.sendMessageToAll(player.getName() + " понизил уровень Здания на ячейке " + property.getName());
+		}		
+		if (buildingCheck(building)) {			
+			ActionUtils.sendMessageToAll(player.getName() + " понизил уровень Здания на " + property.getName());
 		}
 	}
 
 	private boolean buildingCheck(Building building) {
-		return io.yesNoDialog("Понизить уровень " + building.getBuildingName() + "?") && property.sellBuilding();
+		return io.yesNoDialog("Продать уровень Здания на " + property.getName() + " за $" 
+				+ (building.getCurrentPrice() / 2) + " ?") && property.sellBuilding();
 	}
 
 	@Override

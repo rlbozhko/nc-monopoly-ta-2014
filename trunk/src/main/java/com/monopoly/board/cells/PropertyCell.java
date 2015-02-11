@@ -1,10 +1,12 @@
 package com.monopoly.board.cells;
 
+import com.monopoly.action.ActionUtils;
 import com.monopoly.board.building.Building;
 import com.monopoly.board.player.Player;
 import com.monopoly.board.player.PropertyManager;
 import com.monopoly.entity.PropertyCellEntity;
 import com.monopoly.game.session.GameSession;
+import com.monopoly.io.IO;
 
 /**
  * Created by Roma on 06.11.2014.
@@ -129,7 +131,7 @@ public class PropertyCell extends Property {
 	public boolean buildBuilding(Building building) {
 		PropertyManager propertyManager = GameSession.getInstance().getPropertyManager();
 		Player owner = propertyManager.getPropertyOwner(this);
-		if (this.building == null && monopoly.hasSameOwner(owner)) {
+		if (this.building == null && monopoly.hasSameOwner(owner) && owner.subtractMoney(building.getPrimaryCost())) {
 			this.building = building;
 			return true;
 		}
@@ -139,8 +141,8 @@ public class PropertyCell extends Property {
 	@Override
 	public boolean upgradeBuilding() {
 		PropertyManager propertyManager = GameSession.getInstance().getPropertyManager();
-		if (building != null && building.currentLevel() < building.getMaxLevel()
-				&& propertyManager.getPropertyOwner(this).subtractMoney(building.currentPrice())) {
+		if (building != null && building.getCurrentLevel() < building.getMaxLevel()
+				&& propertyManager.getPropertyOwner(this).subtractMoney(building.getNextPrice())) {
 			building.levelUp();
 			return true;
 		}
@@ -151,15 +153,31 @@ public class PropertyCell extends Property {
 	public boolean sellBuilding() {
 		PropertyManager propertyManager = GameSession.getInstance().getPropertyManager();
 		if (building != null) {
-			propertyManager.getPropertyOwner(this).addMoney(building.currentPrice() / 2);
-			if (building.currentLevel() > 1) {
+			int money = building.getCurrentPrice() / 2;
+			Player owner = propertyManager.getPropertyOwner(this);
+			owner.addMoney(money);
+			IO io = ActionUtils.getPlayerIO(owner);
+			if (building.getCurrentLevel() > 1) {
 				building.levelDown();
+				io.showMessage("Вы понизили Здание на " + getName() + " до " + building.getCurrentLevel() 
+						+ " уровня за $" + money);
 			} else {
+				io.showMessage("Вы продали Здание на " + getName() + " за $" + money);
 				building = null;
 			}
 			return true;
 		}
 		return false;
+	}
+	
+	@Override
+	public boolean destroyBuilding() {
+		if (building != null) {
+			building = null;
+			return true;
+		} else {
+			return false;
+		}
 	}
 
 	@Override
@@ -171,7 +189,7 @@ public class PropertyCell extends Property {
 	public int getRent() {
 		int result = baseRent;
 		if (hasBuilding()) {
-			result = Math.round(baseRent * (1 + building.currentLevel() * RENT_RATE));
+			result = Math.round(baseRent * (1 + building.getCurrentLevel() * RENT_RATE));
 		}
 		return result;
 	}

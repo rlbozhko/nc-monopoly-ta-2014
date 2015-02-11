@@ -70,6 +70,9 @@ where password.object_id = 500 and   --var
   password.attr_id = 38;
 --
 
+--delete user
+delete from objects where objects.name = 'insert';
+
 select users.object_id, users.name name, u_email.value email,
   u_password.value password, users.description "hash"
 from objects users, attributes u_email,attributes u_password  

@@ -124,12 +124,14 @@ public class GameController {
 			mav.addObject("propertyList", propertyList);
 		}
 		
+		//TODO
 		if (player.hasPledgedProperty()) {
 			List<Property> propertyList= propertyManager.getPlayerProperties(player);
 			List<Property> pledgedPropertiesList = gameService.getPledgedProperty(propertyList);
 			
 			mav.addObject("pledgedPropertiesList", pledgedPropertiesList);
 		}
+		
 
 		Queue<String> messageQueue = io.getAllMessages();
 
@@ -140,6 +142,7 @@ public class GameController {
 		mav.addObject("email", email);
 		mav.addObject("cellsList", cellsList);
 		mav.addObject("strActions", stringActions);
+		mav.addObject("isJailed", player.isJailed());
 
 		return mav;
 	}

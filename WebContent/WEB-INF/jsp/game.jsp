@@ -83,8 +83,13 @@
 								<button type="submit" name="actionType" value="PLEDGE_PROPERTY"
 									<c:if test="${!strActions.contains('PLEDGE_PROPERTY')}">disabled="disabled"</c:if>>PLEDGE_PROPERTY</button>
 								<button type="submit" name="actionType" value="PAY_BACK"
-									<c:if test="${!strActions.contains('PAY_BACK')}">disabled="disabled"</c:if>>PAY_BACK</button>		
-									
+									<c:if test="${!strActions.contains('PAY_BACK')}">disabled="disabled"</c:if>>PAY_BACK</button>
+								<button type="submit" name="actionType" value="ESCAPE"
+									<c:if test="${!strActions.contains('ESCAPE')}">disabled="disabled"</c:if>>ESCAPE</button>
+								<button type="submit" name="actionType" value="PAY_BAIL"
+									<c:if test="${!strActions.contains('PAY_BAIL')}">disabled="disabled"</c:if>>PAY_BAIL</button>
+								<button type="submit" name="actionType" value="SERVE_JAIL_TERM"
+									<c:if test="${!strActions.contains('SERVE_JAIL_TERM')}">disabled="disabled"</c:if>>SERVE_JAIL_TERM</button>
 									
 							</form>
 							<c:if test="${activePlayers.size() == 0 }">

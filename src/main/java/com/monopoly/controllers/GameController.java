@@ -219,18 +219,18 @@ public class GameController {
 			@CookieValue(value = "bb_data", required = false) String hash,
 			@RequestParam String selectedPlayerName) {
 		System.out.println("inside selectPlayer()");
-
+	
 		User user = userService.getUser(hash);
-
+	
 		if (user == null) {
 			return new ModelAndView("redirect:signin.action");
 		}
-
+	
 		IO io = GameSession.getInstance().getUserIO(user);
 		io.setSelectedPlayer(ActionUtils.getPlayerByName(selectedPlayerName));
 		System.out.println(selectedPlayerName);
 		return new ModelAndView("redirect:game.action");
-	}
+	}	
 
 	@RequestMapping(value = "/deal_target.action", method = RequestMethod.GET, params = { "dealTargetName" })
 	public ModelAndView createDeal(

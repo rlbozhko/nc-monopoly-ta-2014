@@ -81,7 +81,9 @@
 								<button type="submit" name="actionType" value="PAY_RENT"
 									<c:if test="${!strActions.contains('PAY_RENT')}">disabled="disabled"</c:if>>PAY_RENT</button>
 								<button type="submit" name="actionType" value="PLEDGE_PROPERTY"
-									<c:if test="${!strActions.contains('PLEDGE_PROPERTY')}">disabled="disabled"</c:if>>PLEDGE_PROPERTY</button>	
+									<c:if test="${!strActions.contains('PLEDGE_PROPERTY')}">disabled="disabled"</c:if>>PLEDGE_PROPERTY</button>
+								<button type="submit" name="actionType" value="PAY_BACK"
+									<c:if test="${!strActions.contains('PAY_BACK')}">disabled="disabled"</c:if>>PAY_BACK</button>		
 									
 									
 							</form>
@@ -93,7 +95,6 @@
 							 <c:if test="${hasYesNoDialog == true}">
 							 	<form id='dialog' name='dialog' action='dialog.action' method='GET'>
             						<input id="isAnswer" type="hidden" name='isAnswer' value="${hasYesNoDialog}">
-            						<input type="text" value="TEST">
         						</form>
         					 </c:if>
 						</div>

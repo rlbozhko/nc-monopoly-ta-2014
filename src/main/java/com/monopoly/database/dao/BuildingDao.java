@@ -15,7 +15,7 @@ import com.monopoly.board.building.Building;
 import com.monopoly.board.building.BuildingType;
 
 @Repository
-public class BuildingDao implements Dao<Building> {
+public class BuildingDao {
 
 	private JdbcTemplate jdbcTemplate;
 
@@ -23,38 +23,21 @@ public class BuildingDao implements Dao<Building> {
 	public void setDataSource(DataSource dataSource) {
 		this.jdbcTemplate = new JdbcTemplate(dataSource);
 	}
-
-	@Override
-	public Building getByKey(int key) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
+		
 	public Building insert(Building object) {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
-	@Override
-	public void update(Building object) {
-		// TODO Auto-generated method stub
+	
+	public void update(Building object) {	
+
+	}	
+	
+	public void delete(Building object) {	
 
 	}
-
-	@Override
-	public void merge(Building object) {
-		// TODO Auto-generated method stub
-
-	}
-
-	@Override
-	public void delete(Building object) {
-		// TODO Auto-generated method stub
-
-	}
-
-	@Override
+	
 	public List<Building> getAllByParentKey(int key) {
 		String sql = "select property_cells.object_id property_cell_id, building.name building_type, "
 				+ "  currentLevel.value currentLevel, maxLevel.value maxLevel, "

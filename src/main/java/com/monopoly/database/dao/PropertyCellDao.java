@@ -21,7 +21,7 @@ import com.monopoly.board.cells.PropertyStatus;
 import com.monopoly.entity.PropertyCellEntity;
 
 @Repository
-public class PropertyCellDao implements Dao<PropertyCell> {
+public class PropertyCellDao {
 
 	private JdbcTemplate jdbcTemplate;
 	
@@ -33,37 +33,21 @@ public class PropertyCellDao implements Dao<PropertyCell> {
 		this.jdbcTemplate = new JdbcTemplate(dataSource);
 	}
 
-	@Override
-	public PropertyCell getByKey(int key) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
 	public PropertyCell insert(PropertyCell object) {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
-	@Override
 	public void update(PropertyCell object) {
 		// TODO Auto-generated method stub
 
 	}
 
-	@Override
-	public void merge(PropertyCell object) {
-		// TODO Auto-generated method stub
-
-	}
-
-	@Override
 	public void delete(PropertyCell object) {
 		// TODO Auto-generated method stub
 
 	}
 
-	@Override
 	public List<PropertyCell> getAllByParentKey(int key) {
 		String sql = "select property_cells.object_id object_id, property_cells.name p_name, basePrice.value basePrice,"
 				+ "  baseRent.value baseRent, property_cells.description description, maxLevel.value maxLevel, "
@@ -104,28 +88,7 @@ public class PropertyCellDao implements Dao<PropertyCell> {
 						List<Building> buildings = buildingDao.getAllByParentKey(cell_id);
 						if (!buildings.isEmpty() && buildings.get(0) != null) {
 							entity.setBuilding(buildings.get(0));
-//							System.out.println(entity.getBuilding());
-//							Building b = entity.getBuilding();
-//							System.out.println(b.getName());
-//							System.out.println(b.getDescription());
-//							System.out.println(b.getCurrentLevel());
-//							System.out.println(b.getCurrentPrice());
-//							System.out.println(b.getMaxLevel());
-//							System.out.println(b.getPrimaryCost());
-						}
-//						System.out.println("getBasePrice = " + entity.getBasePrice());
-//						System.out.println("getBaseRent = " + entity.getBaseRent());
-//						System.out.println("getDescription = " + entity.getDescription());
-//						System.out.println("getMaxLevel = " + entity.getMaxLevel());
-//						System.out.println("getName = " + entity.getName());
-//						System.out.println("getPayBackMoney = " + entity.getPayBackMoney());
-//						System.out.println("getPledgePercent = " + entity.getPledgePercent());
-//						System.out.println("getPosition = " + entity.getPosition());
-//						System.out.println("getTurnsToPayBack = " + entity.getTurnsToPayBack());
-//						System.out.println("getStatus = " + entity.getStatus());
-//						System.out.println("getBuilding = " + entity.getBuilding());
-//						System.out.println("-----");
-						
+						}						
 						
 						return new PropertyCell(entity);
 					}

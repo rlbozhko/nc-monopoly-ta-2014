@@ -14,14 +14,10 @@ import org.springframework.jdbc.core.RowMapper;
 import org.springframework.stereotype.Repository;
 
 import com.monopoly.board.cells.EventCell;
-import com.monopoly.board.cells.Monopoly;
-import com.monopoly.board.cells.MonopolyType;
-import com.monopoly.board.cells.PropertyStatus;
 import com.monopoly.entity.EventCellEntity;
-import com.monopoly.entity.PropertyCellEntity;
 
 @Repository
-public class EventCellDao implements Dao<EventCell> {
+public class EventCellDao {
 
 	private JdbcTemplate jdbcTemplate;
 	
@@ -32,38 +28,22 @@ public class EventCellDao implements Dao<EventCell> {
 	public void setDataSource(DataSource dataSource) {
 		this.jdbcTemplate = new JdbcTemplate(dataSource);
 	}
-
-	@Override
-	public EventCell getByKey(int key) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
+	
 	public EventCell insert(EventCell object) {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
-	@Override
 	public void update(EventCell object) {
 		// TODO Auto-generated method stub
 
 	}
 
-	@Override
-	public void merge(EventCell object) {
-		// TODO Auto-generated method stub
-
-	}
-
-	@Override
 	public void delete(EventCell object) {
 		// TODO Auto-generated method stub
 
 	}
 
-	@Override
 	public List<EventCell> getAllByParentKey(int key) {
 		String sql = 
 				"select event_cells.object_id, event_cells.name name, event_cells.description description, "

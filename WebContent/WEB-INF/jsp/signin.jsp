@@ -8,18 +8,46 @@
 		<title>Monopoly - sign in</title>
 		<style>
 			.form-signin {
-	                width: 300px;
-	            		}
+	        	width: 300px;
+	        }
+	        .sign-up {
+				margin-top: 20px;
+			}
+			.navbar {
+			    margin-bottom:0;
+  				background-color: #205081;
+			}
+			
 		</style>
 			 <link href="webjars/bootstrap/3.3.1/css/bootstrap.min.css" rel="stylesheet">
 			 <link href="webjars/bootstrapvalidator/0.5.3/css/bootstrapValidator.min.css" rel="stylesheet">
-			 <link href="css/main.css" rel="stylesheet">
+<!-- 			 <link href="css/main.css" rel="stylesheet"> -->
 			 <script src="webjars/jquery/2.1.1/jquery.min.js"></script>
 			 <script src="webjars/bootstrapvalidator/0.5.3/js/bootstrapValidator.min.js"></script>
 			 <script src="webjars/bootstrap/3.3.1/js/bootstrap.min.js"></script>
+			 
 	</head>
 	<body>
-	
+	<div id="navtop">
+  		<div class="navbar navbar-custom navbar-static-top">
+    		<div class="container">
+      			<div class="navbar-collapse collapse">        
+        			<ul class="nav pull-right navbar-nav">
+          				<li>
+				            <form class="navbar-form" action="signin.action" method="get">
+				            	<button type="submit" class="btn btn-primary">Sign in</button>
+				            </form>
+          				</li>
+          				<li>
+				            <form class="navbar-form" action="signup.action" method="get">
+				              <button type="submit" class="btn btn-primary">Sign up</button>
+				            </form>
+          				</li>
+        			</ul>
+      			</div>		
+    		</div>
+  		</div>
+	</div>	  	  	
 	<div class="container" align="center" role="form">
 		<form class="form-signin" action="signin.action" method="post">
 			<h2 class="form-signin-heading">Please sign in</h2>
@@ -27,8 +55,14 @@
 			<input id="inputEmail" class="form-control" type="email" name="email" autofocus required placeholder="Email address">
 			<label class="sr-only" for="inputPassword">Password</label>
 			<input id="inputPassword" class="form-control" type="password" name="password" required placeholder="Password">
-<%-- 			<c:if test="${!isVerificationUser}"><font color="red">You type wrong email or password, please try again</font></c:if> <br><br> --%>
-			<button class="btn btn-lg btn-primary btn-block" type="submit">Sign in</button>
+			<div class="buttons-container">
+				<div class="buttons">
+					<button class="btn btn-lg btn-primary btn-block" type="submit">Sign in</button>
+				</div>
+				<div class="sign-up">
+          			<a href="signup.action">Need an account? Sign up free.</a>
+        		</div>
+			</div>
 		</form>
 	</div>
 	</body>

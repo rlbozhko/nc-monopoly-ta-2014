@@ -52,20 +52,38 @@ public class UserDbService {
 
 		return null;
 	}
-	
+
 	@Transactional
 	public boolean createUser(User user) {
 		try {
 			userDao.insert(user);
 		} catch (SQLException e) {
-			return false; //if already exists
+			return false; // if already exists
 		}
 		return true; // if successfully created
 	}
-	
+
 	@Transactional
 	public void deleteUser(User user) {
 		userDao.delete(user);
+	}
+
+	@Transactional
+	public boolean isEmailExists(String email) {
+		User user = userDao.getByEmail(email);
+		if (user != null) {
+			return true;
+		}
+		return false;
+	}
+
+	@Transactional
+	public boolean isNickNameExists(String nickName) {
+		User user = userDao.getByName(nickName);
+		if (user != null) {
+			return true;
+		}
+		return false;
 	}
 
 }

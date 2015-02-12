@@ -57,5 +57,5 @@ public abstract class Property extends Cell {
 
 	abstract public void resetPledge();
 
-	abstract public boolean destroyBuilding();
+	abstract public boolean destroyBuilding();	
 }

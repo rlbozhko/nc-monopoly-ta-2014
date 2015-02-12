@@ -17,7 +17,7 @@ import com.monopoly.io.IO;
  */
 public class PropertyCell extends Property {
 	private static final double PAY_BACK_RATE = 0.1;
-	private static final float RENT_RATE = 0.2F;
+	private static final float RENT_RATE = 0.4F;
 	private Building building;
 	private int basePrice;
 	private int baseRent;
@@ -273,5 +273,11 @@ public class PropertyCell extends Property {
 		setTurnsToPayBack(0);
 		setPledgePercent(0);
 		setPayBackMoney(0);
+	}
+
+	@Override
+	public String getDescription() {		
+		return "Стоимость: $" + getPrice() + " Аренда: $" + getRent() 
+				+ ((hasBuilding()) ? ", Здание Ур. " + getBuilding().getCurrentLevel() : ", Без Здания");
 	}
 }

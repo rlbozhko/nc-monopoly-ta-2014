@@ -13,17 +13,11 @@ import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.RowMapper;
 import org.springframework.stereotype.Repository;
 
-import com.monopoly.board.cells.EventCell;
-import com.monopoly.board.cells.Monopoly;
-import com.monopoly.board.cells.MonopolyType;
-import com.monopoly.board.cells.PropertyStatus;
 import com.monopoly.board.events.Event;
 import com.monopoly.board.events.EventType;
-import com.monopoly.entity.EventCellEntity;
-import com.monopoly.entity.PropertyCellEntity;
 
 @Repository
-public class EventDao implements Dao<Event> {
+public class EventDao {
 
 	private JdbcTemplate jdbcTemplate;
 
@@ -32,37 +26,21 @@ public class EventDao implements Dao<Event> {
 		this.jdbcTemplate = new JdbcTemplate(dataSource);
 	}
 
-	@Override
-	public Event getByKey(int key) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
 	public Event insert(Event object) {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
-	@Override
 	public void update(Event object) {
 		// TODO Auto-generated method stub
 
 	}
 
-	@Override
-	public void merge(Event object) {
-		// TODO Auto-generated method stub
-
-	}
-
-	@Override
 	public void delete(Event object) {
 		// TODO Auto-generated method stub
 
 	}
-
-	@Override
+	
 	public List<Event> getAllByParentKey(int key) {
 		String sql = "select event.name event_type, event.description event_description "
 				+ "from objects event_cells, objects event " 

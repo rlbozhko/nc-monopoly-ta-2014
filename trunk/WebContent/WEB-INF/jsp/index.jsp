@@ -6,7 +6,7 @@
 	<head>
 		<meta charset="UTF-8">
 		<title>Monopoly - index</title>
-			<link href="webjars/bootstrap/3.3.1/css/bootstrap.min.css" rel="stylesheet">
+		<link href="webjars/bootstrap/3.3.1/css/bootstrap.min.css" rel="stylesheet">
 		<link href="webjars/bootstrapvalidator/0.5.3/css/bootstrapValidator.min.css" rel="stylesheet">
 		<link href="css/main.css" rel="stylesheet">
 		<script src="webjars/jquery/2.1.1/jquery.min.js"></script>

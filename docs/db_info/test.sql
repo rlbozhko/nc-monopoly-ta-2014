@@ -535,9 +535,33 @@ INSERT INTO OBJECTS (OBJECT_ID,PARENT_ID,OBJECT_TYPE_ID,NAME,DESCRIPTION) VALUES
       --  
     
     
+--------
+-- Players test
+--------
+
+INSERT INTO OBJECTS (OBJECT_ID,PARENT_ID,OBJECT_TYPE_ID,NAME,DESCRIPTION) VALUES (200,101,4,'Player 1','green');
+      --atr
+      INSERT INTO attributes (attr_id, object_id, value, date_value) VALUES (3,200,'0',NULL); -- doublesCount
+      INSERT INTO attributes (attr_id, object_id, value, date_value) VALUES (4,200,'CLEAN',NULL); -- jailStatus
+      INSERT INTO attributes (attr_id, object_id, value, date_value) VALUES (5,200,'0',NULL); -- jailTerm
+      INSERT INTO attributes (attr_id, object_id, value, date_value) VALUES (6,200,'false',NULL); -- extraTurn
+      INSERT INTO attributes (attr_id, object_id, value, date_value) VALUES (7,200,'false',NULL); -- offerADeal
+      INSERT INTO attributes (attr_id, object_id, value, date_value) VALUES (8,200,'false',NULL); -- payRent
+      INSERT INTO attributes (attr_id, object_id, value, date_value) VALUES (9,200,'10',NULL); -- position      
+      INSERT INTO attributes (attr_id, object_id, value, date_value) VALUES (11,200,'ACTIVE',NULL); -- status
+      INSERT INTO attributes (attr_id, object_id, value, date_value) VALUES (12,200,'5000',NULL); -- wallet
     
-    
-    
+INSERT INTO OBJECTS (OBJECT_ID,PARENT_ID,OBJECT_TYPE_ID,NAME,DESCRIPTION) VALUES (201,101,4,'Player 2','green');
+      --atr
+      INSERT INTO attributes (attr_id, object_id, value, date_value) VALUES (3,201,'0',NULL); -- doublesCount
+      INSERT INTO attributes (attr_id, object_id, value, date_value) VALUES (4,201,'CLEAN',NULL); -- jailStatus
+      INSERT INTO attributes (attr_id, object_id, value, date_value) VALUES (5,201,'0',NULL); -- jailTerm
+      INSERT INTO attributes (attr_id, object_id, value, date_value) VALUES (6,201,'false',NULL); -- extraTurn
+      INSERT INTO attributes (attr_id, object_id, value, date_value) VALUES (7,201,'false',NULL); -- offerADeal
+      INSERT INTO attributes (attr_id, object_id, value, date_value) VALUES (8,201,'false',NULL); -- payRent
+      INSERT INTO attributes (attr_id, object_id, value, date_value) VALUES (9,201,'10',NULL); -- position      
+      INSERT INTO attributes (attr_id, object_id, value, date_value) VALUES (11,201,'ACTIVE',NULL); -- status
+      INSERT INTO attributes (attr_id, object_id, value, date_value) VALUES (12,201,'5000',NULL); -- wallet    
     
     
     

@@ -39,6 +39,10 @@ public class BoardDao {
 	private EventCellDao eventCellDao;
 
 	@Autowired
+	private PlayerDao playerDao;
+
+	
+	@Autowired
 	public void setDataSource(DataSource dataSource) {
 		this.jdbcTemplate = new JdbcTemplate(dataSource);
 	}
@@ -89,12 +93,12 @@ public class BoardDao {
 				
 				System.out.println("cells = " + cells);
 				
-				List<Player> players = new ArrayList<Player>();
-				players.add(new Player("p1"));
+				List<Player> players = playerDao.getAllByParentKey(boardId);
+				
+				System.out.println("players = " + players);
 				
 				entity.setCells(cells);
-				entity.setPlayers(players);
-				
+				entity.setPlayers(players);				
 				
 				return new Board(entity);
 			}
@@ -106,8 +110,7 @@ public class BoardDao {
 		ApplicationContext context = new FileSystemXmlApplicationContext("test_files\\beans.xml");
 		BoardDao dao = context.getBean(BoardDao.class);
 		Board board = dao.getByParentKey(100);
-		System.out.println(board);
-		
+		System.out.println(board);		
 		
 	}
 }

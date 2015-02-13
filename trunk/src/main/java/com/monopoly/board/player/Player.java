@@ -2,6 +2,7 @@ package com.monopoly.board.player;
 
 import com.monopoly.action.ActionUtils;
 import com.monopoly.board.cells.*;
+import com.monopoly.entity.PlayerEntity;
 import com.monopoly.game.session.GameSession;
 
 import java.util.List;
@@ -13,7 +14,7 @@ public class Player implements MoneyOperations, MoveOperations, PropertyOperatio
 	private Status status;
 	private Wallet wallet;
 	private boolean payRent;
-	private int jailTerm = 0;
+	private int jailTerm;
 	private Status jailStatus;
 	private boolean offerADeal;
 	private PlayerTimer timer;
@@ -29,6 +30,23 @@ public class Player implements MoneyOperations, MoveOperations, PropertyOperatio
 		status = Status.WAIT;
 		payRent = false;
 		jailStatus = Status.CLEAN;
+		timer = new PlayerTimer(this);
+	}
+	
+	public Player(PlayerEntity entity) {
+		this.position = entity.getPosition();
+		this.lastPosition = entity.getLastPosition();
+		this.name = entity.getName();
+		this.wallet = new Wallet();
+		this.wallet.addMoney(entity.getWallet());
+		this.status = entity.getStatus();
+		this.payRent = entity.isPayRent();
+		this.jailStatus = entity.getJailStatus();
+		this.jailTerm = entity.getJailTerm();
+		this.offerADeal = entity.isOfferADeal();
+		this.doublesCount = entity.getDoublesCount();
+		this.playerColor = entity.getPlayerColor();
+		this.extraTurn = entity.isExtraTurn();		
 		timer = new PlayerTimer(this);
 	}
 

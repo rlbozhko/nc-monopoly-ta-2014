@@ -26,15 +26,15 @@ public class DbService {
 	private PropertyCellDao propertyCellDao;
 
 	public Board newBoard(List<Player> players, int startMoney) {
-		List<PropertyCell> proertyCells = propertyCellDao.getAllByParentKey(101);
+		List<PropertyCell> propertyCells = propertyCellDao.getAllByParentKey(101);
 		List<EventCell> eventCells = eventCellDao.getAllByParentKey(101);
-		int size = proertyCells.size() + eventCells.size();
+		int size = propertyCells.size() + eventCells.size();
 		List<Cell> cells = new ArrayList<Cell>(size);
 		for (int i = 0; i < size; i++) {
 			cells.add(null);
 		}
 
-		for (PropertyCell cell : proertyCells) {
+		for (PropertyCell cell : propertyCells) {
 			cells.set(cell.getPosition(), cell);
 			// System.out.println(cell.getPosition());
 		}

@@ -1,17 +1,12 @@
 --session
-select ses.name, id_atr.value id from objects ses, attributes id_atr
-where ses.object_type_id = 1 and
-  id_atr.attr_id = 39 and
-  id_atr.value = '132354651' and
-  ses.object_id = id_atr.object_id;
+select ses.object_id, ses.name, ses.description id from objects ses
+where ses.object_type_id = 1 and  
+  ses.description = '132354651';
 --board
-select ses.name id, board.name board 
-from objects ses, attributes id_atr, objects board
-where ses.object_type_id = 1 and
-  id_atr.attr_id = 39 and
-  id_atr.value = '132354651' and
-  ses.object_id = id_atr.object_id and
-  board.parent_id = ses.object_id and
+select board.object_id id 
+from objects board
+where   
+  board.parent_id = '1' and
   board.object_type_id = 2;
 --user_io_map
 select ses.name id, user_io_map.name user_io_map, users.name users, ios.name ios
@@ -256,3 +251,41 @@ select property_cells.name p_name, basePrice.value basePrice,
 					 position.attr_id = 21 and	position.object_id = property_cells.object_id and
 					 status.attr_id = 22 and	status.object_id = property_cells.object_id and
 					 turnsToPayBack.attr_id = 23 and	turnsToPayBack.object_id = property_cells.object_id;
+           
+----
+-- Player
+----
+
+select player.object_id, player.name name, doublesCount.value doublesCount,
+  jailStatus.value jailStatus, jailTerm.value jailTerm,
+  extraTurn.value extraTurn, offerADeal.value offerADeal,
+  payRent.value payRent, position.value position, status.value status,
+  wallet.value wallet, player.description playerColor
+from objects player, attributes doublesCount, attributes jailStatus,
+  attributes jailTerm,attributes extraTurn,attributes offerADeal,
+  attributes payRent,attributes position,attributes status,
+  attributes wallet
+where         
+  player.object_type_id = 4 and  
+  player.parent_id = 2 and -- var
+  doublesCount.attr_id = 3 and	doublesCount.object_id = player.object_id and
+  jailStatus.attr_id = 4 and	jailStatus.object_id = player.object_id and
+  jailTerm.attr_id = 5 and	jailTerm.object_id = player.object_id and
+  extraTurn.attr_id = 6 and	extraTurn.object_id = player.object_id and
+  offerADeal.attr_id = 7 and	offerADeal.object_id = player.object_id and
+  payRent.attr_id = 8 and	payRent.object_id = player.object_id and
+  position.attr_id = 9 and	position.object_id = player.object_id and
+  status.attr_id = 11 and	status.object_id = player.object_id and
+  wallet.attr_id = 12 and	wallet.object_id = player.object_id;
+  
+  
+  
+  
+  ;
+  
+  
+  
+  
+  
+  
+  

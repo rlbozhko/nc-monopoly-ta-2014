@@ -20,4 +20,5 @@ public interface Session {
     void close();
     IO getUserIO(User user);
 	Set<User> getUsers();
+	long getId();
 }

@@ -44,7 +44,7 @@ public class EventCellDao {
 
 	}
 
-	public List<EventCell> getAllByParentKey(int key) {
+	public List<EventCell> getAllByParentKey(long key) {
 		String sql = 
 				"select event_cells.object_id, event_cells.name name, event_cells.description description, "
 				+ "  position.value position " + "from objects event_cells, attributes position " 

@@ -18,10 +18,12 @@ import com.monopoly.board.cells.Monopoly;
 import com.monopoly.board.cells.MonopolyType;
 import com.monopoly.board.cells.PropertyCell;
 import com.monopoly.board.cells.PropertyStatus;
+import com.monopoly.board.player.Player;
+import com.monopoly.entity.PlayerEntity;
 import com.monopoly.entity.PropertyCellEntity;
 
 @Repository
-public class PropertyCellDao {
+public class PlayerDao {
 
 	private JdbcTemplate jdbcTemplate;
 	
@@ -33,22 +35,22 @@ public class PropertyCellDao {
 		this.jdbcTemplate = new JdbcTemplate(dataSource);
 	}
 
-	public PropertyCell insert(PropertyCell object) {
+	public Player insert(Player object) {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
-	public void update(PropertyCell object) {
+	public void update(Player object) {
 		// TODO Auto-generated method stub
 
 	}
 
-	public void delete(PropertyCell object) {
+	public void delete(Player object) {
 		// TODO Auto-generated method stub
 
 	}
 
-	public List<PropertyCell> getAllByParentKey(long key) {
+	public List<Player> getAllByParentKey(long key) {
 		String sql = "select property_cells.object_id object_id, property_cells.name p_name, basePrice.value basePrice,"
 				+ "  baseRent.value baseRent, property_cells.description description, maxLevel.value maxLevel, "
 				+ "  monopoly.value monopoly, payBackMoney.value payBackMoney, "
@@ -69,38 +71,38 @@ public class PropertyCellDao {
 				+ "	 position.attr_id = 21 and" + "	position.object_id = property_cells.object_id and"
 				+ "	 status.attr_id = 22 and" + "	status.object_id = property_cells.object_id and"
 				+ "	 turnsToPayBack.attr_id = 23 and" + "	turnsToPayBack.object_id = property_cells.object_id";
-		List<PropertyCell> propertyCells = this.jdbcTemplate.query(sql,
-				new RowMapper<PropertyCell>() {
-					public PropertyCell mapRow(ResultSet rs, int rowNum) throws SQLException {
-						PropertyCellEntity entity = new PropertyCellEntity();
+		List<Player> players = this.jdbcTemplate.query(sql,
+				new RowMapper<Player>() {
+					public Player mapRow(ResultSet rs, int rowNum) throws SQLException {
+						PlayerEntity entity = new PlayerEntity();
 						entity.setName(rs.getString("p_name"));
-						entity.setBasePrice(Integer.parseInt(rs.getString("basePrice")));
-						entity.setBaseRent(Integer.parseInt(rs.getString("baseRent")));
-						entity.setDescription(rs.getString("description"));
-						entity.setMaxLevel(Integer.parseInt(rs.getString("maxLevel")));
-						entity.setMonopoly(Monopoly.getMonopoly(MonopolyType.valueOf(rs.getString("monopoly"))));
-						entity.setPayBackMoney(Integer.parseInt(rs.getString("payBackMoney")));
-						entity.setPledgePercent(Double.parseDouble(rs.getString("pledgePercent")));
-						entity.setPosition(Integer.parseInt(rs.getString("position")));
-						entity.setStatus(PropertyStatus.valueOf(rs.getString("status")));
-						entity.setTurnsToPayBack(Integer.parseInt(rs.getString("turnsToPayBack")));
-						int cell_id = Integer.parseInt(rs.getString("object_id"));
-						List<Building> buildings = buildingDao.getAllByParentKey(cell_id);
-						if (!buildings.isEmpty() && buildings.get(0) != null) {
-							entity.setBuilding(buildings.get(0));
-						}						
-						
-						return new PropertyCell(entity);
+//						entity.setBasePrice(Integer.parseInt(rs.getString("basePrice")));
+//						entity.setBaseRent(Integer.parseInt(rs.getString("baseRent")));
+//						entity.setDescription(rs.getString("description"));
+//						entity.setMaxLevel(Integer.parseInt(rs.getString("maxLevel")));
+//						entity.setMonopoly(Monopoly.getMonopoly(MonopolyType.valueOf(rs.getString("monopoly"))));
+//						entity.setPayBackMoney(Integer.parseInt(rs.getString("payBackMoney")));
+//						entity.setPledgePercent(Double.parseDouble(rs.getString("pledgePercent")));
+//						entity.setPosition(Integer.parseInt(rs.getString("position")));
+//						entity.setStatus(PropertyStatus.valueOf(rs.getString("status")));
+//						entity.setTurnsToPayBack(Integer.parseInt(rs.getString("turnsToPayBack")));
+//						int cell_id = Integer.parseInt(rs.getString("object_id"));
+//						List<Building> buildings = buildingDao.getAllByParentKey(cell_id);
+//						if (!buildings.isEmpty() && buildings.get(0) != null) {
+//							entity.setBuilding(buildings.get(0));
+//						}						
+//						
+						return new Player(entity);
 					}
 				});
-		return propertyCells;
+		return players;		
 	}
 	
 	public static void main(String[] args) {
-		ApplicationContext context =
-				new FileSystemXmlApplicationContext("test_files\\beans.xml");	            		
-		PropertyCellDao dao = context.getBean(PropertyCellDao.class);		
-		List<PropertyCell> cells = dao.getAllByParentKey(2);
-		System.out.println(cells);		
+//		ApplicationContext context =
+//				new FileSystemXmlApplicationContext("test_files\\beans.xml");	            		
+//		PlayerDao dao = context.getBean(PlayerDao.class);		
+//		List<PropertyCell> cells = dao.getAllByParentKey(2);
+//		System.out.println(cells);		
 	}
 }

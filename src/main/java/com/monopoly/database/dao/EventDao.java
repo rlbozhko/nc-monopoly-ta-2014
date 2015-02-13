@@ -41,7 +41,7 @@ public class EventDao {
 
 	}
 	
-	public List<Event> getAllByParentKey(int key) {
+	public List<Event> getAllByParentKey(long key) {
 		String sql = "select event.name event_type, event.description event_description "
 				+ "from objects event_cells, objects event " 
 				+ "where " 

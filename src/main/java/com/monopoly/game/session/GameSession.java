@@ -103,7 +103,8 @@ public class GameSession implements Session {
 		this.actionController = GameSessionBuilder.getActionController();		
 		this.propertyManager = GameSessionBuilder.getPropertyManager();
 		this.userIO = GameSessionBuilder.getUsersIO();
-		this.id = System.currentTimeMillis();
+		this.id = GameSessionBuilder.getId();
+//		this.id = System.currentTimeMillis();
 	}
 
 	public static class GameSessionBuilder {
@@ -113,6 +114,7 @@ public class GameSession implements Session {
 		private static Map<User, IO> userIO = new HashMap<User, IO>();
 		private static int maxPlayers;
 		private static int startMoney;
+		private static long id;
 
 		private GameSessionBuilder() {
 		}
@@ -163,6 +165,14 @@ public class GameSession implements Session {
 
 		public static void setStartMoney(int startMoney) {
 			GameSessionBuilder.startMoney = startMoney;
+		}
+
+		public static long getId() {
+			return id;
+		}
+
+		public static void setId(long id) {
+			GameSessionBuilder.id = id;
 		}
 	}
 
@@ -298,6 +308,7 @@ public class GameSession implements Session {
 		return userIO.keySet();
 	}
 
+	@Override
 	public long getId() {
 		return id;
 	}

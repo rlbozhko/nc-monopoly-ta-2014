@@ -1,6 +1,6 @@
 delete objects;
 
-INSERT INTO OBJECTS (OBJECT_ID,PARENT_ID,OBJECT_TYPE_ID,NAME,DESCRIPTION) VALUES (1,NULL,1,'Session',NULL);
+INSERT INTO OBJECTS (OBJECT_ID,PARENT_ID,OBJECT_TYPE_ID,NAME,DESCRIPTION) VALUES (1,NULL,1,'Session','132354651');
   --atr
   INSERT INTO attributes (attr_id, object_id, value, date_value) VALUES (39,1,'132354651',NULL); -- id
   --Board
@@ -8,7 +8,7 @@ INSERT INTO OBJECTS (OBJECT_ID,PARENT_ID,OBJECT_TYPE_ID,NAME,DESCRIPTION) VALUES
     --Cells
     INSERT INTO OBJECTS (OBJECT_ID,PARENT_ID,OBJECT_TYPE_ID,NAME,DESCRIPTION) VALUES (31,2,6,'START',NULL);
       INSERT INTO attributes (attr_id, object_id, value, date_value) VALUES (2,31,'0',NULL); -- position
-      INSERT INTO OBJECTS (OBJECT_ID,PARENT_ID,OBJECT_TYPE_ID,NAME,DESCRIPTION) VALUES (32,31,10,'START',NULL);      
+      INSERT INTO OBJECTS (OBJECT_ID,PARENT_ID,OBJECT_TYPE_ID,NAME,DESCRIPTION) VALUES (32,31,10,'MONEY',NULL);      
     INSERT INTO OBJECTS (OBJECT_ID,PARENT_ID,OBJECT_TYPE_ID,NAME,DESCRIPTION) VALUES (3,2,3,'c1m1','c1m1 descr');   
       --atr
       INSERT INTO attributes (attr_id, object_id, value, date_value) VALUES (13,3,'1000',NULL); -- basePrice
@@ -61,7 +61,7 @@ INSERT INTO OBJECTS (OBJECT_ID,PARENT_ID,OBJECT_TYPE_ID,NAME,DESCRIPTION) VALUES
     INSERT INTO OBJECTS (OBJECT_ID,PARENT_ID,OBJECT_TYPE_ID,NAME,DESCRIPTION) VALUES (15,2,3,'c3m3',NULL);
     --Players
     INSERT INTO OBJECTS (OBJECT_ID,PARENT_ID,OBJECT_TYPE_ID,NAME,DESCRIPTION) VALUES (16,2,4,'Player 1',NULL);
-    INSERT INTO OBJECTS (OBJECT_ID,PARENT_ID,OBJECT_TYPE_ID,NAME,DESCRIPTION) VALUES (17,2,4,'Player 2',NULL);
+    INSERT INTO OBJECTS (OBJECT_ID,PARENT_ID,OBJECT_TYPE_ID,NAME,DESCRIPTION) VALUES (17,2,4,'Player 2','green');
       --atr
       INSERT INTO attributes (attr_id, object_id, value, date_value) VALUES (3,17,'0',NULL); -- doublesCount
       INSERT INTO attributes (attr_id, object_id, value, date_value) VALUES (4,17,'CLEAN',NULL); -- jailStatus
@@ -72,6 +72,8 @@ INSERT INTO OBJECTS (OBJECT_ID,PARENT_ID,OBJECT_TYPE_ID,NAME,DESCRIPTION) VALUES
       INSERT INTO attributes (attr_id, object_id, value, date_value) VALUES (9,17,'10',NULL); -- position      
       INSERT INTO attributes (attr_id, object_id, value, date_value) VALUES (11,17,'ACTIVE',NULL); -- status
       INSERT INTO attributes (attr_id, object_id, value, date_value) VALUES (12,17,'5000',NULL); -- wallet
+     -- INSERT INTO attributes (attr_id, object_id, value, date_value) VALUES (41,17,'green',NULL); -- playerColor
+     -- INSERT INTO attributes (attr_id, object_id, value, date_value) VALUES (42,17,'false',NULL); -- extraTurn
       -- property_ref
       INSERT INTO OBJREFERENCE (ATTR_ID,OBJECT_ID,REFERENCE) VALUES (10,17,3);
       INSERT INTO OBJREFERENCE (ATTR_ID,OBJECT_ID,REFERENCE) VALUES (10,17,4);

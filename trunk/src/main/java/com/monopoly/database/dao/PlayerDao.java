@@ -13,22 +13,17 @@ import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.RowMapper;
 import org.springframework.stereotype.Repository;
 
-import com.monopoly.board.building.Building;
-import com.monopoly.board.cells.Monopoly;
-import com.monopoly.board.cells.MonopolyType;
-import com.monopoly.board.cells.PropertyCell;
-import com.monopoly.board.cells.PropertyStatus;
 import com.monopoly.board.player.Player;
+import com.monopoly.board.player.Status;
 import com.monopoly.entity.PlayerEntity;
-import com.monopoly.entity.PropertyCellEntity;
 
 @Repository
 public class PlayerDao {
 
 	private JdbcTemplate jdbcTemplate;
-	
+
 	@Autowired
-	private BuildingDao buildingDao; 
+	private BuildingDao buildingDao;
 
 	@Autowired
 	public void setDataSource(DataSource dataSource) {
@@ -51,58 +46,67 @@ public class PlayerDao {
 	}
 
 	public List<Player> getAllByParentKey(long key) {
-		String sql = "select property_cells.object_id object_id, property_cells.name p_name, basePrice.value basePrice,"
-				+ "  baseRent.value baseRent, property_cells.description description, maxLevel.value maxLevel, "
-				+ "  monopoly.value monopoly, payBackMoney.value payBackMoney, "
-				+ "  pledgePercent.value pledgePercent, position.value position, status.value status, "
-				+ "  turnsToPayBack.value turnsToPayBack "
-				+ "from objects property_cells, attributes basePrice, attributes baseRent, "
-				+ "  attributes maxLevel,attributes monopoly, "
-				+ "  attributes payBackMoney, attributes pledgePercent, "
-				+ "  attributes position, attributes status, attributes turnsToPayBack " 
-				+ "where "
-				+ "	 property_cells.object_type_id = 3 and" + "	property_cells.parent_id = " + key + " and"
-				+ "	 basePrice.attr_id = 13 and" + "	basePrice.object_id = property_cells.object_id and"
-				+ "	 baseRent.attr_id = 14 and" + "	baseRent.object_id = property_cells.object_id and"
-				+ "	 maxLevel.attr_id = 16 and" + "	maxLevel.object_id = property_cells.object_id and"
-				+ "	 monopoly.attr_id = 17 and" + "	monopoly.object_id = property_cells.object_id and"
-				+ "	 payBackMoney.attr_id = 19 and" + "	payBackMoney.object_id = property_cells.object_id and"
-				+ "	 pledgePercent.attr_id = 20 and" + "	pledgePercent.object_id = property_cells.object_id and"
-				+ "	 position.attr_id = 21 and" + "	position.object_id = property_cells.object_id and"
-				+ "	 status.attr_id = 22 and" + "	status.object_id = property_cells.object_id and"
-				+ "	 turnsToPayBack.attr_id = 23 and" + "	turnsToPayBack.object_id = property_cells.object_id";
-		List<Player> players = this.jdbcTemplate.query(sql,
-				new RowMapper<Player>() {
-					public Player mapRow(ResultSet rs, int rowNum) throws SQLException {
-						PlayerEntity entity = new PlayerEntity();
-						entity.setName(rs.getString("p_name"));
-//						entity.setBasePrice(Integer.parseInt(rs.getString("basePrice")));
-//						entity.setBaseRent(Integer.parseInt(rs.getString("baseRent")));
-//						entity.setDescription(rs.getString("description"));
-//						entity.setMaxLevel(Integer.parseInt(rs.getString("maxLevel")));
-//						entity.setMonopoly(Monopoly.getMonopoly(MonopolyType.valueOf(rs.getString("monopoly"))));
-//						entity.setPayBackMoney(Integer.parseInt(rs.getString("payBackMoney")));
-//						entity.setPledgePercent(Double.parseDouble(rs.getString("pledgePercent")));
-//						entity.setPosition(Integer.parseInt(rs.getString("position")));
-//						entity.setStatus(PropertyStatus.valueOf(rs.getString("status")));
-//						entity.setTurnsToPayBack(Integer.parseInt(rs.getString("turnsToPayBack")));
-//						int cell_id = Integer.parseInt(rs.getString("object_id"));
-//						List<Building> buildings = buildingDao.getAllByParentKey(cell_id);
-//						if (!buildings.isEmpty() && buildings.get(0) != null) {
-//							entity.setBuilding(buildings.get(0));
-//						}						
-//						
-						return new Player(entity);
-					}
-				});
-		return players;		
+		String sql = "select player.object_id, player.name name, doublesCount.value doublesCount, "
+				+ "  jailStatus.value jailStatus, jailTerm.value jailTerm, "
+				+ "  extraTurn.value extraTurn, offerADeal.value offerADeal, "
+				+ "  payRent.value payRent, position.value position, status.value status, "
+				+ "  wallet.value wallet, player.description playerColor "
+				+ "from objects player, attributes doublesCount, attributes jailStatus, "
+				+ "  attributes jailTerm,attributes extraTurn,attributes offerADeal, "
+				+ "  attributes payRent,attributes position,attributes status, " + "  attributes wallet " + "where "
+				+ "  player.object_type_id = 4 and " + "  player.parent_id = ? and "
+				+ "  doublesCount.attr_id = 3 and	doublesCount.object_id = player.object_id and "
+				+ "  jailStatus.attr_id = 4 and	jailStatus.object_id = player.object_id and "
+				+ "  jailTerm.attr_id = 5 and	jailTerm.object_id = player.object_id and "
+				+ "  extraTurn.attr_id = 6 and	extraTurn.object_id = player.object_id and "
+				+ "  offerADeal.attr_id = 7 and	offerADeal.object_id = player.object_id and "
+				+ "  payRent.attr_id = 8 and	payRent.object_id = player.object_id and "
+				+ "  position.attr_id = 9 and	position.object_id = player.object_id and "
+				+ "  status.attr_id = 11 and	status.object_id = player.object_id and "
+				+ "  wallet.attr_id = 12 and	wallet.object_id = player.object_id";
+		List<Player> players = this.jdbcTemplate.query(sql, new Object[] {key}, new RowMapper<Player>() {
+			public Player mapRow(ResultSet rs, int rowNum) throws SQLException {
+				PlayerEntity entity = new PlayerEntity();
+				entity.setName(rs.getString("name"));
+				entity.setDoublesCount(Integer.parseInt(rs.getString("doublesCount")));
+				entity.setJailStatus(Status.valueOf(rs.getString("jailStatus")));
+				entity.setJailTerm(Integer.parseInt(rs.getString("jailTerm")));
+				entity.setExtraTurn(Boolean.parseBoolean(rs.getString("extraTurn")));
+				entity.setOfferADeal(Boolean.parseBoolean(rs.getString("offerADeal")));
+				entity.setPayRent(Boolean.parseBoolean(rs.getString("payRent")));
+				entity.setPosition(Integer.parseInt(rs.getString("position")));
+				entity.setStatus(Status.valueOf(rs.getString("status")));
+				entity.setWallet(Integer.parseInt(rs.getString("wallet")));
+				entity.setPlayerColor(rs.getString("playerColor"));				
+				
+				return new Player(entity);
+			}
+		});
+		return players;
+	}
+
+	public static void main(String[] args) {
+		 ApplicationContext context =
+				 new FileSystemXmlApplicationContext("test_files\\beans.xml");
+		 PlayerDao dao = context.getBean(PlayerDao.class);
+		 List<Player> players = dao.getAllByParentKey(2);
+		 for (Player player : players) {
+			 printPlayer(player);
+		 }
+			 
+		 
 	}
 	
-	public static void main(String[] args) {
-//		ApplicationContext context =
-//				new FileSystemXmlApplicationContext("test_files\\beans.xml");	            		
-//		PlayerDao dao = context.getBean(PlayerDao.class);		
-//		List<PropertyCell> cells = dao.getAllByParentKey(2);
-//		System.out.println(cells);		
+	private static void printPlayer(Player player) {
+		System.out.println(player.getName());
+		System.out.println(player.getDoublesCount());
+		System.out.println(player.getJailTerm());
+		System.out.println(player.getLastPosition());
+		System.out.println(player.getMoney());
+		System.out.println(player.getPlayerColor());
+		System.out.println(player.getPosition());
+		System.out.println(player.getRemainingTime());
+		System.out.println(player.getJailStatus());
+		System.out.println(player.getStatus());
 	}
 }

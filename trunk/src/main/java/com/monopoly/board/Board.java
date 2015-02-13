@@ -1,13 +1,16 @@
 package com.monopoly.board;
 
+import com.monopoly.action.ActionUtils;
 import com.monopoly.board.cells.Cell;
 import com.monopoly.board.cells.CellType;
 import com.monopoly.board.cells.EventCell;
+import com.monopoly.board.cells.Property;
 import com.monopoly.board.events.GoToJailEvent;
 import com.monopoly.board.events.JailEvent;
 import com.monopoly.board.player.Player;
 import com.monopoly.board.player.Status;
 import com.monopoly.entity.BoardEntity;
+import com.monopoly.game.session.GameSession;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -129,6 +132,9 @@ public class Board implements CellOperations, PlayerOperations {
         }
         cursor = next;
         next.setOfferADeal(false);
+        if (next.hasPledgedProperty()) {
+			pledgedPropertyCheck(next);
+		}
         if (Status.FINISH == next.getStatus()) {
             next = nextPlayer(cursor);
         } else if (Status.SKIP_TURN == next.getStatus()) {
@@ -137,6 +143,28 @@ public class Board implements CellOperations, PlayerOperations {
         }
         return next;
     }
+    
+    private void pledgedPropertyCheck(Player player) {
+		for (Property property : getProperties(player)) {
+			if (property.isPledged()) {
+				property.decrementTurnsToPayBack();
+				property.risePayBackMoney();
+				propertyWarning(player, property);
+			}
+		}
+	}
+
+	private List<Property> getProperties(Player player) {
+		return GameSession.getInstance().getPropertyManager().getPlayerProperties(player);
+	}
+
+	private void propertyWarning(Player player, Property property) {
+		if (property.getTurnsToPayBack() == 0) {
+			ActionUtils.getPlayerIO(player).showWarning(
+					"ВНИМАНИЕ!!!" + "Срок погашения заема истек для " + ((Cell) property).getName() + "."
+							+ "Если вы не погасите задолженность, то по окончанию хода начнется аукцион");
+		}
+	}
 
 	@Override
 	public List<Player> getActivePlayers() {		

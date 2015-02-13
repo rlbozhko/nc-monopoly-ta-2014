@@ -32,7 +32,7 @@ public class Player implements MoneyOperations, MoveOperations, PropertyOperatio
 		jailStatus = Status.CLEAN;
 		timer = new PlayerTimer(this);
 	}
-	
+
 	public Player(PlayerEntity entity) {
 		this.position = entity.getPosition();
 		this.lastPosition = entity.getLastPosition();
@@ -46,7 +46,7 @@ public class Player implements MoneyOperations, MoveOperations, PropertyOperatio
 		this.offerADeal = entity.isOfferADeal();
 		this.doublesCount = entity.getDoublesCount();
 		this.playerColor = entity.getPlayerColor();
-		this.extraTurn = entity.isExtraTurn();		
+		this.extraTurn = entity.isExtraTurn();
 		timer = new PlayerTimer(this);
 	}
 
@@ -90,7 +90,7 @@ public class Player implements MoneyOperations, MoveOperations, PropertyOperatio
 	public void setPlayerColor(String playerColor) {
 		this.playerColor = playerColor;
 	}
-	
+
 	@Override
 	public int getLastPosition() {
 		return lastPosition;
@@ -101,22 +101,19 @@ public class Player implements MoneyOperations, MoveOperations, PropertyOperatio
 		int boardSize = GameSession.getInstance().getBoard().getCells().size();
 		PropertyManager propertyManager = GameSession.getInstance().getPropertyManager();
 		this.lastPosition = this.position;
-		
+
 		if (isNextCircle(position)) {
 			GameSession.getInstance().getBoard().performStartEvent();
 		}
-		
-		if (hasPledgedProperty()) {
-			pledgedPropertyCheck();
-		}
+
 		if (position < 0) {
 			this.position = (boardSize + position) % boardSize;
 		} else {
 			this.position = position % boardSize;
-		}		
+		}
 
 		Cell currentCell = getCurrentCell();
-		
+
 		ActionUtils.sendMessageToAll(this.getName() + " перешел на ячейку " + currentCell.getName());
 		if (CellType.EVENT_CELL == currentCell.getCellType()) {
 			((EventCell) currentCell).getEvent().performEvent();
@@ -126,7 +123,7 @@ public class Player implements MoneyOperations, MoveOperations, PropertyOperatio
 			if (null != owner && !this.equals(owner)) {
 				this.setPayRent(true);
 			}
-		}		
+		}
 	}
 
 	@Override
@@ -134,26 +131,8 @@ public class Player implements MoneyOperations, MoveOperations, PropertyOperatio
 		return GameSession.getInstance().getBoard().getCells().get(getPosition());
 	}
 
-	private void pledgedPropertyCheck() {
-		for (Property property : getProperties()) {
-			if (property.isPledged()) {
-				property.decrementTurnsToPayBack();
-				property.risePayBackMoney();
-				propertyWarning(property);
-			}
-		}
-	}
-
 	private List<Property> getProperties() {
 		return GameSession.getInstance().getPropertyManager().getPlayerProperties(this);
-	}
-
-	private void propertyWarning(Property property) {
-		if (property.getTurnsToPayBack() == 0) {
-			ActionUtils.getPlayerIO(this).showWarning(
-					"ВНИМАНИЕ!!!" + "Срок погашения заема истек для " + ((Cell) property).getName() + "."
-							+ "Если вы не погасите задолженность, то по окончанию хода начнется аукцион");
-		}
 	}
 
 	private boolean isNextCircle(int position) {
@@ -166,8 +145,8 @@ public class Player implements MoneyOperations, MoveOperations, PropertyOperatio
 	}
 
 	@Override
-	public boolean subtractMoney(int money) {		
-		return wallet.subtractMoney(money);		
+	public boolean subtractMoney(int money) {
+		return wallet.subtractMoney(money);
 	}
 
 	@Override
@@ -190,13 +169,13 @@ public class Player implements MoneyOperations, MoveOperations, PropertyOperatio
 	@Override
 	public boolean buyProperty(PropertyCell propertyCell) {
 		PropertyManager propertyManager = GameSession.getInstance().getPropertyManager();
-		if (subtractMoney(propertyCell.getPrice())) {			
+		if (subtractMoney(propertyCell.getPrice())) {
 			propertyManager.setPropertyOwner(this, propertyCell);
 			return true;
 		}
 		return false;
 	}
-	
+
 	public boolean hasProperty() {
 		return !GameSession.getInstance().getPropertyManager().getPlayerProperties(this).isEmpty();
 	}
@@ -292,9 +271,9 @@ public class Player implements MoneyOperations, MoveOperations, PropertyOperatio
 
 	@Override
 	public void setOfferADeal(boolean offerADeal) {
-		this.offerADeal = offerADeal;		
+		this.offerADeal = offerADeal;
 	}
-	
+
 	@Override
 	public void addTime() {
 		timer.addTime();
@@ -302,7 +281,7 @@ public class Player implements MoneyOperations, MoveOperations, PropertyOperatio
 
 	@Override
 	public void resetTimer() {
-		timer.reset();		
+		timer.reset();
 	}
 
 	@Override
@@ -311,40 +290,40 @@ public class Player implements MoneyOperations, MoveOperations, PropertyOperatio
 	}
 
 	@Override
-	public long getRemainingTime() {		
+	public long getRemainingTime() {
 		return timer.getRemainingTime();
 	}
 
 	@Override
 	public void startTimer() {
 		timer.start();
-		
+
 	}
-	
+
 	@Override
 	public void incrementDoublesCount() {
 		doublesCount++;
 	}
-	
+
 	@Override
 	public int getDoublesCount() {
 		return doublesCount;
 	}
-	
+
 	@Override
 	public void resetDoublesCount() {
 		doublesCount = 0;
 	}
 
 	@Override
-	public boolean isTimerStarted() {		
+	public boolean isTimerStarted() {
 		return timer.isStarted();
 	}
-	
+
 	public boolean hasExtraTurn() {
 		return extraTurn;
 	}
-	
+
 	public void setExtraTurn(boolean extraTurn) {
 		this.extraTurn = extraTurn;
 	}

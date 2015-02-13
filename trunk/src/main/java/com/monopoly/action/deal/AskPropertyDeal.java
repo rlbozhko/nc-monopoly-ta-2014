@@ -41,7 +41,7 @@ public class AskPropertyDeal extends WrapperDeal {
         boolean result = true;
         for (Property property : properties) {
             if (property.isPledged()) {
-                getSourceIO().showWarning("Собственность " + ((Cell) property).getName() + " заложена.\nСделка отменяется");
+                getSourceIO().showWarning("Собственность " + ((Cell) property).getName() + " заложена. Сделка отменяется");
                 result = false;
                 break;
             }

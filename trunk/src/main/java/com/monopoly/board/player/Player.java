@@ -133,7 +133,7 @@ public class Player implements MoneyOperations, MoveOperations, PropertyOperatio
 	private void propertyWarning(Property property) {
 		if (property.getTurnsToPayBack() == 0) {
 			ActionUtils.getPlayerIO(this).showWarning(
-					"ВНИМАНИЕ!!!\n" + "Срок погашения заема истек для " + ((Cell) property).getName() + ".\n"
+					"ВНИМАНИЕ!!!" + "Срок погашения заема истек для " + ((Cell) property).getName() + "."
 							+ "Если вы не погасите задолженность, то по окончанию хода начнется аукцион");
 		}
 	}

@@ -163,24 +163,30 @@
 									<button type="submit">Select</button>
 								</form>
 							</div>
-						</c:if>		
+						</c:if>
 					</td>
 				</tr>
 			</tbody>
 		</table>
 	</body>
 	<script type="text/javascript">
-	 $( document ).ready(function() {
-		    if ($("#isAnswer").val() == 'true') {
-		    	if(confirm('${yesNoDialog}')) {
-		    		$("#dialog").submit();
-		    	} else {
-		    		$("#isAnswer").val("false");
-		    		$("#dialog").submit();
-		    	}
+	$( document ).ready(function() {
+		
+		if ($("#isAnswer").val() == 'true') {
+			if(confirm('${yesNoDialog}')) {
+		    	$("#dialog").submit();
+		    } else {
+		    	$("#isAnswer").val("false");
+		    	$("#dialog").submit();
 		    }
-		  });
-	 
+		}
+		
+		var isWarring = ${isWarning};
+		if (isWarring == true) {
+			alert('${warningMessage}');
+		}
+	});
+	
    		document.getElementById("chatbox").scrollTop = document.getElementById("chatbox").scrollHeight
  	</script>
 </html>

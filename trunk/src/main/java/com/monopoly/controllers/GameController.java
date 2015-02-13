@@ -93,7 +93,7 @@ public class GameController {
 		PropertyManager propertyManager = gameSession.getPropertyManager();
 		
 		//TODO
-		testProperty();
+//		testProperty();
 		
 		if (io.hasYesNoDialog()) {
 			yesNoDialog = io.getYesNoDialog();
@@ -138,12 +138,15 @@ public class GameController {
 
 		mav.addObject("messageQueue", messageQueue);
 		mav.addObject("players", players);
+		mav.addObject("player", player);
 		mav.addObject("activePlayers", activePlayers);
 		mav.addObject("propertyManager", propertyManager);
 		mav.addObject("email", email);
 		mav.addObject("cellsList", cellsList);
 		mav.addObject("strActions", stringActions);
 		mav.addObject("isJailed", player.isJailed());
+		mav.addObject("isWarning", io.hasWarning());
+		mav.addObject("warningMessage", io.getWarning());
 
 		return mav;
 	}
@@ -422,5 +425,4 @@ public class GameController {
 		
 		return new ModelAndView("redirect:game.action");
 	}
-
 }

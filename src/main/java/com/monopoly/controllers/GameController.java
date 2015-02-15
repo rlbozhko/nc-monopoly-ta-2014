@@ -336,7 +336,8 @@ public class GameController {
 
 	@RequestMapping(value = "/game_over.action", method = RequestMethod.GET)
 	public ModelAndView getLogin() {
-		if (GameSession.getInstance().getBoard().getActivePlayers().size() == 0) {
+		
+		if (GameSession.getStatus() == SessionStatus.RUN && GameSession.getInstance().getBoard().getActivePlayers().size() == 0) {
 			GameSession.getInstance().close();
 			return new ModelAndView("redirect:index.action");
 		}

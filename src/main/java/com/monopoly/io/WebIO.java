@@ -240,7 +240,7 @@ public class WebIO implements IO {
 	public void showWarning(String message) {
 		synchronized (warnings) {
 			warnings.add(message);
-			showMessage("!!!  " + message + "  !!!");
+			showMessage("!!!  " + message);
 		}
 	}
 

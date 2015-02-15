@@ -26,14 +26,12 @@ import com.monopoly.io.IO;
 import com.monopoly.io.WebIO;
 import com.monopoly.services.DbService;
 import com.monopoly.services.UserDbService;
-import com.monopoly.services.UserService;
 
 @Controller
 public class JoinGameController {
 
 	@Autowired
 	private UserDbService userService;
-//	private UserService userService;
 	
 	@Autowired
 	private DbService dbs; 
@@ -101,7 +99,7 @@ public class JoinGameController {
 		}
 		
 		if (sessionStatus == SessionStatus.RUN) {
-			return new ModelAndView("redirect:game.action");
+			return new ModelAndView("redirect:game_test.action");
 		}
 
 		Map<User, IO> usersIO = GameSessionBuilder.getUsersIO();
@@ -130,13 +128,36 @@ public class JoinGameController {
 			GameSessionBuilder.setUsersIO(usersIO);
 			
 			GameSession.setStatus(SessionStatus.RUN);
-			return new ModelAndView("redirect:game.action");
+			return new ModelAndView("redirect:game_test.action");
 		}
 
 		String email = user.getEmail();
 		mav.addObject("playerColor", playerColor);
 		mav.addObject("usersIO", usersIO);
 		mav.addObject("email", email);
+
+		return mav;
+	}
+	
+	@RequestMapping(value = "/join_game_players.action", method = RequestMethod.GET)
+	public ModelAndView joinedPlayers(@CookieValue(value = "bb_data", required = false) String hash) {
+
+		ModelAndView mav = new ModelAndView("join_game_players");
+
+		User user = userService.getUser(hash);
+
+		if (user == null) {
+			throw new NoContentException();
+		}
+
+		SessionStatus sessionStatus = GameSession.getStatus();
+
+		if (sessionStatus != SessionStatus.CREATING) {
+			throw new NoContentException();
+		}
+
+		Map<User, IO> usersIO = GameSessionBuilder.getUsersIO();
+		mav.addObject("usersIO", usersIO);
 
 		return mav;
 	}

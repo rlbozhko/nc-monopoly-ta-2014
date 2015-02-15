@@ -45,7 +45,7 @@ public abstract class Cell {
     public boolean hasEscapedPlayers() {
     	List<Player> players = GameSession.getInstance().getBoard().getPlayers(); 
     	for (Player player : players) {
-    		if (player.getJailStatus() == Status.ESCAPE) {
+    		if (player.getPosition() == position && player.getJailStatus() == Status.ESCAPE) {
     			return true;
     		}
     	}

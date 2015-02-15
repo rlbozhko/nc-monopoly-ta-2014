@@ -12,6 +12,7 @@
 		<script src="webjars/jquery/2.1.1/jquery.min.js"></script>
 		<script src="webjars/bootstrapvalidator/0.5.3/js/bootstrapValidator.min.js"></script>
 		<script src="webjars/bootstrap/3.3.1/js/bootstrap.min.js"></script>
+		<script type="text/javascript" src="js/ajax.js"></script>
 </head>
 	<body>
 		<div align="right">
@@ -33,4 +34,16 @@
 			    <input type="submit" value="Create game">
 		</form>
 	</body>
+	<script type="text/javascript">
+	function done() {
+		checkIndexStatus();		
+		setTimeout(function() {
+			done();// call done() again
+		}, 100);// refresh it accordingly
+	}
+
+	$(document).ready(function() {
+		done();
+	});
+</script>
 </html>

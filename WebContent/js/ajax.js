@@ -159,9 +159,9 @@ function yesNoDialog(answer) {
 		success : function(data, status) {
 			$("#yn_dialog").hide("fast", function() {
 				$("#yn_dialog").html("");
-			})
-			isDialogVisible = false;
-			return false;
+				isDialogVisible = false;
+			})			
+//			return false;
 		}
 	})
 };
@@ -207,8 +207,9 @@ function selectProperty(accept) {
 		success : function(data, status) {
 			$("#select_property").hide(0, function() {
 				$("#select_property").html("");
+				isSelectPropertyVisible = false;
 			});
-			isSelectPropertyVisible = false;
+			
 		}
 	})
 };
@@ -250,9 +251,10 @@ function createDeal(accept, dealTargetName) {
 		success : function(data, status) {
 			$("#deal").hide("fast", function() {
 				$("#deal").html("");
+				isDealVisible = false;	
 			});
-			isDealVisible = false;			
-			return false;
+					
+//			return false;
 		}
 	})
 };
@@ -290,9 +292,10 @@ function selectPlayer(accept) {
 		success : function(data, status) {
 			$("#select_player").hide("fast", function() {
 				$("#select_player").html("");
+				isSelectPlayerVisible = false;
 			});
-			isSelectPlayerVisible = false;
-			return false;
+			
+//			return false;
 		}
 	})
 };

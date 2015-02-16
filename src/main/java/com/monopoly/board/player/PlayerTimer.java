@@ -7,14 +7,14 @@ import com.monopoly.action.ActionUtils;
 import com.monopoly.action.FinishGameAction;
 
 public class PlayerTimer {
-	private static final int START_TIME = 6000000;
-	private static final int MAX_TIME = 6000000;
-	private static final int ADDIONAL_TIME = 20000;
+	public static final int START_TIME = 6000000;
+	public static final int MAX_TIME = 6000000;
+	public static final int ADDIONAL_TIME = 20000;
 	private volatile long timerEnd;
 	private Player player;
 	private Timer timer;
 	private TimerTask task;
-	private boolean started;
+	private volatile boolean started;
 
 	public PlayerTimer(Player player) {
 		this.player = player;

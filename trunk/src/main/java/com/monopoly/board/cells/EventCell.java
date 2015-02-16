@@ -7,6 +7,11 @@ import com.monopoly.board.events.Event;
  */
 public abstract class EventCell extends Cell {
 
+	@Override
+	public String getOwnerColor() {
+		return "#FFFAF0";
+	}
+
 	public EventCell(String name, String description, int position) {
 		super(name, description, CellType.EVENT_CELL, position);
 	}

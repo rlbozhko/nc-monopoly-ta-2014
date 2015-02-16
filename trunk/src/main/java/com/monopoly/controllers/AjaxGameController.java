@@ -442,6 +442,29 @@ public class AjaxGameController {
 		return "Ok";
 	}
 
+	@RequestMapping(value = "/game_timer.action", method = RequestMethod.GET)
+	public @ResponseBody String getTimer(@CookieValue(value = "bb_data", required = false) String hash) {
+
+		User user = userService.getUser(hash);
+
+		if (user == null) {
+			throw new NoContentException();
+		}
+
+		SessionStatus sessionStatus = GameSession.getStatus();
+
+		if (sessionStatus != SessionStatus.RUN) {
+			throw new NoContentException();
+		}
+
+		IO io = GameSession.getInstance().getUserIO(user);
+		Player player = io.getOwner();
+		if (player.isTimerStarted()) {
+			return "" + (Math.round(player.getRemainingTime() / 100.) / 10.);
+		}
+		return "--.-";
+	}
+	
 	@RequestMapping(value = "/game_warning.action", method = RequestMethod.GET)
 	public ModelAndView hasWarning(@CookieValue(value = "bb_data", required = false) String hash) {
 

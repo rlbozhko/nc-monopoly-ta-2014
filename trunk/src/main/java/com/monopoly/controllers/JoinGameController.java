@@ -128,6 +128,8 @@ public class JoinGameController {
 			GameSessionBuilder.setUsersIO(usersIO);
 			
 			GameSession.setStatus(SessionStatus.RUN);
+			GameSession.getInstance().getBoard().getCurrentPlayer().startTimer();
+			
 			return new ModelAndView("redirect:game_test.action");
 		}
 

@@ -1,3 +1,4 @@
+var currentTimer;
 var currentButtons;
 var currentChat;
 var currentBoard;
@@ -7,6 +8,22 @@ var isWarningVisible;
 var isSelectPropertyVisible;
 var isDealVisible;
 var isSelectPlayerVisible;
+
+function updateTimer() {
+	$.ajax({
+		url : "game_timer.action",
+		type : "GET",
+		ifModified : true,
+		success : function(data, status, jqXHR) {
+			if (jqXHR.status != '204') {
+				if (data != currentTimer) {
+					currentTimer = data;
+					$("#timer").html("<p>Осталось времени: " + data + "</p>");					
+				}
+			}
+		}
+	})
+};
 
 function updateButtons() {
 	$.ajax({

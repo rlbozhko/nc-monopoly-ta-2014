@@ -36,7 +36,8 @@
 					<div id="board"></div>
 				</td>
 				<td style="vertical-align: top;">
-					<div id="chatbox"></div>					
+					<div id="chatbox"></div>
+					<div id="timer"></div>					
 					<div id="buttons"></div>
 					<div id="yn_dialog"></div>
 					<div id="warning"></div>
@@ -55,8 +56,9 @@
 		checkGameStatus();
 		updatePlayerInfo();
 		updateBoard();
-		updateButtons();
 		updateChat();
+		updateTimer()
+		updateButtons();		
 		updateYesNoDialog();
 		updateWarning();
 		updateSelectProperty();
@@ -64,7 +66,7 @@
 		updateSelectPlayer();
 		setTimeout(function() {
 			done();// call done() again
-		}, 100);// refresh it accordingly
+		}, 200);// refresh it accordingly
 	}
 
 	$(document).ready(function() {

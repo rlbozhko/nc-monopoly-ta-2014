@@ -12,4 +12,11 @@ public abstract class EventCell extends Cell {
 	}
 
 	public abstract Event getEvent();
+
+	@Override
+	public String getColor() {		
+		return "#FFFAF0";
+	}
+	
+	
 }

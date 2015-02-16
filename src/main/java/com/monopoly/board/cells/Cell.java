@@ -25,6 +25,8 @@ public abstract class Cell {
         this.cellType = cellType;
         this.position = position;
     }
+    
+    public abstract String getColor();
 
     public String getName() {
         return name;

@@ -280,4 +280,9 @@ public class PropertyCell extends Property {
 		return "Стоимость: $" + getPrice() + " Аренда: $" + getRent() 
 				+ ((hasBuilding()) ? ", Здание Ур. " + getBuilding().getCurrentLevel() : ", Без Здания");
 	}
+
+	@Override
+	public String getColor() {		
+		return monopoly.getMonopolyType().getColor();
+	}
 }

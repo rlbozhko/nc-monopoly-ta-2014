@@ -27,6 +27,8 @@ public abstract class Cell {
     }
     
     public abstract String getColor();
+    
+    public abstract String getOwnerColor();
 
     public String getName() {
         return name;

@@ -10,6 +10,10 @@ public class TestCell extends Cell {
 
 	@Override
 	public String getColor() {		
-		return "white";
+		return "#FFFAF0";
 	}
+
+	@Override
+	public String getOwnerColor() {
+		return "#FFFAF0";	}
 }

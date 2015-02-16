@@ -285,4 +285,14 @@ public class PropertyCell extends Property {
 	public String getColor() {		
 		return monopoly.getMonopolyType().getColor();
 	}
+
+	@Override
+	public String getOwnerColor() {		
+		Player owner = GameSession.getInstance().getPropertyManager().getPropertyOwner(this);
+		if (owner != null) {
+			return owner.getPlayerColor();
+		} else {
+			return "#FFFAF0";
+		}
+	}
 }

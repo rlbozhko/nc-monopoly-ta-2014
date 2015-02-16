@@ -344,9 +344,7 @@ public class AjaxGameController {
 	@RequestMapping(value = "/a_deal_target.action", method = RequestMethod.GET, params = { "dealTargetName" })
 	public @ResponseBody String createDeal(@CookieValue(value = "bb_data", required = false) String hash,
 			@ModelAttribute DealContainer dealContainer, @RequestParam String dealTargetName,
-			@RequestParam(value = "isAccept", required = false, defaultValue = "false") Boolean isAccept,
-			@RequestParam(value = "askPropertiesIDs", required = false) String askPropertiesIDs,
-			@RequestParam(value = "givePropertiesIDs", required = false) String givePropertiesIDs) {
+			@RequestParam(value = "isAccept", required = false, defaultValue = "false") Boolean isAccept) {
 
 		System.out.println("inside createDeal");
 		User user = userService.getUser(hash);
@@ -372,9 +370,7 @@ public class AjaxGameController {
 		} else {
 			io.setCreatedDeal(null);
 		}
-		System.out.println("isAccept = " + isAccept);
-		System.out.println("askPropertiesIDs = " + askPropertiesIDs);
-		System.out.println("givePropertiesIDs = " + givePropertiesIDs);
+		System.out.println("isAccept = " + isAccept);		
 		System.out.println(deal.message());
 
 		return "deal";

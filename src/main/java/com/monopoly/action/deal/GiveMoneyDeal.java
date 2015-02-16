@@ -14,7 +14,7 @@ public class GiveMoneyDeal extends WrapperDeal {
 	@Override
 	public String message() {
 		StringBuilder message = new StringBuilder();
-		message.append("Предлагает ").append("Денег: ").append(money).append(" ");
+		message.append("Предлагает ").append("Денег: ").append(money).append("<br>");
 		return super.message() + message.toString();
 	}
 

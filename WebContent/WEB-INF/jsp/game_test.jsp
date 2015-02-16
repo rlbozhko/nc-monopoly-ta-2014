@@ -42,7 +42,8 @@
 					<div id="warning"></div>
 					<div id="select_player"></div>
 					<div id="deal"></div>
-					<div id="select_property"></div>					
+					<div id="select_property"></div>
+					<div id="test"></div>					
 				</td>
 			</tr>
 		</tbody>

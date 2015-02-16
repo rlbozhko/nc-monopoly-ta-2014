@@ -3,7 +3,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 
 
-<div id="select_property_body">
+<div id="deal_body">
 	<p>Сделка с ${targetPlayer}</p>	
 	Требовать деньги <input type="text" name="askMoney" value="0"><br>
 	Предложить деньги <input type="text" name="giveMoney" value="0"><br>

@@ -5,7 +5,7 @@
 
 
     <div id="warning_body" class="alert alert-danger alert-error">
-        <a href="#" class="close" data-dismiss="alert">&times;</a>
+        <a href="#" class="close" data-dismiss="alert" onclick="okWarning()">&times;</a>
         ${warningMessage}
     </div>
 

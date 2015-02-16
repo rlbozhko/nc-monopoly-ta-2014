@@ -23,7 +23,7 @@
   				background-color: #205081;
 			}
 			.form-group {
-				 width: 200px;
+				 width: 220px;
 			}
 		</style>
 		<script type="text/javascript" src="js/ajax.js"></script>

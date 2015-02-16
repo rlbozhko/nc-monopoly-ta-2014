@@ -5,11 +5,11 @@
 
 <div style="position: relative; height: 100%;">
 	<c:forEach var="each" items="${players}">
-		<div
-			style="border: 2px solid ${each.getPlayerColor()}; margin-bottom: 20px; padding: 0px;">
-			Player: ${each.getName()} <br> Money: ${each.getMoney()} <br>
-			Position: ${cellsList.get(each.getPosition()).getName()} <br>
-			Property: ${propertyManager.getPlayerProperties(each)}
+		<div style="border: 3px solid ${each.getPlayerColor()}; margin-bottom: 20px;">
+			<p align="center" style="font-weight: 700;">${each.getName()}</p>
+			<p>Состояние: ${each.getMoney()}</p>
+			<p>Местонахождение: ${cellsList.get(each.getPosition()).getName()}</p>
+			<p>Собственность: ${propertyManager.getPlayerProperties(each)}</p>
 		</div>
 	</c:forEach>
 </div>

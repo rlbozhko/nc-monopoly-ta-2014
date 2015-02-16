@@ -5,7 +5,7 @@
 
 <div id="yn_dialog_body">
 	<p>${yesNoDialog}</p>	
-	<button onclick="yesNoDialog(true)">Да</button>
-	<button onclick="yesNoDialog(false)">Нет</button>	
+	<button onclick="yesNoDialog(true)" class="btn btn-info">Да</button>
+	<button onclick="yesNoDialog(false)" class="btn btn-info">Нет</button>	
 </div>
 

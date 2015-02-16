@@ -13,38 +13,58 @@
 				margin: 0 auto;
 				margin-bottom: 25px;
 				padding: 10px;
-				background: #fff;
+				background: #FFFFF0;
 				height: 170px;
 				border: 1px solid black;
 				overflow: auto;
 			}
+			.navbar {
+			    margin-bottom:0;
+  				background-color: #205081;
+			}
 		</style>
-		<script src="//code.jquery.com/jquery-1.10.2.js"></script>
+		<link href="webjars/bootstrap/3.3.1/css/bootstrap.min.css" rel="stylesheet">
+		<link href="webjars/bootstrapvalidator/0.5.3/css/bootstrapValidator.min.css" rel="stylesheet">
+<!-- 		<link href="css/main.css" rel="stylesheet"> -->
+		<script src="webjars/jquery/2.1.1/jquery.min.js"></script>
+		<script src="webjars/bootstrapvalidator/0.5.3/js/bootstrapValidator.min.js"></script>
+		<script src="webjars/bootstrap/3.3.1/js/bootstrap.min.js"></script>
 	</head>
-	<body>
-		<a href="signin.action?signout">Sign out [${email}] </a>
-	
-		<form>
-			<input type=button value="Refresh" onClick="history.go()">
-		</form>
+	<body style="background-color: #FFFAF0;">
+		<div id="navtop">
+  			<div class="navbar navbar-custom navbar-static-top">
+    			<div class="container">
+     				<div class="navbar-collapse collapse">
+       					<ul class="nav pull-right navbar-nav">
+       						<li>
+			            		<form class="navbar-form" action="signin.action" method="get">
+			            			<input type="hidden" name="signout" value="true">
+			            			<button type="submit" class="btn btn-primary">Выход [${email}]</button>
+			            		</form>
+       						</li>
+        				</ul>
+      				</div>		
+    			</div>
+  			</div>
+		</div>
 	
 		<h1>Game</h1>
 		<table>
 			<tbody>
 				<tr>
-					<td style="width: 10%; vertical-align: top;">
+					<td style="width: 10%; vertical-align: top; background-color: #FFFACD;">
 						<div style="position:relative; height:100%;">
 							<c:forEach var="each" items="${players}">
-								<div style="border: 2px solid ${each.getPlayerColor()}; margin-bottom: 20px; padding: 0px;">
-										Player: ${each.getName()} <br>
-										Money: ${each.getMoney()} <br>
-										Position: ${cellsList.get(each.getPosition()).getName()} <br>
-										Property: ${propertyManager.getPlayerProperties(each)}
+								<div style="border: 3px solid ${each.getPlayerColor()}; margin-bottom: 20px;">
+										<p>Игрок: ${each.getName()}</p>
+										<p>Состояние: ${each.getMoney()}</p>
+										<p>Местонахождение: ${cellsList.get(each.getPosition()).getName()}</p>
+										<p>Собственность: ${propertyManager.getPlayerProperties(each)}</p>
 								</div>		
 							</c:forEach>
 						</div>
 				   	</td>
-				   	<td style="width: 55%;">
+				   	<td style="width: 55%; background-color: #F5FFFA;">
 				   		<c:forEach var="eachCell" items="${cellsList}">
 							 <div	style="height: 100px; width: 109px; float: left; overflow: hidden; border: 1px solid black; margin-bottom: 10px; margin-left: 10px" align="center">
 								<div style="border: 1px solid black;">${eachCell.getName()}</div>
@@ -59,7 +79,7 @@
 							</div>
 						</c:forEach>
 				   	</td>
-					<td style="vertical-align: top;">
+					<td style="vertical-align: top; background-color: #FFFACD;">
 						<div id="chatbox">
 							<c:forEach var="each" items="${messageQueue}">${each}<br></c:forEach>
 						</div>
@@ -71,7 +91,7 @@
 								<button type="submit" name="actionType" value="START_TURN"
 									<c:if test="${!strActions.contains('START_TURN')}">disabled="disabled"</c:if>>Start	turn</button>
 								<button type="submit" name="actionType" value="END_TURN"
-									<c:if test="${!strActions.contains('END_TURN')}">disabled="disabled"</c:if>>End turn</button>
+									<c:if test="${!strActions.contains('END_TURN')}">" disabled="disabled"</c:if>>End turn</button>
 								<button type="submit" name="actionType" value="BUY_PROPERTY"
 									<c:if test="${!strActions.contains('BUY_PROPERTY')}">disabled="disabled"</c:if>>Buy</button>		
 								<button type="submit" name="actionType" value="DEAL"
@@ -185,6 +205,8 @@
 		if (isWarring == true) {
 			alert('${warningMessage}');
 		}
+		
+		alert('${strActions}');
 	});
 	
    		document.getElementById("chatbox").scrollTop = document.getElementById("chatbox").scrollHeight

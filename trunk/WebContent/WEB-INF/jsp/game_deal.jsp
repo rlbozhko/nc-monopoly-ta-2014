@@ -5,22 +5,30 @@
 
 <div id="deal_body">
 	<div class="form-group">
-	<p class="nav nav-bar">Сделка с ${targetPlayer}</p>	
-	<label class="control-label">Требовать деньги </label><input class="form-control" type="text" name="askMoney" value="0">
-	<label class="control-label">Предложить деньги </label> <input class="form-control" type="text" name="giveMoney" value="0">
+		<p><b>Сделка с ${targetPlayer}</b></p>	
+		<label class="control-label">Требовать деньги </label><input class="form-control" type="text" name="askMoney" value="0">
+		<label class="control-label">Предложить деньги </label> <input class="form-control" type="text" name="giveMoney" value="0">
 	</div>
-	<p>Ask property</p>
-	<select name="askPropertiesIDs" multiple="multiple">
-		<c:forEach items="${targetProperty}" var="each">
-			<option value="${each.getPosition()}">${each.getName()}</option>
-		</c:forEach>
-	</select> <br>
-	<p>Give property</p>
-	<select name="givePropertiesIDs" multiple="multiple">
-		<c:forEach items="${sourceProperty}" var="each">
-			<option value="${each.getPosition()}">${each.getName()}</option>
-		</c:forEach>
-	</select> <br>	
+	<c:if test="${targetProperty.size() > 0}">
+		<div class="form-group">
+			<p><b>Ask property</b></p>
+			<select class="form-control" name="askPropertiesIDs" multiple="multiple">
+				<c:forEach items="${targetProperty}" var="each">
+					<option value="${each.getPosition()}">${each.getName()}</option>
+				</c:forEach>
+			</select>
+		</div>
+	</c:if>
+	<c:if test="${sourceProperty.size() > 0}">
+		<div class="form-group">
+			<p><b>Give property</b></p>
+			<select class="form-control" name="givePropertiesIDs" multiple="multiple">
+				<c:forEach items="${sourceProperty}" var="each">
+					<option value="${each.getPosition()}">${each.getName()}</option>
+				</c:forEach>
+			</select>
+		</div>
+	</c:if>
 	<button onclick="createDeal(true,'${targetPlayer}')" class="btn btn-info">Отправить Сделу</button>
 	<button onclick="createDeal(false,'${targetPlayer}')" class="btn btn-info">Отмена</button>
 </div>

@@ -4,9 +4,11 @@
 
 
 <div id="deal_body">
-	<p>Сделка с ${targetPlayer}</p>	
-	Требовать деньги <input type="text" name="askMoney" value="0"><br>
-	Предложить деньги <input type="text" name="giveMoney" value="0"><br>
+	<div class="form-group">
+	<p class="nav nav-bar">Сделка с ${targetPlayer}</p>	
+	<label class="control-label">Требовать деньги </label><input class="form-control" type="text" name="askMoney" value="0">
+	<label class="control-label">Предложить деньги </label> <input class="form-control" type="text" name="giveMoney" value="0">
+	</div>
 	<p>Ask property</p>
 	<select name="askPropertiesIDs" multiple="multiple">
 		<c:forEach items="${targetProperty}" var="each">
@@ -19,6 +21,6 @@
 			<option value="${each.getPosition()}">${each.getName()}</option>
 		</c:forEach>
 	</select> <br>	
-	<button onclick="createDeal(true,'${targetPlayer}')">Отправить Сделу</button>
-	<button onclick="createDeal(false,'${targetPlayer}')">Отмена</button>
+	<button onclick="createDeal(true,'${targetPlayer}')" class="btn btn-info">Отправить Сделу</button>
+	<button onclick="createDeal(false,'${targetPlayer}')" class="btn btn-info">Отмена</button>
 </div>

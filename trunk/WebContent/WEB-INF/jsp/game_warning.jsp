@@ -4,6 +4,6 @@
 
 
 <div id="warning_body">
-	<p>${warningMessage}</p>	
-	<button onclick="okWarning()">Ok</button>	
+	<p style="color: red;">${warningMessage}</p>	
+	<button onclick="okWarning()" class="btn btn-danger">Ok</button>	
 </div>

@@ -34,12 +34,12 @@
        					<ul class="nav pull-right navbar-nav">
        						<li>
 			            		<form class="navbar-form" action="signin.action" method="get">
-			            			<button type="submit" class="btn btn-primary">Sign in</button>
+			            			<button type="submit" class="btn btn-primary">Вход</button>
 			            		</form>
        						</li>
        						<li>
 			            		<form class="navbar-form" action="signup.action" method="get">
-			              			<button type="submit" class="btn btn-primary">Sign up</button>
+			              			<button type="submit" class="btn btn-primary">Регистрация</button>
 			            		</form>
         					</li>
         				</ul>
@@ -56,12 +56,12 @@
 				<input id="inputPassword" class="form-control" type="password" name="password" required placeholder="Password">
 				<div class="buttons-container">
 					<div class="buttons">
-						<button class="btn btn-lg btn-primary btn-block" type="submit">Sign in</button>
+						<button class="btn btn-lg btn-primary btn-block" type="submit">Вход</button>
 					</div>
 				</div>
 			</form>
 				<div class="sign-up">
-        			<a href="signup.action">Need an account? Sign up free.</a>
+        			<a href="signup.action">Необходим аккаунт? Зарегистрироваться бесплатно.</a>
         		</div>
 		</div>
 	</body>

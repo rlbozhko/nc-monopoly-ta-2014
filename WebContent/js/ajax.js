@@ -167,7 +167,7 @@ function yesNoDialog(answer) {
 };
 
 function updateWarning() {
-	if (!isWarningVisible) {
+//	if (!isWarningVisible) {
 		$.ajax({
 			url : "game_warning.action",
 			type : "GET",
@@ -175,14 +175,15 @@ function updateWarning() {
 			success : function(data, status, jqXHR) {
 				if (jqXHR.status != 204) {
 					isWarningVisible = true;
-					$("#warning").html(data);
+//					$("#warning").html(data);
+					$("#warning").append(data);
 					$("#warning").show();
 				} else {
 					// $("#warning").html("<p>No Warning</p>");
 				}
 			}
 		});
-	}
+//	}
 };
 
 function okWarning() {

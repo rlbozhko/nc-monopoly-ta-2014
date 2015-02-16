@@ -3,6 +3,7 @@ package com.monopoly.action;
 import com.monopoly.board.dice.Dice;
 import com.monopoly.board.player.Player;
 import com.monopoly.board.player.Status;
+import com.monopoly.io.IO;
 import com.monopoly.performer.GoToJailPerformer;
 
 /**
@@ -14,6 +15,11 @@ public class StartTurnAction implements Action {
 
 	@Override
 	public void performAction(Player player) {
+		IO io = ActionUtils.getPlayerIO(player);
+		if (checkDialogs(io)) {
+			return;
+		}
+		
 		Dice dice = Dice.getInstance();
 		dice.generateNewDiceValue();
 		ActionUtils.getPlayerIO(player).showDice();
@@ -50,6 +56,16 @@ public class StartTurnAction implements Action {
 			player.resetDoublesCount();
 			return false;
 		}
+	}
+	
+	private boolean checkDialogs(IO io) {
+		if (io.hasYesNoDialog()) {
+			io.showWarning("Чтобы походить ответьте на все запросы!");
+			io.getOwner().addTime();
+			return true;
+		} else {
+			return false;
+		}	 
 	}
 
 	@Override

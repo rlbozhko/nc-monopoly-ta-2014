@@ -186,7 +186,7 @@ function updateWarning() {
 };
 
 function okWarning() {
-	$("#warning").hide(100, function() {
+	$("#warning").hide(300, function() {
 		$("#warning").html("");
 	});
 	$("#warning").html("");

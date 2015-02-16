@@ -28,8 +28,13 @@ public class EndTurnAction implements Action {
 
 	@Override
 	public void performAction(Player aPlayer) {
-		player = aPlayer;
-		playerIO = ActionUtils.getPlayerIO(player);
+		player = aPlayer;		
+		playerIO = ActionUtils.getPlayerIO(player);	
+		
+		if (checkDialogs(playerIO)) {
+			return;
+		}
+		
 		if (player.isPayRent()) {
 			playerIO.showWarning("Для завершения хода уплатите аренду");
 			player.addTime();
@@ -51,6 +56,16 @@ public class EndTurnAction implements Action {
 				checkAndStartAuction();
 			}
 		}
+	}
+	
+	private boolean checkDialogs(IO io) {
+		if (io.hasYesNoDialog()) {
+			io.showWarning("Чтобы завершить ход ответьте на все запросы!");
+			io.getOwner().addTime();
+			return true;
+		} else {
+			return false;
+		}	 
 	}
 
 	private void checkForEscape() {

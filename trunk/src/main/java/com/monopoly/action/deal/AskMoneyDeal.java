@@ -15,7 +15,7 @@ public class AskMoneyDeal extends WrapperDeal {
     public String message() {
         StringBuilder message = new StringBuilder();
         message.append("Требует ")
-                .append("Денег: ").append(money).append(" ");
+                .append("Денег: ").append(money).append("<br>");
         return super.message() + message.toString();
     }
 

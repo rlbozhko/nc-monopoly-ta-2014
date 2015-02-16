@@ -42,7 +42,7 @@ public class EmptyDeal implements Deal {
 
     @Override
     public String message() {
-        return "Игрок " + source.getName() + " ";
+        return "Игрок " + source.getName() + "<br>";
     }
 
     @Override

@@ -35,21 +35,18 @@ function updateChat() {
 				if (data != currentChat) {
 					currentChat = data;
 					$("#chatbox").html(data);
+					chatHover();
 				}
 			}
 		}
 	})
-	chatHover();
 };
 
 function chatHover() {
-	$("#chatbox").hover(
-			function() {
-			},
-			function() {
-				document.getElementById("chatbox").scrollTop = document
-						.getElementById("chatbox").scrollHeight;
-			});
+	if (!$('#chatbox').is(":hover")) {
+		document.getElementById("chatbox").scrollTop = document
+				.getElementById("chatbox").scrollHeight;
+	}
 }
 
 function updateBoard() {
@@ -217,30 +214,26 @@ function updateSelectProperty() {
 	}
 };
 
-function createDeal(accept, targetPlayer) {
-	askMoney = $("input[name=askMoney]").val();
-	giveMoney = $("input[name=giveMoney]").val();
-	askPropertiesIDs = $("select[name=askPropertiesIDs]").val() || [];
-	givePropertiesIDs = $("select[name=givePropertiesIDs]").val() || [];
+function createDeal(accept, dealTargetName) {
+	askMoney = $("input[name=askMoney]").serialize();
+	giveMoney = $("input[name=giveMoney]").serialize();
+	askPropertiesIDs = $("select[name=askPropertiesIDs]").serialize();
+	givePropertiesIDs = $("select[name=givePropertiesIDs]").serialize();
+	$("#test").html(deal);
+
 	$.ajax({
 		url : "a_deal_target.action",
 		type : "GET",
 		ifModified : true,
-		data : {
-			"isAccept" : accept,
-			"askMoney" : askMoney,
-			"giveMoney" : giveMoney,
-			"askPropertiesIDs" : askPropertiesIDs,
-			"givePropertiesIDs" : givePropertiesIDs,
-			"dealTargetName" : targetPlayer
-		},
+		data : askPropertiesIDs + "&" + givePropertiesIDs + "&" + askMoney
+				+ "&" + giveMoney + "&dealTargetName=" + dealTargetName
+				+ "&isAccept=" + accept,
+		processData : false,
 		success : function(data, status) {
 			$("#deal").hide("fast", function() {
 				$("#deal").html("");
 			});
-			isDealVisible = false;
-			alert(askPropertiesIDs);
-			alert(givePropertiesIDs);
+			isDealVisible = false;			
 			return false;
 		}
 	})

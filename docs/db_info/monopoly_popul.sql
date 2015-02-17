@@ -49,7 +49,7 @@ INSERT INTO OBJECTS (OBJECT_ID,PARENT_ID,OBJECT_TYPE_ID,NAME,DESCRIPTION) VALUES
     INSERT INTO OBJECTS (OBJECT_ID,PARENT_ID,OBJECT_TYPE_ID,NAME,DESCRIPTION) VALUES (102,101,6,'Начало','Тут все начинается');
       INSERT INTO attributes (attr_id, object_id, value, date_value) VALUES (2,102,'0',NULL); -- position
       INSERT INTO OBJECTS (OBJECT_ID,PARENT_ID,OBJECT_TYPE_ID,NAME,DESCRIPTION) VALUES (150,102,10,'MONEY',NULL);
-    INSERT INTO OBJECTS (OBJECT_ID,PARENT_ID,OBJECT_TYPE_ID,NAME,DESCRIPTION) VALUES (103,101,3,'c1m1','c1m1 desc');   
+    INSERT INTO OBJECTS (OBJECT_ID,PARENT_ID,OBJECT_TYPE_ID,NAME,DESCRIPTION) VALUES (103,101,3,'Google','c1m1 desc');   
       --atr
       INSERT INTO attributes (attr_id, object_id, value, date_value) VALUES (13,103,'1000',NULL); -- basePrice
       INSERT INTO attributes (attr_id, object_id, value, date_value) VALUES (14,103,'100',NULL); -- baseRent      
@@ -70,7 +70,7 @@ INSERT INTO OBJECTS (OBJECT_ID,PARENT_ID,OBJECT_TYPE_ID,NAME,DESCRIPTION) VALUES
       INSERT INTO OBJECTS (OBJECT_ID,PARENT_ID,OBJECT_TYPE_ID,NAME,DESCRIPTION) VALUES (155,104,10,'MOVE',NULL);
       INSERT INTO OBJECTS (OBJECT_ID,PARENT_ID,OBJECT_TYPE_ID,NAME,DESCRIPTION) VALUES (156,104,10,'RANDOM_MONEY',NULL);
       --
-    INSERT INTO OBJECTS (OBJECT_ID,PARENT_ID,OBJECT_TYPE_ID,NAME,DESCRIPTION) VALUES (105,101,3,'c2m1','c2m1 desc');
+    INSERT INTO OBJECTS (OBJECT_ID,PARENT_ID,OBJECT_TYPE_ID,NAME,DESCRIPTION) VALUES (105,101,3,'Yahoo','c2m1 desc');
       --atr
       INSERT INTO attributes (attr_id, object_id, value, date_value) VALUES (13,105,'1000',NULL); -- basePrice
       INSERT INTO attributes (attr_id, object_id, value, date_value) VALUES (14,105,'100',NULL); -- baseRent      
@@ -82,7 +82,7 @@ INSERT INTO OBJECTS (OBJECT_ID,PARENT_ID,OBJECT_TYPE_ID,NAME,DESCRIPTION) VALUES
       INSERT INTO attributes (attr_id, object_id, value, date_value) VALUES (22,105,'UNPLEDGED',NULL); -- status
       INSERT INTO attributes (attr_id, object_id, value, date_value) VALUES (23,105,'0',NULL); -- turnsToPayBack
       --          
-    INSERT INTO OBJECTS (OBJECT_ID,PARENT_ID,OBJECT_TYPE_ID,NAME,DESCRIPTION) VALUES (106,101,3,'c3m1','c3m1 desc');
+    INSERT INTO OBJECTS (OBJECT_ID,PARENT_ID,OBJECT_TYPE_ID,NAME,DESCRIPTION) VALUES (106,101,3,'Яндекс','c3m1 desc');
     --atr
       INSERT INTO attributes (attr_id, object_id, value, date_value) VALUES (13,106,'1000',NULL); -- basePrice
       INSERT INTO attributes (attr_id, object_id, value, date_value) VALUES (14,106,'100',NULL); -- baseRent      
@@ -94,7 +94,7 @@ INSERT INTO OBJECTS (OBJECT_ID,PARENT_ID,OBJECT_TYPE_ID,NAME,DESCRIPTION) VALUES
       INSERT INTO attributes (attr_id, object_id, value, date_value) VALUES (22,106,'UNPLEDGED',NULL); -- status
       INSERT INTO attributes (attr_id, object_id, value, date_value) VALUES (23,106,'0',NULL); -- turnsToPayBack
       --          
-    INSERT INTO OBJECTS (OBJECT_ID,PARENT_ID,OBJECT_TYPE_ID,NAME,DESCRIPTION) VALUES (107,101,3,'c1m9','c1m9 desc');
+    INSERT INTO OBJECTS (OBJECT_ID,PARENT_ID,OBJECT_TYPE_ID,NAME,DESCRIPTION) VALUES (107,101,3,'Bethesda','c1m9 desc');
     --atr
       INSERT INTO attributes (attr_id, object_id, value, date_value) VALUES (13,107,'2000',NULL); -- basePrice
       INSERT INTO attributes (attr_id, object_id, value, date_value) VALUES (14,107,'250',NULL); -- baseRent      
@@ -106,7 +106,7 @@ INSERT INTO OBJECTS (OBJECT_ID,PARENT_ID,OBJECT_TYPE_ID,NAME,DESCRIPTION) VALUES
       INSERT INTO attributes (attr_id, object_id, value, date_value) VALUES (22,107,'UNPLEDGED',NULL); -- status
       INSERT INTO attributes (attr_id, object_id, value, date_value) VALUES (23,107,'0',NULL); -- turnsToPayBack
       --          
-    INSERT INTO OBJECTS (OBJECT_ID,PARENT_ID,OBJECT_TYPE_ID,NAME,DESCRIPTION) VALUES (108,101,3,'c1m2','c1m2 desc');
+    INSERT INTO OBJECTS (OBJECT_ID,PARENT_ID,OBJECT_TYPE_ID,NAME,DESCRIPTION) VALUES (108,101,3,'Asus','c1m2 desc');
     --atr
       INSERT INTO attributes (attr_id, object_id, value, date_value) VALUES (13,108,'1500',NULL); -- basePrice
       INSERT INTO attributes (attr_id, object_id, value, date_value) VALUES (14,108,'300',NULL); -- baseRent      
@@ -118,7 +118,7 @@ INSERT INTO OBJECTS (OBJECT_ID,PARENT_ID,OBJECT_TYPE_ID,NAME,DESCRIPTION) VALUES
       INSERT INTO attributes (attr_id, object_id, value, date_value) VALUES (22,108,'UNPLEDGED',NULL); -- status
       INSERT INTO attributes (attr_id, object_id, value, date_value) VALUES (23,108,'0',NULL); -- turnsToPayBack
       --          
-    INSERT INTO OBJECTS (OBJECT_ID,PARENT_ID,OBJECT_TYPE_ID,NAME,DESCRIPTION) VALUES (109,101,3,'c2m2','c2m2 desc');
+    INSERT INTO OBJECTS (OBJECT_ID,PARENT_ID,OBJECT_TYPE_ID,NAME,DESCRIPTION) VALUES (109,101,3,'Lenovo','c2m2 desc');
     --atr
       INSERT INTO attributes (attr_id, object_id, value, date_value) VALUES (13,109,'1500',NULL); -- basePrice
       INSERT INTO attributes (attr_id, object_id, value, date_value) VALUES (14,109,'300',NULL); -- baseRent      
@@ -133,7 +133,7 @@ INSERT INTO OBJECTS (OBJECT_ID,PARENT_ID,OBJECT_TYPE_ID,NAME,DESCRIPTION) VALUES
     INSERT INTO OBJECTS (OBJECT_ID,PARENT_ID,OBJECT_TYPE_ID,NAME,DESCRIPTION) VALUES (110,101,6,'Казино','Фортуна может улыбнуться');
       INSERT INTO attributes (attr_id, object_id, value, date_value) VALUES (2,110,'8',NULL); -- position
       INSERT INTO OBJECTS (OBJECT_ID,PARENT_ID,OBJECT_TYPE_ID,NAME,DESCRIPTION) VALUES (157,110,10,'RANDOM_MONEY',NULL);
-    INSERT INTO OBJECTS (OBJECT_ID,PARENT_ID,OBJECT_TYPE_ID,NAME,DESCRIPTION) VALUES (141,101,3,'c3m2','c3m2 desc');
+    INSERT INTO OBJECTS (OBJECT_ID,PARENT_ID,OBJECT_TYPE_ID,NAME,DESCRIPTION) VALUES (141,101,3,'HP','c3m2 desc');
     --atr
       INSERT INTO attributes (attr_id, object_id, value, date_value) VALUES (13,141,'1500',NULL); -- basePrice
       INSERT INTO attributes (attr_id, object_id, value, date_value) VALUES (14,141,'300',NULL); -- baseRent      
@@ -148,7 +148,7 @@ INSERT INTO OBJECTS (OBJECT_ID,PARENT_ID,OBJECT_TYPE_ID,NAME,DESCRIPTION) VALUES
     INSERT INTO OBJECTS (OBJECT_ID,PARENT_ID,OBJECT_TYPE_ID,NAME,DESCRIPTION) VALUES (111,101,6,'Тюрьма','Это место лучше пройти мимо');
       INSERT INTO attributes (attr_id, object_id, value, date_value) VALUES (2,111,'10',NULL); -- position
       INSERT INTO OBJECTS (OBJECT_ID,PARENT_ID,OBJECT_TYPE_ID,NAME,DESCRIPTION) VALUES (158,111,10,'JAIL',null);
-    INSERT INTO OBJECTS (OBJECT_ID,PARENT_ID,OBJECT_TYPE_ID,NAME,DESCRIPTION) VALUES (112,101,3,'c1m3','c1m3 desc');
+    INSERT INTO OBJECTS (OBJECT_ID,PARENT_ID,OBJECT_TYPE_ID,NAME,DESCRIPTION) VALUES (112,101,3,'Dr.Web','c1m3 desc');
     --atr
       INSERT INTO attributes (attr_id, object_id, value, date_value) VALUES (13,112,'3000',NULL); -- basePrice
       INSERT INTO attributes (attr_id, object_id, value, date_value) VALUES (14,112,'300',NULL); -- baseRent      
@@ -160,7 +160,7 @@ INSERT INTO OBJECTS (OBJECT_ID,PARENT_ID,OBJECT_TYPE_ID,NAME,DESCRIPTION) VALUES
       INSERT INTO attributes (attr_id, object_id, value, date_value) VALUES (22,112,'UNPLEDGED',NULL); -- status
       INSERT INTO attributes (attr_id, object_id, value, date_value) VALUES (23,112,'0',NULL); -- turnsToPayBack
       -- 
-    INSERT INTO OBJECTS (OBJECT_ID,PARENT_ID,OBJECT_TYPE_ID,NAME,DESCRIPTION) VALUES (113,101,3,'c2m3','c2m3 desc');
+    INSERT INTO OBJECTS (OBJECT_ID,PARENT_ID,OBJECT_TYPE_ID,NAME,DESCRIPTION) VALUES (113,101,3,'Avast','c2m3 desc');
      --atr
       INSERT INTO attributes (attr_id, object_id, value, date_value) VALUES (13,113,'3000',NULL); -- basePrice
       INSERT INTO attributes (attr_id, object_id, value, date_value) VALUES (14,113,'300',NULL); -- baseRent      
@@ -180,7 +180,7 @@ INSERT INTO OBJECTS (OBJECT_ID,PARENT_ID,OBJECT_TYPE_ID,NAME,DESCRIPTION) VALUES
       INSERT INTO OBJECTS (OBJECT_ID,PARENT_ID,OBJECT_TYPE_ID,NAME,DESCRIPTION) VALUES (162,114,10,'EXTRA_TURN',NULL);
       INSERT INTO OBJECTS (OBJECT_ID,PARENT_ID,OBJECT_TYPE_ID,NAME,DESCRIPTION) VALUES (163,114,10,'MOVE',NULL);
       INSERT INTO OBJECTS (OBJECT_ID,PARENT_ID,OBJECT_TYPE_ID,NAME,DESCRIPTION) VALUES (164,114,10,'RANDOM_MONEY',NULL);
-    INSERT INTO OBJECTS (OBJECT_ID,PARENT_ID,OBJECT_TYPE_ID,NAME,DESCRIPTION) VALUES (115,101,3,'c3m3','c3m3 desc');
+    INSERT INTO OBJECTS (OBJECT_ID,PARENT_ID,OBJECT_TYPE_ID,NAME,DESCRIPTION) VALUES (115,101,3,'Comodo','c3m3 desc');
      --atr
       INSERT INTO attributes (attr_id, object_id, value, date_value) VALUES (13,115,'3000',NULL); -- basePrice
       INSERT INTO attributes (attr_id, object_id, value, date_value) VALUES (14,115,'300',NULL); -- baseRent      
@@ -192,7 +192,7 @@ INSERT INTO OBJECTS (OBJECT_ID,PARENT_ID,OBJECT_TYPE_ID,NAME,DESCRIPTION) VALUES
       INSERT INTO attributes (attr_id, object_id, value, date_value) VALUES (22,115,'UNPLEDGED',NULL); -- status
       INSERT INTO attributes (attr_id, object_id, value, date_value) VALUES (23,115,'0',NULL); -- turnsToPayBack
       -- 
-    INSERT INTO OBJECTS (OBJECT_ID,PARENT_ID,OBJECT_TYPE_ID,NAME,DESCRIPTION) VALUES (116,101,3,'c2m9','c3m3 desc');
+    INSERT INTO OBJECTS (OBJECT_ID,PARENT_ID,OBJECT_TYPE_ID,NAME,DESCRIPTION) VALUES (116,101,3,'Blizzard','c2m9 desc');
     --atr
       INSERT INTO attributes (attr_id, object_id, value, date_value) VALUES (13,116,'2000',NULL); -- basePrice
       INSERT INTO attributes (attr_id, object_id, value, date_value) VALUES (14,116,'250',NULL); -- baseRent      
@@ -212,7 +212,7 @@ INSERT INTO OBJECTS (OBJECT_ID,PARENT_ID,OBJECT_TYPE_ID,NAME,DESCRIPTION) VALUES
       INSERT INTO OBJECTS (OBJECT_ID,PARENT_ID,OBJECT_TYPE_ID,NAME,DESCRIPTION) VALUES (168,117,10,'EXTRA_TURN',NULL);
       INSERT INTO OBJECTS (OBJECT_ID,PARENT_ID,OBJECT_TYPE_ID,NAME,DESCRIPTION) VALUES (169,117,10,'MOVE',NULL);
       INSERT INTO OBJECTS (OBJECT_ID,PARENT_ID,OBJECT_TYPE_ID,NAME,DESCRIPTION) VALUES (170,117,10,'RANDOM_MONEY',NULL);
-    INSERT INTO OBJECTS (OBJECT_ID,PARENT_ID,OBJECT_TYPE_ID,NAME,DESCRIPTION) VALUES (118,101,3,'c1m4','c1m4 desc');
+    INSERT INTO OBJECTS (OBJECT_ID,PARENT_ID,OBJECT_TYPE_ID,NAME,DESCRIPTION) VALUES (118,101,3,'Intel','c1m4 desc');
     --atr
       INSERT INTO attributes (attr_id, object_id, value, date_value) VALUES (13,118,'3300',NULL); -- basePrice
       INSERT INTO attributes (attr_id, object_id, value, date_value) VALUES (14,118,'330',NULL); -- baseRent      
@@ -227,7 +227,7 @@ INSERT INTO OBJECTS (OBJECT_ID,PARENT_ID,OBJECT_TYPE_ID,NAME,DESCRIPTION) VALUES
     INSERT INTO OBJECTS (OBJECT_ID,PARENT_ID,OBJECT_TYPE_ID,NAME,DESCRIPTION) VALUES (119,101,6,'Ипподром','Главное поставить на фаворита');
       INSERT INTO attributes (attr_id, object_id, value, date_value) VALUES (2,119,'18',NULL); -- position
       INSERT INTO OBJECTS (OBJECT_ID,PARENT_ID,OBJECT_TYPE_ID,NAME,DESCRIPTION) VALUES (171,119,10,'RANDOM_MONEY',NULL);
-    INSERT INTO OBJECTS (OBJECT_ID,PARENT_ID,OBJECT_TYPE_ID,NAME,DESCRIPTION) VALUES (120,101,3,'c2m4','c2m4 desc');
+    INSERT INTO OBJECTS (OBJECT_ID,PARENT_ID,OBJECT_TYPE_ID,NAME,DESCRIPTION) VALUES (120,101,3,'AMD','c2m4 desc');
     --atr
       INSERT INTO attributes (attr_id, object_id, value, date_value) VALUES (13,120,'3300',NULL); -- basePrice
       INSERT INTO attributes (attr_id, object_id, value, date_value) VALUES (14,120,'330',NULL); -- baseRent      
@@ -242,7 +242,7 @@ INSERT INTO OBJECTS (OBJECT_ID,PARENT_ID,OBJECT_TYPE_ID,NAME,DESCRIPTION) VALUES
     INSERT INTO OBJECTS (OBJECT_ID,PARENT_ID,OBJECT_TYPE_ID,NAME,DESCRIPTION) VALUES (121,101,6,'Бесплатная стоянка','Можете передохнуть');
       INSERT INTO attributes (attr_id, object_id, value, date_value) VALUES (2,121,'20',NULL); -- position
       INSERT INTO OBJECTS (OBJECT_ID,PARENT_ID,OBJECT_TYPE_ID,NAME,DESCRIPTION) VALUES (172,121,10,'FREE',null);
-    INSERT INTO OBJECTS (OBJECT_ID,PARENT_ID,OBJECT_TYPE_ID,NAME,DESCRIPTION) VALUES (122,101,3,'c1m5','c1m5 desc');
+    INSERT INTO OBJECTS (OBJECT_ID,PARENT_ID,OBJECT_TYPE_ID,NAME,DESCRIPTION) VALUES (122,101,3,'Nokia','c1m5 desc');
     --atr
       INSERT INTO attributes (attr_id, object_id, value, date_value) VALUES (13,122,'3500',NULL); -- basePrice
       INSERT INTO attributes (attr_id, object_id, value, date_value) VALUES (14,122,'350',NULL); -- baseRent      
@@ -262,7 +262,7 @@ INSERT INTO OBJECTS (OBJECT_ID,PARENT_ID,OBJECT_TYPE_ID,NAME,DESCRIPTION) VALUES
       INSERT INTO OBJECTS (OBJECT_ID,PARENT_ID,OBJECT_TYPE_ID,NAME,DESCRIPTION) VALUES (176,123,10,'EXTRA_TURN',NULL);
       INSERT INTO OBJECTS (OBJECT_ID,PARENT_ID,OBJECT_TYPE_ID,NAME,DESCRIPTION) VALUES (178,123,10,'MOVE',NULL);
       INSERT INTO OBJECTS (OBJECT_ID,PARENT_ID,OBJECT_TYPE_ID,NAME,DESCRIPTION) VALUES (179,123,10,'RANDOM_MONEY',NULL);
-    INSERT INTO OBJECTS (OBJECT_ID,PARENT_ID,OBJECT_TYPE_ID,NAME,DESCRIPTION) VALUES (124,101,3,'c2m5','c2m5 desc');
+    INSERT INTO OBJECTS (OBJECT_ID,PARENT_ID,OBJECT_TYPE_ID,NAME,DESCRIPTION) VALUES (124,101,3,'HTC','c2m5 desc');
     --atr
       INSERT INTO attributes (attr_id, object_id, value, date_value) VALUES (13,124,'3500',NULL); -- basePrice
       INSERT INTO attributes (attr_id, object_id, value, date_value) VALUES (14,124,'350',NULL); -- baseRent      
@@ -277,7 +277,7 @@ INSERT INTO OBJECTS (OBJECT_ID,PARENT_ID,OBJECT_TYPE_ID,NAME,DESCRIPTION) VALUES
     INSERT INTO OBJECTS (OBJECT_ID,PARENT_ID,OBJECT_TYPE_ID,NAME,DESCRIPTION) VALUES (125,101,6,'Событие Хода','Переместит вперед или назад');
       INSERT INTO attributes (attr_id, object_id, value, date_value) VALUES (2,125,'24',NULL); -- position
       INSERT INTO OBJECTS (OBJECT_ID,PARENT_ID,OBJECT_TYPE_ID,NAME,DESCRIPTION) VALUES (180,125,10,'MOVE',null);
-    INSERT INTO OBJECTS (OBJECT_ID,PARENT_ID,OBJECT_TYPE_ID,NAME,DESCRIPTION) VALUES (126,101,3,'c3m9','c3m9 desc');
+    INSERT INTO OBJECTS (OBJECT_ID,PARENT_ID,OBJECT_TYPE_ID,NAME,DESCRIPTION) VALUES (126,101,3,'Cryteck','c3m9 desc');
     --atr
       INSERT INTO attributes (attr_id, object_id, value, date_value) VALUES (13,126,'2000',NULL); -- basePrice
       INSERT INTO attributes (attr_id, object_id, value, date_value) VALUES (14,126,'250',NULL); -- baseRent      
@@ -289,7 +289,7 @@ INSERT INTO OBJECTS (OBJECT_ID,PARENT_ID,OBJECT_TYPE_ID,NAME,DESCRIPTION) VALUES
       INSERT INTO attributes (attr_id, object_id, value, date_value) VALUES (22,126,'UNPLEDGED',NULL); -- status
       INSERT INTO attributes (attr_id, object_id, value, date_value) VALUES (23,126,'0',NULL); -- turnsToPayBack
       --  
-    INSERT INTO OBJECTS (OBJECT_ID,PARENT_ID,OBJECT_TYPE_ID,NAME,DESCRIPTION) VALUES (127,101,3,'c1m6','c1m6 desc');
+    INSERT INTO OBJECTS (OBJECT_ID,PARENT_ID,OBJECT_TYPE_ID,NAME,DESCRIPTION) VALUES (127,101,3,'Skype','c1m6 desc');
     --atr
       INSERT INTO attributes (attr_id, object_id, value, date_value) VALUES (13,127,'4000',NULL); -- basePrice
       INSERT INTO attributes (attr_id, object_id, value, date_value) VALUES (14,127,'400',NULL); -- baseRent      
@@ -309,7 +309,7 @@ INSERT INTO OBJECTS (OBJECT_ID,PARENT_ID,OBJECT_TYPE_ID,NAME,DESCRIPTION) VALUES
       INSERT INTO OBJECTS (OBJECT_ID,PARENT_ID,OBJECT_TYPE_ID,NAME,DESCRIPTION) VALUES (184,128,10,'EXTRA_TURN',NULL);
       INSERT INTO OBJECTS (OBJECT_ID,PARENT_ID,OBJECT_TYPE_ID,NAME,DESCRIPTION) VALUES (185,128,10,'MOVE',NULL);
       INSERT INTO OBJECTS (OBJECT_ID,PARENT_ID,OBJECT_TYPE_ID,NAME,DESCRIPTION) VALUES (186,128,10,'RANDOM_MONEY',NULL);
-    INSERT INTO OBJECTS (OBJECT_ID,PARENT_ID,OBJECT_TYPE_ID,NAME,DESCRIPTION) VALUES (129,101,3,'c2m6','c2m6 desc');
+    INSERT INTO OBJECTS (OBJECT_ID,PARENT_ID,OBJECT_TYPE_ID,NAME,DESCRIPTION) VALUES (129,101,3,'Viber','c2m6 desc');
     --atr
       INSERT INTO attributes (attr_id, object_id, value, date_value) VALUES (13,129,'4000',NULL); -- basePrice
       INSERT INTO attributes (attr_id, object_id, value, date_value) VALUES (14,129,'400',NULL); -- baseRent      
@@ -321,7 +321,7 @@ INSERT INTO OBJECTS (OBJECT_ID,PARENT_ID,OBJECT_TYPE_ID,NAME,DESCRIPTION) VALUES
       INSERT INTO attributes (attr_id, object_id, value, date_value) VALUES (22,129,'UNPLEDGED',NULL); -- status
       INSERT INTO attributes (attr_id, object_id, value, date_value) VALUES (23,129,'0',NULL); -- turnsToPayBack
       --  
-    INSERT INTO OBJECTS (OBJECT_ID,PARENT_ID,OBJECT_TYPE_ID,NAME,DESCRIPTION) VALUES (130,101,3,'c3m6','c3m6 desc');
+    INSERT INTO OBJECTS (OBJECT_ID,PARENT_ID,OBJECT_TYPE_ID,NAME,DESCRIPTION) VALUES (130,101,3,'ICQ','c3m6 desc');
     --atr
       INSERT INTO attributes (attr_id, object_id, value, date_value) VALUES (13,130,'4000',NULL); -- basePrice
       INSERT INTO attributes (attr_id, object_id, value, date_value) VALUES (14,130,'400',NULL); -- baseRent      
@@ -336,7 +336,7 @@ INSERT INTO OBJECTS (OBJECT_ID,PARENT_ID,OBJECT_TYPE_ID,NAME,DESCRIPTION) VALUES
     INSERT INTO OBJECTS (OBJECT_ID,PARENT_ID,OBJECT_TYPE_ID,NAME,DESCRIPTION) VALUES (131,101,6,'В Тюрьму','Отправляйтесь в тюрьму');
       INSERT INTO attributes (attr_id, object_id, value, date_value) VALUES (2,131,'30',NULL); -- position
       INSERT INTO OBJECTS (OBJECT_ID,PARENT_ID,OBJECT_TYPE_ID,NAME,DESCRIPTION) VALUES (187,131,10,'GO_TO_JAIL',NULL);
-    INSERT INTO OBJECTS (OBJECT_ID,PARENT_ID,OBJECT_TYPE_ID,NAME,DESCRIPTION) VALUES (132,101,3,'c1m7','c1m7 desc');
+    INSERT INTO OBJECTS (OBJECT_ID,PARENT_ID,OBJECT_TYPE_ID,NAME,DESCRIPTION) VALUES (132,101,3,'AT&T','c1m7 desc');
     --atr
       INSERT INTO attributes (attr_id, object_id, value, date_value) VALUES (13,132,'4200',NULL); -- basePrice
       INSERT INTO attributes (attr_id, object_id, value, date_value) VALUES (14,132,'420',NULL); -- baseRent      
@@ -351,7 +351,7 @@ INSERT INTO OBJECTS (OBJECT_ID,PARENT_ID,OBJECT_TYPE_ID,NAME,DESCRIPTION) VALUES
     INSERT INTO OBJECTS (OBJECT_ID,PARENT_ID,OBJECT_TYPE_ID,NAME,DESCRIPTION) VALUES (133,101,6,'Бильярдная','Тут много азартных игроков');
       INSERT INTO attributes (attr_id, object_id, value, date_value) VALUES (2,133,'32',NULL); -- position
       INSERT INTO OBJECTS (OBJECT_ID,PARENT_ID,OBJECT_TYPE_ID,NAME,DESCRIPTION) VALUES (188,133,10,'RANDOM_MONEY',NULL);
-    INSERT INTO OBJECTS (OBJECT_ID,PARENT_ID,OBJECT_TYPE_ID,NAME,DESCRIPTION) VALUES (134,101,3,'c2m7','c2m7 desc');
+    INSERT INTO OBJECTS (OBJECT_ID,PARENT_ID,OBJECT_TYPE_ID,NAME,DESCRIPTION) VALUES (134,101,3,'MTS','c2m7 desc');
     --atr
       INSERT INTO attributes (attr_id, object_id, value, date_value) VALUES (13,134,'4200',NULL); -- basePrice
       INSERT INTO attributes (attr_id, object_id, value, date_value) VALUES (14,134,'420',NULL); -- baseRent      
@@ -363,7 +363,7 @@ INSERT INTO OBJECTS (OBJECT_ID,PARENT_ID,OBJECT_TYPE_ID,NAME,DESCRIPTION) VALUES
       INSERT INTO attributes (attr_id, object_id, value, date_value) VALUES (22,134,'UNPLEDGED',NULL); -- status
       INSERT INTO attributes (attr_id, object_id, value, date_value) VALUES (23,134,'0',NULL); -- turnsToPayBack
       --  
-    INSERT INTO OBJECTS (OBJECT_ID,PARENT_ID,OBJECT_TYPE_ID,NAME,DESCRIPTION) VALUES (135,101,3,'c3m7','c3m7 desc');
+    INSERT INTO OBJECTS (OBJECT_ID,PARENT_ID,OBJECT_TYPE_ID,NAME,DESCRIPTION) VALUES (135,101,3,'Life','c3m7 desc');
     --atr
       INSERT INTO attributes (attr_id, object_id, value, date_value) VALUES (13,135,'4200',NULL); -- basePrice
       INSERT INTO attributes (attr_id, object_id, value, date_value) VALUES (14,135,'420',NULL); -- baseRent      
@@ -375,7 +375,7 @@ INSERT INTO OBJECTS (OBJECT_ID,PARENT_ID,OBJECT_TYPE_ID,NAME,DESCRIPTION) VALUES
       INSERT INTO attributes (attr_id, object_id, value, date_value) VALUES (22,135,'UNPLEDGED',NULL); -- status
       INSERT INTO attributes (attr_id, object_id, value, date_value) VALUES (23,135,'0',NULL); -- turnsToPayBack
       --  
-    INSERT INTO OBJECTS (OBJECT_ID,PARENT_ID,OBJECT_TYPE_ID,NAME,DESCRIPTION) VALUES (136,101,3,'c4m9','c4m9 desc');
+    INSERT INTO OBJECTS (OBJECT_ID,PARENT_ID,OBJECT_TYPE_ID,NAME,DESCRIPTION) VALUES (136,101,3,'Buka','c4m9 desc');
     --atr
       INSERT INTO attributes (attr_id, object_id, value, date_value) VALUES (13,136,'2000',NULL); -- basePrice
       INSERT INTO attributes (attr_id, object_id, value, date_value) VALUES (14,136,'250',NULL); -- baseRent      
@@ -387,7 +387,7 @@ INSERT INTO OBJECTS (OBJECT_ID,PARENT_ID,OBJECT_TYPE_ID,NAME,DESCRIPTION) VALUES
       INSERT INTO attributes (attr_id, object_id, value, date_value) VALUES (22,136,'UNPLEDGED',NULL); -- status
       INSERT INTO attributes (attr_id, object_id, value, date_value) VALUES (23,136,'0',NULL); -- turnsToPayBack
       --  
-    INSERT INTO OBJECTS (OBJECT_ID,PARENT_ID,OBJECT_TYPE_ID,NAME,DESCRIPTION) VALUES (137,101,3,'c1m8','c1m8 desc');
+    INSERT INTO OBJECTS (OBJECT_ID,PARENT_ID,OBJECT_TYPE_ID,NAME,DESCRIPTION) VALUES (137,101,3,'Twitter','c1m8 desc');
     --atr
       INSERT INTO attributes (attr_id, object_id, value, date_value) VALUES (13,137,'4500',NULL); -- basePrice
       INSERT INTO attributes (attr_id, object_id, value, date_value) VALUES (14,137,'450',NULL); -- baseRent      
@@ -407,7 +407,7 @@ INSERT INTO OBJECTS (OBJECT_ID,PARENT_ID,OBJECT_TYPE_ID,NAME,DESCRIPTION) VALUES
       INSERT INTO OBJECTS (OBJECT_ID,PARENT_ID,OBJECT_TYPE_ID,NAME,DESCRIPTION) VALUES (192,138,10,'EXTRA_TURN',NULL);
       INSERT INTO OBJECTS (OBJECT_ID,PARENT_ID,OBJECT_TYPE_ID,NAME,DESCRIPTION) VALUES (193,138,10,'MOVE',NULL);
       INSERT INTO OBJECTS (OBJECT_ID,PARENT_ID,OBJECT_TYPE_ID,NAME,DESCRIPTION) VALUES (194,138,10,'RANDOM_MONEY',NULL);
-    INSERT INTO OBJECTS (OBJECT_ID,PARENT_ID,OBJECT_TYPE_ID,NAME,DESCRIPTION) VALUES (139,101,3,'c2m8','c2m8 desc');
+    INSERT INTO OBJECTS (OBJECT_ID,PARENT_ID,OBJECT_TYPE_ID,NAME,DESCRIPTION) VALUES (139,101,3,'Facebook','c2m8 desc');
     --atr
       INSERT INTO attributes (attr_id, object_id, value, date_value) VALUES (13,139,'4500',NULL); -- basePrice
       INSERT INTO attributes (attr_id, object_id, value, date_value) VALUES (14,139,'450',NULL); -- baseRent      
@@ -419,7 +419,7 @@ INSERT INTO OBJECTS (OBJECT_ID,PARENT_ID,OBJECT_TYPE_ID,NAME,DESCRIPTION) VALUES
       INSERT INTO attributes (attr_id, object_id, value, date_value) VALUES (22,139,'UNPLEDGED',NULL); -- status
       INSERT INTO attributes (attr_id, object_id, value, date_value) VALUES (23,139,'0',NULL); -- turnsToPayBack
       --  
-    INSERT INTO OBJECTS (OBJECT_ID,PARENT_ID,OBJECT_TYPE_ID,NAME,DESCRIPTION) VALUES (140,101,3,'c3m8','c3m8 desc');
+    INSERT INTO OBJECTS (OBJECT_ID,PARENT_ID,OBJECT_TYPE_ID,NAME,DESCRIPTION) VALUES (140,101,3,'MySpace','c3m8 desc');
     --atr
       INSERT INTO attributes (attr_id, object_id, value, date_value) VALUES (13,140,'4500',NULL); -- basePrice
       INSERT INTO attributes (attr_id, object_id, value, date_value) VALUES (14,140,'450',NULL); -- baseRent      

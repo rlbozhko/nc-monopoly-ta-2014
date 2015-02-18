@@ -16,6 +16,7 @@ public class BuildAction implements Action {
 	private IO io;
 	private Property property;
 	private Player player;	
+	
 	private static Set<Player> players = new HashSet<Player>();
 	
 	@Override

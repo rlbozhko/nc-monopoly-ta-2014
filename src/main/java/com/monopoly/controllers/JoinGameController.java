@@ -130,6 +130,8 @@ public class JoinGameController {
 			GameSession.setStatus(SessionStatus.RUN);
 			GameSession.getInstance().getBoard().getCurrentPlayer().startTimer();
 			
+//			GameController.testProperty(); //for test
+			
 			return new ModelAndView("redirect:game_test.action");
 		}
 

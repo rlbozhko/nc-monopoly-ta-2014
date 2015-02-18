@@ -48,6 +48,7 @@ public class EndTurnAction implements Action {
 				player.setStatus(Status.START_TURN);
 				ActionUtils.sendMessageToAll(player.getName() + " ходит еще раз!");
 				player.setExtraTurn(false);
+				player.setBuildPerformed(false);
 			} else {
 				player.setStatus(Status.WAIT);
 				Player nextPlayer = board.getNextPlayer();

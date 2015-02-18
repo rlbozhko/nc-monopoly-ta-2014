@@ -48,7 +48,7 @@ public class FinishGameAction implements Action {
 				Player lastPlayer = activePlayers.get(0);
 				lastPlayer.setStatus(Status.FINISH);
 				lastPlayer.resetTimer();
-				ActionUtils.getPlayerIO(lastPlayer).showMessage("Поздравляю!!! Вы стали абсолютным монополистом!!!");
+				ActionUtils.getPlayerIO(lastPlayer).showWarning("Поздравляю!!! Вы стали абсолютным монополистом!!!");
 				ActionUtils.sendMessageToAll("Игрок " + lastPlayer.getName() + " победил!!!");
 			}
 		}

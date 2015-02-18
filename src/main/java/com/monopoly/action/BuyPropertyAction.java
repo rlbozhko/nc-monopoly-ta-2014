@@ -13,53 +13,58 @@ import com.monopoly.io.IO;
  * Created by Roma on 28.11.2014.
  */
 
-public class BuyPropertyAction implements Action {	
+public class BuyPropertyAction implements Action {
 	public final static ActionType type = ActionType.BUY_PROPERTY;
 	private static Set<Player> buyers = new HashSet<Player>();
-	
-    @Override
-    public void performAction(Player player) {
-    	IO playerIO = ActionUtils.getPlayerIO(player);
-    	if (buyers.contains(player)) {
-    		playerIO.showWarning("Можно совершать только одну покупку одновременно");
-    		return;
-    	}
-    	
-    	buyers.add(player);
-    	
-        PropertyCell property = (PropertyCell) player.getCurrentCell();        
-        PropertyManager pm = GameSession.getInstance().getPropertyManager();
-        if (playerIO.yesNoDialog("Хотите купить " + property.getName() + " за $" + property.getPrice() + "?") 
-        		&& pm.getPropertyOwner(property) == null) {
-            if (player.buyProperty(property)) {
-                ActionUtils.sendMessageToAll(player.getName() + " купил " + property.getName() + " за $" + property.getPrice());
-            } else {
-                playerIO.showWarning("У Вас не достаточно средств");
-            }
-        } else {
-        	playerIO.showWarning("Не удалось купить " + property.getName());
-        }
-        
-        buyers.remove(player);
-    }
+
+	@Override
+	public void performAction(Player player) {
+		IO playerIO = ActionUtils.getPlayerIO(player);
+
+		synchronized (BuyPropertyAction.class) {
+			if (buyers.contains(player)) {
+				playerIO.showWarning("Можно совершать только одну покупку одновременно");
+				return;
+			}
+			buyers.add(player);
+		}
+
+		PropertyCell property = (PropertyCell) player.getCurrentCell();
+		PropertyManager pm = GameSession.getInstance().getPropertyManager();
+		if (playerIO.yesNoDialog("Хотите купить " + property.getName() + " за $" + property.getPrice() + "?")
+				&& pm.getPropertyOwner(property) == null) {
+			if (player.buyProperty(property)) {
+				ActionUtils.sendMessageToAll(player.getName() + " купил " + property.getName() + " за $"
+						+ property.getPrice());
+			} else {
+				playerIO.showWarning("У Вас не достаточно средств");
+			}
+		} else {
+			playerIO.showWarning("Не удалось купить " + property.getName());
+		}
 		
-    @Override
-    public String getName() {
-        return "Buy Property";
-    }
-    
-    @Override
-	public int hashCode() {		
+		synchronized (BuyPropertyAction.class) {
+			buyers.remove(player);
+		}
+	}
+
+	@Override
+	public String getName() {
+		return "Buy Property";
+	}
+
+	@Override
+	public int hashCode() {
 		return type.hashCode();
 	}
 
 	@Override
-	public boolean equals(Object obj) {		
+	public boolean equals(Object obj) {
 		return type.equals(obj);
 	}
-	
+
 	@Override
-	public ActionType getType() {		
+	public ActionType getType() {
 		return type;
 	}
 }

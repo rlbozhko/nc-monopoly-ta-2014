@@ -18,7 +18,7 @@ function updateTimer() {
 			if (jqXHR.status != '204') {
 				if (data != currentTimer) {
 					currentTimer = data;
-					$("#timer").html("<p>Осталось времени: " + data + "</p>");					
+					$("#timer").html('<p style="font-size: 16px; font-weight: bold;">Время на ход: ' + data + "</p>");					
 				}
 			}
 		}

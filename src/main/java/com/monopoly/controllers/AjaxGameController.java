@@ -460,9 +460,9 @@ public class AjaxGameController {
 		IO io = GameSession.getInstance().getUserIO(user);
 		Player player = io.getOwner();
 		if (player.isTimerStarted()) {
-			return "" + (Math.round(player.getRemainingTime() / 100.) / 10.);
+			return "" + (player.getRemainingTime() / 1000);
 		}
-		return "--.-";
+		return "---";
 	}
 	
 	@RequestMapping(value = "/game_warning.action", method = RequestMethod.GET)

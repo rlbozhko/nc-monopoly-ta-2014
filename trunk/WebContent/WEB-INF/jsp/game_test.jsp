@@ -65,12 +65,11 @@
 						<div id="chatbox"></div>
 						<div id="timer"></div>					
 						<div id="buttons"></div>
-						<div id="yn_dialog"></div>
 						<div id="warning"></div>
+						<div id="yn_dialog"></div>						
 						<div id="select_player"></div>
-						<div id="deal"></div>
 						<div id="select_property"></div>
-						<div id="test"></div>					
+						<div id="deal"></div>
 					</td>
 				</tr>
 			</tbody>

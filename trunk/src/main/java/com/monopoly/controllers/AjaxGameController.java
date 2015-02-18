@@ -359,13 +359,25 @@ public class AjaxGameController {
 			throw new NoContentException();
 		}
 
-		IO io = GameSession.getInstance().getUserIO(user);
-
+		IO io = GameSession.getInstance().getUserIO(user);		
+		
+		if (io == null) {
+			throw new NoContentException();
+		}
+		
 		Deal deal;
 		dealContainer.setTarget(ActionUtils.getPlayerByName(dealTargetName));
-		dealContainer.setSource(io.getOwner());
+		dealContainer.setSource(io.getOwner());		
+		
 		deal = dealContainer.createDeal();
-		if (isAccept) {
+		if (dealContainer.getAskMoney() < 0 || dealContainer.getGiveMoney() < 0) {
+			io.showWarning("Деньги не должны быть отрицательными!");
+			io.setCreatedDeal(null);
+		} else if (dealContainer.getAskMoney() == 0 && dealContainer.getGiveMoney() == 0
+				&& dealContainer.getAskProperties().isEmpty() && dealContainer.getGiveProperties().isEmpty()) {
+			io.showWarning("Сделака не может быть пустой!");
+			io.setCreatedDeal(null);
+		} else if (isAccept) {
 			io.setCreatedDeal(deal);
 		} else {
 			io.setCreatedDeal(null);
@@ -458,6 +470,10 @@ public class AjaxGameController {
 		}
 
 		IO io = GameSession.getInstance().getUserIO(user);
+		if (io == null) {
+			throw new NoContentException();
+		}
+		
 		Player player = io.getOwner();
 		if (player.isTimerStarted()) {
 			return "" + (player.getRemainingTime() / 1000);
@@ -551,10 +567,10 @@ public class AjaxGameController {
 
 		System.out.println(propertyId);
 		IO io = GameSession.getInstance().getUserIO(user);
-
-		Property property = (Property) GameSession.getInstance().getBoard().getCells().get(propertyId);
+		
 		SelectPropertyHelper selectPropertyHelper = io.getSelectPropertyHelper();
 		if (isAccept) {
+			Property property = (Property) GameSession.getInstance().getBoard().getCells().get(propertyId);
 			selectPropertyHelper.setProperty(property);
 		} else {
 			selectPropertyHelper.setProperty(null);

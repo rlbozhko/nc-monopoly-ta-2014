@@ -43,7 +43,7 @@ public class IndexController {
 		}
 		
 		if (sessionStatus == SessionStatus.RUN) {
-			return new ModelAndView("redirect:game.action");
+			return new ModelAndView("redirect:game_test.action");
 		}
 		
 		return mav;

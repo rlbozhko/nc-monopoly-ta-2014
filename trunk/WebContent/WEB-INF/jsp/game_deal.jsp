@@ -6,12 +6,12 @@
 <div id="deal_body">
 	<div class="form-group">
 		<p><b>Сделка с ${targetPlayer}</b></p>	
-		<label class="control-label">Требовать деньги </label><input class="form-control" type="text" name="askMoney" value="0">
-		<label class="control-label">Предложить деньги </label> <input class="form-control" type="text" name="giveMoney" value="0">
+		<label class="control-label">Требовать деньги </label><input class="form-control" type="number" min="0" name="askMoney" value="0">
+		<label class="control-label">Предложить деньги </label> <input class="form-control" type="number" min="0" name="giveMoney" value="0">
 	</div>
 	<c:if test="${targetProperty.size() > 0}">
 		<div class="form-group">
-			<p><b>Ask property</b></p>
+			<p><b>Требовать собственность</b></p>
 			<select class="form-control" name="askPropertiesIDs" multiple="multiple">
 				<c:forEach items="${targetProperty}" var="each">
 					<option value="${each.getPosition()}">${each.getName()}</option>
@@ -21,7 +21,7 @@
 	</c:if>
 	<c:if test="${sourceProperty.size() > 0}">
 		<div class="form-group">
-			<p><b>Give property</b></p>
+			<p><b>Предложить собственность</b></p>
 			<select class="form-control" name="givePropertiesIDs" multiple="multiple">
 				<c:forEach items="${sourceProperty}" var="each">
 					<option value="${each.getPosition()}">${each.getName()}</option>

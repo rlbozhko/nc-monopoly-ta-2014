@@ -151,7 +151,7 @@ public class GameController {
 		return mav;
 	}
 	
-	private void testProperty() {
+	public static void testProperty() {
 		Session session = GameSession.getInstance();
 		PropertyManager testPropertyManager = session.getPropertyManager();
 
@@ -210,23 +210,23 @@ public class GameController {
 		
 		
 
-//		Player p1 = session.getBoard().getPlayers().get(0);
+		Player p1 = session.getBoard().getPlayers().get(0);
 		Player p2 = session.getBoard().getPlayers().get(1);
 
 		testPropertyManager.setPropertyOwner(p2, testProperty1);
 		testPropertyManager.setPropertyOwner(p2, testProperty2);
 		testPropertyManager.setPropertyOwner(p2, testProperty3);
 		testPropertyManager.setPropertyOwner(p2, testProperty4);
-		testPropertyManager.setPropertyOwner(p2, testProperty5);
-		testPropertyManager.setPropertyOwner(p2, testProperty6);
-		testPropertyManager.setPropertyOwner(p2, testProperty7);
-		testPropertyManager.setPropertyOwner(p2, testProperty8);
-		testPropertyManager.setPropertyOwner(p2, testProperty9);
-		testPropertyManager.setPropertyOwner(p2, testProperty10);
-		testPropertyManager.setPropertyOwner(p2, testProperty11);
-		testPropertyManager.setPropertyOwner(p2, testProperty12);
-		testPropertyManager.setPropertyOwner(p2, testProperty13);
-		testPropertyManager.setPropertyOwner(p2, testProperty14);
+		testPropertyManager.setPropertyOwner(p1, testProperty5);
+		testPropertyManager.setPropertyOwner(p1, testProperty6);
+		testPropertyManager.setPropertyOwner(p1, testProperty7);
+		testPropertyManager.setPropertyOwner(p1, testProperty8);
+		testPropertyManager.setPropertyOwner(p1, testProperty9);
+		testPropertyManager.setPropertyOwner(p1, testProperty10);
+		testPropertyManager.setPropertyOwner(p1, testProperty11);
+		testPropertyManager.setPropertyOwner(p1, testProperty12);
+		testPropertyManager.setPropertyOwner(p1, testProperty13);
+		testPropertyManager.setPropertyOwner(p1, testProperty14);
 		testPropertyManager.setPropertyOwner(p2, testProperty15);
 		testPropertyManager.setPropertyOwner(p2, testProperty16);
 		testPropertyManager.setPropertyOwner(p2, testProperty17);

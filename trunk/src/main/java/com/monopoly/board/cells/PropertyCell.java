@@ -26,7 +26,7 @@ public class PropertyCell extends Property {
 	private int maxLevel = 5;// временно	
 	private int turnsToPayBack;
 	private int payBackMoney;
-	private double pledgePercent;
+	private double pledgePercent;	
 
 	public static class PropertyBuilder {
 		private final static int DEFAULT_BASE_PRICE = 1000;

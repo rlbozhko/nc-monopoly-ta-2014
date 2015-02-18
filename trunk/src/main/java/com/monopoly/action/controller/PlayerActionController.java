@@ -58,7 +58,7 @@ public class PlayerActionController implements ActionController {
 			result.add(ActionType.PAY_RENT);
 		}
 
-		if (hasMonopoly(player)) {
+		if (!player.isBuildPerformed() && hasMonopoly(player)) {
 			result.add(ActionType.BUILD);
 		}
 

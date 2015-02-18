@@ -60,5 +60,15 @@ public abstract class Cell {
     public String toString() {
         return name;
     }
+
+	public boolean isBuildPerformed() {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+	public void setBuildPerformed(boolean buildPerformed) {
+		// TODO Auto-generated method stub
+		
+	}
 }
 

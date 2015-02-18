@@ -21,6 +21,7 @@ public class Player implements MoneyOperations, MoveOperations, PropertyOperatio
 	private int doublesCount;
 	private String playerColor;
 	private boolean extraTurn;
+	private boolean buildPerformed;
 
 	public Player(String name) {
 		position = 0;
@@ -326,5 +327,13 @@ public class Player implements MoneyOperations, MoveOperations, PropertyOperatio
 
 	public void setExtraTurn(boolean extraTurn) {
 		this.extraTurn = extraTurn;
+	}
+
+	public boolean isBuildPerformed() {
+		return buildPerformed;
+	}
+
+	public void setBuildPerformed(boolean build) {
+		this.buildPerformed = build;
 	}
 }

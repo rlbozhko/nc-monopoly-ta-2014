@@ -132,6 +132,7 @@ public class Board implements CellOperations, PlayerOperations {
         }
         cursor = next;
         next.setOfferADeal(false);
+        next.setBuildPerformed(false);
         if (next.hasPledgedProperty()) {
 			pledgedPropertyCheck(next);
 		}

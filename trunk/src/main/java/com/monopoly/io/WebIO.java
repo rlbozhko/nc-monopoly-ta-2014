@@ -262,7 +262,7 @@ public class WebIO implements IO {
 		private Property property;
 		private Player owner;
 
-		public SelectPropertyHelper(Player owner) {
+		SelectPropertyHelper(Player owner) {
 			this.owner = owner;
 		}
 
@@ -288,7 +288,7 @@ public class WebIO implements IO {
 		private volatile boolean answer;
 		private volatile boolean answered;
 
-		public YesNoDialog(String message) {
+		YesNoDialog(String message) {
 			this.message = message;
 			answered = false;
 		}

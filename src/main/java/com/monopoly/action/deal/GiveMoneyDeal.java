@@ -28,7 +28,11 @@ public class GiveMoneyDeal extends WrapperDeal {
 	@Override
 	public boolean isValid() {
 		boolean result = true;
-		if (getSource().getMoney() < money) {
+		if (money < 0) {
+			getSourceIO().showWarning("Деньги должны быть положительным числом");
+			getTargetIO().showWarning("Деньги должны быть положительным числом");
+			result = false;
+		} else if (getSource().getMoney() < money) {
 			getSourceIO().showWarning("У Вас не достаточно денег!");
 			result = false;
 		}

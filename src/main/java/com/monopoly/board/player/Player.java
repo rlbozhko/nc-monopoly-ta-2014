@@ -121,7 +121,7 @@ public class Player implements MoneyOperations, MoveOperations, PropertyOperatio
 		} else if (CellType.PROPERTY_CELL == currentCell.getCellType()) {
 			Property property = (Property) currentCell;
 			Player owner = propertyManager.getPropertyOwner(property);
-			if (null != owner && !this.equals(owner)) {
+			if (!property.isPledged() && null != owner && !this.equals(owner)) {
 				this.setPayRent(true);
 			}
 		}

@@ -133,6 +133,9 @@ public class Board implements CellOperations, PlayerOperations {
         cursor = next;
         next.setOfferADeal(false);
         next.setBuildPerformed(false);
+        if (next.isJailed()) {
+        	ActionUtils.getPlayerIO(next).showWarning("Вам осталось сидеть " + next.getJailTerm() + " ходов");
+        }
         if (next.hasPledgedProperty()) {
 			pledgedPropertyCheck(next);
 		}

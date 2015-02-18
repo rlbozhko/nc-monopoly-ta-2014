@@ -22,13 +22,13 @@ public enum MonopolyType {
 	MONOPOLY4 {
 		@Override
 		public String getColor() {
-			return "#9400D3";
+			return "#9932CC";
 		}
 	},
 	MONOPOLY5 {
 		@Override
 		public String getColor() {
-			return "#A52A2A";
+			return "#ADFF2F";
 		}
 	},
 	MONOPOLY6 {

@@ -70,7 +70,8 @@ public class PlayerActionController implements ActionController {
 		Cell cell = player.getCurrentCell();
 		if (CellType.PROPERTY_CELL == cell.getCellType()) {
 			PropertyCell propertyCell = (PropertyCell) cell;
-			if (propertyManager.getPropertyOwner(propertyCell) == null) {
+			if ((player.getStatus() == Status.ACTIVE || player.getStatus() == Status.START_TURN) 
+				&& propertyManager.getPropertyOwner(propertyCell) == null) {
 				result.add(ActionType.BUY_PROPERTY);
 			}
 		}

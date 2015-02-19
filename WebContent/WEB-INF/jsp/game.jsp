@@ -72,7 +72,7 @@
 									<c:forEach var="eachPlayer" items="${players}">
 										<c:choose>
 											<c:when test="${eachCell.getPosition() == eachPlayer.getPosition()}">
-												<div style="background: ${eachPlayer.getPlayerColor()}; width: 20%; float: left; margin-left: 5px;">&nbsp</div>
+												<div style="background: ${eachPlayer.getPlayerColor()}; width: 20%; float: left; margin-left: 5px;">&nbsp;</div>
 											</c:when>
 										</c:choose>	
 									</c:forEach>

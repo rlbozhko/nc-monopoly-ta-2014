@@ -40,14 +40,10 @@
     			</div>
   			</div>
 		</div>
-	
-		<c:forEach var="entry" items="${usersIO}">
-			${entry.getValue().getOwner().getName()}
-		</c:forEach>
 		
 		<div class="container" align="center" role="form">
 			<form class="setup" action="join_game.action" method="get">
-				<select id="player_color" class="form-control" name="playerColor" title="playerColor" title="Выберите цвет вашей фишки" required>
+				<select id="player_color" class="form-control" name="playerColor" title="playerColor" title="Выберите цвет вашей фишки" required <c:if test="${isJoinToGame == true}"> disabled </c:if>>
 					<option style="color: black;" value="" selected>Выберите цвет вашей фишки</option>
 					<option style="color: aqua;" value="aqua">Aqua</option>
 					<option style="color: black;" value="black">Black</option>
@@ -67,11 +63,22 @@
 					<option style="color: yellow;" value="yellow">Yellow</option>
 				</select>
 				<input type="hidden" name="isJoinToGame" value="true">
-				<button class="btn btn-lg btn-primary btn-block" type="submit">
+				<button class="btn btn-lg btn-primary btn-block" type="submit" <c:if test="${isJoinToGame == true}"> disabled </c:if>>
 					Присоединиться к игре
 				</button>
 			</form>
 		</div>
+		<c:if test="${isJoinToGame == true}">
+			<div align="center">
+				<p style="font-weight: 700; font-size: 36px;">К игре присоединились : </p>
+				<p style="font-weight: 700; font-size: 24px;">
+					<c:forEach var="entry" items="${usersIO}">
+						 ${entry.getValue().getOwner().getName()}
+					</c:forEach>
+				</p>
+				<p style="font-weight: 700;">Игра начнется автоматически, после того как все игроки присоединятся к игре</p>
+			</div>
+		</c:if>
 	</body>
 	<script type="text/javascript">
 		function done() {

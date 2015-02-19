@@ -114,12 +114,12 @@ public class PlayerTest{
         Assert.assertEquals(true, p1.isPayRent());
     }
 
-    @Test
-    public void gotoPositionTest() {
-        p1.goToPosition(7);
-        Assert.assertEquals(7, p1.getPosition());
-
-    }
+//    @Test
+//    public void gotoPositionTest() {
+//        p1.goToPosition(7);
+//        Assert.assertEquals(7, p1.getPosition());
+//
+//    }
 
     @Test
     public void getLastPositionTest() {

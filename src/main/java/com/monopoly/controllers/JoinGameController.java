@@ -137,6 +137,7 @@ public class JoinGameController {
 
 		String email = user.getEmail();
 		mav.addObject("playerColor", playerColor);
+		mav.addObject("isJoinToGame", isJoinToGame);
 		mav.addObject("usersIO", usersIO);
 		mav.addObject("email", email);
 
